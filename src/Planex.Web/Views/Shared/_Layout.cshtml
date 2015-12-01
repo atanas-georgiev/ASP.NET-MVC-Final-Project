@@ -1,44 +1,96 @@
-﻿<!DOCTYPE html>
+﻿@using Kendo.Mvc.UI
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Scripts.Render("~/bundles/jquery")
     @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
+    @Styles.Render("~/Content/kendo")
+    @RenderSection("styles", required: false)
 
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                </ul>
-                @Html.Partial("_LoginPartial")
-            </div>
-        </div>
+    <div id="megaStore">
+        @(Html.Kendo().Menu()
+      .Name("Menu")
+      .Items(items =>
+      {
+          items.Add().Text("Categories").Action("Index", "Categories");
+          //          items.Add()
+          //              .Text("Categories")
+          //              .Items(children =>
+          //              {
+          //                  children.Add().Text("Add").Action("Add", "Categories");
+          //                  children.Add().Text("List all").Action("Add", "All");
+          //
+          //              });
+
+          items.Add().Visible(Context.User.Identity.IsAuthenticated).Text("Logout [" + Context.User.Identity.Name + "]").Action("LogOff", "Account");
+          items.Add().Visible(!Context.User.Identity.IsAuthenticated).Text("Register").Action("Register", "Account");
+          items.Add().Visible(!Context.User.Identity.IsAuthenticated).Text("Login").Action("Login", "Account"); ;
+      })
+        )
+
     </div>
-    <div class="container body-content">
+    <style>
+        #megaStore {
+            max-width: 960px;
+            margin: 30px auto;
+        }
+
+        #menu h2 {
+            font-size: 1em;
+            text-transform: uppercase;
+            padding: 5px 10px;
+        }
+
+        #template img {
+            margin: 5px 20px 0 0;
+            float: left;
+        }
+
+        #template {
+            width: 380px;
+        }
+
+            #template ol {
+                float: left;
+                margin: 0 0 0 30px;
+                padding: 10px 10px 0 10px;
+            }
+
+            #template:after {
+                content: ".";
+                display: block;
+                height: 0;
+                clear: both;
+                visibility: hidden;
+            }
+
+            #template .k-button {
+                float: left;
+                clear: left;
+                margin: 5px 0 5px 12px;
+            }
+    </style>
+
+    <div class="container body-content text-center">
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            <p>&copy; @DateTime.Now.Year - My KendoUI Application</p>
         </footer>
     </div>
 
-    @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/kendo")
     @RenderSection("scripts", required: false)
+    <script>
+    $(function() {
+        $('#menu').kendoMenu();
+    })
+    </script>
 </body>
 </html>
