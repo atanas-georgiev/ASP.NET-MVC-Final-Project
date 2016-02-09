@@ -174,9 +174,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -237,6 +235,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -245,6 +244,24 @@
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Planex.Common\Planex.Common.csproj">
+      <Project>{0ea65a04-b989-4f36-a9d0-e9ac9397f970}</Project>
+      <Name>Planex.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Planex.Data.Models\Planex.Data.Models.csproj">
+      <Project>{36e741af-b659-4a5d-a595-5f0b9786aa9a}</Project>
+      <Name>Planex.Data.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Planex.Data\Planex.Data.csproj">
+      <Project>{3173becb-e152-4253-8540-3ff02007bc04}</Project>
+      <Name>Planex.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Planex.Services\Planex.Services.csproj">
+      <Project>{097b601b-aff8-46ad-810d-f6edda488d3f}</Project>
+      <Name>Planex.Services</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
