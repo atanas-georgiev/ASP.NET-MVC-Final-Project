@@ -12,7 +12,6 @@ using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using Planex.Data;
 using Planex.Data.Models;
-using Planex.Web.Models;
 
 namespace Planex.Web
 {

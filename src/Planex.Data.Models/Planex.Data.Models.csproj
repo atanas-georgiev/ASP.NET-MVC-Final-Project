@@ -60,6 +60,11 @@
     <Folder Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="PriorityType.cs" />
+    <Compile Include="Resource.cs" />
+    <Compile Include="Skill.cs" />
+    <Compile Include="Subtask.cs" />
+    <Compile Include="MainTask.cs" />
     <Compile Include="User.cs" />
   </ItemGroup>
   <ItemGroup>
