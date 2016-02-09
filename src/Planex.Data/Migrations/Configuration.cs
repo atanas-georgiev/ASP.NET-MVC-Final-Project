@@ -1,11 +1,8 @@
+using System.Data.Entity.Migrations;
+
 namespace Planex.Data.Migrations
 {
-    using System;
-    using System.Data.Entity;
-    using System.Data.Entity.Migrations;
-    using System.Linq;
-
-    public sealed class Configuration : DbMigrationsConfiguration<Planex.Data.PlanexDbContext>
+    public sealed class Configuration : DbMigrationsConfiguration<PlanexDbContext>
     {
         public Configuration()
         {
@@ -13,7 +10,7 @@ namespace Planex.Data.Migrations
             AutomaticMigrationDataLossAllowed = true;
         }
 
-        protected override void Seed(Planex.Data.PlanexDbContext context)
+        protected override void Seed(PlanexDbContext context)
         {
             // todo: seed some data
         }

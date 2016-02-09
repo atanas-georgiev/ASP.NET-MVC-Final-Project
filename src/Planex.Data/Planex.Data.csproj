@@ -60,7 +60,11 @@
     <Folder Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GenericRepository.cs" />
+    <Compile Include="IRepository.cs" />
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="IPlanexData.cs" />
+    <Compile Include="PlanexData.cs" />
     <Compile Include="PlanexDbContext.cs" />
   </ItemGroup>
   <ItemGroup>

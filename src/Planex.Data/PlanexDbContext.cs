@@ -1,10 +1,9 @@
 ﻿using System.Data.Entity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using Planex.Data.Models;
 
 namespace Planex.Data
 {
-    using Microsoft.AspNet.Identity.EntityFramework;
-    using Planex.Data.Models;
-
     public class PlanexDbContext : IdentityDbContext<User>
     {
         public PlanexDbContext()
@@ -18,7 +17,7 @@ namespace Planex.Data
 
         public virtual IDbSet<MainTask> MainTasks { get; set; }
 
-        public virtual IDbSet<Subtask> Subtasks { get; set; }        
+        public virtual IDbSet<Subtask> Subtasks { get; set; }
 
         public static PlanexDbContext Create()
         {
