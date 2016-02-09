@@ -5,6 +5,8 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using Planex.Common;
+using Planex.Web.App_Start;
 
 namespace Planex.Web
 {
@@ -16,6 +18,8 @@ namespace Planex.Web
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            DatabaseConfig.Initialize();
+            AutoMapperConfig.RegisterMappings(AssemblyConstants.MapName);
         }
     }
 }
