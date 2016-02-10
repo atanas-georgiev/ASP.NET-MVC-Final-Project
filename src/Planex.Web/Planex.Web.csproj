@@ -186,6 +186,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_LocalResources\Default.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Default.resx</DependentUpon>
+    </Compile>
     <Compile Include="App_Start\AutoMapperConfig.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\DatabaseConfig.cs" />
@@ -194,6 +199,9 @@
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Areas\HR\Controllers\UsersController.cs" />
+    <Compile Include="Areas\HR\HRAreaRegistration.cs" />
+    <Compile Include="Areas\HR\Models\UserViewModel.cs" />
     <Compile Include="Areas\Lead\Controllers\IndexController.cs" />
     <Compile Include="Areas\Lead\LeadAreaRegistration.cs" />
     <Compile Include="Areas\Lead\Models\DependencyViewModel.cs" />
@@ -313,8 +321,10 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Areas\Manager\Views\web.config" />
     <Content Include="Areas\Lead\Views\web.config" />
+    <Content Include="Areas\HR\Views\web.config" />
+    <Content Include="Areas\HR\Views\Users\Index.cshtml" />
     <None Include="Areas\Lead\Views\Index\Index.cshtml" />
-    <Content Include="Areas\Lead\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\HR\Views\_ViewStart.cshtml" />
     <None Include="Areas\Manager\Views\Index\Index.cshtml" />
     <Content Include="Content\Kendo\kendo.black.min.css.map" />
     <Content Include="Content\Kendo\kendo.black.mobile.min.css.map" />
@@ -703,10 +713,13 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\HR\Views\Shared\" />
     <Folder Include="Areas\Lead\Views\Shared\" />
     <Folder Include="Areas\Manager\Models\" />
     <Folder Include="Areas\Manager\Views\Shared\" />
     <Folder Include="Properties\" />
+    <Folder Include="Views\Grid\" />
+    <Folder Include="Views\Users\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -732,6 +745,13 @@
       <Project>{097b601b-aff8-46ad-810d-f6edda488d3f}</Project>
       <Name>Planex.Services</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_LocalResources\Default.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Default.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
