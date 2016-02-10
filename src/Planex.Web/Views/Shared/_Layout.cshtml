@@ -15,17 +15,54 @@
     <div id="megaStore">
         @(Html.Kendo().Menu()
       .Name("Menu")
+      .Animation(animation =>
+        {
+            animation.Open(open =>
+            {
+                if (ViewBag.animation == "expand")
+                {
+                    open.Expand(ExpandDirection.Vertical);
+                }
+
+                if (ViewBag.animation == "slide")
+                {
+                    open.SlideIn(SlideDirection.Down);
+                }
+
+                if (true)
+                {
+                    open.Fade(FadeDirection.In);
+                }
+            });
+        })
+        .HoverDelay(100)
       .Items(items =>
       {
-          items.Add().Text("Categories").Action("Index", "Categories");
-          //          items.Add()
-          //              .Text("Categories")
-          //              .Items(children =>
-          //              {
-          //                  children.Add().Text("Add").Action("Add", "Categories");
-          //                  children.Add().Text("List all").Action("Add", "All");
-          //
-          //              });
+          // items.Add().Text("Categories").Action("Index", "Categories");
+          items.Add()
+              .Text("Categories")
+              .Items(children =>
+              {
+                  children.Add().Text("Add").Action("Add", "Categories");
+                  children.Add().Text("List all").Action("Add", "All");
+
+              });
+          items.Add()
+    .Text("Categories")
+    .Items(children =>
+    {
+        children.Add().Text("Add").Action("Add", "Categories");
+        children.Add().Text("List all").Action("Add", "All");
+
+    });
+          items.Add()
+              .Text("Categories")
+              .Items(children =>
+              {
+                  children.Add().Text("Add").Action("Add", "Categories");
+                  children.Add().Text("List all").Action("Add", "All");
+
+              });
 
           items.Add().Visible(Context.User.Identity.IsAuthenticated).Text("Logout [" + Context.User.Identity.Name + "]").Action("LogOff", "Account");
           items.Add().Visible(!Context.User.Identity.IsAuthenticated).Text("Register").Action("Register", "Account");
@@ -34,47 +71,47 @@
         )
 
     </div>
-    <style>
-        #megaStore {
-            max-width: 960px;
-            margin: 30px auto;
-        }
-
-        #menu h2 {
-            font-size: 1em;
-            text-transform: uppercase;
-            padding: 5px 10px;
-        }
-
-        #template img {
-            margin: 5px 20px 0 0;
-            float: left;
-        }
-
-        #template {
-            width: 380px;
-        }
-
-            #template ol {
-                float: left;
-                margin: 0 0 0 30px;
-                padding: 10px 10px 0 10px;
-            }
-
-            #template:after {
-                content: ".";
-                display: block;
-                height: 0;
-                clear: both;
-                visibility: hidden;
-            }
-
-            #template .k-button {
-                float: left;
-                clear: left;
-                margin: 5px 0 5px 12px;
-            }
-    </style>
+@*    <style>*@
+@*        #megaStore {*@
+@*            max-width: 960px;*@
+@*            margin: 30px auto;*@
+@*        }*@
+@**@
+@*        #menu h2 {*@
+@*            font-size: 1em;*@
+@*            text-transform: uppercase;*@
+@*            padding: 5px 10px;*@
+@*        }*@
+@**@
+@*        #template img {*@
+@*            margin: 5px 20px 0 0;*@
+@*            float: left;*@
+@*        }*@
+@**@
+@*        #template {*@
+@*            width: 380px;*@
+@*        }*@
+@**@
+@*            #template ol {*@
+@*                float: left;*@
+@*                margin: 0 0 0 30px;*@
+@*                padding: 10px 10px 0 10px;*@
+@*            }*@
+@**@
+@*            #template:after {*@
+@*                content: ".";*@
+@*                display: block;*@
+@*                height: 0;*@
+@*                clear: both;*@
+@*                visibility: hidden;*@
+@*            }*@
+@**@
+@*            #template .k-button {*@
+@*                float: left;*@
+@*                clear: left;*@
+@*                margin: 5px 0 5px 12px;*@
+@*            }*@
+@*    </style>*@
 
     <div class="container body-content text-center">
         @RenderBody()

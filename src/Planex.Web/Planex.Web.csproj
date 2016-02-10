@@ -194,6 +194,10 @@
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Areas\Lead\Controllers\IndexController.cs" />
+    <Compile Include="Areas\Lead\LeadAreaRegistration.cs" />
+    <Compile Include="Areas\Lead\Models\DependencyViewModel.cs" />
+    <Compile Include="Areas\Lead\Models\TaskViewModel.cs" />
     <Compile Include="Areas\Manager\Controllers\IndexController.cs" />
     <Compile Include="Areas\Manager\ManagerAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -308,6 +312,9 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Areas\Manager\Views\web.config" />
+    <Content Include="Areas\Lead\Views\web.config" />
+    <None Include="Areas\Lead\Views\Index\Index.cshtml" />
+    <Content Include="Areas\Lead\Views\_ViewStart.cshtml" />
     <None Include="Areas\Manager\Views\Index\Index.cshtml" />
     <Content Include="Content\Kendo\kendo.black.min.css.map" />
     <Content Include="Content\Kendo\kendo.black.mobile.min.css.map" />
@@ -696,6 +703,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Lead\Views\Shared\" />
     <Folder Include="Areas\Manager\Models\" />
     <Folder Include="Areas\Manager\Views\Shared\" />
     <Folder Include="Properties\" />
