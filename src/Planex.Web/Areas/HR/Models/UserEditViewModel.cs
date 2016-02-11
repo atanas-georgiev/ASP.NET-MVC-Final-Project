@@ -33,10 +33,10 @@ namespace Planex.Web.Areas.HR.Models
 
         [Required]
         public decimal PricePerHour { get; set; }
-
-        [Required]
-        public Image Avatar { get; set; }
-
+//
+//        [Required]
+//        public Image Avatar { get; set; }
+//
         public List<string> Skills { get; set; }
 
         public void CreateMappings(IConfiguration configuration)

@@ -1,4 +1,5 @@
-﻿@model Planex.Web.Areas.HR.Models.UserEditViewModel
+﻿@using Kendo.Mvc.UI
+@model Planex.Web.Areas.HR.Models.UserEditViewModel
 
 @{
     ViewBag.Title = "Index";
@@ -41,12 +42,19 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.PricePerHour, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.PricePerHour, htmlAttributes: new {@class = "control-label col-md-2"})
             <div class="col-md-10">
-                @Html.EditorFor(model => model.PricePerHour, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.PricePerHour, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.PricePerHour, new {htmlAttributes = new {@class = "form-control"}})
+                @Html.ValidationMessageFor(model => model.PricePerHour, "", new {@class = "text-danger"})
             </div>
         </div>
+
+        @(Html.Kendo().MultiSelect()
+          .Name("Skills")
+          .Placeholder("Select attendees...")          
+          .BindTo((List<string>)ViewData["skills"])          
+          .Value(Model.Skills)
+    )
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
@@ -55,7 +63,3 @@
         </div>
     </div>
 }
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>

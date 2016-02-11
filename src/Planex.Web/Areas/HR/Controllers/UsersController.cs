@@ -13,6 +13,7 @@ using Kendo.Mvc.UI;
 ﻿using Planex.Data.Models;
 ﻿using Planex.Web.Areas.HR.Models;
 using AutoMapper.QueryableExtensions;
+﻿using Planex.Services.Skills;
 ﻿using Planex.Services.Users;
 ﻿using Planex.Web.Infrastructure.Mappings;
 ﻿using WebGrease.Css.Extensions;
@@ -22,7 +23,7 @@ namespace Planex.Web.Areas.HR.Controllers
     public class UsersController : Controller
     {
         IUserService userService = new UserService();
-        
+
         public ActionResult Index()
         {
             ViewData["roles"] = new List<SelectListItem>();            

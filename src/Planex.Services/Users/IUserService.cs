@@ -7,6 +7,8 @@ namespace Planex.Services.Users
     {
         IQueryable<string> GetRoles();
         IQueryable<User> GetAll();
+        User GetById(string id);
         void Add(User user, string role);
+        void Update(User user);
     }
 }

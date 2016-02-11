@@ -39,12 +39,22 @@ namespace Planex.Services.Users
             return this.users.All();
         }
 
+        public User GetById(string id)
+        {
+            return this.users.GetById(id);
+        }
+
         public void Add(User user, string role)
         {                        
             user.UserName = user.Email;
             this.userManager.Create(user, string.Empty);
             this.users.Add(user);
             this.userManager.AddToRole(user.Id, role);            
+        }
+
+        public void Update(User user)
+        {
+            this.users.Update(user);
         }
     }
 }
