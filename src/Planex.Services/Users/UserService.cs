@@ -17,6 +17,7 @@ namespace Planex.Services.Users
         private IRepository<User> users;
         private IRepository<Image> images;
         private UserManager<User> userManager;
+        RoleManager<IdentityRole> roleManager;
 
         public UserService(DbContext context, IRepository<User> users, IRepository<Image> images)
         {
@@ -24,16 +25,12 @@ namespace Planex.Services.Users
             this.users = users;
             this.images = images;
             this.userManager = new UserManager<User>(new UserStore<User>(context));
+            this.roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
         }
 
         public IQueryable<string> GetRoles()
         {
-            var result = new List<string>();
-            result.Add("Manager");
-            result.Add("HR");
-            result.Add("Lead");
-            result.Add("Worker");
-
+            var result = roleManager.Roles.Select(x => x.Name);            
             return result.AsQueryable();
         }
 
@@ -51,12 +48,25 @@ namespace Planex.Services.Users
         {                        
             user.UserName = user.Email;
             this.userManager.Create(user, string.Empty);
-            this.users.Add(user);
+            this.users.Add(user);         
             this.userManager.AddToRole(user.Id, role);            
         }
 
         public void Update(User user)
         {
+            this.users.Update(user);
+        }
+
+        public string GetRoleName(User user)
+        {
+            var result = this.userManager.GetRoles(user.Id).FirstOrDefault();
+            return result;
+        }
+
+        public void SetRoleName(User user, string name)
+        {
+            this.userManager.RemoveFromRole(user.Id, GetRoleName(user));
+            this.userManager.AddToRole(user.Id, name);
             this.users.Update(user);
         }
     }

@@ -5,6 +5,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using AutoMapper;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using Planex.Data.Models;
 using Planex.Services.Images;
 using Planex.Services.Skills;
@@ -33,8 +35,22 @@ namespace Planex.Web.Areas.HR.Controllers
             var skills = skillService.GetAll().Select(s => s.Name).ToList();
             ViewData["skills"] = skills;
 
+            ViewData["roles"] = new List<SelectListItem>();
+            var roles = this.userService.GetRoles();
+
+            foreach (var role in roles)
+            {
+                (ViewData["roles"] as List<SelectListItem>).Add(
+                    new SelectListItem()
+                    {
+                        Value = role,
+                        Text = role
+                    });
+            }
+           
             var dataModel = userService.GetById(id);
             var viewModel = AutoMapperConfig.Configuration.CreateMapper().Map<UserEditViewModel>(dataModel);
+            ViewData["SelectedIndex"] = roles.ToList().IndexOf(this.userService.GetRoleName(dataModel)) + 1;
 
             return View(viewModel);
         }
@@ -49,7 +65,6 @@ namespace Planex.Web.Areas.HR.Controllers
                 entity.FirstName = user.FirstName;
                 entity.LastName = user.LastName;
                 entity.PricePerHour = user.PricePerHour;
-                // todo: avatar
                 entity.Skills.Clear();
 
                 if (user.Skills != null)
@@ -77,6 +92,7 @@ namespace Planex.Web.Areas.HR.Controllers
                 }
 
                 userService.Update(entity);
+                userService.SetRoleName(entity, user.Role);
             }
 
             return RedirectToAction("Index");

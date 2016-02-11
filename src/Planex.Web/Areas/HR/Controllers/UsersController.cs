@@ -46,6 +46,8 @@ namespace Planex.Web.Areas.HR.Controllers
                     });
             }
 
+            ViewData["SelectedIndex"] = 0;
+
             return View();
         }
 

@@ -5,5 +5,6 @@
         .DataValueField("Value")
         .DataTextField("Text")
         .BindTo((IEnumerable<SelectListItem>)ViewData["roles"])                
-        .OptionLabel("Select Position")                
+        .OptionLabel("Select Position")
+        .SelectedIndex((int)ViewData["SelectedIndex"])           
 )

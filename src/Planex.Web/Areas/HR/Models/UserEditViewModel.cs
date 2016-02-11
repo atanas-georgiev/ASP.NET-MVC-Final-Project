@@ -39,6 +39,10 @@ namespace Planex.Web.Areas.HR.Models
 
         public int? ImageId { get; set; }
 
+        [Required]
+        [UIHint("DropDown")]
+        public string Role { get; set; }
+
         public HttpPostedFileBase UploadedImage { get; set; }
 
         public List<string> Skills { get; set; }
@@ -46,7 +50,7 @@ namespace Planex.Web.Areas.HR.Models
         public void CreateMappings(IConfiguration configuration)
         {
             configuration.CreateMap<User, UserEditViewModel>("")
-                .ForMember(m => m.Skills, opt => opt.MapFrom(c => c.Skills.Select(s => s.Name)));            
+                .ForMember(m => m.Skills, opt => opt.MapFrom(c => c.Skills.Select(s => s.Name)));
         }
     }
 }
