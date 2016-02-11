@@ -15,12 +15,14 @@ namespace Planex.Services.Users
     {
         private DbContext context;
         private IRepository<User> users;
+        private IRepository<Image> images;
         private UserManager<User> userManager;
 
-        public UserService(DbContext context, IRepository<User> users)
+        public UserService(DbContext context, IRepository<User> users, IRepository<Image> images)
         {
             this.context = context;
             this.users = users;
+            this.images = images;
             this.userManager = new UserManager<User>(new UserStore<User>(context));
         }
 

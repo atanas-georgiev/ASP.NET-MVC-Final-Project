@@ -19,24 +19,28 @@ namespace Planex.Web.Areas.HR.Models
 
         [Required]
         [UIHint("Email")]
-
         public string Email { get; set; }
+
         [Required]
         [MinLength(2)]
         [MaxLength(50)]
+        [UIHint("String")]
         public string FirstName { get; set; }
 
         [Required]
         [MinLength(2)]
         [MaxLength(50)]
+        [UIHint("String")]
         public string LastName { get; set; }
 
         [Required]
+        [UIHint("Currency")]
         public decimal PricePerHour { get; set; }
-//
-//        [Required]
-//        public Image Avatar { get; set; }
-//
+
+        public int? ImageId { get; set; }
+
+        public HttpPostedFileBase UploadedImage { get; set; }
+
         public List<string> Skills { get; set; }
 
         public void CreateMappings(IConfiguration configuration)

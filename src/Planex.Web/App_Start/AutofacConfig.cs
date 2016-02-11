@@ -4,6 +4,7 @@ using System.Web.Mvc;
 using Autofac;
 using Autofac.Integration.Mvc;
 using Planex.Data;
+using Planex.Services.Images;
 using Planex.Services.Skills;
 using Planex.Services.Users;
 using Planex.Web.Areas.HR.Controllers;
@@ -54,6 +55,7 @@ namespace Planex.Web
 
             //var servicesAssembly = Assembly.GetAssembly(typeof(IJokesService));
             builder.RegisterAssemblyTypes(Assembly.GetAssembly(typeof(IUserService))).AsImplementedInterfaces();
+            builder.RegisterAssemblyTypes(Assembly.GetAssembly(typeof(IImageService))).AsImplementedInterfaces();
             builder.RegisterAssemblyTypes(Assembly.GetAssembly(typeof(ISkillService))).AsImplementedInterfaces();
 
             builder.RegisterGeneric(typeof(GenericRepository<>)).As(typeof(IRepository<>)).InstancePerRequest();

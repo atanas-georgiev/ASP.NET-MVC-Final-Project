@@ -30,7 +30,9 @@ namespace Planex.Data.Models
         [Required]
         public decimal PricePerHour { get; set; }
 
-        public byte[] Avatar { get; set; }
+        public int? ImageId { get; set; }
+
+        public virtual Image Image { get; set; }
 
         public virtual ICollection<Skill> Skills
         {

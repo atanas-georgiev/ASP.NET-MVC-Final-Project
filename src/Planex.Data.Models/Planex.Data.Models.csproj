@@ -60,6 +60,7 @@
     <Folder Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Image.cs" />
     <Compile Include="PriorityType.cs" />
     <Compile Include="Resource.cs" />
     <Compile Include="Skill.cs" />

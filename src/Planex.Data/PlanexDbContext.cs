@@ -19,6 +19,8 @@ namespace Planex.Data
 
         public virtual IDbSet<Subtask> Subtasks { get; set; }
 
+        public virtual IDbSet<Image> Images { get; set; }
+
         public static PlanexDbContext Create()
         {
             return new PlanexDbContext();

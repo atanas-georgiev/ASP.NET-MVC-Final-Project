@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using AutoMapper;
 using Planex.Data.Models;
+using Planex.Services.Images;
 using Planex.Services.Skills;
 using Planex.Services.Users;
 using Planex.Web.Areas.HR.Models;
@@ -16,11 +18,13 @@ namespace Planex.Web.Areas.HR.Controllers
 
         protected IUserService userService;
         protected ISkillService skillService;
+        protected IImageService imageService;
 
-        public UserDetailsController(IUserService userService, ISkillService skillService)
+        public UserDetailsController(IUserService userService, ISkillService skillService, IImageService imageService)
         {
             this.userService = userService;
             this.skillService = skillService;
+            this.imageService = imageService;
         }
 
         public ActionResult Index(string id)
@@ -36,6 +40,7 @@ namespace Planex.Web.Areas.HR.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Index(UserEditViewModel user)
         {
             if (ModelState.IsValid)
@@ -47,16 +52,46 @@ namespace Planex.Web.Areas.HR.Controllers
                 // todo: avatar
                 entity.Skills.Clear();
 
-                foreach (string skill in user.Skills)
+                if (user.Skills != null)
                 {
-                    var dbSkill = skillService.GetAll().FirstOrDefault(x => x.Name == skill);
-                    entity.Skills.Add(dbSkill);
+                    foreach (string skill in user.Skills)
+                    {
+                        var dbSkill = skillService.GetAll().FirstOrDefault(x => x.Name == skill);
+                        entity.Skills.Add(dbSkill);
+                    }
+                }
+
+                if (user.UploadedImage != null)
+                {
+                    using (var memory = new MemoryStream())
+                    {
+                        user.UploadedImage.InputStream.CopyTo(memory);
+                        var content = memory.GetBuffer();
+
+                        entity.Image = new Image
+                        {
+                            Content = content,
+                            FileExtension = user.UploadedImage.FileName.Split(new[] { '.' }).Last()
+                        };
+                    }
                 }
 
                 userService.Update(entity);
             }
 
             return RedirectToAction("Index");
+        }
+
+        public ActionResult Image(int id)
+        {
+            var image = this.imageService.GetById(id);
+            if (image == null)
+            {
+                return Content("");
+               // throw new HttpException(404, "Image not found");
+            }            
+
+            return File(image.Content, "image/" + image.FileExtension);
         }
     }
 }
