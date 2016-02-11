@@ -1,43 +1,45 @@
 ﻿using System;
 using Kendo.Mvc.UI;
 
-public class TaskViewModel : IGanttTask
+namespace Planex.Web.Areas.Lead.Models
 {
-    public int TaskID { get; set; }
-    public int? ParentID { get; set; }
-
-    public string Title { get; set; }
-
-    private DateTime start;
-    public DateTime Start
+    public class TaskViewModel : IGanttTask
     {
-        get
-        {
-            return start;
-        }
-        set
-        {
-            start = value.ToUniversalTime();
-        }
-    }
+        public int TaskID { get; set; }
+        public int? ParentID { get; set; }
 
-    private DateTime end;
-    public DateTime End
-    {
-        get
-        {
-            return end;
-        }
-        set
-        {
-            end = value.ToUniversalTime();
-        }
-    }
+        public string Title { get; set; }
 
-    public bool Summary { get; set; }
-    public bool Expanded { get; set; }
-    public decimal PercentComplete { get; set; }
-    public int OrderId { get; set; }
+        private DateTime start;
+        public DateTime Start
+        {
+            get
+            {
+                return start;
+            }
+            set
+            {
+                start = value.ToUniversalTime();
+            }
+        }
+
+        private DateTime end;
+        public DateTime End
+        {
+            get
+            {
+                return end;
+            }
+            set
+            {
+                end = value.ToUniversalTime();
+            }
+        }
+
+        public bool Summary { get; set; }
+        public bool Expanded { get; set; }
+        public decimal PercentComplete { get; set; }
+        public int OrderId { get; set; }
 
 //    public GanttTask ToEntity()
 //    {
@@ -54,4 +56,5 @@ public class TaskViewModel : IGanttTask
 //            OrderId = OrderId
 //        };
 //    }
+    }
 }

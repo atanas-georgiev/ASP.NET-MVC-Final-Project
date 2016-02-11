@@ -7,15 +7,21 @@ using AutoMapper;
 using Planex.Data.Models;
 using Planex.Services.Skills;
 using Planex.Services.Users;
-using Planex.Web.App_Start;
 using Planex.Web.Areas.HR.Models;
 
 namespace Planex.Web.Areas.HR.Controllers
 {
-    public class UserDetailsController : Controller
+    public class UserDetailsController : BaseController
     {
-        IUserService userService = new UserService();
-        ISkillService skillService = new SkillService();
+
+        protected IUserService userService;
+        protected ISkillService skillService;
+
+        public UserDetailsController(IUserService userService, ISkillService skillService)
+        {
+            this.userService = userService;
+            this.skillService = skillService;
+        }
 
         public ActionResult Index(string id)
         {

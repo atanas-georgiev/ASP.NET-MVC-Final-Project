@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,14 +13,14 @@ namespace Planex.Services.Users
 {
     public class UserService : IUserService
     {
-        private PlanexDbContext context;
+        private DbContext context;
         private IRepository<User> users;
         private UserManager<User> userManager;
 
-        public UserService()
+        public UserService(DbContext context, IRepository<User> users)
         {
-            this.context = new PlanexDbContext();
-            this.users = new GenericRepository<User>(context);
+            this.context = context;
+            this.users = users;
             this.userManager = new UserManager<User>(new UserStore<User>(context));
         }
 

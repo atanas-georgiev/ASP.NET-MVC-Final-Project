@@ -13,15 +13,22 @@ using Kendo.Mvc.UI;
 ﻿using Planex.Data;
 ﻿using Planex.Data.Models;
 ﻿using Planex.Services.Skills;
-﻿using Planex.Web.App_Start;
+﻿using Planex.Services.Users;
 ﻿using Planex.Web.Areas.HR.Models;
 ﻿using Planex.Web.Infrastructure.Mappings;
 
 namespace Planex.Web.Areas.HR.Controllers
 {
-    public class SkillsController : Controller
+    public class SkillsController : BaseController
     {
-        ISkillService skillService = new SkillService();
+        protected IUserService userService;
+        protected ISkillService skillService;
+
+        public SkillsController(IUserService userService, ISkillService skillService)
+        {
+            this.userService = userService;
+            this.skillService = skillService;
+        }
 
         public ActionResult Index()
         {

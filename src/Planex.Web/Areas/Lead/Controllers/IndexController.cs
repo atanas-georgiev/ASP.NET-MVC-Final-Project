@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using Kendo.Mvc.Extensions;
 using Kendo.Mvc.UI;
+using Planex.Web.Areas.Lead.Models;
 
 namespace Planex.Web.Areas.Lead.Controllers
 {

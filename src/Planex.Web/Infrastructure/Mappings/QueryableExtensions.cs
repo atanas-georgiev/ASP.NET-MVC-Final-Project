@@ -5,7 +5,6 @@ using System.Linq.Expressions;
 using System.Web;
 using AutoMapper.QueryableExtensions;
 using Planex.Data.Models;
-using Planex.Web.App_Start;
 
 namespace Planex.Web.Infrastructure.Mappings
 {

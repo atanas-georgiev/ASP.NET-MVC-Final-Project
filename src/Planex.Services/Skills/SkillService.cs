@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,13 +13,13 @@ namespace Planex.Services.Skills
 {
     public class SkillService : ISkillService
     {
-        private PlanexDbContext context;
+        private DbContext context;
         private IRepository<Skill> skills;        
 
-        public SkillService()
+        public SkillService(DbContext context, IRepository<Skill> skills)
         {
-            this.context = new PlanexDbContext();
-            this.skills = new GenericRepository<Skill>(context);            
+            this.context = context;
+            this.skills = skills;            
         }
 
         public IQueryable<Skill> GetAll()

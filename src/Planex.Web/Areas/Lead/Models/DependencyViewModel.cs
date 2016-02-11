@@ -1,12 +1,14 @@
 ﻿using Kendo.Mvc.UI;
 
-public class DependencyViewModel : IGanttDependency
+namespace Planex.Web.Areas.Lead.Models
 {
-    public int DependencyID { get; set; }
+    public class DependencyViewModel : IGanttDependency
+    {
+        public int DependencyID { get; set; }
 
-    public int PredecessorID { get; set; }
-    public int SuccessorID { get; set; }
-    public DependencyType Type { get; set; }
+        public int PredecessorID { get; set; }
+        public int SuccessorID { get; set; }
+        public DependencyType Type { get; set; }
 
 //    public GanttDependency ToEntity()
 //    {
@@ -18,4 +20,5 @@ public class DependencyViewModel : IGanttDependency
 //            Type = (int)Type
 //        };
 //    }
+    }
 }

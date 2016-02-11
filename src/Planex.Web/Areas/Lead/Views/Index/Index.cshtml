@@ -1,4 +1,5 @@
 ﻿@using Kendo.Mvc.UI
+@using Planex.Web.Areas.Lead.Models
 @(Html.Kendo()
     .Gantt<TaskViewModel, DependencyViewModel>((IEnumerable<TaskViewModel>)ViewData["tasks"], (IEnumerable<DependencyViewModel>)ViewData["dependencies"])
     .Name("gantt")

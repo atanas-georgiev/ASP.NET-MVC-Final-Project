@@ -20,9 +20,16 @@ using AutoMapper.QueryableExtensions;
 
 namespace Planex.Web.Areas.HR.Controllers
 {
-    public class UsersController : Controller
+    public class UsersController : BaseController
     {
-        IUserService userService = new UserService();
+        protected IUserService userService;
+        protected ISkillService skillService;
+
+        public UsersController(IUserService userService, ISkillService skillService)
+        {
+            this.userService = userService;
+            this.skillService = skillService;
+        }
 
         public ActionResult Index()
         {

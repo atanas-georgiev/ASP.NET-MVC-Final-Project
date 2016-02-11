@@ -2,7 +2,7 @@
 using Planex.Data;
 using Planex.Data.Migrations;
 
-namespace Planex.Web.App_Start
+namespace Planex.Web
 {
     public static class DatabaseConfig
     {
