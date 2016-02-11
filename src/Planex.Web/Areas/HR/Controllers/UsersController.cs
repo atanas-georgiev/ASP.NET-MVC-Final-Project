@@ -14,6 +14,7 @@ using Kendo.Mvc.UI;
 ﻿using Planex.Web.Areas.HR.Models;
 using AutoMapper.QueryableExtensions;
 ﻿using Planex.Services.Users;
+﻿using Planex.Web.Infrastructure.Mappings;
 ﻿using WebGrease.Css.Extensions;
 
 namespace Planex.Web.Areas.HR.Controllers
@@ -42,8 +43,8 @@ namespace Planex.Web.Areas.HR.Controllers
 
         public ActionResult Users_Read([DataSourceRequest]DataSourceRequest request)
         {
-            DataSourceResult result = this.userService.GetAll().ProjectTo<UserViewModel>().ToDataSourceResult(request);                
-            return Json(result);
+            var users = this.userService.GetAll().To<UserViewModel>();
+            return Json(users.ToDataSourceResult(request));
         }
 
         [AcceptVerbs(HttpVerbs.Post)]

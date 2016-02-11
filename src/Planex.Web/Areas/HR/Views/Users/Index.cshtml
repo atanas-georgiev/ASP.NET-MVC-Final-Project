@@ -4,23 +4,27 @@
       .Name("grid")
       .Columns(columns =>
       {
+          columns.Template(@<text></text>).ClientTemplate("<a href='" + Url.Action("Index", "UserDetails", new {id = "#=Id#"}) + "'>View user</a>");
           columns.Bound(c => c.Email);
           columns.Bound(c => c.FirstName);
           columns.Bound(c => c.LastName);
           columns.Bound(c => c.Role);
       })
-      .ToolBar(toolbar => {
+      .ToolBar(toolbar =>
+      {
           toolbar.Create();
       })
       .ColumnMenu()
       .Editable(editable => editable.Mode(GridEditMode.PopUp))
       .Pageable()
       .Navigatable()
-      .Selectable(selectable => {
+      .Selectable(selectable =>
+      {
           selectable.Mode(GridSelectionMode.Single);
           selectable.Type(GridSelectionType.Row);
       })
-      .Sortable(sortable => {
+      .Sortable(sortable =>
+      {
           sortable.SortMode(GridSortMode.SingleColumn);
       })
       .Filterable()
@@ -29,6 +33,6 @@
           .Ajax()
           .Model(model => model.Id(p => p.Id))
           .Read(read => read.Action("Users_Read", "Users"))
-          .Create(create => create.Action("Users_Create", "Users"))          
+          .Create(create => create.Action("Users_Create", "Users"))
       )
 )

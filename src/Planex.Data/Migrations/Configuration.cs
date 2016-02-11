@@ -29,7 +29,7 @@ namespace Planex.Data.Migrations
         private void SeedRoles(PlanexDbContext context)
         {
             context.Roles.AddOrUpdate(x => x.Name, new IdentityRole("Manager"));
-            context.Roles.AddOrUpdate(x => x.Name, new IdentityRole("Load"));
+            context.Roles.AddOrUpdate(x => x.Name, new IdentityRole("Lead"));
             context.Roles.AddOrUpdate(x => x.Name, new IdentityRole("Worker"));
             context.Roles.AddOrUpdate(x => x.Name, new IdentityRole("HR"));
             context.Roles.AddOrUpdate(x => x.Name, new IdentityRole("StoreKeeper"));
