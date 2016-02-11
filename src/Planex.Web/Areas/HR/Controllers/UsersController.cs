@@ -27,7 +27,6 @@ namespace Planex.Web.Areas.HR.Controllers
         public ActionResult Users_Read([DataSourceRequest]DataSourceRequest request)
         {
             DataSourceResult result = this.users.All().ProjectTo<UserViewModel>().ToDataSourceResult(request);                
-
             return Json(result);
         }
 

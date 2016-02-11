@@ -29,6 +29,8 @@ namespace Planex.Data.Models
 
         public decimal PricePerHour { get; set; }
 
+        public byte[] Avatar { get; set; }
+
         public virtual ICollection<Skill> Skills
         {
             get { return this.skills; }
