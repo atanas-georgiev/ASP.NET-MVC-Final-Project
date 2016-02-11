@@ -7,6 +7,7 @@ using System.Runtime.Versioning;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
+using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Planex.Data.Models;
 using Planex.Web.App_LocalResources;
@@ -21,23 +22,23 @@ namespace Planex.Web.Areas.HR.Models
         public string Id { get; set; }
 
         [Required]
+        [UIHint("Email")]
+        public string Email { get; set; }
+
+        [Required]
         [MinLength(2)]
         [MaxLength(50)]
         [UIHint("String")]
-     //   [Display(Name = "UserFirstName", ResourceType = typeof(Default))]
         public string FirstName { get; set; }
 
         [Required]
         [MinLength(2)]
         [MaxLength(50)]
         [UIHint("String")]
-        //     [Display(Name = "UserLastName", ResourceType = typeof(Default))]
         public string LastName { get; set; }
 
         [Required]
-        [UIHint("Currency")]
-        public decimal PricePerHour { get; set; }
-
-        public ICollection<Skill> Skills;        
+        [UIHint("DropDown")]
+        public string Role { get; set; }
     }
 }

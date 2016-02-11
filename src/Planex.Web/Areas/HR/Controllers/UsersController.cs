@@ -12,21 +12,36 @@ using Kendo.Mvc.UI;
 ﻿using Planex.Data.Models;
 ﻿using Planex.Web.Areas.HR.Models;
 using AutoMapper.QueryableExtensions;
+﻿using Planex.Services.Users;
+﻿using WebGrease.Css.Extensions;
 
 namespace Planex.Web.Areas.HR.Controllers
 {
     public class UsersController : Controller
     {
-        IRepository<User> users = new GenericRepository<User>(new PlanexDbContext());
+        IUserService userService = new UserService();
         
         public ActionResult Index()
         {
+            ViewData["roles"] = new List<SelectListItem>();            
+            var roles = this.userService.GetRoles();
+
+            foreach (var role in roles)
+            {
+                (ViewData["roles"] as List<SelectListItem>).Add(
+                    new SelectListItem()
+                    {
+                        Value = role,
+                        Text = role
+                    });
+            }
+
             return View();
         }
 
         public ActionResult Users_Read([DataSourceRequest]DataSourceRequest request)
         {
-            DataSourceResult result = this.users.All().ProjectTo<UserViewModel>().ToDataSourceResult(request);                
+            DataSourceResult result = this.userService.GetAll().ProjectTo<UserViewModel>().ToDataSourceResult(request);                
             return Json(result);
         }
 
@@ -34,17 +49,16 @@ namespace Planex.Web.Areas.HR.Controllers
         public ActionResult Users_Create([DataSourceRequest]DataSourceRequest request, UserViewModel user)
         {
             if (ModelState.IsValid)
-            {
+            {                
                 var entity = new User
                 {
+                    Email = user.Email,
                     FirstName = user.FirstName,
                     LastName = user.LastName,
-                    PricePerHour = user.PricePerHour,
-                    Skills = user.Skills
+                    PricePerHour = 0,
                 };
 
-             //   db.Users.Add(entity);
-            //    db.SaveChanges();
+                this.userService.Add(entity, user.Role);                
                 user.Id = entity.Id;
             }
 
@@ -61,8 +75,8 @@ namespace Planex.Web.Areas.HR.Controllers
                     Id = user.Id,
                     FirstName = user.FirstName,
                     LastName = user.LastName,
-                    PricePerHour = user.PricePerHour,
-                    Skills = user.Skills
+//                    PricePerHour = user.PricePerHour,
+//                    Skills = user.Skills
                 };
 
           //      db.Users.Attach(entity);
@@ -83,8 +97,8 @@ namespace Planex.Web.Areas.HR.Controllers
                     Id = user.Id,
                     FirstName = user.FirstName,
                     LastName = user.LastName,
-                    PricePerHour = user.PricePerHour,
-                    Skills = user.Skills
+//                    PricePerHour = user.PricePerHour,
+//                    Skills = user.Skills
                 };
 
 //                db.Users.Attach(entity);

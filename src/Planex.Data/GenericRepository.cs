@@ -42,6 +42,14 @@ namespace Planex.Data
             else
             {
                 DbSet.Add(entity);
+                try
+                {
+                    Context.SaveChanges();
+                }
+                catch (Exception e)
+                {
+                    
+                }
             }
         }
 

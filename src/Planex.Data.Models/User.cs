@@ -17,16 +17,17 @@ namespace Planex.Data.Models
             this.skills = new HashSet<Skill>();
         }
 
-        //  [Required]
+        [Required]
         [MinLength(2)]
         [MaxLength(50)]
         public string FirstName { get; set; }
 
-       // [Required]
+        [Required]
         [MinLength(2)]
         [MaxLength(50)]
         public string LastName { get; set; }
 
+        [Required]
         public decimal PricePerHour { get; set; }
 
         public byte[] Avatar { get; set; }
