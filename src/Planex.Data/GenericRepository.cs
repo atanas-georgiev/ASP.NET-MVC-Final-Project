@@ -42,14 +42,7 @@ namespace Planex.Data
             else
             {
                 DbSet.Add(entity);
-                try
-                {
-                    Context.SaveChanges();
-                }
-                catch (Exception e)
-                {
-                    
-                }
+                Context.SaveChanges();
             }
         }
 
@@ -62,6 +55,7 @@ namespace Planex.Data
             }
 
             entry.State = EntityState.Modified;
+            Context.SaveChanges();
         }
 
         public virtual void Delete(T entity)
@@ -76,6 +70,7 @@ namespace Planex.Data
                 DbSet.Attach(entity);
                 DbSet.Remove(entity);
             }
+            Context.SaveChanges();
         }
 
         public virtual void Delete(object id)
@@ -86,6 +81,7 @@ namespace Planex.Data
             {
                 Delete(entity);
             }
+            Context.SaveChanges();
         }
 
         public virtual void Detach(T entity)

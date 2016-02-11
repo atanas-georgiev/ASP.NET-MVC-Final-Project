@@ -60,6 +60,8 @@
     <Folder Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Skills\ISkillService.cs" />
+    <Compile Include="Skills\SkillService.cs" />
     <Compile Include="Users\IUserService.cs" />
     <Compile Include="Users\UserService.cs" />
   </ItemGroup>

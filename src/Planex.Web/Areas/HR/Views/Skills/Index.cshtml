@@ -1,0 +1,30 @@
+﻿@using Kendo.Mvc.UI
+
+@(Html.Kendo().Grid<Planex.Web.Areas.HR.Models.SkillViewModel>()
+      .Name("grid")
+      .Columns(columns =>
+      {
+        columns.Bound(c => c.Name);
+        columns.Command(command => { command.Edit(); command.Destroy(); });
+      })
+      .ToolBar(toolbar => {
+            toolbar.Create();
+      })
+      .ColumnMenu()
+      .Editable(editable => editable.Mode(GridEditMode.PopUp))
+      .Pageable()
+      .Navigatable()
+      .Sortable(sortable => {
+          sortable.SortMode(GridSortMode.SingleColumn);
+      })
+      .Filterable()
+      .Scrollable()
+      .DataSource(dataSource => dataSource
+          .Ajax()
+          .Model(model => model.Id(p => p.Id))
+          .Read(read => read.Action("Skills_Read", "Skills"))
+          .Create(create => create.Action("Skills_Create", "Skills"))
+          .Update(update => update.Action("Skills_Update", "Skills"))
+          .Destroy(destroy => destroy.Action("Skills_Destroy", "Skills"))
+      )
+)
