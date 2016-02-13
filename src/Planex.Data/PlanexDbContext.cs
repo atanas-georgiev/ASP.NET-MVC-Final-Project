@@ -13,7 +13,7 @@ namespace Planex.Data
 
         public virtual IDbSet<Skill> Skills { get; set; }
 
-        public virtual IDbSet<Resource> Resources { get; set; }
+        public virtual IDbSet<Attachment> Attachments { get; set; }
 
         public virtual IDbSet<MainTask> MainTasks { get; set; }
 

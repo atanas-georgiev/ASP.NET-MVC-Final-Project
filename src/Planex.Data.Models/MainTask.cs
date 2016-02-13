@@ -9,22 +9,34 @@ namespace Planex.Data.Models
     public class MainTask
     {
         private ICollection<Subtask> subTasks;
+        private ICollection<Attachment> attachments;
 
         public MainTask()
         {
             this.subTasks = new HashSet<Subtask>();
+            this.attachments = new HashSet<Attachment>();
         }
 
         public int Id { get; set; }
 
-        public DateTime DeadLine { get; set; }
+        public string Title { get; set; }
+
+        public string Description { get; set; }
 
         public PriorityType Priority { get; set; }
+
+        public TaskStateType State { get; set; }
 
         public virtual ICollection<Subtask> Subtasks
         {
             get { return this.subTasks; }
             set { this.subTasks = value; }
+        }
+
+        public virtual ICollection<Attachment> Attachments
+        {
+            get { return this.attachments; }
+            set { this.attachments = value; }
         }
     }
 }

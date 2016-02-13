@@ -8,8 +8,6 @@ namespace Planex.Data.Migrations
 {
     public sealed class Configuration : DbMigrationsConfiguration<PlanexDbContext>
     {
-        private UserManager<User> userManager;
-
         public Configuration()
         {
             AutomaticMigrationsEnabled = true;

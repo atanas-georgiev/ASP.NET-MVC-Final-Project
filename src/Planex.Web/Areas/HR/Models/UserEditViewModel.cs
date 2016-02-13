@@ -7,7 +7,6 @@ using System.Web;
 using AutoMapper;
 using Planex.Data.Models;
 using Planex.Web.Infrastructure.Mappings;
-using AutoMapper;
 
 namespace Planex.Web.Areas.HR.Models
 {

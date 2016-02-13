@@ -10,18 +10,22 @@ namespace Planex.Data.Models
     public class Subtask
     {
         private ICollection<Skill> skills;
-        private ICollection<Resource> resources;
+        private ICollection<Attachment> attachements;
+        private ICollection<User> users;
 
         public Subtask()
         {
             this.skills = new HashSet<Skill>();
-            this.resources = new HashSet<Resource>();
+            this.attachements = new HashSet<Attachment>();
+            this.users = new HashSet<User>();
         }
 
         public int Id { get; set; }
 
+        public DateTime Start;
+
         [Required]
-        public TimeSpan Duration;
+        public DateTime End;
 
         [Required]
         public int MainTaskId { get; set; }
@@ -34,10 +38,16 @@ namespace Planex.Data.Models
             set { this.skills = value; }
         }
 
-        public virtual ICollection<Resource> Resources
+        public virtual ICollection<Attachment> Resources
         {
-            get { return this.resources; }
-            set { this.resources = value; }
-        }        
+            get { return this.attachements; }
+            set { this.attachements = value; }
+        }
+
+        public virtual ICollection<User> Users
+        {
+            get { return this.users; }
+            set { this.users = value; }
+        }
     }
 }
