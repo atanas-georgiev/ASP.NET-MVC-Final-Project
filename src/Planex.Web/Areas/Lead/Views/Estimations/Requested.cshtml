@@ -1,0 +1,25 @@
+﻿@using Kendo.Mvc.UI
+@using Planex.Web.Areas.Lead.Models
+@model IEnumerable<EstimationRequestedViewModel>
+
+<script type="text/x-kendo-tmpl" id="template">
+    <div class="product">
+        <h1>Yeee</h1>
+       <h3>#:Title#</h3>
+@*        <p>#:kendo.toString(UnitPrice, "c")#</p>*@
+    </div>
+</script>
+
+<div class="demo-section k-content wide">
+    @(Html.Kendo().ListView<EstimationRequestedViewModel>(Model)
+    .Name("listView")
+    .TagName("div")
+    .ClientTemplateId("template")
+    .DataSource(dataSource =>
+    {
+        dataSource.Read(read => read.Action("requestedEstimationTasks", "Estimations"));
+        dataSource.PageSize(21);
+    })
+    .Pageable()
+    )
+</div>

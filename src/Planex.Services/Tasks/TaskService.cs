@@ -60,5 +60,10 @@ namespace Planex.Services.Tasks
                 Update(dbTask);
             }
         }
+
+        public IQueryable<MainTask> GetAll()
+        {
+            return this.tasks.All();
+        }
     }
 }
