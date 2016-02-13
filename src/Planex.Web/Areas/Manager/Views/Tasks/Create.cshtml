@@ -1,0 +1,29 @@
+﻿@using Kendo.Mvc.UI
+@model Planex.Web.Areas.Manager.Models.TaskCreateViewModel
+
+@{
+    ViewBag.Title = "Create";
+}
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+
+    <div class="k-content">
+
+        <h2>Create</h2>
+        <br/>
+        @Html.EditorFor(model => model.Title)
+        @Html.EditorFor(model => model.Description)
+        @Html.EditorFor(model => model.Priority)
+        @(Html.Kendo().Upload().Name("UploadedAttachments"))
+
+        <div class="form-group">
+            <input type="submit" value="Create" class="k-primary"/>
+        </div>
+    </div>
+        }
+
+        <div>
+            @Html.ActionLink("Back to List", "Index")
+        </div>

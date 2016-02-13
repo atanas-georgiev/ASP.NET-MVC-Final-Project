@@ -11,10 +11,12 @@ namespace Planex.Data.Models
     public class User : IdentityUser
     {
         private ICollection<Skill> skills;
+        private ICollection<Subtask> subtasks;
 
         public User()
         {
             this.skills = new HashSet<Skill>();
+            this.subtasks = new List<Subtask>();
         }
 
         [Required]
@@ -38,6 +40,12 @@ namespace Planex.Data.Models
         {
             get { return this.skills; }
             set { this.skills = value; }
+        }
+
+        public virtual ICollection<Subtask> SubTasks
+        {
+            get { return this.subtasks; }
+            set { this.subtasks = value; }
         }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<User> manager)

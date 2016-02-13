@@ -27,6 +27,14 @@ namespace Planex.Data.Models
 
         public TaskStateType State { get; set; }
 
+        public string ManagerId { get; set; }
+
+        public virtual User Manager { get; set; }
+
+        public string LeadId { get; set; }
+
+        public virtual User Lead { get; set; }
+
         public virtual ICollection<Subtask> Subtasks
         {
             get { return this.subTasks; }

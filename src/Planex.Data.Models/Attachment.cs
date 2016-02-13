@@ -9,8 +9,5 @@
 
         [MaxLength(300)]
         public string Name { get; set; }
-
-        [MaxLength(300)]
-        public string Path { get; set; }
     }
 }

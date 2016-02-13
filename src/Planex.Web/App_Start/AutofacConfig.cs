@@ -6,6 +6,7 @@ using Autofac.Integration.Mvc;
 using Planex.Data;
 using Planex.Services.Images;
 using Planex.Services.Skills;
+using Planex.Services.Tasks;
 using Planex.Services.Users;
 using Planex.Web.Areas.HR.Controllers;
 
@@ -45,18 +46,9 @@ namespace Planex.Web
         {
             builder.Register(x => new PlanexDbContext())
                 .As<DbContext>()
-                .InstancePerLifetimeScope();
-//            builder.Register(x => new HttpCacheService())
-//                .As<ICacheService>()
-//                .InstancePerRequest();
-//            builder.Register(x => new IdentifierProvider())
-//                .As<IIdentifierProvider>()
-//                .InstancePerRequest();
+                .InstancePerRequest();
 
-            //var servicesAssembly = Assembly.GetAssembly(typeof(IJokesService));
             builder.RegisterAssemblyTypes(Assembly.GetAssembly(typeof(IUserService))).AsImplementedInterfaces();
-            builder.RegisterAssemblyTypes(Assembly.GetAssembly(typeof(IImageService))).AsImplementedInterfaces();
-            builder.RegisterAssemblyTypes(Assembly.GetAssembly(typeof(ISkillService))).AsImplementedInterfaces();
 
             builder.RegisterGeneric(typeof(GenericRepository<>)).As(typeof(IRepository<>)).InstancePerRequest();
 

@@ -38,7 +38,7 @@ namespace Planex.Data.Models
             set { this.skills = value; }
         }
 
-        public virtual ICollection<Attachment> Resources
+        public virtual ICollection<Attachment> Attachments
         {
             get { return this.attachements; }
             set { this.attachements = value; }

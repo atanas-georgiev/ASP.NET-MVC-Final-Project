@@ -1,3 +1,12 @@
-﻿@model object 
+﻿@model object
 
-@Html.Kendo().TextBoxFor(model => model)
+<div class="row">
+    <div class="col-md-1">
+        @Html.LabelFor(model => model, htmlAttributes: new {@class = "control-label col-md-2"})
+    </div>
+    <div class="col-md-11">
+        @Html.Kendo().TextBoxFor(model => model).HtmlAttributes(new {@class = "form-control"})
+        @*        @Html.ValidationMessageFor(model => model, "", new { @class = "text-danger" })*@
+    </div>
+</div>
+<br/>

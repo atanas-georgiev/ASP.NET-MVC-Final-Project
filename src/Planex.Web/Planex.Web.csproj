@@ -215,8 +215,11 @@
     <Compile Include="Areas\Lead\LeadAreaRegistration.cs" />
     <Compile Include="Areas\Lead\Models\DependencyViewModel.cs" />
     <Compile Include="Areas\Lead\Models\TaskViewModel.cs" />
+    <Compile Include="Areas\Manager\Controllers\BaseController.cs" />
     <Compile Include="Areas\Manager\Controllers\IndexController.cs" />
+    <Compile Include="Areas\Manager\Controllers\TasksController.cs" />
     <Compile Include="Areas\Manager\ManagerAreaRegistration.cs" />
+    <Compile Include="Areas\Manager\Models\TaskCreateViewModel.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -414,6 +417,8 @@
     <Content Include="Content\Kendo\kendo.silver.mobile.min.css.map" />
     <Content Include="Content\Kendo\kendo.uniform.min.css.map" />
     <Content Include="Content\Kendo\kendo.uniform.mobile.min.css.map" />
+    <Content Include="Areas\Manager\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Manager\Views\Tasks\Create.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -736,13 +741,15 @@
     <Content Include="Views\Shared\EditorTemplates\Time.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Url.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\DropDown.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\EnumDropDown.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Editor.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\HR\Views\Base\" />
     <Folder Include="Areas\HR\Views\Shared\" />
     <Folder Include="Areas\Lead\Views\Shared\" />
-    <Folder Include="Areas\Manager\Models\" />
+    <Folder Include="Areas\Manager\Views\Base\" />
     <Folder Include="Areas\Manager\Views\Shared\" />
     <Folder Include="Properties\" />
     <Folder Include="Views\Grid\" />
