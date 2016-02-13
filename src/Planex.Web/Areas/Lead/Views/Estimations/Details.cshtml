@@ -1,0 +1,16 @@
+﻿@model Planex.Web.Areas.Lead.Models.EstimationRequestedViewModel
+
+<div class="k-content">
+    <div>
+        <h4>EstimationRequestedViewModel</h4>
+        <hr />
+
+        @Html.DisplayFor(model => model.Title)
+        @Html.DisplayFor(model => model.Description)
+        @Html.DisplayFor(model => model.Priority)
+
+    </div>
+    <p>
+        @Html.ActionLink("Start Estimation", "StartEstimation", new { id = Model.Id }) |
+    </p>
+</div>

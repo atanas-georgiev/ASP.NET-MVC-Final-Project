@@ -1,0 +1,14 @@
+﻿@using System.Collections
+@using Planex.Data.Models
+@model object
+
+<div class="row">
+    <div class="col-md-1">
+        @Html.LabelFor(model => model, htmlAttributes: new { @class = "control-label col-md-2" })
+    </div>
+    <div class="col-md-11">
+        @Model.ToString()
+@*        @Html.Kendo().DropDownListFor(model => model).Name("Enum").BindTo(Enum.GetNames(typeof (PriorityType)).ToList())*@
+    </div>
+</div>
+<br />

@@ -1,0 +1,10 @@
+﻿@using System.Collections
+
+@(Html.Kendo().DropDownList()
+        .Name("Role")
+        .DataValueField("Value")
+        .DataTextField("Text")
+        .BindTo((IEnumerable<SelectListItem>)ViewData["roles"])                
+        .OptionLabel("Select Position")
+        .SelectedIndex((int)ViewData["SelectedIndex"])           
+)

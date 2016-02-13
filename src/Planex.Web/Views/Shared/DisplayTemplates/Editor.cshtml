@@ -1,0 +1,11 @@
+﻿@model string
+
+<div class="row">
+    <div class="col-md-1">
+        @Html.LabelFor(model => model, htmlAttributes: new { @class = "control-label col-md-2" })
+    </div>
+    <div class="col-md-11">
+        @Html.Raw(Model)
+    </div>
+</div>
+<br />

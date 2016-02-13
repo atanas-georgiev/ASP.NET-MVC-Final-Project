@@ -47,7 +47,7 @@ namespace Planex.Services.Users
         public void Add(User user, string role)
         {                        
             user.UserName = user.Email;
-            this.userManager.Create(user, string.Empty);
+            this.userManager.Create(user, "changeme");
             this.users.Add(user);         
             this.userManager.AddToRole(user.Id, role);            
         }
@@ -65,7 +65,16 @@ namespace Planex.Services.Users
 
         public void SetRoleName(User user, string name)
         {
-            this.userManager.RemoveFromRole(user.Id, GetRoleName(user));
+            // todo: remove try catch
+            try
+            {
+                this.userManager.RemoveFromRole(user.Id, GetRoleName(user));
+
+            }
+            catch (Exception)
+            {
+
+            }
             this.userManager.AddToRole(user.Id, name);
             this.users.Update(user);
         }

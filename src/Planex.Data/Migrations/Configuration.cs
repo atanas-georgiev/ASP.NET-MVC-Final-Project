@@ -30,7 +30,6 @@ namespace Planex.Data.Migrations
             context.Roles.AddOrUpdate(x => x.Name, new IdentityRole("Lead"));
             context.Roles.AddOrUpdate(x => x.Name, new IdentityRole("Worker"));
             context.Roles.AddOrUpdate(x => x.Name, new IdentityRole("HR"));
-            context.Roles.AddOrUpdate(x => x.Name, new IdentityRole("StoreKeeper"));
             context.SaveChanges();
         }
     }
