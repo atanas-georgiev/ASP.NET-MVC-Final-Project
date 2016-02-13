@@ -44,5 +44,12 @@ namespace Planex.Web.Areas.Lead.Controllers
                 taskService.GetAll().Where(x => x.Id == intId).To<EstimationRequestedViewModel>().FirstOrDefault();
             return View(requestedEstimationTask);
         }
+
+        public ActionResult StartEstimation(string id)
+        {
+            var intId = int.Parse(id);
+            taskService.StartEstimation(intId, UserProfile.Id);
+            return RedirectToAction("Details", id);
+        }
     }
 }

@@ -75,5 +75,13 @@ namespace Planex.Services.Tasks
         {
             return this.tasks.GetById(id);
         }
+
+        public void StartEstimation(int taskId, string userId)
+        {
+            var task = this.tasks.GetById(taskId);
+            task.State = TaskStateType.UnderEstimation;
+            task.LeadId = userId;
+            Update(task);
+        }
     }
 }

@@ -14,5 +14,7 @@ namespace Planex.Services.Tasks
         IQueryable<MainTask> GetAll();
 
         MainTask GetById(int id);
+
+        void StartEstimation(int taskId, string userId);
     }
 }
