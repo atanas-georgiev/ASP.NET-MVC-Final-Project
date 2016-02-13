@@ -343,6 +343,7 @@
     <Content Include="Areas\HR\Views\UserDetails\Index.cshtml" />
     <Content Include="Areas\HR\Views\Skills\Index.cshtml" />
     <None Include="Areas\Lead\Views\Estimations\Requested.cshtml" />
+    <Content Include="Areas\Lead\Views\Estimations\Details.cshtml" />
     <None Include="Areas\Lead\Views\Index\Index.cshtml" />
     <Content Include="Areas\HR\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Lead\Views\_ViewStart.cshtml" />
@@ -748,6 +749,21 @@
     <Content Include="Views\Shared\EditorTemplates\DropDown.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\EnumDropDown.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Editor.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\Currency.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\Date.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\DateTime.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\DropDown.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\Editor.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\Email.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\EmailAddress.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\EnumDropDown.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\GridForeignKey.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\Integer.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\Number.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\Password.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\String.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\Time.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\Url.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

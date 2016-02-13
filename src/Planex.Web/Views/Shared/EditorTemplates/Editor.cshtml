@@ -5,7 +5,7 @@
         @Html.LabelFor(model => model, htmlAttributes: new { @class = "control-label col-md-2" })
     </div>
     <div class="col-md-11">
-        @Html.Kendo().EditorFor(model => model).HtmlAttributes(new { @class = "form-control" })
+        @Html.Kendo().EditorFor(model => model).HtmlAttributes(new { @class = "form-control" }).Encode(false)
         @*        @Html.ValidationMessageFor(model => model, "", new { @class = "text-danger" })*@
     </div>
 </div>

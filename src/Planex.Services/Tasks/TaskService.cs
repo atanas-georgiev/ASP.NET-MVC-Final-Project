@@ -38,6 +38,11 @@ namespace Planex.Services.Tasks
 
         public void AddAttachments(MainTask dbTask, List<HttpPostedFileBase> uploadedAttachments, HttpServerUtility server)
         {
+            if (uploadedAttachments == null)
+            {
+                return;
+            }
+
             if (!Directory.Exists(server.MapPath(TasksConstants.MainContentFolder)))
             {
                 Directory.CreateDirectory(server.MapPath(TasksConstants.MainContentFolder));
@@ -64,6 +69,11 @@ namespace Planex.Services.Tasks
         public IQueryable<MainTask> GetAll()
         {
             return this.tasks.All();
+        }
+
+        public MainTask GetById(int id)
+        {
+            return this.tasks.GetById(id);
         }
     }
 }

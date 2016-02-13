@@ -12,5 +12,7 @@ namespace Planex.Services.Tasks
         void AddAttachments(MainTask dbTask, List<HttpPostedFileBase> uploadedAttachments, HttpServerUtility server);
 
         IQueryable<MainTask> GetAll();
+
+        MainTask GetById(int id);
     }
 }

@@ -10,12 +10,13 @@ using Planex.Services.Tasks;
 using Planex.Services.Users;
 using Planex.Web.Areas.Lead.Models;
 using Planex.Web.Infrastructure.Mappings;
+using AutoMapper.QueryableExtensions;
 
 namespace Planex.Web.Areas.Lead.Controllers
 {
     public class EstimationsController : BaseController
     {
-        private ITaskService taskService;
+        private readonly ITaskService taskService;
 
         public EstimationsController(IUserService userService, ITaskService taskService)
             : base(userService)
@@ -34,6 +35,14 @@ namespace Planex.Web.Areas.Lead.Controllers
         {
             var requestedEstimationTasks = taskService.GetAll().To<EstimationRequestedViewModel>();
             return View(requestedEstimationTasks);
+        }
+
+        public ActionResult Details(string id)
+        {
+            var intId = int.Parse(id);
+            var requestedEstimationTask =
+                taskService.GetAll().Where(x => x.Id == intId).To<EstimationRequestedViewModel>().FirstOrDefault();
+            return View(requestedEstimationTask);
         }
     }
 }
