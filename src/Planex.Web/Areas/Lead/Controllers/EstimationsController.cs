@@ -40,8 +40,7 @@ namespace Planex.Web.Areas.Lead.Controllers
         public ActionResult Details(string id)
         {
             var intId = int.Parse(id);
-            var requestedEstimationTask =
-                taskService.GetAll().Where(x => x.Id == intId).To<EstimationRequestedViewModel>().FirstOrDefault();
+            var requestedEstimationTask = taskService.GetAll().Where(x => x.Id == intId).To<EstimationRequestedViewModel>().FirstOrDefault();
             return View(requestedEstimationTask);
         }
 
@@ -49,7 +48,24 @@ namespace Planex.Web.Areas.Lead.Controllers
         {
             var intId = int.Parse(id);
             taskService.StartEstimation(intId, UserProfile.Id);
-            return RedirectToAction("Details", id);
+            return RedirectToAction("Edit", new { id = intId } );
+        }
+
+        public ActionResult Index(string id)
+        {
+            var requestedEstimationTasks = taskService.GetAll().Where(x => x.LeadId == UserProfile.Id).To<EstimationHomeViewModel>();
+            return View(requestedEstimationTasks);
+        }
+
+        public ActionResult Estimations_Read([DataSourceRequest]DataSourceRequest request)
+        {
+            var tasks = taskService.GetAll().Where(x => x.LeadId == UserProfile.Id).To<EstimationHomeViewModel>();
+            return Json(tasks.ToDataSourceResult(request));
+        }
+
+        public ActionResult Edit(string id)
+        {
+            return View();
         }
     }
 }

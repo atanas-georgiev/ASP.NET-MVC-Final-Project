@@ -216,6 +216,7 @@
     <Compile Include="Areas\Lead\Controllers\IndexController.cs" />
     <Compile Include="Areas\Lead\LeadAreaRegistration.cs" />
     <Compile Include="Areas\Lead\Models\DependencyViewModel.cs" />
+    <Compile Include="Areas\Lead\Models\EstimationHomeViewModel.cs" />
     <Compile Include="Areas\Lead\Models\EstimationRequestedViewModel.cs" />
     <Compile Include="Areas\Lead\Models\TaskViewModel.cs" />
     <Compile Include="Areas\Manager\Controllers\BaseController.cs" />
@@ -342,6 +343,8 @@
     <Content Include="Areas\HR\Views\Users\Index.cshtml" />
     <Content Include="Areas\HR\Views\UserDetails\Index.cshtml" />
     <Content Include="Areas\HR\Views\Skills\Index.cshtml" />
+    <Content Include="Areas\Lead\Views\Estimations\Index.cshtml" />
+    <Content Include="Areas\Lead\Views\Estimations\Edit.cshtml" />
     <None Include="Areas\Lead\Views\Estimations\Requested.cshtml" />
     <Content Include="Areas\Lead\Views\Estimations\Details.cshtml" />
     <None Include="Areas\Lead\Views\Index\Index.cshtml" />
@@ -425,6 +428,7 @@
     <Content Include="Content\Kendo\kendo.uniform.mobile.min.css.map" />
     <Content Include="Areas\Manager\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Manager\Views\Tasks\Create.cshtml" />
+    <None Include="Properties\PublishProfiles\server.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -773,7 +777,6 @@
     <Folder Include="Areas\Lead\Views\Shared\" />
     <Folder Include="Areas\Manager\Views\Base\" />
     <Folder Include="Areas\Manager\Views\Shared\" />
-    <Folder Include="Properties\" />
     <Folder Include="Views\Grid\" />
     <Folder Include="Views\Skills\" />
     <Folder Include="Views\Users\" />

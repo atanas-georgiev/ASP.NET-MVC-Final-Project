@@ -7,11 +7,11 @@ using Planex.Services.Users;
 
 namespace Planex.Web.Areas.Lead.Controllers
 {
-    public class BaseController : Controller
+    public abstract class BaseController : Controller
     {
         private readonly IUserService userService;
 
-        public BaseController(IUserService userService)
+        protected BaseController(IUserService userService)
         {
             this.userService = userService;
         }

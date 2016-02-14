@@ -1,0 +1,40 @@
+﻿@using Kendo.Mvc.UI
+@using Planex.Web.Areas.Lead.Models
+@model IEnumerable<EstimationHomeViewModel>
+
+<h1>My estimation list</h1>
+
+@(Html.Kendo().Grid<EstimationHomeViewModel>()
+      .Name("grid")
+      .Columns(columns =>
+      {
+          columns.Template(@<text></text>).ClientTemplate("<a href='" + Url.Action("Edit", "Estimations", new { id = "#=Id#" }) + "'>Select</a>");
+          columns.Bound(c => c.Title);
+          columns.Bound(c => c.Manager);
+          columns.Bound(c => c.Priority);
+          columns.Bound(c => c.State);
+          //          columns.Command(command => { command.Edit();});
+      })
+      //      .ToolBar(toolbar =>
+      //      {
+      //          toolbar.Create();
+      //      })
+      .ColumnMenu()
+      .Editable(editable => editable.Mode(GridEditMode.PopUp))
+      .Pageable()
+      .Navigatable()
+      .Sortable(sortable =>
+      {
+          sortable.SortMode(GridSortMode.SingleColumn);
+      })
+      .Filterable()
+      .Scrollable()
+      .DataSource(dataSource => dataSource
+          .Ajax()
+          .Model(model => model.Id(p => p.Id))
+          .Read(read => read.Action("Estimations_Read", "Estimations"))
+      //          .Create(create => create.Action("Skills_Create", "Skills"))
+      //          .Update(update => update.Action("Skills_Update", "Skills"))
+      //          .Destroy(destroy => destroy.Action("Skills_Destroy", "Skills"))
+      )
+)
