@@ -68,7 +68,8 @@ namespace Planex.Web.Areas.Lead.Models
 
         public void CreateMappings(IConfiguration configuration)
         {
-            //throw new System.NotImplementedException();
+//            configuration.CreateMap<Subtask, SubTaskViewModel>("")
+//                .ForMember(m => m.Start, opt => opt.MapFrom(c => DateTime.Parse(c.Start.ToString())));
         }
     }
 }

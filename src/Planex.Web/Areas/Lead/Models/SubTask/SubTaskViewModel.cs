@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
 using Planex.Data.Models;
@@ -25,21 +26,13 @@ namespace Planex.Web.Areas.Lead.Models.SubTask
         [AllowHtml]
         public string Description { get; set; }
 
-//        [Required]
-//        [UIHint("EnumDropDown")]
-//        public PriorityType Priority { get; set; }
-//
-//        [Required]
-//        [UIHint("Email")]
-//        public string Manager { get; set; }
-//
-//        [Required]
-//        [UIHint("Email")]
-//        public string Lead { get; set; }
-//
-//        [Required]
-//        [UIHint("String")]
-//        public TaskStateType State { get; set; }
+        [Required]
+        [UIHint("Date")]
+        public DateTime Start { get; set; }
+
+        [Required]
+        [UIHint("Number")]
+        public int? Duration { get; set; }
 
         public List<string> UploadedAttachmentFiles { get; set; }
     }

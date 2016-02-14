@@ -11,6 +11,7 @@ using Planex.Services.Users;
 using Planex.Web.Areas.Lead.Models;
 using Planex.Web.Infrastructure.Mappings;
 using AutoMapper.QueryableExtensions;
+using Planex.Services.Skills;
 using Planex.Web.Areas.Lead.Models.SubTask;
 
 namespace Planex.Web.Areas.Lead.Controllers
@@ -18,11 +19,15 @@ namespace Planex.Web.Areas.Lead.Controllers
     public class EstimationsController : BaseController
     {
         private readonly ITaskService taskService;
+        private readonly ISkillService skillService;
+        private readonly IUserService userService;
 
-        public EstimationsController(IUserService userService, ITaskService taskService)
+        public EstimationsController(IUserService userService, ITaskService taskService, ISkillService skillService)
             : base(userService)
         {
             this.taskService = taskService;
+            this.skillService = skillService;
+            this.userService = userService;
         }
 
 
@@ -74,6 +79,23 @@ namespace Planex.Web.Areas.Lead.Controllers
         public ActionResult CreateSubTask()
         {
             return PartialView("_SubTaskAdd", new EstimationEditViewModelSubTask());
+        }
+
+        public JsonResult GetAllSkills()
+        {
+            var skills = skillService.GetAll().Select(x => new {id = x.Id, skill = x.Name});
+            return Json(skills, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult GetCascadeUsersWithSkill(int? skillId)
+        {
+            if (skillId != null)
+            {
+                var users = userService.GetAll().Where(x => x.Skills.Any(s => s.Id == skillId));
+                return Json(users.Select(u => new { id = u.Id, email = u.Email }), JsonRequestBehavior.AllowGet);
+            }
+
+            return Json("");
         }
     }
 }

@@ -26,10 +26,9 @@ namespace Planex.Data.Models
 
         public string Description { get; set; }
 
-        public DateTime Start;
+        public DateTime Start { get; set; }
 
-        [Required]
-        public DateTime End;
+        public DateTime End { get; set; }
 
         [Required]
         public int MainTaskId { get; set; }
