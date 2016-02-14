@@ -92,7 +92,7 @@ namespace Planex.Web.Areas.Lead.Controllers
             if (skillId != null)
             {
                 var users = userService.GetAll().Where(x => x.Skills.Any(s => s.Id == skillId));
-                return Json(users.Select(u => new { id = u.Id, email = u.Email }), JsonRequestBehavior.AllowGet);
+                return Json(users.Select(u => u.Email).ToList(), JsonRequestBehavior.AllowGet);
             }
 
             return Json("");

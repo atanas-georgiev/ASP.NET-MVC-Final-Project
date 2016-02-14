@@ -1,7 +1,33 @@
 ﻿@using Kendo.Mvc.UI
 @model Planex.Web.Areas.Lead.Models.EstimationEditViewModelSubTask
 
-@using (Html.BeginForm()) 
+<script>
+    function filterUsers() {
+        var skillId = $("#skills").val();
+
+        $.ajax({
+            url: '@Url.Action("GetCascadeUsersWithSkill", "Estimations")',
+            type: 'GET',
+            dataType: 'json',
+            cache: false,
+            data: { skillId: skillId },
+            success: function (users) {
+                $("#users").kendoMultiSelect({
+                    dataSource: users
+                });
+            }
+        });
+
+        return;
+    }
+
+    function onChangeSkill() {
+        filterUsers();
+        return;
+    }
+</script>
+
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
 
@@ -13,55 +39,33 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default"/>
+                <input type="submit" value="Create" class="btn btn-default" />
             </div>
         </div>
 
         @(Html.Kendo().DropDownList()
-                      .Name("skills")
-                      //.HtmlAttributes(new { style = "width:100%" })
-                      .OptionLabel("Select skill...")
-                      .DataTextField("skill")
-                      .DataValueField("id")
-                      .DataSource(source =>
-                      {
-                          source.Read(read =>
-                          {
-                              read.Action("GetAllSkills", "Estimations");
-                              //                                  .Data("filterProducts");
-                          })
-                          .ServerFiltering(true);
-                      })
-                      .SelectedIndex(0)
-              )
+              .Name("skills")
+              //.HtmlAttributes(new { style = "width:100%" })
+              .OptionLabel("Select skill...")
+              .DataTextField("skill")
+              .DataValueField("id")
+              .DataSource(source =>
+              {
+                  source.Read(read =>
+                  {
+                      read.Action("GetAllSkills", "Estimations"); //.Data("onChangeSkill");
+                  })
+              .ServerFiltering(true);
+              })
+              .Events(e =>
+              {
+                  e.Close("onChangeSkill");
+              })
+              //.SelectedIndex(0)
 
-        <script>
-            function filterUsers() {
-                return {
-                    skillId: $("#skills").val()
-                };
-            }
-        </script>
+        )
 
-        @(Html.Kendo().DropDownList()
-                      .Name("users")
-                      //.HtmlAttributes(new { style = "width:100%" })
-                      .OptionLabel("Select user...")
-                      .DataTextField("email")
-                      .DataValueField("id")
-                      .DataSource(source =>
-                      {
-                          source.Read(read =>
-                          {
-                              read.Action("GetCascadeUsersWithSkill", "Estimations").Data("filterUsers");
-                          })
-                          .ServerFiltering(true);
-                      })
-                       .Enable(false)
-                        .AutoBind(false)
-                        .CascadeFrom("skills")
-              )
-
+        <div id="users"></div>
 
     </div>
 }
@@ -69,3 +73,5 @@
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
+
+
