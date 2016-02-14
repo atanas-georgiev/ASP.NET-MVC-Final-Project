@@ -1,1 +1,34 @@
-﻿
+﻿@model Planex.Web.Areas.Lead.Models.EstimationEditViewModel
+
+<div class="k-content">
+    <div>
+        <h4>Project info</h4>
+        <hr/>
+
+        @Html.DisplayFor(model => model.Title)
+        @Html.DisplayFor(model => model.Description)
+        @Html.DisplayFor(model => model.Priority)
+
+        @foreach (var file in Model.UploadedAttachmentFiles)
+        {
+            <a href="@file">@file</a>
+        }
+
+    </div>
+
+    <div>
+        @Ajax.ActionLink("New Sub Task", "CreateSubTask", null, new AjaxOptions
+        {
+            UpdateTargetId = "create",
+            LoadingElementId = "loading",
+            InsertionMode = InsertionMode.Replace
+        }, new {@class = "btn btn-primary"})
+    </div>
+    <div>
+        <div id="loading" style="display: none">Loading data...</div>
+        <div id="create"></div>
+    </div>
+    @*    <p>*@
+@*        @Html.ActionLink("Start Estimation", "StartEstimation", new { id = Model.Id }) |*@
+@*    </p>*@
+</div>

@@ -11,6 +11,7 @@ using Planex.Services.Users;
 using Planex.Web.Areas.Lead.Models;
 using Planex.Web.Infrastructure.Mappings;
 using AutoMapper.QueryableExtensions;
+using Planex.Web.Areas.Lead.Models.SubTask;
 
 namespace Planex.Web.Areas.Lead.Controllers
 {
@@ -65,7 +66,14 @@ namespace Planex.Web.Areas.Lead.Controllers
 
         public ActionResult Edit(string id)
         {
-            return View();
+            var intId = int.Parse(id);
+            var requestedEstimationTask = taskService.GetAll().Where(x => x.Id == intId).To<EstimationEditViewModel>().FirstOrDefault();
+            return View(requestedEstimationTask);
+        }
+
+        public ActionResult CreateSubTask()
+        {
+            return PartialView("_SubTaskAdd", new EstimationEditViewModelSubTask());
         }
     }
 }

@@ -216,8 +216,12 @@
     <Compile Include="Areas\Lead\Controllers\IndexController.cs" />
     <Compile Include="Areas\Lead\LeadAreaRegistration.cs" />
     <Compile Include="Areas\Lead\Models\DependencyViewModel.cs" />
+    <Compile Include="Areas\Lead\Models\EstimationEditViewModelSubTask.cs" />
+    <Compile Include="Areas\Lead\Models\EstimationEditViewModel.cs" />
     <Compile Include="Areas\Lead\Models\EstimationHomeViewModel.cs" />
     <Compile Include="Areas\Lead\Models\EstimationRequestedViewModel.cs" />
+    <Compile Include="Areas\Lead\Models\Project\ProjectViewModel.cs" />
+    <Compile Include="Areas\Lead\Models\SubTask\SubTaskViewModel.cs" />
     <Compile Include="Areas\Lead\Models\TaskViewModel.cs" />
     <Compile Include="Areas\Manager\Controllers\BaseController.cs" />
     <Compile Include="Areas\Manager\Controllers\IndexController.cs" />
@@ -347,6 +351,7 @@
     <Content Include="Areas\Lead\Views\Estimations\Edit.cshtml" />
     <None Include="Areas\Lead\Views\Estimations\Requested.cshtml" />
     <Content Include="Areas\Lead\Views\Estimations\Details.cshtml" />
+    <Content Include="Areas\Lead\Views\Estimations\_SubTaskAdd.cshtml" />
     <None Include="Areas\Lead\Views\Index\Index.cshtml" />
     <Content Include="Areas\HR\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Lead\Views\_ViewStart.cshtml" />
@@ -433,6 +438,8 @@
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />

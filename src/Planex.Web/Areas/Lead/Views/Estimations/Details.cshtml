@@ -9,6 +9,11 @@
         @Html.DisplayFor(model => model.Description)
         @Html.DisplayFor(model => model.Priority)
 
+        @foreach (var file in Model.UploadedAttachmentFiles)
+        {
+            <a href="@file">@file</a>
+        }
+
     </div>
     <p>
         @Html.ActionLink("Start Estimation", "StartEstimation", new { id = Model.Id }) |

@@ -4,9 +4,6 @@ using System.Web.Mvc;
 using Autofac;
 using Autofac.Integration.Mvc;
 using Planex.Data;
-using Planex.Services.Images;
-using Planex.Services.Skills;
-using Planex.Services.Tasks;
 using Planex.Services.Users;
 using Planex.Web.Areas.HR.Controllers;
 
