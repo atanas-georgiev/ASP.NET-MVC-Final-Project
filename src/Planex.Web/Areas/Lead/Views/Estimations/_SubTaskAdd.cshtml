@@ -11,14 +11,13 @@
             dataType: 'json',
             cache: false,
             data: { skillId: skillId },
-            success: function (users) {
+            success: function(users) {
                 $("#SelectedUsers").kendoMultiSelect({
-                    
-                    dataTextField: "value",
-                    dataValueField: "id",
-                    dataSource: users
-                })
-                .data("SelectedUsers");
+                        dataTextField: "value",
+                        dataValueField: "id",
+                        dataSource: users
+                    })
+                    .data("SelectedUsers");
             }
         });
 
@@ -28,6 +27,14 @@
     function onChangeSkill() {
         filterUsers();
         return;
+    }
+</script>
+
+<script>
+    function filterParent() {
+        return {
+            id: $("#ParentId").val()
+        };
     }
 </script>
 
@@ -52,6 +59,25 @@
                       .ServerFiltering(true);
               })
               )
+
+        @(Html.Kendo().DropDownList()
+              .Name("DependencyId")
+              .OptionLabel("Select dependency...")
+              .DataTextField("title")
+              .DataValueField("id")
+              .DataSource(source =>
+              {
+                  source.Read(read =>
+                  {
+                      read.Action("GetAllSubTasksDependency", "Helper")
+                          .Data("filterParent");
+                  })
+                  .ServerFiltering(true);
+              })
+              .Enable(false)
+              .AutoBind(false)
+              .CascadeFrom("ParentId")
+)
 
         @Html.EditorFor(model => model.Title)
         @Html.EditorFor(model => model.Description)

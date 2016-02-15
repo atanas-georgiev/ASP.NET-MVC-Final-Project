@@ -20,8 +20,8 @@ namespace Planex.Web.Areas.Lead.Models
         {
             configuration.CreateMap<Subtask, EstimationEditViewModelSubTask>("")
                 .ForMember(m => m.SelectedSkill, opt => opt.MapFrom(c => c.Skill.Name))
-                .ForMember(m => m.SelectedUsers, opt => opt.MapFrom(c => c.Users.Select(x => x.Email)))
-                .ForMember(m => m.ParentName, opt => opt.MapFrom(c => c.Parent.Title));
+                .ForMember(m => m.SelectedUsers, opt => opt.MapFrom(c => c.Users.Select(x => x.Email)));
+            // .ForMember(m => m.ParentName, opt => opt.MapFrom(c => c.Parent.Title));
         }
     }
 }

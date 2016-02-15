@@ -48,13 +48,14 @@ namespace Planex.Web.Areas.Lead.Controllers
         public JsonResult GetAllSubTasks()
         {
             var projectId = int.Parse(Session["mainTaskId"].ToString());
-            var result = subTaskService.GetAll().Where(s => s.MainTaskId == projectId).Select(x => new { id = x.Id, title = x.Title });
+            var result = subTaskService.GetAll().Where(s => s.MainTaskId == projectId && s.ParentId == null).Select(x => new { id = x.Id, title = x.Title });
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult GetSubTasksTreeView(int? id)
         {
             var projectId = int.Parse(Session["mainTaskId"].ToString());
+            var hasChildrenDb = subTaskService.GetAll().Any(x => x.ParentId == id);
             var result = subTaskService.GetAll().Where(x => x.MainTaskId == projectId && x.ParentId == id).Select(s => 
                             new
                             {
@@ -62,7 +63,20 @@ namespace Planex.Web.Areas.Lead.Controllers
                                 title = s.Title,
                                 start = s.Start,
                                 end = s.End,
-                                hasChildren = s.Children.Any()
+                                hasChildren = hasChildrenDb
+                            });
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult GetAllSubTasksDependency(int? id)
+        {
+            var projectId = int.Parse(Session["mainTaskId"].ToString());
+            var result = subTaskService.GetAll().Where(x => x.MainTaskId == projectId && x.ParentId == id).Select(s =>
+                            new
+                            {
+                                id = s.Id,
+                                title = s.Title,
                             });
 
             return Json(result, JsonRequestBehavior.AllowGet);

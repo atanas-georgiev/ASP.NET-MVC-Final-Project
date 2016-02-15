@@ -20,13 +20,15 @@ namespace Planex.Web.Areas.Lead.Models.SubTask
         [HiddenInput(DisplayValue = false)]
         public int? ParentId { get; set; }
 
+        [HiddenInput(DisplayValue = false)]
+        public int? DependencyId { get; set; }
+
         [Required]
         [MinLength(2)]
         [MaxLength(50)]
         [UIHint("String")]
         public string Title { get; set; }
 
-        [Required]
         [MinLength(2)]
         [MaxLength(500)]
         [UIHint("Editor")]
@@ -34,22 +36,17 @@ namespace Planex.Web.Areas.Lead.Models.SubTask
         [AllowHtml]
         public string Description { get; set; }
 
-        [Required]
         public string SelectedSkill { get; set; }
 
-        [Required]
         public List<string> SelectedUsers { get; set; }
 
-        //[Required]
         [UIHint("Date")]
         public DateTime Start { get; set; }
 
-        //[Required]
         [UIHint("Date")]
         public DateTime End { get; set; }
 
-        // [Required]
-        // [UIHint("Number")]
+        [UIHint("Number")]
         public int? Duration { get; set; }
 
         public List<HttpPostedFileBase> UploadedAttachments { get; set; }

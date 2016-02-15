@@ -91,35 +91,85 @@ namespace Planex.Web.Areas.Lead.Controllers
 
             if (ModelState.IsValid)
             {
-                //var skill = skillService.GetAll().FirstOrDefault(x => subtask.Skill == x.Name);
-                //var users = userService.GetAll().Where(x => subtask.SelectedUsers.All(x.Email));
+                int duration;
+                int? skillId;
+
+                if (subtask.Duration == null || subtask.SelectedUsers.Count == 0)
+                {
+                    duration = 0;
+                }
+                else
+                {
+                    duration = subtask.Duration.Value/subtask.SelectedUsers.Count;
+                }
+
+                if (subtask.SelectedSkill == null)
+                {
+                    skillId = null;
+                }
+                else
+                {
+                    skillId = int.Parse(subtask.SelectedSkill);
+                }
+
                 var subTaskDB = new Subtask()
                 {
                     Title = subtask.Title,
                     Description = subtask.Description,
-                    Duration = subtask.Duration.Value / subtask.SelectedUsers.Count,
+                    Duration = duration,
                     MainTaskId = int.Parse(Session["mainTaskId"].ToString()),
                     ParentId = subtask.ParentId,
-                    SkillId = int.Parse(subtask.SelectedSkill),
+                    DependencyId = subtask.DependencyId,
+                    SkillId = skillId,
                     Start = DateTime.UtcNow
                 };
 
-                foreach (var user in subtask.SelectedUsers)
+                if (subtask.SelectedUsers != null)
                 {
-                    var dbuser = userService.GetById(user);
-                    subTaskDB.Users.Add(dbuser);
+                    foreach (var user in subtask.SelectedUsers)
+                    {
+                        var dbuser = userService.GetById(user);
+                        subTaskDB.Users.Add(dbuser);
+                    }
+
+                    if (subTaskDB.DependencyId != null)
+                    {
+                        var depSubTask = subTaskService.GetById((int)subTaskDB.DependencyId);
+                        subTaskDB.Start = depSubTask.End.AddDays(1);
+                        subTaskDB.End = subTaskDB.Start.AddDays(subTaskDB.Duration);
+                    }
+                    else if (subTaskDB.ParentId == null)
+                    {
+                        subTaskDB.Start = parentTask.Start;
+                        subTaskDB.End = subTaskDB.Start.AddDays(subTaskDB.Duration);
+                    }
+                    else
+                    {
+                        var parentSubTask = subTaskService.GetById((int) subTaskDB.ParentId);
+                        subTaskDB.Start = parentSubTask.End.AddDays(1);
+                        subTaskDB.End = subTaskDB.Start.AddDays(subTaskDB.Duration);                        
+                    }
                 }
 
-                subTaskDB.Start = subTaskDB.ParentId == null ? parentTask.Start : subTaskDB.Parent.Start.AddDays(1);
-                subTaskDB.End = subTaskDB.Start.AddDays(subTaskDB.Duration);
+                
 
                 subTaskService.Add(subTaskDB);
                 subTaskService.AddAttachments(subTaskDB, subtask.UploadedAttachments, System.Web.HttpContext.Current.Server);
 
+                if (subTaskDB.ParentId != null)
+                {
+                    var parentSubTask = subTaskService.GetById((int)subTaskDB.ParentId);
+                    var parentChildrenByStartDate = subTaskService.GetAll().Where(x => x.ParentId == parentSubTask.Id).OrderBy(x => x.Start);
+                    var parentChildrenByEndDate = subTaskService.GetAll().Where(x => x.ParentId == parentSubTask.Id).OrderByDescending(x => x.End);
+                    parentSubTask.Start = parentChildrenByStartDate.First().Start;
+                    parentSubTask.End = parentChildrenByEndDate.First().End;
+                    subTaskService.Update(parentSubTask);
+                }
+
                 return Content("Done!");
             }
 
-            return Content("Done!");
+            return Content("Error!");
         }
 
         public ActionResult EditSubTask(string id)

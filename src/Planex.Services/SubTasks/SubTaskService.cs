@@ -23,8 +23,6 @@ namespace Planex.Services.SubTasks
 
         public void Add(Subtask task)
         {
-            //todo:
-            task.End = DateTime.UtcNow;
             this.tasks.Add(task);
         }
 
