@@ -10,7 +10,7 @@ namespace Planex.Web.Areas.Lead.Models
 {
     public class EstimationEditViewModel : ProjectViewModel, IMapFrom<MainTask>, IHaveCustomMappings
     {
-        public List<EstimationEditViewModelSubTask> SubTasks { get; set; }
+        //public List<EstimationEditViewModelSubTask> SubTasks { get; set; }
 
         public void CreateMappings(IConfiguration configuration)
         {

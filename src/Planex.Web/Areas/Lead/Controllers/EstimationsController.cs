@@ -12,6 +12,7 @@ using Planex.Web.Areas.Lead.Models;
 using Planex.Web.Infrastructure.Mappings;
 using AutoMapper.QueryableExtensions;
 using Planex.Services.Skills;
+using Planex.Services.SubTasks;
 using Planex.Web.Areas.Lead.Models.SubTask;
 
 namespace Planex.Web.Areas.Lead.Controllers
@@ -21,13 +22,15 @@ namespace Planex.Web.Areas.Lead.Controllers
         private readonly ITaskService taskService;
         private readonly ISkillService skillService;
         private readonly IUserService userService;
+        private readonly ISubTaskService subTaskService;
 
-        public EstimationsController(IUserService userService, ITaskService taskService, ISkillService skillService)
+        public EstimationsController(IUserService userService, ITaskService taskService, ISkillService skillService, ISubTaskService subTaskService)
             : base(userService)
         {
             this.taskService = taskService;
             this.skillService = skillService;
             this.userService = userService;
+            this.subTaskService = subTaskService;
         }
 
 
@@ -71,6 +74,7 @@ namespace Planex.Web.Areas.Lead.Controllers
 
         public ActionResult Edit(string id)
         {
+            Session["mainTaskId"] = id;
             var intId = int.Parse(id);
             var requestedEstimationTask = taskService.GetAll().Where(x => x.Id == intId).To<EstimationEditViewModel>().FirstOrDefault();
             return View(requestedEstimationTask);
@@ -92,10 +96,44 @@ namespace Planex.Web.Areas.Lead.Controllers
             if (skillId != null)
             {
                 var users = userService.GetAll().Where(x => x.Skills.Any(s => s.Id == skillId));
-                return Json(users.Select(u => u.Email).ToList(), JsonRequestBehavior.AllowGet);
+                return Json(users.Select(u => new {id =  u.Id, value = u.Email}), JsonRequestBehavior.AllowGet);
             }
 
             return Json("");
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult SubTaskAdd(SubTaskViewModel subtask)
+        {
+            if (ModelState.IsValid)
+            {
+                //var skill = skillService.GetAll().FirstOrDefault(x => subtask.Skill == x.Name);
+                //var users = userService.GetAll().Where(x => subtask.SelectedUsers.All(x.Email));
+                var subTaskDB = new Subtask()
+                {
+                    Title = subtask.Title,
+                    Description = subtask.Description,
+                    Duration = subtask.Duration.Value / subtask.SelectedUsers.Count,
+                    MainTaskId = int.Parse(Session["mainTaskId"].ToString()),
+                    SkillId = int.Parse(subtask.Skill),
+                    Start = DateTime.UtcNow
+                };
+
+                foreach (var user in subtask.SelectedUsers)
+                {
+                    var dbuser = userService.GetById(user);
+                    subTaskDB.Users.Add(dbuser);
+                }
+
+                subTaskService.Add(subTaskDB);
+                subTaskService.AddAttachments(subTaskDB, subtask.UploadedAttachments, System.Web.HttpContext.Current.Server);
+
+                return Content("Done!");
+            }
+
+            return Content("Done!");
+        }
+
     }
 }

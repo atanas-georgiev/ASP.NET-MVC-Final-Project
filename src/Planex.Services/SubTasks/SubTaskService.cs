@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.IO;
 using System.Linq;
@@ -22,6 +23,8 @@ namespace Planex.Services.SubTasks
 
         public void Add(Subtask task)
         {
+            //todo:
+            task.End = DateTime.UtcNow;
             this.tasks.Add(task);
         }
 
@@ -42,15 +45,20 @@ namespace Planex.Services.SubTasks
                 Directory.CreateDirectory(server.MapPath(TasksConstants.MainContentFolder));
             }
 
-            if (!Directory.Exists(server.MapPath(TasksConstants.MainContentFolder + "\\" + dbTask.Id)))
+            if (!Directory.Exists(server.MapPath(TasksConstants.MainContentFolder + "\\" + dbTask.MainTaskId)))
             {
-                Directory.CreateDirectory(server.MapPath(TasksConstants.MainContentFolder + "\\" + dbTask.Id));
+                Directory.CreateDirectory(server.MapPath(TasksConstants.MainContentFolder + "\\" + dbTask.MainTaskId));
+            }
+
+            if (!Directory.Exists(server.MapPath(TasksConstants.MainContentFolder + "\\" + dbTask.MainTaskId + "\\" + dbTask.Id)))
+            {
+                Directory.CreateDirectory(server.MapPath(TasksConstants.MainContentFolder + "\\" + dbTask.MainTaskId + "\\" + dbTask.Id));
             }
 
             foreach (var file in uploadedAttachments)
             {
                 var filename = Path.GetFileName(file.FileName);
-                file.SaveAs(server.MapPath(TasksConstants.MainContentFolder + "\\" + dbTask.Id + "\\" + filename));
+                file.SaveAs(server.MapPath(TasksConstants.MainContentFolder + "\\" + dbTask.MainTaskId + "\\" + dbTask.Id + "\\" + filename));
                 dbTask.Attachments.Add(new Attachment()
                 {
                     Name = file.FileName

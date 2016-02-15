@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Web;
 using System.Web.Mvc;
 using Planex.Data.Models;
 
@@ -11,6 +12,9 @@ namespace Planex.Web.Areas.Lead.Models.SubTask
         [Key]
         [HiddenInput(DisplayValue = false)]
         public int Id { get; set; }
+
+        [HiddenInput(DisplayValue = false)]
+        public int MainTaskId { get; set; }
 
         [Required]
         [MinLength(2)]
@@ -27,13 +31,19 @@ namespace Planex.Web.Areas.Lead.Models.SubTask
         public string Description { get; set; }
 
         [Required]
+        public string Skill { get; set; }
+
+        [Required]
+        public List<string> SelectedUsers { get; set; }
+
+        //[Required]
         [UIHint("Date")]
         public DateTime Start { get; set; }
 
-        [Required]
+       // [Required]
         [UIHint("Number")]
         public int? Duration { get; set; }
 
-        public List<string> UploadedAttachmentFiles { get; set; }
+        public List<HttpPostedFileBase> UploadedAttachments { get; set; }
     }
 }

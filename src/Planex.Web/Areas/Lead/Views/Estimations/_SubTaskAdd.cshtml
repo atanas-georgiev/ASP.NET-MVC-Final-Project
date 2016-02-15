@@ -3,7 +3,7 @@
 
 <script>
     function filterUsers() {
-        var skillId = $("#skills").val();
+        var skillId = $("#Skill").val();
 
         $.ajax({
             url: '@Url.Action("GetCascadeUsersWithSkill", "Estimations")',
@@ -12,9 +12,13 @@
             cache: false,
             data: { skillId: skillId },
             success: function (users) {
-                $("#users").kendoMultiSelect({
+                $("#SelectedUsers").kendoMultiSelect({
+                    
+                    dataTextField: "value",
+                    dataValueField: "id",
                     dataSource: users
-                });
+                })
+                .data("SelectedUsers");
             }
         });
 
@@ -27,25 +31,20 @@
     }
 </script>
 
-@using (Html.BeginForm())
+@*, new { id = "searchForm" }))*@
+@using (Html.BeginForm("SubTaskAdd", null, new { @class = "form", enctype = "multipart/form-data" }))
 {
-    @Html.AntiForgeryToken()
+        @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
+        
         @Html.EditorFor(model => model.Title)
         @Html.EditorFor(model => model.Description)
-        @Html.EditorFor(model => model.Start)
         @Html.EditorFor(model => model.Duration)
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
-        </div>
+        @Html.Kendo().Upload().Name("UploadedAttachments")
 
         @(Html.Kendo().DropDownList()
-              .Name("skills")
-              //.HtmlAttributes(new { style = "width:100%" })
+              .Name("Skill")
               .OptionLabel("Select skill...")
               .DataTextField("skill")
               .DataValueField("id")
@@ -55,17 +54,22 @@
                   {
                       read.Action("GetAllSkills", "Estimations"); //.Data("onChangeSkill");
                   })
-              .ServerFiltering(true);
+                      .ServerFiltering(true);
               })
               .Events(e =>
               {
                   e.Close("onChangeSkill");
               })
-              //.SelectedIndex(0)
 
-        )
+              )
 
-        <div id="users"></div>
+        <select id="SelectedUsers" name="SelectedUsers" multiple="multiple"></select>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default"/>
+            </div>
+        </div>
 
     </div>
 }

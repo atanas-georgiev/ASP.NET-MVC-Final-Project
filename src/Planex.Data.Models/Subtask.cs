@@ -9,13 +9,11 @@ namespace Planex.Data.Models
 {
     public class Subtask
     {
-        private ICollection<Skill> skills;
         private ICollection<Attachment> attachements;
         private ICollection<User> users;
 
         public Subtask()
         {
-            this.skills = new HashSet<Skill>();
             this.attachements = new HashSet<Attachment>();
             this.users = new HashSet<User>();
         }
@@ -30,16 +28,15 @@ namespace Planex.Data.Models
 
         public DateTime End { get; set; }
 
-        [Required]
+        public int Duration { get; set; }
+
         public int MainTaskId { get; set; }
 
         public virtual MainTask MainTask { get; set; }
 
-        public virtual ICollection<Skill> Skills
-        {
-            get { return this.skills; }
-            set { this.skills = value; }
-        }
+        public int SkillId { get; set; }
+
+        public virtual Skill Skill { get; set; }
 
         public virtual ICollection<Attachment> Attachments
         {
