@@ -16,6 +16,9 @@ namespace Planex.Web.Areas.Lead.Models.SubTask
         [HiddenInput(DisplayValue = false)]
         public int MainTaskId { get; set; }
 
+        [HiddenInput(DisplayValue = false)]
+        public int? ParentId { get; set; }
+
         [Required]
         [MinLength(2)]
         [MaxLength(50)]

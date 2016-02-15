@@ -19,16 +19,14 @@ namespace Planex.Web.Areas.Lead.Controllers
 {
     public class EstimationsController : BaseController
     {
-        private readonly ITaskService taskService;
-        private readonly ISkillService skillService;
+        private readonly ITaskService taskService;        
         private readonly IUserService userService;
         private readonly ISubTaskService subTaskService;
 
         public EstimationsController(IUserService userService, ITaskService taskService, ISkillService skillService, ISubTaskService subTaskService)
             : base(userService)
         {
-            this.taskService = taskService;
-            this.skillService = skillService;
+            this.taskService = taskService;            
             this.userService = userService;
             this.subTaskService = subTaskService;
         }
@@ -85,23 +83,6 @@ namespace Planex.Web.Areas.Lead.Controllers
             return PartialView("_SubTaskAdd", new EstimationEditViewModelSubTask());
         }
 
-        public JsonResult GetAllSkills()
-        {
-            var skills = skillService.GetAll().Select(x => new {id = x.Id, skill = x.Name});
-            return Json(skills, JsonRequestBehavior.AllowGet);
-        }
-
-        public JsonResult GetCascadeUsersWithSkill(int? skillId)
-        {
-            if (skillId != null)
-            {
-                var users = userService.GetAll().Where(x => x.Skills.Any(s => s.Id == skillId));
-                return Json(users.Select(u => new {id =  u.Id, value = u.Email}), JsonRequestBehavior.AllowGet);
-            }
-
-            return Json("");
-        }
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult SubTaskAdd(SubTaskViewModel subtask)
@@ -116,6 +97,7 @@ namespace Planex.Web.Areas.Lead.Controllers
                     Description = subtask.Description,
                     Duration = subtask.Duration.Value / subtask.SelectedUsers.Count,
                     MainTaskId = int.Parse(Session["mainTaskId"].ToString()),
+                    ParentId = subtask.ParentId,
                     SkillId = int.Parse(subtask.Skill),
                     Start = DateTime.UtcNow
                 };

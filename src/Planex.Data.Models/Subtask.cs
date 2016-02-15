@@ -20,6 +20,10 @@ namespace Planex.Data.Models
 
         public int Id { get; set; }
 
+        public int? ParentId { get; set; }
+
+        public Subtask Parent { get; set; }
+
         public string Title { get; set; }
 
         public string Description { get; set; }

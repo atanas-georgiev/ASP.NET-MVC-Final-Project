@@ -6,7 +6,7 @@
         var skillId = $("#Skill").val();
 
         $.ajax({
-            url: '@Url.Action("GetCascadeUsersWithSkill", "Estimations")',
+            url: '@Url.Action("GetCascadeUsersWithSkill", "Helper")',
             type: 'GET',
             dataType: 'json',
             cache: false,
@@ -37,7 +37,22 @@
         @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        
+
+        @(Html.Kendo().DropDownList()
+              .Name("ParentId")
+              .OptionLabel("Select category ...")
+              .DataTextField("title")
+              .DataValueField("id")
+              .DataSource(source =>
+              {
+                  source.Read(read =>
+                  {
+                      read.Action("GetAllSubTasks", "Helper");
+                  })
+                      .ServerFiltering(true);
+              })
+              )
+
         @Html.EditorFor(model => model.Title)
         @Html.EditorFor(model => model.Description)
         @Html.EditorFor(model => model.Duration)
@@ -52,7 +67,7 @@
               {
                   source.Read(read =>
                   {
-                      read.Action("GetAllSkills", "Estimations"); //.Data("onChangeSkill");
+                      read.Action("GetAllSkills", "Helper");
                   })
                       .ServerFiltering(true);
               })

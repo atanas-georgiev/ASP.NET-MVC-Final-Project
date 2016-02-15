@@ -213,6 +213,7 @@
     <Compile Include="Areas\HR\Models\UserViewModel.cs" />
     <Compile Include="Areas\Lead\Controllers\BaseController.cs" />
     <Compile Include="Areas\Lead\Controllers\EstimationsController.cs" />
+    <Compile Include="Areas\Lead\Controllers\HelperController.cs" />
     <Compile Include="Areas\Lead\Controllers\IndexController.cs" />
     <Compile Include="Areas\Lead\LeadAreaRegistration.cs" />
     <Compile Include="Areas\Lead\Models\DependencyViewModel.cs" />
@@ -781,6 +782,7 @@
     <Folder Include="Areas\HR\Views\Base\" />
     <Folder Include="Areas\HR\Views\Shared\" />
     <Folder Include="Areas\Lead\Views\Base\" />
+    <Folder Include="Areas\Lead\Views\Helper\" />
     <Folder Include="Areas\Lead\Views\Shared\" />
     <Folder Include="Areas\Manager\Views\Base\" />
     <Folder Include="Areas\Manager\Views\Shared\" />
