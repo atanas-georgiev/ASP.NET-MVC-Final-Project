@@ -3,7 +3,7 @@
 
 <script>
     function filterUsers() {
-        var skillId = $("#SelectedSkill").val();
+        var skillId = $("#Skill").val();
 
         $.ajax({
             url: '@Url.Action("GetCascadeUsersWithSkill", "Helper")',
@@ -13,7 +13,7 @@
             data: { skillId: skillId },
             success: function (users) {
                 $("#SelectedUsers").kendoMultiSelect({
-                    
+
                     dataTextField: "value",
                     dataValueField: "id",
                     dataSource: users
@@ -34,11 +34,11 @@
 @*, new { id = "searchForm" }))*@
 @using (Html.BeginForm("SubTaskAdd", null, new { @class = "form", enctype = "multipart/form-data" }))
 {
-        @Html.AntiForgeryToken()
+    @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
 
-        @(Html.Kendo().DropDownList()
+        @(Html.Kendo().DropDownListFor(model => model.ParentId)
               .Name("ParentId")
               .OptionLabel("Select category ...")
               .DataTextField("title")
@@ -49,18 +49,19 @@
                   {
                       read.Action("GetAllSubTasks", "Helper");
                   })
-                      .ServerFiltering(true);
+                  .ServerFiltering(true);
               })
-              )
+              .HtmlAttributes(new { value = @Model.ParentName })
+              .Value(@Model.ParentId.ToString())
+        )
 
         @Html.EditorFor(model => model.Title)
         @Html.EditorFor(model => model.Description)
         @Html.EditorFor(model => model.Duration)
         @Html.Kendo().Upload().Name("UploadedAttachments")
 
-        @(Html.Kendo().DropDownList()
+        @(Html.Kendo().DropDownListFor(model => model.SelectedSkill)
               .Name("SelectedSkill")
-              .OptionLabel("Select skill...")
               .DataTextField("skill")
               .DataValueField("id")
               .DataSource(source =>
@@ -69,20 +70,21 @@
                   {
                       read.Action("GetAllSkills", "Helper");
                   })
-                      .ServerFiltering(true);
+                  .ServerFiltering(true);
               })
               .Events(e =>
               {
                   e.Close("onChangeSkill");
               })
+              .Value(@Model.SelectedSkill)
 
-              )
+        )
 
         <select id="SelectedUsers" name="SelectedUsers" multiple="multiple"></select>
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default"/>
+                <input type="submit" value="Create" class="btn btn-default" />
             </div>
         </div>
 

@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Web;
 using System.Web.Mvc;
 using Planex.Data.Models;
+using Planex.Web.Infrastructure.Mappings;
 
 namespace Planex.Web.Areas.Lead.Models.SubTask
 {
@@ -34,7 +35,7 @@ namespace Planex.Web.Areas.Lead.Models.SubTask
         public string Description { get; set; }
 
         [Required]
-        public string Skill { get; set; }
+        public string SelectedSkill { get; set; }
 
         [Required]
         public List<string> SelectedUsers { get; set; }
@@ -43,8 +44,12 @@ namespace Planex.Web.Areas.Lead.Models.SubTask
         [UIHint("Date")]
         public DateTime Start { get; set; }
 
-       // [Required]
-        [UIHint("Number")]
+        //[Required]
+        [UIHint("Date")]
+        public DateTime End { get; set; }
+
+        // [Required]
+        // [UIHint("Number")]
         public int? Duration { get; set; }
 
         public List<HttpPostedFileBase> UploadedAttachments { get; set; }

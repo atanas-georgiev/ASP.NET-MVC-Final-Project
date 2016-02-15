@@ -1,13 +1,9 @@
 ﻿@using Kendo.Mvc.UI
 @model Planex.Web.Areas.Lead.Models.EstimationEditViewModel
 
-<script id="treeview-template" type="text/kendo-ui-template">
-    #: item.title #
-@*    # if (!item.items) { #*@
-        <a class='delete-link' href='\#'>Edit</a>
-        <a class='delete-link' href='\#'>Delete</a>
-@*    # } #*@
-</script>
+
+
+#: item.title #  <a data-ajax="true" data-ajax-mode="replace" data-ajax-update="#create" href="/Lead/Estimations/CreateSubTask">New Sub Task</a>
 
 <div class="k-content">
     <div>
@@ -17,6 +13,8 @@
         @Html.DisplayFor(model => model.Title)
         @Html.DisplayFor(model => model.Description)
         @Html.DisplayFor(model => model.Priority)
+        @Html.DisplayFor(model => model.Start)
+
 
         @foreach (var file in Model.UploadedAttachmentFiles)
         {
@@ -26,7 +24,10 @@
         @(Html.Kendo().TreeView()
                 .Name("treeview")
                 .DataTextField("title")
-                .TemplateId("treeview-template")
+                .Template("#: item.title # <a data-ajax='true' data-ajax-mode='replace' data-ajax-update='\\#create' href='/Lead/Estimations/EditSubTask/#: item.id #'>Edit</a> " +
+                                          "<a data-ajax='true' data-ajax-mode='replace' data-ajax-update='\\#create' href='/Lead/Estimations/DeleteSubTask/#: item.id #'>Delete</a>" +
+                                          "[#= kendo.toString(kendo.parseDate(item.start, 'yyyy-MM-dd'), 'dd/MM/yyyy') #] " +
+                                          "[#= kendo.toString(kendo.parseDate(item.end, 'yyyy-MM-dd'), 'dd/MM/yyyy') #]")
                 .DataSource(dataSource => dataSource
                     .Read(read => read
                         .Action("GetSubTasksTreeView", "Helper")
@@ -43,6 +44,7 @@
             LoadingElementId = "loading",
             InsertionMode = InsertionMode.Replace,
         }, new { @class = "btn btn-primary" })
+
     </div>
     <div>
         <div id="loading" style="display: none">Loading data...</div>

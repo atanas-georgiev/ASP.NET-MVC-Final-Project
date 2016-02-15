@@ -43,8 +43,11 @@ namespace Planex.Web.Areas.Lead.Models.Project
         public string Lead { get; set; }
 
         [Required]
-        [UIHint("String")]
         public TaskStateType State { get; set; }
+
+        [Required]
+        [UIHint("Date")]
+        public DateTime Start { get; set; }
 
         public List<string> UploadedAttachmentFiles { get; set; }
     }

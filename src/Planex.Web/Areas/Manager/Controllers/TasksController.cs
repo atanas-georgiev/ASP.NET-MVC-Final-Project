@@ -43,7 +43,8 @@ namespace Planex.Web.Areas.Manager.Controllers
                     Description = model.Description,
                     Manager = UserProfile,
                     Priority = model.Priority,
-                    State = TaskStateType.Draft
+                    State = TaskStateType.Draft,
+                    Start = model.Start
                 };
 
                 taskService.Add(dbTask);

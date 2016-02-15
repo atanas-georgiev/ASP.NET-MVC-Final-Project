@@ -25,6 +25,8 @@ namespace Planex.Data.Models
 
         public PriorityType Priority { get; set; }
 
+        public DateTime Start { get; set; }
+
         public TaskStateType State { get; set; }
 
         public string ManagerId { get; set; }

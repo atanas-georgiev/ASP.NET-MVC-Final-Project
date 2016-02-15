@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Web;
 using System.Web.Mvc;
@@ -26,6 +27,13 @@ namespace Planex.Web.Areas.Manager.Models
         [DataType(DataType.MultilineText)]
         [AllowHtml]
         public string Description { get; set; }
+
+        [Required]
+        public TaskStateType State { get; set; }
+
+        [Required]
+        [UIHint("Date")]
+        public DateTime Start { get; set; }
 
         [Required]
         [UIHint("EnumDropDown")]

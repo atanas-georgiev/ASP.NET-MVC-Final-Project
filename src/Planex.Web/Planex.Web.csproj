@@ -353,6 +353,7 @@
     <None Include="Areas\Lead\Views\Estimations\Requested.cshtml" />
     <Content Include="Areas\Lead\Views\Estimations\Details.cshtml" />
     <Content Include="Areas\Lead\Views\Estimations\_SubTaskAdd.cshtml" />
+    <Content Include="Areas\Lead\Views\Estimations\_SubTaskEdit.cshtml" />
     <None Include="Areas\Lead\Views\Index\Index.cshtml" />
     <Content Include="Areas\HR\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Lead\Views\_ViewStart.cshtml" />

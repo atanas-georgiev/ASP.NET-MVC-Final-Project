@@ -87,6 +87,8 @@ namespace Planex.Web.Areas.Lead.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult SubTaskAdd(SubTaskViewModel subtask)
         {
+            var parentTask = taskService.GetById(int.Parse(Session["mainTaskId"].ToString()));
+
             if (ModelState.IsValid)
             {
                 //var skill = skillService.GetAll().FirstOrDefault(x => subtask.Skill == x.Name);
@@ -98,7 +100,7 @@ namespace Planex.Web.Areas.Lead.Controllers
                     Duration = subtask.Duration.Value / subtask.SelectedUsers.Count,
                     MainTaskId = int.Parse(Session["mainTaskId"].ToString()),
                     ParentId = subtask.ParentId,
-                    SkillId = int.Parse(subtask.Skill),
+                    SkillId = int.Parse(subtask.SelectedSkill),
                     Start = DateTime.UtcNow
                 };
 
@@ -108,6 +110,9 @@ namespace Planex.Web.Areas.Lead.Controllers
                     subTaskDB.Users.Add(dbuser);
                 }
 
+                subTaskDB.Start = subTaskDB.ParentId == null ? parentTask.Start : subTaskDB.Parent.Start.AddDays(1);
+                subTaskDB.End = subTaskDB.Start.AddDays(subTaskDB.Duration);
+
                 subTaskService.Add(subTaskDB);
                 subTaskService.AddAttachments(subTaskDB, subtask.UploadedAttachments, System.Web.HttpContext.Current.Server);
 
@@ -115,6 +120,13 @@ namespace Planex.Web.Areas.Lead.Controllers
             }
 
             return Content("Done!");
+        }
+
+        public ActionResult EditSubTask(string id)
+        {
+            var intId = int.Parse(id);
+            var result = subTaskService.GetAll().Where(x => x.Id == intId).To<EstimationEditViewModelSubTask>().FirstOrDefault();
+            return PartialView("_SubTaskEdit", result);
         }
 
     }
