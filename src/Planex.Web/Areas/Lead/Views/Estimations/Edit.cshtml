@@ -1,4 +1,13 @@
-﻿@model Planex.Web.Areas.Lead.Models.EstimationEditViewModel
+﻿@using Kendo.Mvc.UI
+@model Planex.Web.Areas.Lead.Models.EstimationEditViewModel
+
+<script id="treeview-template" type="text/kendo-ui-template">
+    #: item.title #
+@*    # if (!item.items) { #*@
+        <a class='delete-link' href='\#'>Edit</a>
+        <a class='delete-link' href='\#'>Delete</a>
+@*    # } #*@
+</script>
 
 <div class="k-content">
     <div>
@@ -13,6 +22,17 @@
         {
             <a href="@file">@file</a>
         }
+
+        @(Html.Kendo().TreeView()
+                .Name("treeview")
+                .DataTextField("title")
+                .TemplateId("treeview-template")
+                .DataSource(dataSource => dataSource
+                    .Read(read => read
+                        .Action("GetSubTasksTreeView", "Helper")
+                    )
+                )
+        )
 
     </div>
 

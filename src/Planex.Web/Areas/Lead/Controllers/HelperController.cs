@@ -50,5 +50,18 @@ namespace Planex.Web.Areas.Lead.Controllers
             var result = subTaskService.GetAll().Select(x => new { id = x.Id, title = x.Title });
             return Json(result, JsonRequestBehavior.AllowGet);
         }
+
+        public JsonResult GetSubTasksTreeView(int? id)
+        {
+            var result = subTaskService.GetAll().Where(x => x.ParentId == id).Select(s => 
+                            new
+                            {
+                                id = s.Id,
+                                title = s.Title,
+                                hasChildren = s.Children.Any()
+                            });
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
     }
 }

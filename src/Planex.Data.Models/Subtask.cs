@@ -11,11 +11,13 @@ namespace Planex.Data.Models
     {
         private ICollection<Attachment> attachements;
         private ICollection<User> users;
+        private ICollection<Subtask> subtasks;
 
         public Subtask()
         {
             this.attachements = new HashSet<Attachment>();
             this.users = new HashSet<User>();
+            this.subtasks = new List<Subtask>();
         }
 
         public int Id { get; set; }
@@ -41,6 +43,12 @@ namespace Planex.Data.Models
         public int SkillId { get; set; }
 
         public virtual Skill Skill { get; set; }
+
+        public virtual ICollection<Subtask> Children
+        {
+            get { return this.subtasks; }
+            set { this.subtasks = value; }
+        }
 
         public virtual ICollection<Attachment> Attachments
         {
