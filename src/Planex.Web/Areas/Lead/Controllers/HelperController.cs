@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Routing;
 using Kendo.Mvc.Extensions;
 using Kendo.Mvc.UI;
 using Planex.Data.Models;
@@ -11,6 +12,7 @@ using Planex.Services.SubTasks;
 using Planex.Services.Tasks;
 using Planex.Services.Users;
 using Planex.Web.Areas.Lead.Models;
+using Planex.Web.Infrastructure.Extensions;
 using Planex.Web.Infrastructure.Mappings;
 
 namespace Planex.Web.Areas.Lead.Controllers
@@ -18,7 +20,7 @@ namespace Planex.Web.Areas.Lead.Controllers
     public class HelperController : BaseController
     {
 
-        private readonly IUserService userService;
+       // private readonly IUserService userService;
         private readonly ISkillService skillService;
         private readonly ISubTaskService subTaskService;
         private readonly ITaskService taskService;
@@ -31,8 +33,13 @@ namespace Planex.Web.Areas.Lead.Controllers
         {
             this.skillService = skillService;
             this.subTaskService = subTaskService;
-            this.userService = userService;
+         //   this.userService = userService;
             this.taskService = taskService;
+        }
+
+        protected override IAsyncResult BeginExecute(RequestContext requestContext, AsyncCallback callback, object state)
+        {
+            return base.BeginExecute(requestContext, callback, state);
         }
 
         //[ChildActionOnly]
@@ -93,7 +100,7 @@ namespace Planex.Web.Areas.Lead.Controllers
 
         public JsonResult ProjectsIndex_Read([DataSourceRequest]DataSourceRequest request)
         {
-            var result = taskService.GetAll().Where(x => x.LeadId == UserProfile.Id && x.State >= TaskStateType.Started).To<ProjectIndexViewController>();
+            var result = taskService.GetAll().Where(x => x.LeadId == UserProfileId && x.State >= TaskStateType.Started).To<ProjectIndexViewController>();
             return Json(result.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
         }
 
@@ -102,6 +109,57 @@ namespace Planex.Web.Areas.Lead.Controllers
             var projectId = int.Parse(Session["mainTaskId"].ToString());
             var result = subTaskService.GetAll().Where(x => x.MainTaskId == projectId).To<ProjectDetailsViewModel>();
             return Json(result.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
+        }
+
+        
+        [HttpPost]
+        public virtual JsonResult CreateTask([DataSourceRequest] DataSourceRequest request, ProjectDetailsViewModel task)
+        {
+            var projectId = int.Parse(Session["mainTaskId"].ToString());
+
+            if (ModelState.IsValid)
+            {
+                 subTaskService.Add(new Subtask()
+                 {
+                    MainTaskId = projectId,
+                    Title = task.Title,
+                    ParentId = task.ParentTaskId,
+                    Start = task.Start,
+                    End = task.End
+                 });
+            }
+
+            return Json(new[] { task }.ToDataSourceResult(request, ModelState));
+        }
+
+        [AcceptVerbs(HttpVerbs.Post)]
+        public virtual JsonResult DestroyTask([DataSourceRequest] DataSourceRequest request, ProjectDetailsViewModel task)
+        {
+            if (ModelState.IsValid)
+            {
+// todo
+            }
+
+            return Json(new[] { task }.ToDataSourceResult(request, ModelState));
+        }
+
+        [AcceptVerbs(HttpVerbs.Post)]
+        public virtual JsonResult UpdateTask([DataSourceRequest] DataSourceRequest request, ProjectDetailsViewModel task)
+        {
+            var projectId = int.Parse(Session["mainTaskId"].ToString());
+
+            if (ModelState.IsValid)
+            {
+                var taskDb = subTaskService.GetById(task.TaskId);
+
+                taskDb.Title = task.Title;
+                taskDb.ParentId = task.ParentTaskId;
+                taskDb.Start = task.Start;
+                taskDb.End = task.End;
+                subTaskService.Update(taskDb);
+            }
+
+            return Json(new[] { task }.ToDataSourceResult(request, ModelState));
         }
 
         public virtual JsonResult ReadDependencies([DataSourceRequest] DataSourceRequest request)
@@ -122,17 +180,59 @@ namespace Planex.Web.Areas.Lead.Controllers
             var projectId = int.Parse(Session["mainTaskId"].ToString());
             var result = new List<ProjectDetailsAssignmentsViewModel>();
             var subtasks = subTaskService.GetAll().Where(x => x.MainTaskId == projectId);
-            var idCount = 0;
+            var idCount = 1000;
 
             foreach (var subtask in subtasks)
             {
                 result.AddRange(subtask.Users.Select(user => new ProjectDetailsAssignmentsViewModel()
                 {
-                    ID = idCount++, ResourceID = user.IntId, TaskID = subtask.Id, Units = 1
+                    AssignmentID = idCount++, ResourceID = user.IntId, TaskID = subtask.Id, Units = 1
                 }));
             }
 
             return Json(result.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult UpdateAssignments([DataSourceRequest] DataSourceRequest request, ProjectDetailsAssignmentsViewModel assignment)
+        {
+            var projectId = int.Parse(Session["mainTaskId"].ToString());
+
+            if (assignment != null)
+            {
+                var subtask = subTaskService.GetById(assignment.TaskID);
+                var user = userService.GetAll().FirstOrDefault(x => x.IntId == assignment.ResourceID);
+                subtask.Users.Add(user);
+                subTaskService.Update(subtask);
+            }
+            return this.Json(assignment);
+        }
+
+        public ActionResult DestroyAssignments([DataSourceRequest] DataSourceRequest request, ProjectDetailsAssignmentsViewModel assignment)
+        {
+            var projectId = int.Parse(Session["mainTaskId"].ToString());
+
+            if (assignment != null)
+            {
+                var subtask = subTaskService.GetById(assignment.TaskID);
+                var user = userService.GetAll().FirstOrDefault(x => x.IntId == assignment.ResourceID);
+                subtask.Users.Remove(user);
+                subTaskService.Update(subtask);
+            }
+            return this.Json(assignment);
+        }
+
+        public ActionResult CreateAssignments([DataSourceRequest] DataSourceRequest request, ProjectDetailsAssignmentsViewModel assignment)
+        {
+            var projectId = int.Parse(Session["mainTaskId"].ToString());
+
+            if (assignment != null)
+            {
+                var subtask = subTaskService.GetById(assignment.TaskID);
+                var user = userService.GetAll().FirstOrDefault(x => x.IntId == assignment.ResourceID);
+                subtask.Users.Add(user);
+                subTaskService.Update(subtask);
+            }
+            return this.Json(assignment);
         }
     }
 }

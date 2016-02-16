@@ -21,14 +21,14 @@ namespace Planex.Web.Areas.Lead.Controllers
     public class EstimationsController : BaseController
     {
         private readonly ITaskService taskService;        
-        private readonly IUserService userService;
+     //   private readonly IUserService userService;
         private readonly ISubTaskService subTaskService;
 
         public EstimationsController(IUserService userService, ITaskService taskService, ISkillService skillService, ISubTaskService subTaskService)
             : base(userService)
         {
             this.taskService = taskService;            
-            this.userService = userService;
+        //    this.userService = userService;
             this.subTaskService = subTaskService;
         }
 
@@ -55,19 +55,19 @@ namespace Planex.Web.Areas.Lead.Controllers
         public ActionResult StartEstimation(string id)
         {
             var intId = int.Parse(id);
-            taskService.StartEstimation(intId, UserProfile.Id);
+            taskService.StartEstimation(intId, UserProfileId);
             return RedirectToAction("Edit", new { id = intId } );
         }
 
         public ActionResult Index(string id)
         {
-            var requestedEstimationTasks = taskService.GetAll().Where(x => x.LeadId == UserProfile.Id).To<EstimationHomeViewModel>();
+            var requestedEstimationTasks = taskService.GetAll().Where(x => x.LeadId == UserProfileId).To<EstimationHomeViewModel>();
             return View(requestedEstimationTasks);
         }
 
         public ActionResult Estimations_Read([DataSourceRequest]DataSourceRequest request)
         {
-            var tasks = taskService.GetAll().Where(x => x.LeadId == UserProfile.Id).To<EstimationHomeViewModel>();
+            var tasks = taskService.GetAll().Where(x => x.LeadId == UserProfileId).To<EstimationHomeViewModel>();
             return Json(tasks.ToDataSourceResult(request));
         }
 

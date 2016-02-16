@@ -70,7 +70,7 @@ namespace Planex.Web.Areas.HR.Controllers
                     PricePerHour = 0,
                 };
 
-                this.userService.Add(entity, user.Role);                
+                this.userService.Add(entity, user.Role);
                 user.Id = entity.Id;
             }
 

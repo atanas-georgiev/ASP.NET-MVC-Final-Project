@@ -12,7 +12,7 @@ namespace Planex.Web.Areas.Manager.Controllers
 {
     public class BaseController : Controller
     {
-        private IUserService userService;
+        protected IUserService userService;
 
         public BaseController(IUserService userService)
         {

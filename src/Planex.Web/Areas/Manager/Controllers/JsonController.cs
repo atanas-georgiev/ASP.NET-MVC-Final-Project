@@ -16,7 +16,7 @@ namespace Planex.Web.Areas.Manager.Controllers
     public class JsonController : BaseController
     {
         // GET: Manager/Json
-        private readonly IUserService userService;
+     //   private readonly IUserService userService;
         private readonly ISkillService skillService;
         private readonly ISubTaskService subTaskService;
         private readonly ITaskService taskService;
@@ -29,7 +29,7 @@ namespace Planex.Web.Areas.Manager.Controllers
         {
             this.skillService = skillService;
             this.subTaskService = subTaskService;
-            this.userService = userService;
+          //  this.userService = userService;
             this.taskService = taskService;
         }
 

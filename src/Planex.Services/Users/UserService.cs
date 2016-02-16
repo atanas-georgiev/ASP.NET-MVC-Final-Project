@@ -48,7 +48,9 @@ namespace Planex.Services.Users
         {                        
             user.UserName = user.Email;
             this.userManager.Create(user, "changeme");
-            this.users.Add(user);         
+            this.users.Add(user);
+            user.IntId = user.Id.GetHashCode();
+            this.users.Update(user);
             this.userManager.AddToRole(user.Id, role);            
         }
 

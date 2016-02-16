@@ -7,12 +7,13 @@
     .Name("gantt")
     .Columns(columns =>
     {
-        columns.Bound(c => c.TaskID).Title("ID").Width(50);
+//        columns.Template(@<text></text>).ClientTemplate("<a href='" + Url.Action("Details", "Projects", new { id = "#=Id#" }) + "'>Select</a>");
         columns.Bound("title").Editable(true).Sortable(true);
         columns.Bound("start").Title("Start Time").Format("{0:MM/dd/yyyy}").Width(100).Editable(true).Sortable(true);
         columns.Bound("end").Title("End Time").Format("{0:MM/dd/yyyy}").Width(100).Editable(true).Sortable(true);
         columns.Resources("Users").Editable(true).Title("Assigned Resources");
     })
+    .Editable(true)
     .Views(views =>
     {
         views.DayView();
@@ -26,15 +27,15 @@
     .DataSource(d => d
         .Model(m =>
         {
-            m.Id(f => f.TaskID);
-            m.ParentId(f => f.ParentID);
-            m.OrderId(f => f.OrderId);
+            m.Id(f => f.TaskId);
+            m.ParentId(f => f.ParentTaskId);
+            m.OrderId(f => f.TaskOrderId);
             m.Field(f => f.Expanded).DefaultValue(true);
         })
         .Read("ReadTasks", "Helper")
-    //        .Create("CreateTask", "Gantt")
-    //        .Destroy("DestroyTask", "Gantt")
-    //        .Update("UpdateTask", "Gantt")
+        .Create("CreateTask", "Helper")
+        .Destroy("DestroyTask", "Helper")
+        .Update("UpdateTask", "Helper")
     )
     .DependenciesDataSource(d => d
         .Model(m =>
@@ -58,7 +59,7 @@
                     .Schema(s => s
                         .Model(m =>
                         {
-                            m.Id("ID");
+                            m.Id("ResourseId");
                         })
                         .Data("Data")
                     )
@@ -75,12 +76,12 @@
         .DataSource(d => d
             .Model(m =>
             {
-                m.Id(f => f.ID);
+                m.Id(f => f.AssignmentID);
             })
             .Read("ReadAssignments", "Helper")
-//            .Create("CreateAssignment", "Gantt")
-//            .Destroy("DestroyAssignment", "Gantt")
-//            .Update("UpdateAssignment", "Gantt")
+            .Create("CreateAssignments", "Helper")
+            .Destroy("DestroyAssignments", "Helper")
+            .Update("UpdateAssignments", "Helper")
         )
     )
 )

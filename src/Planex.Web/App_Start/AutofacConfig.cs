@@ -5,7 +5,8 @@ using Autofac;
 using Autofac.Integration.Mvc;
 using Planex.Data;
 using Planex.Services.Users;
-using Planex.Web.Areas.HR.Controllers;
+using Planex.Web.Areas.Lead.Controllers;
+using BaseController = Planex.Web.Areas.HR.Controllers.BaseController;
 
 namespace Planex.Web
 {
@@ -45,16 +46,19 @@ namespace Planex.Web
                 .As<DbContext>()
                 .InstancePerRequest();
 
-            builder.RegisterAssemblyTypes(Assembly.GetAssembly(typeof(IUserService))).AsImplementedInterfaces();
+            builder.RegisterAssemblyTypes(Assembly.GetAssembly(typeof(IUserService))).AsImplementedInterfaces().InstancePerRequest();
 
             builder.RegisterGeneric(typeof(GenericRepository<>)).As(typeof(IRepository<>)).InstancePerRequest();
 
-//            builder.RegisterGeneric(typeof(PlanexData))
-//                .As(typeof(IPlanexData))
-//                .InstancePerRequest();
+            //            builder.RegisterGeneric(typeof(PlanexData))
+            //                .As(typeof(IPlanexData))
+            //                .InstancePerRequest();
+//
+                        builder.RegisterAssemblyTypes(Assembly.GetExecutingAssembly())
+                            .AssignableTo<BaseController>().PropertiesAutowired().InstancePerRequest();
 
-            builder.RegisterAssemblyTypes(Assembly.GetExecutingAssembly())
-                .AssignableTo<BaseController>().PropertiesAutowired();
+            builder.RegisterType<HelperController>().InstancePerDependency();
         }
+
     }
 }

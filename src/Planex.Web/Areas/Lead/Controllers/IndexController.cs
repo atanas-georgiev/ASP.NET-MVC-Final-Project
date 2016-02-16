@@ -18,14 +18,14 @@ namespace Planex.Web.Areas.Lead.Controllers
     {
 
         private readonly ITaskService taskService;
-        private readonly IUserService userService;
+    //    private readonly IUserService userService;
         private readonly ISubTaskService subTaskService;
 
         public IndexController(IUserService userService, ITaskService taskService, ISkillService skillService, ISubTaskService subTaskService)
             : base(userService)
         {
             this.taskService = taskService;
-            this.userService = userService;
+        //    this.userService = userService;
             this.subTaskService = subTaskService;
         }
 

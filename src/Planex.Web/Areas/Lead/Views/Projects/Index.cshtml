@@ -7,7 +7,7 @@
       .Name("grid")
       .Columns(columns =>
       {
-      columns.Template(@<text></text>).ClientTemplate("<a href='" + Url.Action("Details", "Projects", new { id = "#=Id#" }) + "'>Select</a>");
+          columns.Template(@<text></text>).ClientTemplate("<a href='" + Url.Action("Details", "Projects", new { id = "#=Id#" }) + "'>Select</a>");
           columns.Bound(c => c.Title);
           columns.Bound(c => c.Manager);
           columns.Bound(c => c.Priority);
