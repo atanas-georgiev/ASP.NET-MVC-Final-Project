@@ -96,5 +96,43 @@ namespace Planex.Web.Areas.Lead.Controllers
             var result = taskService.GetAll().Where(x => x.LeadId == UserProfile.Id && x.State >= TaskStateType.Started).To<ProjectIndexViewController>();
             return Json(result.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
         }
+
+        public virtual JsonResult ReadTasks([DataSourceRequest] DataSourceRequest request)
+        {
+            var projectId = int.Parse(Session["mainTaskId"].ToString());
+            var result = subTaskService.GetAll().Where(x => x.MainTaskId == projectId).To<ProjectDetailsViewModel>();
+            return Json(result.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
+        }
+
+        public virtual JsonResult ReadDependencies([DataSourceRequest] DataSourceRequest request)
+        {
+            var projectId = int.Parse(Session["mainTaskId"].ToString());
+            var result = subTaskService.GetAll().Where(x => x.MainTaskId == projectId && x.DependencyId != null).To<ProjectDetailsDependencyViewModel>();
+            return Json(result.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
+        }
+
+        public virtual JsonResult ReadResources([DataSourceRequest] DataSourceRequest request)
+        {
+            var result = userService.GetAll().To<ProjectDetailsResourseViewModel>();
+            return Json(result.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
+        }
+
+        public virtual JsonResult ReadAssignments([DataSourceRequest] DataSourceRequest request)
+        {
+            var projectId = int.Parse(Session["mainTaskId"].ToString());
+            var result = new List<ProjectDetailsAssignmentsViewModel>();
+            var subtasks = subTaskService.GetAll().Where(x => x.MainTaskId == projectId);
+            var idCount = 0;
+
+            foreach (var subtask in subtasks)
+            {
+                result.AddRange(subtask.Users.Select(user => new ProjectDetailsAssignmentsViewModel()
+                {
+                    ID = idCount++, ResourceID = user.IntId, TaskID = subtask.Id, Units = 1
+                }));
+            }
+
+            return Json(result.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
+        }
     }
 }

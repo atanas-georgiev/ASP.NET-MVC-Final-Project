@@ -1,7 +1,9 @@
 ﻿@using Kendo.Mvc.UI
 @using Planex.Web.Areas.Lead.Models
+@using Planex.Web.Areas.Manager.Models
+@using ProjectDetailsViewModel = Planex.Web.Areas.Lead.Models.ProjectDetailsViewModel
 
-@(Html.Kendo().Gantt<TaskViewModel, DependencyViewModel>()
+@(Html.Kendo().Gantt<ProjectDetailsViewModel, ProjectDetailsDependencyViewModel>()
     .Name("gantt")
     .Columns(columns =>
     {
@@ -9,6 +11,7 @@
         columns.Bound("title").Editable(true).Sortable(true);
         columns.Bound("start").Title("Start Time").Format("{0:MM/dd/yyyy}").Width(100).Editable(true).Sortable(true);
         columns.Bound("end").Title("End Time").Format("{0:MM/dd/yyyy}").Width(100).Editable(true).Sortable(true);
+        columns.Resources("Users").Editable(true).Title("Assigned Resources");
     })
     .Views(views =>
     {
@@ -28,7 +31,7 @@
             m.OrderId(f => f.OrderId);
             m.Field(f => f.Expanded).DefaultValue(true);
         })
-        .Read("ReadTasks", "Index")
+        .Read("ReadTasks", "Helper")
     //        .Create("CreateTask", "Gantt")
     //        .Destroy("DestroyTask", "Gantt")
     //        .Update("UpdateTask", "Gantt")
@@ -41,9 +44,43 @@
             m.SuccessorId(f => f.SuccessorID);
             m.Type(f => f.Type);
         })
-        .Read("ReadDependencies", "Index")
+        .Read("ReadDependencies", "Helper")
     //        .Create("CreateDependency", "Gantt")
     //        .Destroy("DestroyDependency", "Gantt")
     //        .Update("UpdateDependency", "Gantt")
+    )
+    .Resources(r => r
+                .Field("Users")
+                .DataColorField("Color")
+                .DataTextField("Name")
+                .DataSource(d => d
+                    .Custom()
+                    .Schema(s => s
+                        .Model(m =>
+                        {
+                            m.Id("ID");
+                        })
+                        .Data("Data")
+                    )
+                    .Transport(t =>
+                    {
+                        t.Read("ReadResources", "Helper");
+                    })
+                )
+            )
+    .Assignments<ProjectDetailsAssignmentsViewModel>(a => a
+        .DataTaskIdField("TaskID")
+        .DataResourceIdField("ResourceID")
+        .DataValueField("Units")
+        .DataSource(d => d
+            .Model(m =>
+            {
+                m.Id(f => f.ID);
+            })
+            .Read("ReadAssignments", "Helper")
+//            .Create("CreateAssignment", "Gantt")
+//            .Destroy("DestroyAssignment", "Gantt")
+//            .Update("UpdateAssignment", "Gantt")
+        )
     )
 )

@@ -20,6 +20,9 @@ namespace Planex.Data.Models
         }
 
         [Required]
+        public int IntId { get; set; }
+
+        [Required]
         [MinLength(2)]
         [MaxLength(50)]
         public string FirstName { get; set; }

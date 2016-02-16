@@ -33,17 +33,5 @@ namespace Planex.Web.Areas.Lead.Controllers
         {
             return View();
         }
-
-        public virtual JsonResult ReadTasks([DataSourceRequest] DataSourceRequest request)
-        {
-            var result = subTaskService.GetAll().Where(x => x.MainTaskId == 5).To<TaskViewModel>();
-            return Json(result.ToDataSourceResult(request));
-        }
-
-        public virtual JsonResult ReadDependencies([DataSourceRequest] DataSourceRequest request)
-        {
-            var result = subTaskService.GetAll().Where(x => x.MainTaskId == 5 && x.DependencyId != null).To<DependencyViewModel>();
-            return Json(result.ToDataSourceResult(request));
-        }
     }
 }

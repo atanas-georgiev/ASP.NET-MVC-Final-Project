@@ -59,7 +59,7 @@ namespace Planex.Web.Areas.Manager.Controllers
         public virtual JsonResult ReadSubTaskDependencies([DataSourceRequest] DataSourceRequest request)
         {
             var taskId = int.Parse(Session["mainTaskId"].ToString());
-            var result = subTaskService.GetAll().Where(x => x.MainTaskId == taskId && x.DependencyId != null).To<DependencyViewModel>();
+            var result = subTaskService.GetAll().Where(x => x.MainTaskId == taskId && x.DependencyId != null).To<ProjectDetailsDependencyViewModel>();
             return Json(result.ToDataSourceResult(request));
         }
 
