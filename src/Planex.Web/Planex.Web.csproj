@@ -215,12 +215,14 @@
     <Compile Include="Areas\Lead\Controllers\EstimationsController.cs" />
     <Compile Include="Areas\Lead\Controllers\HelperController.cs" />
     <Compile Include="Areas\Lead\Controllers\IndexController.cs" />
+    <Compile Include="Areas\Lead\Controllers\ProjectsController.cs" />
     <Compile Include="Areas\Lead\LeadAreaRegistration.cs" />
     <Compile Include="Areas\Lead\Models\DependencyViewModel.cs" />
     <Compile Include="Areas\Lead\Models\EstimationEditViewModelSubTask.cs" />
     <Compile Include="Areas\Lead\Models\EstimationEditViewModel.cs" />
     <Compile Include="Areas\Lead\Models\EstimationHomeViewModel.cs" />
     <Compile Include="Areas\Lead\Models\EstimationRequestedViewModel.cs" />
+    <Compile Include="Areas\Lead\Models\ProjectIndexViewController.cs" />
     <Compile Include="Areas\Lead\Models\Project\ProjectViewModel.cs" />
     <Compile Include="Areas\Lead\Models\SubTask\SubTaskViewModel.cs" />
     <Compile Include="Areas\Lead\Models\TaskViewModel.cs" />
@@ -364,6 +366,8 @@
     <None Include="Areas\Lead\Views\Index\Index.cshtml" />
     <Content Include="Areas\HR\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Lead\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Lead\Views\Projects\Details.cshtml" />
+    <None Include="Areas\Lead\Views\Projects\Index.cshtml" />
     <None Include="Areas\Manager\Views\Index\Index.cshtml" />
     <Content Include="Content\Kendo\kendo.black.min.css.map" />
     <Content Include="Content\Kendo\kendo.black.mobile.min.css.map" />

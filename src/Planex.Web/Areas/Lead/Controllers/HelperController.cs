@@ -3,9 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Kendo.Mvc.Extensions;
+using Kendo.Mvc.UI;
+using Planex.Data.Models;
 using Planex.Services.Skills;
 using Planex.Services.SubTasks;
+using Planex.Services.Tasks;
 using Planex.Services.Users;
+using Planex.Web.Areas.Lead.Models;
+using Planex.Web.Infrastructure.Mappings;
 
 namespace Planex.Web.Areas.Lead.Controllers
 {
@@ -15,15 +21,18 @@ namespace Planex.Web.Areas.Lead.Controllers
         private readonly IUserService userService;
         private readonly ISkillService skillService;
         private readonly ISubTaskService subTaskService;
+        private readonly ITaskService taskService;
 
         public HelperController(IUserService userService,
                                 ISkillService skillService,
-                                ISubTaskService subTaskService
+                                ISubTaskService subTaskService,
+                                ITaskService taskService
                                 ) : base(userService)
         {
             this.skillService = skillService;
             this.subTaskService = subTaskService;
             this.userService = userService;
+            this.taskService = taskService;
         }
 
         //[ChildActionOnly]
@@ -80,6 +89,12 @@ namespace Planex.Web.Areas.Lead.Controllers
                             });
 
             return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult ProjectsIndex_Read([DataSourceRequest]DataSourceRequest request)
+        {
+            var result = taskService.GetAll().Where(x => x.LeadId == UserProfile.Id && x.State >= TaskStateType.Started).To<ProjectIndexViewController>();
+            return Json(result.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
         }
     }
 }
