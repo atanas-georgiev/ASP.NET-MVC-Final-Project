@@ -8,14 +8,15 @@ using Planex.Services.Skills;
 using Planex.Services.Tasks;
 using Planex.Services.Users;
 using Planex.Web.Areas.Manager.Models;
+using Planex.Web.Infrastructure.Mappings;
 
 namespace Planex.Web.Areas.Manager.Controllers
 {
-    public class TasksController : BaseController
+    public class ProjectsController : BaseController
     {
         private ITaskService taskService;
 
-        public TasksController(IUserService userService, ITaskService taskService)
+        public ProjectsController(IUserService userService, ITaskService taskService)
             : base(userService)
         {
             this.taskService = taskService;
@@ -54,6 +55,23 @@ namespace Planex.Web.Areas.Manager.Controllers
             }
 
             return Create(model);
+        }
+
+        public ActionResult Details(string id)
+        {
+            Session["mainTaskId"] = id;
+            var intId = int.Parse(id);
+            var result = taskService.GetAll().Where(x => x.Id == intId).To<ProjectDetailsViewModel>().FirstOrDefault();
+            return View(result);
+        }
+
+        public ActionResult Approve()
+        {
+            var taskId = int.Parse(Session["mainTaskId"].ToString());
+            var task = taskService.GetById(taskId);
+            task.State = TaskStateType.Started;
+            taskService.Update(task);
+            return RedirectToAction("Index");
         }
     }
 }

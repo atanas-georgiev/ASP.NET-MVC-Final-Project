@@ -227,9 +227,14 @@
     <Compile Include="Areas\Manager\Controllers\BaseController.cs" />
     <Compile Include="Areas\Manager\Controllers\IndexController.cs" />
     <Compile Include="Areas\Manager\Controllers\JsonController.cs" />
-    <Compile Include="Areas\Manager\Controllers\TasksController.cs" />
+    <Compile Include="Areas\Manager\Controllers\ProjectsController.cs" />
     <Compile Include="Areas\Manager\ManagerAreaRegistration.cs" />
+    <Compile Include="Areas\Manager\Models\ProjectDetailsViewModel.cs" />
     <Compile Include="Areas\Manager\Models\ProjectViewModel.cs" />
+    <Compile Include="Areas\Manager\Models\SubTaskAssignentsViewModel.cs" />
+    <Compile Include="Areas\Manager\Models\SubTaskDependencyViewModel.cs" />
+    <Compile Include="Areas\Manager\Models\SubTaskResourceViewModel.cs" />
+    <Compile Include="Areas\Manager\Models\SubTaskViewModel.cs" />
     <Compile Include="Areas\Manager\Models\TaskCreateViewModel.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -436,8 +441,9 @@
     <Content Include="Content\Kendo\kendo.uniform.min.css.map" />
     <Content Include="Content\Kendo\kendo.uniform.mobile.min.css.map" />
     <Content Include="Areas\Manager\Views\_ViewStart.cshtml" />
-    <Content Include="Areas\Manager\Views\Tasks\Create.cshtml" />
-    <Content Include="Areas\Manager\Views\Tasks\Index.cshtml" />
+    <Content Include="Areas\Manager\Views\Projects\Create.cshtml" />
+    <Content Include="Areas\Manager\Views\Projects\Details.cshtml" />
+    <Content Include="Areas\Manager\Views\Projects\_DetailsChart.cshtml" />
     <None Include="Properties\PublishProfiles\server.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
