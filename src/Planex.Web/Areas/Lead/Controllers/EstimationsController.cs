@@ -11,6 +11,7 @@ using Planex.Services.Users;
 using Planex.Web.Areas.Lead.Models;
 using Planex.Web.Infrastructure.Mappings;
 using AutoMapper.QueryableExtensions;
+using Planex.Common;
 using Planex.Services.Skills;
 using Planex.Services.SubTasks;
 using Planex.Web.Areas.Lead.Models.SubTask;
@@ -75,6 +76,19 @@ namespace Planex.Web.Areas.Lead.Controllers
             Session["mainTaskId"] = id;
             var intId = int.Parse(id);
             var requestedEstimationTask = taskService.GetAll().Where(x => x.Id == intId).To<EstimationEditViewModel>().FirstOrDefault();
+            var requestedEstimationTaskSubTasks = subTaskService.GetAll().Where(x => x.MainTaskId == requestedEstimationTask.Id).OrderByDescending(x => x.End);
+
+            if (requestedEstimationTaskSubTasks.ToList().Count != 0)
+            {
+                requestedEstimationTask.End = requestedEstimationTaskSubTasks.First().End;
+                requestedEstimationTask.Price = requestedEstimationTaskSubTasks.Where(x => x.ParentId == null).Sum(x => x.Price); 
+            }
+            else
+            {
+                requestedEstimationTask.End = requestedEstimationTask.Start;
+                requestedEstimationTask.Price = 0;
+            }
+
             return View(requestedEstimationTask);
         }
 
@@ -121,7 +135,9 @@ namespace Planex.Web.Areas.Lead.Controllers
                     ParentId = subtask.ParentId,
                     DependencyId = subtask.DependencyId,
                     SkillId = skillId,
-                    Start = DateTime.UtcNow
+                    Start = DateTime.UtcNow,
+                    End = DateTime.UtcNow,
+                    Price = 0
                 };
 
                 if (subtask.SelectedUsers != null)
@@ -130,6 +146,7 @@ namespace Planex.Web.Areas.Lead.Controllers
                     {
                         var dbuser = userService.GetById(user);
                         subTaskDB.Users.Add(dbuser);
+                        subTaskDB.Price += dbuser.PricePerHour / UserConstants.WorkingDays * subTaskDB.Duration;
                     }
 
                     if (subTaskDB.DependencyId != null)
@@ -151,18 +168,20 @@ namespace Planex.Web.Areas.Lead.Controllers
                     }
                 }
 
-                
-
                 subTaskService.Add(subTaskDB);
                 subTaskService.AddAttachments(subTaskDB, subtask.UploadedAttachments, System.Web.HttpContext.Current.Server);
 
+                // Sub task date and price
                 if (subTaskDB.ParentId != null)
                 {
                     var parentSubTask = subTaskService.GetById((int)subTaskDB.ParentId);
                     var parentChildrenByStartDate = subTaskService.GetAll().Where(x => x.ParentId == parentSubTask.Id).OrderBy(x => x.Start);
                     var parentChildrenByEndDate = subTaskService.GetAll().Where(x => x.ParentId == parentSubTask.Id).OrderByDescending(x => x.End);
+
                     parentSubTask.Start = parentChildrenByStartDate.First().Start;
                     parentSubTask.End = parentChildrenByEndDate.First().End;
+                    parentSubTask.Price = parentChildrenByStartDate.Sum(x => x.Price);
+
                     subTaskService.Update(parentSubTask);
                 }
 
@@ -177,6 +196,14 @@ namespace Planex.Web.Areas.Lead.Controllers
             var intId = int.Parse(id);
             var result = subTaskService.GetAll().Where(x => x.Id == intId).To<EstimationEditViewModelSubTask>().FirstOrDefault();
             return PartialView("_SubTaskEdit", result);
+        }
+
+        public ActionResult SendApproval()
+        {
+            var task = taskService.GetById(int.Parse(Session["mainTaskId"].ToString()));
+            task.State = TaskStateType.Estimated;
+            taskService.Update(task);
+            return RedirectToAction("Index");
         }
 
     }

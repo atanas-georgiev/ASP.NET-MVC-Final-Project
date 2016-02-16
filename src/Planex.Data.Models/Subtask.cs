@@ -45,6 +45,8 @@ namespace Planex.Data.Models
 
         public int Duration { get; set; }
 
+        public decimal Price { get; set; }
+
         public int MainTaskId { get; set; }
 
         public virtual MainTask MainTask { get; set; }

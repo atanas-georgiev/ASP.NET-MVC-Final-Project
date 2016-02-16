@@ -14,7 +14,10 @@
         @Html.DisplayFor(model => model.Description)
         @Html.DisplayFor(model => model.Priority)
         @Html.DisplayFor(model => model.Start)
+        @Html.DisplayFor(model => model.End)
+        @Html.DisplayFor(model => model.Price)
 
+        @Html.ActionLink("Send for approval", "SendApproval");
 
         @foreach (var file in Model.UploadedAttachmentFiles)
         {
