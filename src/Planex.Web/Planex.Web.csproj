@@ -226,8 +226,10 @@
     <Compile Include="Areas\Lead\Models\TaskViewModel.cs" />
     <Compile Include="Areas\Manager\Controllers\BaseController.cs" />
     <Compile Include="Areas\Manager\Controllers\IndexController.cs" />
+    <Compile Include="Areas\Manager\Controllers\JsonController.cs" />
     <Compile Include="Areas\Manager\Controllers\TasksController.cs" />
     <Compile Include="Areas\Manager\ManagerAreaRegistration.cs" />
+    <Compile Include="Areas\Manager\Models\ProjectViewModel.cs" />
     <Compile Include="Areas\Manager\Models\TaskCreateViewModel.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -435,6 +437,7 @@
     <Content Include="Content\Kendo\kendo.uniform.mobile.min.css.map" />
     <Content Include="Areas\Manager\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Manager\Views\Tasks\Create.cshtml" />
+    <Content Include="Areas\Manager\Views\Tasks\Index.cshtml" />
     <None Include="Properties\PublishProfiles\server.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -786,6 +789,7 @@
     <Folder Include="Areas\Lead\Views\Helper\" />
     <Folder Include="Areas\Lead\Views\Shared\" />
     <Folder Include="Areas\Manager\Views\Base\" />
+    <Folder Include="Areas\Manager\Views\Json\" />
     <Folder Include="Areas\Manager\Views\Shared\" />
     <Folder Include="Views\Grid\" />
     <Folder Include="Views\Skills\" />
