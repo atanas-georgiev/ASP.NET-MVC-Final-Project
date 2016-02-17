@@ -1,0 +1,16 @@
+﻿@model List<string>
+
+<div class="form-group">
+    <div class="col-md-2">
+    </div>
+    <div class="col-md-10">
+        @foreach (string file in Model)
+        {
+            var link = "../../../../Content/Attachments/" + @Session["ProjectId"].ToString() + "/" + @file;
+            <a href=@link>@file</a>
+            <br />
+        }
+    </div>
+</div>
+
+

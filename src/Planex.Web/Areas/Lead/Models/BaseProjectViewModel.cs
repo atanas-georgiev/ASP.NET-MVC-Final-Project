@@ -1,53 +1,43 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using AutoMapper;
 using Planex.Data.Models;
-using Planex.Web.Infrastructure.Mappings;
 
-namespace Planex.Web.Areas.Lead.Models.Project
+namespace Planex.Web.Areas.Lead.Models
 {
-    public class ProjectViewModel
+    public class BaseProjectViewModel
     {
         [Key]
         [HiddenInput(DisplayValue = false)]
         public int Id { get; set; }
 
         [Required]
-        [MinLength(2)]
-        [MaxLength(50)]
+        [MaxLength(100)]
         [UIHint("String")]
         public string Title { get; set; }
 
         [Required]
-        [MinLength(2)]
-        [MaxLength(500)]
-        [UIHint("Editor")]
+        [MaxLength(10000)]
+        [UIHint("String")]
         [DataType(DataType.MultilineText)]
         [AllowHtml]
         public string Description { get; set; }
 
         [Required]
-        [UIHint("EnumDropDown")]
+        [UIHint("String")]
         public PriorityType Priority { get; set; }
 
         [Required]
-        [UIHint("Email")]
+        [UIHint("String")]
         public string Manager { get; set; }
-
-        [Required]
-        [UIHint("Email")]
-        public string Lead { get; set; }
-
-        [Required]
-        public TaskStateType State { get; set; }
 
         [Required]
         [UIHint("Date")]
         public DateTime Start { get; set; }
+
+        [Required]
+        public TaskStateType State { get; set; }
 
         public List<string> UploadedAttachmentFiles { get; set; }
     }

@@ -6,6 +6,7 @@ using Autofac.Integration.Mvc;
 using Planex.Data;
 using Planex.Services.Users;
 using Planex.Web.Areas.Lead.Controllers;
+using Planex.Web.Areas.Manager.Controllers;
 using BaseController = Planex.Web.Areas.HR.Controllers.BaseController;
 
 namespace Planex.Web
@@ -57,7 +58,7 @@ namespace Planex.Web
                         builder.RegisterAssemblyTypes(Assembly.GetExecutingAssembly())
                             .AssignableTo<BaseController>().PropertiesAutowired().InstancePerRequest();
 
-            builder.RegisterType<HelperController>().InstancePerDependency();
+           // builder.RegisterType<JsonController>().InstancePerDependency();
         }
 
     }

@@ -1,59 +1,48 @@
 ﻿@using Kendo.Mvc.UI
-@model Planex.Web.Areas.Lead.Models.EstimationEditViewModel
+@using Planex.Data.Models
+@model Planex.Web.Areas.Lead.Models.Estimation.EstimationEditViewModel
 
+@{
+    ViewBag.Title = "Create project";
+}
 
+<br />
+<div class="well k-content">
+    <h2 class="well-title">Project details</h2>
 
-#: item.title #  <a data-ajax="true" data-ajax-mode="replace" data-ajax-update="#create" href="/Lead/Estimations/CreateSubTask">New Sub Task</a>
+    @using (Html.BeginForm())
+    {
+    @Html.AntiForgeryToken()
 
-<div class="k-content">
-    <div>
-        <h4>Project info</h4>
-        <hr/>
+    <div class="form-horizontal">
+        <div class="form-group">
+            @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DisplayFor(model => model.Title)
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.Raw(Model.Description)
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Start, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DisplayFor(model => model.Start)
+            </div>
+        </div>
 
-        @Html.DisplayFor(model => model.Title)
-        @Html.DisplayFor(model => model.Description)
-        @Html.DisplayFor(model => model.Priority)
-        @Html.DisplayFor(model => model.Start)
-        @Html.DisplayFor(model => model.End)
-        @Html.DisplayFor(model => model.Price)
-
-        @Html.ActionLink("Send for approval", "SendApproval");
-
-        @foreach (var file in Model.UploadedAttachmentFiles)
-        {
-            <a href="@file">@file</a>
-        }
-
-        @(Html.Kendo().TreeView()
-                .Name("treeview")
-                .DataTextField("title")
-                .Template("#: item.title # <a data-ajax='true' data-ajax-mode='replace' data-ajax-update='\\#create' href='/Lead/Estimations/EditSubTask/#: item.id #'>Edit</a> " +
-                                          "<a data-ajax='true' data-ajax-mode='replace' data-ajax-update='\\#create' href='/Lead/Estimations/DeleteSubTask/#: item.id #'>Delete</a>" +
-                                          "[#= kendo.toString(kendo.parseDate(item.start, 'yyyy-MM-dd'), 'dd/MM/yyyy') #] " +
-                                          "[#= kendo.toString(kendo.parseDate(item.end, 'yyyy-MM-dd'), 'dd/MM/yyyy') #]")
-                .DataSource(dataSource => dataSource
-                    .Read(read => read
-                        .Action("GetSubTasksTreeView", "Helper")
-                    )
-                )
-        )
-
+        @Html.Partial("_DetailsFiles", Model.UploadedAttachmentFiles)
+        
+        <div class="form-group">
+            @if (Model.State == TaskStateType.UnderEstimation)
+            {
+                @Html.ActionLink("Send For Approval", "SendForApproval", new { id = Model.Id }, new { @class = "k-button" })
+            }
+        </div>
     </div>
+    }
 
-    <div>
-        @Ajax.ActionLink("New Sub Task", "CreateSubTask", null, new AjaxOptions
-        {
-            UpdateTargetId = "create",
-            LoadingElementId = "loading",
-            InsertionMode = InsertionMode.Replace,
-        }, new { @class = "btn btn-primary" })
-
-    </div>
-    <div>
-        <div id="loading" style="display: none">Loading data...</div>
-        <div id="create"></div>
-    </div>
-    @*    <p>*@
-@*        @Html.ActionLink("Start Estimation", "StartEstimation", new { id = Model.Id }) |*@
-@*    </p>*@
 </div>

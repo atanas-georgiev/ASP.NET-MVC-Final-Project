@@ -12,7 +12,7 @@ namespace Planex.Web.Areas.Lead.Controllers
     {
         protected readonly IUserService userService;
 
-        protected string UserProfileId { get; private set; }
+        protected User UserProfile { get; private set; }
 
         protected IMapper Mapper => AutoMapperConfig.Configuration.CreateMapper();
 
@@ -23,9 +23,7 @@ namespace Planex.Web.Areas.Lead.Controllers
 
         protected override IAsyncResult BeginExecute(RequestContext requestContext, AsyncCallback callback, object state)
         {
-            UserProfileId =
-                    userService.GetAll().Where(u => u.UserName == requestContext.HttpContext.User.Identity.Name).Select(x => x.Id).FirstOrDefault();
-               
+            UserProfile = userService.GetAll().FirstOrDefault(u => u.UserName == requestContext.HttpContext.User.Identity.Name);               
             return base.BeginExecute(requestContext, callback, state);
         }
     }

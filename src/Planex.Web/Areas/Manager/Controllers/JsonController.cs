@@ -76,9 +76,6 @@ namespace Planex.Web.Areas.Manager.Controllers
         public virtual JsonResult ReadSubTaskResources([DataSourceRequest] DataSourceRequest request)
         {
             var result = userService.GetAll().To<SubTaskResourceViewModel>().ToList();
-
-
-
             return Json(result.ToDataSourceResult(request));
         }
 

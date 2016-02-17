@@ -56,6 +56,10 @@
       <HintPath>..\packages\AutoMapper.4.2.0\lib\net45\AutoMapper.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="HtmlAgilityPack, Version=1.4.9.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
+      <HintPath>..\packages\HtmlAgilityPack.1.4.9\lib\Net45\HtmlAgilityPack.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Kendo.Mvc, Version=2016.1.112.545, Culture=neutral, PublicKeyToken=121fae78165ba3d4, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\ASP.NET-MVC-Homeworks\04. Working-with-Data\Tweeter.Mvc\Libs\Kendo.Mvc.dll</HintPath>
@@ -126,6 +130,10 @@
     <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="Vereyon.Web.HtmlSanitizer, Version=1.1.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Vereyon.Web.HtmlSanitizer.1.1.3.0\lib\net40\Vereyon.Web.HtmlSanitizer.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="WebActivatorEx, Version=2.0.0.0, Culture=neutral, PublicKeyToken=7b26dc2a43f6a0d4, processorArchitecture=MSIL">
       <HintPath>..\packages\WebActivatorEx.2.0\lib\net40\WebActivatorEx.dll</HintPath>
@@ -214,18 +222,17 @@
     <Compile Include="Areas\HR\Models\UserViewModel.cs" />
     <Compile Include="Areas\Lead\Controllers\BaseController.cs" />
     <Compile Include="Areas\Lead\Controllers\EstimationsController.cs" />
-    <Compile Include="Areas\Lead\Controllers\HelperController.cs" />
+    <Compile Include="Areas\Lead\Controllers\JsonController.cs" />
     <Compile Include="Areas\Lead\Controllers\IndexController.cs" />
     <Compile Include="Areas\Lead\Controllers\ProjectsController.cs" />
     <Compile Include="Areas\Lead\LeadAreaRegistration.cs" />
     <Compile Include="Areas\Lead\Models\ProjectDetailsDependencyViewModel.cs" />
     <Compile Include="Areas\Lead\Models\EstimationEditViewModelSubTask.cs" />
-    <Compile Include="Areas\Lead\Models\EstimationEditViewModel.cs" />
-    <Compile Include="Areas\Lead\Models\EstimationHomeViewModel.cs" />
-    <Compile Include="Areas\Lead\Models\EstimationRequestedViewModel.cs" />
+    <Compile Include="Areas\Lead\Models\Estimation\EstimationEditViewModel.cs" />
+    <Compile Include="Areas\Lead\Models\Estimation\EstimationListViewModel.cs" />
     <Compile Include="Areas\Lead\Models\ProjectDetailsResourseViewModel.cs" />
-    <Compile Include="Areas\Lead\Models\ProjectIndexViewController.cs" />
-    <Compile Include="Areas\Lead\Models\Project\ProjectViewModel.cs" />
+    <Compile Include="Areas\Lead\Views\ProjectIndexViewController.cs" />
+    <Compile Include="Areas\Lead\Models\BaseProjectViewModel.cs" />
     <Compile Include="Areas\Lead\Models\ProjectDetailsAssignmentsViewModel.cs" />
     <Compile Include="Areas\Lead\Models\SubTask\SubTaskViewModel.cs" />
     <Compile Include="Areas\Lead\Models\ProjectDetailsViewModel.cs" />
@@ -363,10 +370,10 @@
     <Content Include="Areas\HR\Views\Skills\Index.cshtml" />
     <Content Include="Areas\Lead\Views\Estimations\Index.cshtml" />
     <Content Include="Areas\Lead\Views\Estimations\Edit.cshtml" />
-    <None Include="Areas\Lead\Views\Estimations\Requested.cshtml" />
     <Content Include="Areas\Lead\Views\Estimations\Details.cshtml" />
     <Content Include="Areas\Lead\Views\Estimations\_SubTaskAdd.cshtml" />
     <Content Include="Areas\Lead\Views\Estimations\_SubTaskEdit.cshtml" />
+    <Content Include="Areas\Lead\Views\Estimations\_DetailsFiles.cshtml" />
     <None Include="Areas\Lead\Views\Index\Index.cshtml" />
     <Content Include="Areas\HR\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Lead\Views\_ViewStart.cshtml" />
@@ -801,6 +808,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\HR\Views\Base\" />
     <Folder Include="Areas\HR\Views\Shared\" />
+    <Folder Include="Areas\Lead\Models\Project\" />
     <Folder Include="Areas\Lead\Views\Base\" />
     <Folder Include="Areas\Lead\Views\Helper\" />
     <Folder Include="Areas\Lead\Views\Shared\" />

@@ -12,34 +12,30 @@ using Planex.Services.Skills;
 using Planex.Services.Tasks;
 using Planex.Services.Users;
 using Planex.Web.Areas.Lead.Models;
+using Planex.Web.Areas.Lead.Models.Estimation;
 using Planex.Web.Infrastructure.Extensions;
 using Planex.Web.Infrastructure.Mappings;
 
 namespace Planex.Web.Areas.Lead.Controllers
 {
-    public class HelperController : BaseController
+    public class JsonController : BaseController
     {
 
        // private readonly IUserService userService;
         private readonly ISkillService skillService;
         private readonly ITaskService subTaskService;
-        private readonly IProjectService taskService;
+        private readonly IProjectService projectService;
 
-        public HelperController(IUserService userService,
+        public JsonController(IUserService userService,
                                 ISkillService skillService,
                                 ITaskService subTaskService,
-                                IProjectService taskService
+                                IProjectService projectService
                                 ) : base(userService)
         {
             this.skillService = skillService;
             this.subTaskService = subTaskService;
          //   this.userService = userService;
-            this.taskService = taskService;
-        }
-
-        protected override IAsyncResult BeginExecute(RequestContext requestContext, AsyncCallback callback, object state)
-        {
-            return base.BeginExecute(requestContext, callback, state);
+            this.projectService = projectService;
         }
 
         //[ChildActionOnly]
@@ -98,9 +94,15 @@ namespace Planex.Web.Areas.Lead.Controllers
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
+        public virtual JsonResult ReadEstimations([DataSourceRequest]DataSourceRequest request)
+        {
+            var result = projectService.GetAll().Where(x => /*x.LeadId == UserProfile.Id &&*/ x.State == TaskStateType.UnderEstimation).To<EstimationListViewModel>();
+            return Json(result.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
+        }
+
         public JsonResult ProjectsIndex_Read([DataSourceRequest]DataSourceRequest request)
         {
-            var result = taskService.GetAll().Where(x => x.LeadId == UserProfileId && x.State >= TaskStateType.Started).To<ProjectIndexViewController>();
+            var result = projectService.GetAll().Where(x => x.LeadId == UserProfile.Id && x.State >= TaskStateType.Started).To<ProjectIndexViewController>();
             return Json(result.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
         }
 

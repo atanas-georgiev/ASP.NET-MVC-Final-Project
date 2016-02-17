@@ -14,7 +14,9 @@ using Planex.Common;
 using Planex.Services.Projects;
 using Planex.Services.Skills;
 using Planex.Services.Tasks;
+using Planex.Web.Areas.Lead.Models.Estimation;
 using Planex.Web.Areas.Lead.Models.SubTask;
+using Vereyon.Web;
 
 namespace Planex.Web.Areas.Lead.Controllers
 {
@@ -35,39 +37,32 @@ namespace Planex.Web.Areas.Lead.Controllers
 
         public ActionResult Projects_Read([DataSourceRequest] DataSourceRequest request)
         {
-            var requestedEstimationTasks = taskService.GetAll().To<EstimationRequestedViewModel>();
+            var requestedEstimationTasks = taskService.GetAll().To<EstimationListViewModel>();
             return Json(requestedEstimationTasks.ToDataSourceResult(request));
         }
 
-        public ActionResult Requested()
-        {
-            var requestedEstimationTasks = taskService.GetAll().To<EstimationRequestedViewModel>();
-            return View(requestedEstimationTasks);
-        }
-
-        public ActionResult Details(string id)
-        {
-            var intId = int.Parse(id);
-            var requestedEstimationTask = taskService.GetAll().Where(x => x.Id == intId).To<EstimationRequestedViewModel>().FirstOrDefault();
-            return View(requestedEstimationTask);
-        }
+//        public ActionResult Details(string id)
+//        {
+//            var intId = int.Parse(id);
+//            var requestedEstimationTask = taskService.GetAll().Where(x => x.Id == intId).To<EstimationListViewModel>().FirstOrDefault();
+//            return View(requestedEstimationTask);
+//        }
 
         public ActionResult StartEstimation(string id)
         {
             var intId = int.Parse(id);
-            taskService.StartEstimation(intId, UserProfileId);
+            taskService.StartEstimation(intId, UserProfile.Id);
             return RedirectToAction("Edit", new { id = intId } );
         }
 
-        public ActionResult Index(string id)
+        public ActionResult Index()
         {
-            var requestedEstimationTasks = taskService.GetAll().Where(x => x.LeadId == UserProfileId).To<EstimationHomeViewModel>();
-            return View(requestedEstimationTasks);
+            return View();
         }
 
         public ActionResult Estimations_Read([DataSourceRequest]DataSourceRequest request)
         {
-            var tasks = taskService.GetAll().Where(x => x.LeadId == UserProfileId).To<EstimationHomeViewModel>();
+            var tasks = taskService.GetAll().Where(x => x.LeadId == UserProfile.Id).To<EstimationListViewModel>();
             return Json(tasks.ToDataSourceResult(request));
         }
 
@@ -88,6 +83,9 @@ namespace Planex.Web.Areas.Lead.Controllers
                 requestedEstimationTask.End = requestedEstimationTask.Start;
                 requestedEstimationTask.Price = 0;
             }
+
+            var sanitizer = HtmlSanitizer.SimpleHtml5DocumentSanitizer();
+            requestedEstimationTask.Description = sanitizer.Sanitize(requestedEstimationTask.Description);
 
             return View(requestedEstimationTask);
         }
