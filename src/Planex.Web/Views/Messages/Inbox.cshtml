@@ -1,0 +1,40 @@
+﻿@using Kendo.Mvc.UI
+@using Planex.Web.Models.Messages
+@model IEnumerable<Planex.Web.Models.Messages.MessageViewModel>
+
+@{
+    ViewBag.Title = "Inbox";
+}
+
+<br />
+<div class="well k-content">
+    <h2 class="well-title">Messages</h2>
+    <div>
+        @Html.ActionLink("New message", "Send", "", new { @class = "k-button" })
+    </div>
+
+    @(Html.Kendo().Grid<MessageViewModel>()
+          .Name("grid")
+          .Columns(columns =>
+          {
+              columns.Template(@<text></text>).ClientTemplate("<a href='" + Url.Action("View", "Messages", new { id = "#=Id#" }) + "'>View</a>");
+              columns.Bound(c => c.From.Name);
+              columns.Bound(c => c.Subject);
+              columns.Bound(c => c.Date);
+          })
+          .ColumnMenu()
+          .Pageable()
+          .Navigatable()
+          .Sortable(sortable =>
+          {
+              sortable.SortMode(GridSortMode.SingleColumn);
+          })
+          .Filterable()
+          .Scrollable()
+          .DataSource(dataSource => dataSource
+              .Ajax()
+              .Model(model => model.Id(p => p.Id))
+              .Read(read => read.Action("ReadMessages", "JsonData"))
+          )
+    )
+</div>

@@ -65,6 +65,7 @@
   <ItemGroup>
     <Compile Include="Attachment.cs" />
     <Compile Include="Image.cs" />
+    <Compile Include="Message.cs" />
     <Compile Include="PriorityType.cs" />
     <Compile Include="Skill.cs" />
     <Compile Include="SubTask.cs" />

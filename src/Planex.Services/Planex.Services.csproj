@@ -99,6 +99,8 @@
   <ItemGroup>
     <Compile Include="Images\IImageService.cs" />
     <Compile Include="Images\ImageService.cs" />
+    <Compile Include="Messages\IMessageService.cs" />
+    <Compile Include="Messages\MessageService.cs" />
     <Compile Include="Skills\ISkillService.cs" />
     <Compile Include="Skills\SkillService.cs" />
     <Compile Include="Tasks\ITaskService.cs" />

@@ -21,6 +21,8 @@ namespace Planex.Data
 
         public virtual IDbSet<Image> Images { get; set; }
 
+        public virtual IDbSet<Message> Messages { get; set; }        
+
         public virtual IDbSet<SubTaskDependency> SubTaskDependencies { get; set; }
 
         public static PlanexDbContext Create()
