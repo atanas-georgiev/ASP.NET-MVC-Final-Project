@@ -1,30 +1,77 @@
 ﻿@using Kendo.Mvc.UI
-@model Planex.Web.Areas.Manager.Models.TaskCreateViewModel
+@using Planex.Data.Models
+@model Planex.Web.Areas.Manager.Models.Projects.ProjectCreateViewModel
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Create project";
 }
 
-@using (Html.BeginForm()) 
-{
-    @Html.AntiForgeryToken()
+<br />
+<div class="well k-content">
+    <h2 class="well-title">Create project</h2>
 
-    <div class="k-content">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
 
-        <h2>Create</h2>
-        <br/>
-        @Html.EditorFor(model => model.Title)
-        @Html.EditorFor(model => model.Description)
-        @Html.EditorFor(model => model.Start)
-        @Html.EditorFor(model => model.Priority)
-        @(Html.Kendo().Upload().Name("UploadedAttachments"))
-
-        <div class="form-group">
-            <input type="submit" value="Create" class="k-primary"/>
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Title)
+                    @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Description)
+                    @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Start, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Start)
+                    @Html.ValidationMessageFor(model => model.Start, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Priority, htmlAttributes: new {@class = "control-label col-md-2"})
+                <div class="col-md-10">
+                    @Html.Kendo().DropDownList().Name("Priority").BindTo(Enum.GetNames(typeof(PriorityType)).ToList())
+                    @Html.ValidationMessageFor(model => model.Priority, "", new {@class = "text-danger"})
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.LeadId, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @(Html.Kendo().DropDownListFor(model => model.LeadId).Name("LeadId").OptionLabel("Select Lead ...")
+                        .DataTextField("name").DataValueField("id")
+                              .DataSource(source =>
+                              {
+                                  source.Read(read =>
+                                  {
+                                      read.Action("GetAllLeadUsers", "Json");
+                                  })
+                                  .ServerFiltering(false);
+                              })
+                    )
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-2">
+                  
+                </div>                    
+                <div class="col-md-10">
+                    @(Html.Kendo().Upload().Name("UploadedAttachments"))
+                </div>
+                </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="k-button" />
+            </div>
         </div>
-    </div>
-        }
+    }
 
-        <div>
-            @Html.ActionLink("Back to List", "Index")
-        </div>
+</div>

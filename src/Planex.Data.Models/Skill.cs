@@ -6,12 +6,12 @@ namespace Planex.Data.Models
     public class Skill
     {
         private ICollection<User> users;
-        private ICollection<Subtask> subTasks;
+        private ICollection<SubTask> subTasks;
 
         public Skill()
         {
             this.users = new HashSet<User>();
-            this.subTasks = new HashSet<Subtask>();
+            this.subTasks = new HashSet<SubTask>();
         }
                
         [Key]
@@ -28,7 +28,7 @@ namespace Planex.Data.Models
             set { this.users = value; }
         }
 
-        public virtual ICollection<Subtask> Subtasks
+        public virtual ICollection<SubTask> Subtasks
         {
             get { return this.subTasks; }
             set { this.subTasks = value; }

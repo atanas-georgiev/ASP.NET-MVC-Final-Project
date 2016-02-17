@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Planex.Data;
@@ -37,6 +36,14 @@ namespace Planex.Services.Users
         public IQueryable<User> GetAll()
         {
             return this.users.All();
+        }
+
+        public IQueryable<User> GetAllByRole(string role)
+        {
+            var r = roleManager.FindByName(role);
+            var userIds = r.Users.Select(u => u.UserId);
+            var res =  this.users.All().Where(u => userIds.Contains(u.Id));
+            return res;
         }
 
         public User GetById(string id)

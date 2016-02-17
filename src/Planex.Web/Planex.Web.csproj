@@ -234,13 +234,13 @@
     <Compile Include="Areas\Manager\Controllers\JsonController.cs" />
     <Compile Include="Areas\Manager\Controllers\ProjectsController.cs" />
     <Compile Include="Areas\Manager\ManagerAreaRegistration.cs" />
-    <Compile Include="Areas\Manager\Models\ProjectDetailsViewModel.cs" />
-    <Compile Include="Areas\Manager\Models\ProjectViewModel.cs" />
+    <Compile Include="Areas\Manager\Models\Projects\ProjectDetailsViewModel.cs" />
+    <Compile Include="Areas\Manager\Models\Projects\ProjectCreateViewModel.cs" />
+    <Compile Include="Areas\Manager\Models\Projects\ProjectListViewModel.cs" />
     <Compile Include="Areas\Manager\Models\SubTaskAssignentsViewModel.cs" />
     <Compile Include="Areas\Manager\Models\SubTaskDependencyViewModel.cs" />
     <Compile Include="Areas\Manager\Models\SubTaskResourceViewModel.cs" />
     <Compile Include="Areas\Manager\Models\SubTaskViewModel.cs" />
-    <Compile Include="Areas\Manager\Models\TaskCreateViewModel.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -452,6 +452,8 @@
     <Content Include="Areas\Manager\Views\Projects\Create.cshtml" />
     <Content Include="Areas\Manager\Views\Projects\Details.cshtml" />
     <Content Include="Areas\Manager\Views\Projects\_DetailsChart.cshtml" />
+    <Content Include="Areas\Manager\Views\Projects\Index.cshtml" />
+    <Content Include="Areas\Manager\Views\Projects\_DetailsFiles.cshtml" />
     <None Include="Properties\PublishProfiles\server.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />

@@ -4,23 +4,20 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Planex.Data.Models
 {
-    public class Subtask
+    public class SubTask
     {
-        private ICollection<Attachment> attachements;
         private ICollection<User> users;
-        private ICollection<Subtask> subtasks;
-        private ICollection<Subtask> dependencies;
+        private ICollection<SubTask> tasks;
+        private ICollection<SubTask> dependencies;
 
-        public Subtask()
+        public SubTask()
         {
-            this.attachements = new HashSet<Attachment>();
             this.users = new HashSet<User>();
-            this.subtasks = new List<Subtask>();
-            this.dependencies = new List<Subtask>();
+            this.tasks = new List<SubTask>();
+            this.dependencies = new List<SubTask>();
         }
 
         public int Id { get; set; }
@@ -28,12 +25,12 @@ namespace Planex.Data.Models
         public int? ParentId { get; set; }
 
         [ForeignKey("ParentId")]
-        public virtual Subtask Parent { get; set; }
+        public virtual SubTask Parent { get; set; }
 
         public int? DependencyId { get; set; }
 
         [ForeignKey("DependencyId")]
-        public virtual Subtask Dependency { get; set; }
+        public virtual SubTask Dependency { get; set; }
 
         public string Title { get; set; }
 
@@ -47,30 +44,28 @@ namespace Planex.Data.Models
 
         public decimal Price { get; set; }
 
-        public int MainTaskId { get; set; }
+        public int ProjectId { get; set; }
 
-        public virtual MainTask MainTask { get; set; }
+        [ForeignKey("ProjectId")]
+        public virtual Project Project { get; set; }
 
         public int? SkillId { get; set; }
 
+        [ForeignKey("SkillId")]
         public virtual Skill Skill { get; set; }
 
-        public virtual ICollection<Subtask> Subtasks
+        public decimal PercentComplete { get; set; }
+
+        public virtual ICollection<SubTask> Subtasks
         {
-            get { return this.subtasks; }
-            set { this.subtasks = value; }
+            get { return this.tasks; }
+            set { this.tasks = value; }
         }
 
-        public virtual ICollection<Subtask> Dependences
+        public virtual ICollection<SubTask> Dependences
         {
             get { return this.dependencies; }
             set { this.dependencies = value; }
-        }
-
-        public virtual ICollection<Attachment> Attachments
-        {
-            get { return this.attachements; }
-            set { this.attachements = value; }
         }
 
         public virtual ICollection<User> Users

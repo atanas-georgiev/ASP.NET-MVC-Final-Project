@@ -1,20 +1,16 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Planex.Data.Models;
 using System.Web;
+using Planex.Data.Models;
 
 namespace Planex.Services.Tasks
 {
     public interface ITaskService
     {
-        void Add(MainTask task);
-        void Update(MainTask task);
-        void AddAttachments(MainTask dbTask, List<HttpPostedFileBase> uploadedAttachments, HttpServerUtility server);
-
-        IQueryable<MainTask> GetAll();
-
-        MainTask GetById(int id);
-
-        void StartEstimation(int taskId, string userId);
+        void Add(SubTask task);
+        void Update(SubTask task);
+        void AddAttachments(SubTask dbTask, List<HttpPostedFileBase> uploadedAttachments, HttpServerUtility server);
+        IQueryable<SubTask> GetAll();
+        SubTask GetById(int id);
     }
 }

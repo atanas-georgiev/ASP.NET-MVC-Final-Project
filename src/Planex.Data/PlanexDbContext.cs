@@ -15,15 +15,48 @@ namespace Planex.Data
 
         public virtual IDbSet<Attachment> Attachments { get; set; }
 
-        public virtual IDbSet<MainTask> MainTasks { get; set; }
+        public virtual IDbSet<Project> Projects { get; set; }
 
-        public virtual IDbSet<Subtask> Subtasks { get; set; }
+        public virtual IDbSet<SubTask> Tasks { get; set; }
 
         public virtual IDbSet<Image> Images { get; set; }
 
         public static PlanexDbContext Create()
         {
             return new PlanexDbContext();
+        }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+//            modelBuilder.Entity<User>()
+//                .HasRequired(c => c.SubTasks)
+//                .WithMany()
+//                .WillCascadeOnDelete(false);
+//            base.OnModelCreating(modelBuilder);
+
+//            modelBuilder.Entity<SubTask>()
+//                .HasRequired(c => c.Users)
+//                .WithMany()
+//                .WillCascadeOnDelete(false);
+//            base.OnModelCreating(modelBuilder);
+
+//            modelBuilder.Entity<Project>()
+//                .HasRequired(c => c.LeadId)
+//                .WithMany()
+//                .WillCascadeOnDelete(false);
+//            base.OnModelCreating(modelBuilder);
+//
+//            modelBuilder.Entity<Project>()
+//                .HasRequired(c => c.ManagerId)
+//                .WithMany()
+//                .WillCascadeOnDelete(false);
+//            base.OnModelCreating(modelBuilder);
+            //
+            //            modelBuilder.Entity<User>()
+            //                .HasRequired(c => c.)
+            //                .WithMany()
+            //                .WillCascadeOnDelete(false);
+                        base.OnModelCreating(modelBuilder);
         }
     }
 }

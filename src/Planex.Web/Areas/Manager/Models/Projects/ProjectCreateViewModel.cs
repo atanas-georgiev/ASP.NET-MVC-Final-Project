@@ -6,38 +6,41 @@ using System.Web.Mvc;
 using Planex.Data.Models;
 using Planex.Web.Infrastructure.Mappings;
 
-namespace Planex.Web.Areas.Manager.Models
+namespace Planex.Web.Areas.Manager.Models.Projects
 {
-    public class TaskCreateViewModel : IMapFrom<MainTask>
+    public class ProjectCreateViewModel : IMapFrom<Project>
     {
         [Key]
         [HiddenInput(DisplayValue = false)]
         public int Id { get; set; }
 
         [Required]
-        [MinLength(2)]
-        [MaxLength(50)]
+        [MaxLength(100)]
         [UIHint("String")]
         public string Title { get; set; }
 
         [Required]
-        [MinLength(2)]
-        [MaxLength(500)]
+        [MaxLength(10000)]
         [UIHint("Editor")]
         [DataType(DataType.MultilineText)]
         [AllowHtml]
         public string Description { get; set; }
 
         [Required]
+        public PriorityType Priority { get; set; }
+
+        [Required]
         public TaskStateType State { get; set; }
+
+        [Required]
+        public string LeadId { get; set; }
 
         [Required]
         [UIHint("Date")]
         public DateTime Start { get; set; }
 
         [Required]
-        [UIHint("EnumDropDown")]
-        public PriorityType Priority { get; set; }
+        public decimal Price { get; set; }
 
         public List<HttpPostedFileBase> UploadedAttachments { get; set; }
     }

@@ -15,7 +15,7 @@ namespace Planex.Web.Areas.Lead.Models.SubTask
         public int Id { get; set; }
 
         [HiddenInput(DisplayValue = false)]
-        public int MainTaskId { get; set; }
+        public int ProjectId { get; set; }
 
         [HiddenInput(DisplayValue = false)]
         public int? ParentId { get; set; }

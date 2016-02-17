@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data.Entity;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Web;
-using System.Web.Configuration;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
 using Planex.Common;
 using Planex.Data;
 using Planex.Data.Models;
@@ -18,25 +12,25 @@ namespace Planex.Services.Tasks
     public class TaskService : ITaskService
     {
         private DbContext context;
-        private IRepository<MainTask> tasks;
+        private IRepository<SubTask> tasks;
 
-        public TaskService(DbContext context, IRepository<MainTask> tasks)
+        public TaskService(DbContext context, IRepository<SubTask> tasks)
         {
             this.context = context;
             this.tasks = tasks;
         }
 
-        public void Add(MainTask task)
+        public void Add(SubTask task)
         {
             this.tasks.Add(task);
         }
 
-        public void Update(MainTask task)
+        public void Update(SubTask task)
         {
             this.tasks.Update(task);
         }
 
-        public void AddAttachments(MainTask dbTask, List<HttpPostedFileBase> uploadedAttachments, HttpServerUtility server)
+        public void AddAttachments(SubTask dbTask, List<HttpPostedFileBase> uploadedAttachments, HttpServerUtility server)
         {
             if (uploadedAttachments == null)
             {
@@ -48,40 +42,37 @@ namespace Planex.Services.Tasks
                 Directory.CreateDirectory(server.MapPath(TasksConstants.MainContentFolder));
             }
 
-            if (!Directory.Exists(server.MapPath(TasksConstants.MainContentFolder + "\\" + dbTask.Id)))
+            if (!Directory.Exists(server.MapPath(TasksConstants.MainContentFolder + "\\" + dbTask.ProjectId)))
             {
-                Directory.CreateDirectory(server.MapPath(TasksConstants.MainContentFolder + "\\" + dbTask.Id));
+                Directory.CreateDirectory(server.MapPath(TasksConstants.MainContentFolder + "\\" + dbTask.ProjectId));
+            }
+
+            if (!Directory.Exists(server.MapPath(TasksConstants.MainContentFolder + "\\" + dbTask.ProjectId + "\\" + dbTask.Id)))
+            {
+                Directory.CreateDirectory(server.MapPath(TasksConstants.MainContentFolder + "\\" + dbTask.ProjectId + "\\" + dbTask.Id));
             }
 
             foreach (var file in uploadedAttachments)
             {
                 var filename = Path.GetFileName(file.FileName);
-                file.SaveAs(server.MapPath(TasksConstants.MainContentFolder + "\\" + dbTask.Id + "\\" + filename));
-                dbTask.Attachments.Add(new Attachment()
-                {
-                    Name = file.FileName
-                });
+                file.SaveAs(server.MapPath(TasksConstants.MainContentFolder + "\\" + dbTask.ProjectId + "\\" + dbTask.Id + "\\" + filename));
+//                dbTask.Attachments.Add(new Attachment()
+//                {
+//                    Name = file.FileName
+//                });
 
                 Update(dbTask);
             }
         }
 
-        public IQueryable<MainTask> GetAll()
+        public IQueryable<SubTask> GetAll()
         {
             return this.tasks.All();
         }
 
-        public MainTask GetById(int id)
+        public SubTask GetById(int id)
         {
             return this.tasks.GetById(id);
-        }
-
-        public void StartEstimation(int taskId, string userId)
-        {
-            var task = this.tasks.GetById(taskId);
-            task.State = TaskStateType.UnderEstimation;
-            task.LeadId = userId;
-            Update(task);
         }
     }
 }

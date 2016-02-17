@@ -15,7 +15,7 @@ namespace Planex.Web.Areas.Lead.Controllers
 
         public ActionResult Details(string id)
         {
-            Session["mainTaskId"] = id;
+            Session["ProjectId"] = id;
 //            var intId = int.Parse(id);
 //            var result = taskService.GetAll().Where(x => x.Id == intId).To<ProjectDetailsViewModel>().FirstOrDefault();
             return View();

@@ -11,6 +11,9 @@ namespace Planex.Services.Users
         void Add(User user, string role);
         void Update(User user);
         string GetRoleName(User user);
+
+        IQueryable<User> GetAllByRole(string role);
+
         void SetRoleName(User user, string name);
     }
 }

@@ -6,25 +6,25 @@ using System.Web.Mvc;
 using Kendo.Mvc.Extensions;
 using Kendo.Mvc.UI;
 using Planex.Data.Models;
-using Planex.Services.Tasks;
 using Planex.Services.Users;
 using Planex.Web.Areas.Lead.Models;
 using Planex.Web.Infrastructure.Mappings;
 using AutoMapper.QueryableExtensions;
 using Planex.Common;
+using Planex.Services.Projects;
 using Planex.Services.Skills;
-using Planex.Services.SubTasks;
+using Planex.Services.Tasks;
 using Planex.Web.Areas.Lead.Models.SubTask;
 
 namespace Planex.Web.Areas.Lead.Controllers
 {
     public class EstimationsController : BaseController
     {
-        private readonly ITaskService taskService;        
+        private readonly IProjectService taskService;        
      //   private readonly IUserService userService;
-        private readonly ISubTaskService subTaskService;
+        private readonly ITaskService subTaskService;
 
-        public EstimationsController(IUserService userService, ITaskService taskService, ISkillService skillService, ISubTaskService subTaskService)
+        public EstimationsController(IUserService userService, IProjectService taskService, ISkillService skillService, ITaskService subTaskService)
             : base(userService)
         {
             this.taskService = taskService;            
@@ -73,10 +73,10 @@ namespace Planex.Web.Areas.Lead.Controllers
 
         public ActionResult Edit(string id)
         {
-            Session["mainTaskId"] = id;
+            Session["ProjectId"] = id;
             var intId = int.Parse(id);
             var requestedEstimationTask = taskService.GetAll().Where(x => x.Id == intId).To<EstimationEditViewModel>().FirstOrDefault();
-            var requestedEstimationTaskSubTasks = subTaskService.GetAll().Where(x => x.MainTaskId == requestedEstimationTask.Id).OrderByDescending(x => x.End);
+            var requestedEstimationTaskSubTasks = subTaskService.GetAll().Where(x => x.ProjectId == requestedEstimationTask.Id).OrderByDescending(x => x.End);
 
             if (requestedEstimationTaskSubTasks.ToList().Count != 0)
             {
@@ -101,7 +101,7 @@ namespace Planex.Web.Areas.Lead.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult SubTaskAdd(SubTaskViewModel subtask)
         {
-            var parentTask = taskService.GetById(int.Parse(Session["mainTaskId"].ToString()));
+            var parentTask = taskService.GetById(int.Parse(Session["ProjectId"].ToString()));
 
             if (ModelState.IsValid)
             {
@@ -126,12 +126,12 @@ namespace Planex.Web.Areas.Lead.Controllers
                     skillId = int.Parse(subtask.SelectedSkill);
                 }
 
-                var subTaskDB = new Subtask()
+                var subTaskDB = new SubTask()
                 {
                     Title = subtask.Title,
                     Description = subtask.Description,
                     Duration = duration,
-                    MainTaskId = int.Parse(Session["mainTaskId"].ToString()),
+                    ProjectId = int.Parse(Session["ProjectId"].ToString()),
                     ParentId = subtask.ParentId,
                     DependencyId = subtask.DependencyId,
                     SkillId = skillId,
@@ -146,7 +146,7 @@ namespace Planex.Web.Areas.Lead.Controllers
                     {
                         var dbuser = userService.GetById(user);
                         subTaskDB.Users.Add(dbuser);
-                        subTaskDB.Price += dbuser.PricePerHour / UserConstants.WorkingDays * subTaskDB.Duration;
+                        subTaskDB.Price += dbuser.Salary / UserConstants.WorkingDays * subTaskDB.Duration;
                     }
 
                     if (subTaskDB.DependencyId != null)
@@ -200,7 +200,7 @@ namespace Planex.Web.Areas.Lead.Controllers
 
         public ActionResult SendApproval()
         {
-            var task = taskService.GetById(int.Parse(Session["mainTaskId"].ToString()));
+            var task = taskService.GetById(int.Parse(Session["ProjectId"].ToString()));
             task.State = TaskStateType.Estimated;
             taskService.Update(task);
             return RedirectToAction("Index");

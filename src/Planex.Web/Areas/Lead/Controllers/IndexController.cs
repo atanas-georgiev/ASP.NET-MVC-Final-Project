@@ -5,8 +5,8 @@ using System.Web;
 using System.Web.Mvc;
 using Kendo.Mvc.Extensions;
 using Kendo.Mvc.UI;
+using Planex.Services.Projects;
 using Planex.Services.Skills;
-using Planex.Services.SubTasks;
 using Planex.Services.Tasks;
 using Planex.Services.Users;
 using Planex.Web.Areas.Lead.Models;
@@ -17,11 +17,11 @@ namespace Planex.Web.Areas.Lead.Controllers
     public class IndexController : BaseController
     {
 
-        private readonly ITaskService taskService;
+        private readonly IProjectService taskService;
     //    private readonly IUserService userService;
-        private readonly ISubTaskService subTaskService;
+        private readonly ITaskService subTaskService;
 
-        public IndexController(IUserService userService, ITaskService taskService, ISkillService skillService, ISubTaskService subTaskService)
+        public IndexController(IUserService userService, IProjectService taskService, ISkillService skillService, ITaskService subTaskService)
             : base(userService)
         {
             this.taskService = taskService;

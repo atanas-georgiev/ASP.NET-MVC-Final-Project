@@ -7,7 +7,7 @@ using Planex.Web.Infrastructure.Mappings;
 
 namespace Planex.Web.Areas.Lead.Models
 {
-    public class ProjectDetailsViewModel : IGanttTask, IMapFrom<Planex.Data.Models.Subtask>, IHaveCustomMappings
+    public class ProjectDetailsViewModel : IGanttTask, IMapFrom<Planex.Data.Models.SubTask>, IHaveCustomMappings
     {
         public int TaskId { get; set; }
         public string Title { get; set; }
@@ -24,7 +24,7 @@ namespace Planex.Web.Areas.Lead.Models
 
         public void CreateMappings(IConfiguration configuration)
         {
-            configuration.CreateMap<Planex.Data.Models.Subtask, ProjectDetailsViewModel>("")
+            configuration.CreateMap<Planex.Data.Models.SubTask, ProjectDetailsViewModel>("")
                 .ForMember(m => m.TaskId, opt => opt.MapFrom(c => c.Id))
                 .ForMember(m => m.ParentTaskId, opt => opt.MapFrom(c => c.ParentId))
                 .ForMember(m => m.Expanded, opt => opt.MapFrom(c => true))

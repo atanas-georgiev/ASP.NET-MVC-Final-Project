@@ -101,10 +101,10 @@
     <Compile Include="Images\ImageService.cs" />
     <Compile Include="Skills\ISkillService.cs" />
     <Compile Include="Skills\SkillService.cs" />
-    <Compile Include="SubTasks\ISubTaskService.cs" />
-    <Compile Include="SubTasks\SubTaskService.cs" />
     <Compile Include="Tasks\ITaskService.cs" />
     <Compile Include="Tasks\TaskService.cs" />
+    <Compile Include="Projects\IProjectService.cs" />
+    <Compile Include="Projects\ProjectService.cs" />
     <Compile Include="Users\IUserService.cs" />
     <Compile Include="Users\UserService.cs" />
   </ItemGroup>

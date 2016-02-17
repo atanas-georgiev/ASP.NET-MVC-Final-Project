@@ -64,7 +64,7 @@ namespace Planex.Web.Areas.HR.Controllers
                 var entity = userService.GetById(user.Id);
                 entity.FirstName = user.FirstName;
                 entity.LastName = user.LastName;
-                entity.PricePerHour = user.PricePerHour;
+                entity.Salary = user.PricePerHour;
                 entity.Skills.Clear();
 
                 if (user.Skills != null)

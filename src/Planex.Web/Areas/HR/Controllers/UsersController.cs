@@ -67,7 +67,7 @@ namespace Planex.Web.Areas.HR.Controllers
                     Email = user.Email,
                     FirstName = user.FirstName,
                     LastName = user.LastName,
-                    PricePerHour = 0,
+                    Salary = 0,
                 };
 
                 this.userService.Add(entity, user.Role);

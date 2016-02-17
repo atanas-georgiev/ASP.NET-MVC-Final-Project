@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
@@ -7,43 +8,44 @@ using AutoMapper;
 using Planex.Data.Models;
 using Planex.Web.Infrastructure.Mappings;
 
-namespace Planex.Web.Areas.Manager.Models
+namespace Planex.Web.Areas.Manager.Models.Projects
 {
-    public class ProjectDetailsViewModel : IMapFrom<MainTask>, IHaveCustomMappings
+    public class ProjectDetailsViewModel : IMapFrom<Project>, IHaveCustomMappings
     {
         [Key]
         [HiddenInput(DisplayValue = false)]
         public int Id { get; set; }
 
         [Required]
-        [MinLength(2)]
-        [MaxLength(50)]
+        [MaxLength(100)]
         [UIHint("String")]
         public string Title { get; set; }
 
         [Required]
-        [MinLength(2)]
-        [MaxLength(50)]
+        [MaxLength(10000)]
         [UIHint("Editor")]
+        [DataType(DataType.MultilineText)]
+        [AllowHtml]
         public string Description { get; set; }
 
         [Required]
-        [UIHint("EnumDropDown")]
         public PriorityType Priority { get; set; }
 
         [Required]
-        [UIHint("String")]
-        public string ManagerName { get; set; }
+        public TaskStateType State { get; set; }
 
         [Required]
-        [UIHint("String")]
+        public string LeadId { get; set; }
+
         public string LeadName { get; set; }
+
+        [Required]
+        [UIHint("Date")]
+        public DateTime Start { get; set; }
 
         [Required]
         [UIHint("Number")]
         public int Completed { get; set; }
-
-        public TaskStateType State { get; set; }
 
         public List<string> UploadedAttachmentFiles { get; set; }
 
@@ -51,8 +53,7 @@ namespace Planex.Web.Areas.Manager.Models
 
         public void CreateMappings(IConfiguration configuration)
         {
-            configuration.CreateMap<MainTask, ProjectDetailsViewModel>("")
-                .ForMember(m => m.ManagerName, opt => opt.MapFrom(c => c.Manager.FirstName + " " + c.Manager.LastName))
+            configuration.CreateMap<Project, ProjectDetailsViewModel>("")
                 .ForMember(m => m.LeadName, opt => opt.MapFrom(c => c.Lead.FirstName + " " + c.Lead.LastName))
                 .ForMember(m => m.UploadedAttachmentFiles, opt => opt.MapFrom(c => c.Attachments.Select(x => x.Name)))
                 .ForMember(m => m.Completed, opt => opt.MapFrom(c => 0));
