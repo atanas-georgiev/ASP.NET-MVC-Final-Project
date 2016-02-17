@@ -13,8 +13,6 @@ namespace Planex.Web.Areas.Worker.Models.Assignments
         [HiddenInput(DisplayValue = false)]
         public int Id { get; set; }
 
-        public int? ParentId { get; set; }
-
         [Required]
         [MaxLength(100)]
         [UIHint("String")]
@@ -28,10 +26,15 @@ namespace Planex.Web.Areas.Worker.Models.Assignments
         [UIHint("Date")]
         public DateTime End { get; set; }
 
+        [Key]
         public int ProjectId { get; set; }
 
+        [UIHint("String")]
+        public string ProjectTitle { get; set; }
+
         [Required]
-    //    [UIHint("Number")]
+        [UIHint("Percent")]
+        [Range(0, 100)]
         public decimal PercentComplete { get; set; }
     }
 }

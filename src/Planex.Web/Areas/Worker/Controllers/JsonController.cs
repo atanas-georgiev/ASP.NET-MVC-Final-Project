@@ -30,10 +30,22 @@ namespace Planex.Web.Areas.Worker.Controllers
             this.subTaskService = subTaskService;
             this.projectService = projectService;
         }
-        public ActionResult GetAllAssignments([DataSourceRequest]DataSourceRequest request)
+        public virtual ActionResult GetAllAssignments([DataSourceRequest]DataSourceRequest request)
         {
             var tasks = subTaskService.GetAll().Where(x => x.Users.Any(u => u.Id == UserProfile.Id)).To<AssignmentViewModel>();
             return Json(tasks.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
+        }
+
+        public virtual ActionResult EditAssignment([DataSourceRequest]DataSourceRequest request, AssignmentViewModel task)
+        {
+            if (ModelState.IsValid)
+            {
+                var taskDb = subTaskService.GetById(task.Id);
+                taskDb.PercentComplete = task.PercentComplete/100;
+                subTaskService.Update(taskDb);
+            }
+
+            return Json(request);
         }
     }
 }
