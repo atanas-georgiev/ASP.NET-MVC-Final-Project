@@ -20,7 +20,7 @@ namespace Planex.Data.Models
             this.subtasks = new List<SubTask>();
         }
 
-        public int? IntId { get; set; }
+        public int IntId { get; set; }
 
         [Required]
         [MinLength(2)]

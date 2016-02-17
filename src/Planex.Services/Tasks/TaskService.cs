@@ -13,11 +13,13 @@ namespace Planex.Services.Tasks
     {
         private DbContext context;
         private IRepository<SubTask> tasks;
+        private IRepository<SubTaskDependency> dependencies;
 
-        public TaskService(DbContext context, IRepository<SubTask> tasks)
+        public TaskService(DbContext context, IRepository<SubTask> tasks, IRepository<SubTaskDependency> dependencies)
         {
             this.context = context;
             this.tasks = tasks;
+            this.dependencies = dependencies;
         }
 
         public void Add(SubTask task)
@@ -73,6 +75,31 @@ namespace Planex.Services.Tasks
         public SubTask GetById(int id)
         {
             return this.tasks.GetById(id);
+        }
+
+        public void Delete(int id)
+        {
+            this.tasks.Delete(id);
+        }
+
+        public void AddDependency(SubTaskDependency dep)
+        {
+            this.dependencies.Add(dep);
+        }
+
+        public IQueryable<SubTaskDependency> AllDependencies()
+        {
+            return this.dependencies.All();
+        }
+
+        public void DeleteDependency(int id)
+        {
+            this.dependencies.Delete(id);
+        }
+
+        public void UpdateDependency(SubTaskDependency task)
+        {
+            this.dependencies.Update(task);
         }
     }
 }

@@ -1,17 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using AutoMapper;
+﻿using AutoMapper;
 using Planex.Data.Models;
 using Planex.Web.Infrastructure.Mappings;
 
-namespace Planex.Web.Areas.Lead.Models
+namespace Planex.Web.Areas.Lead.Models.Gantt
 {
     public class ProjectDetailsResourseViewModel : IMapFrom<User>, IHaveCustomMappings
     {
-        //public string Id { get; set; }
-
         public int ResourseId { get; set; }
         public string Name { get; set; }
         public string Color { get; set; }

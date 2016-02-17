@@ -12,5 +12,11 @@ namespace Planex.Services.Tasks
         void AddAttachments(SubTask dbTask, List<HttpPostedFileBase> uploadedAttachments, HttpServerUtility server);
         IQueryable<SubTask> GetAll();
         SubTask GetById(int id);
+        void Delete(int id);
+
+        void AddDependency(SubTaskDependency dep);
+        IQueryable<SubTaskDependency> AllDependencies();
+        void DeleteDependency(int id);
+        void UpdateDependency(SubTaskDependency task);
     }
 }

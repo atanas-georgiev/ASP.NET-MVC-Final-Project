@@ -9,6 +9,7 @@ using Planex.Services.Skills;
 using Planex.Services.Tasks;
 using Planex.Services.Users;
 using Planex.Web.Areas.Lead.Models;
+using Planex.Web.Areas.Lead.Models.Gantt;
 using Planex.Web.Areas.Manager.Models;
 using Planex.Web.Areas.Manager.Models.Projects;
 using Planex.Web.Infrastructure.Mappings;
