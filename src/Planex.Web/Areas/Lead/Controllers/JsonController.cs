@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using System.Web.Routing;
 using Kendo.Mvc.Extensions;
 using Kendo.Mvc.UI;
+using Planex.Common;
 using Planex.Data.Models;
 using Planex.Services.Projects;
 using Planex.Services.Skills;
@@ -63,7 +64,8 @@ namespace Planex.Web.Areas.Lead.Controllers
                     ParentId = task.ParentTaskId,
                     Start = task.Start,
                     End = task.End,
-                    PercentComplete = 0
+                    PercentComplete = 0,
+                    Price = 0
                  });
             }
 
@@ -74,6 +76,20 @@ namespace Planex.Web.Areas.Lead.Controllers
         {
             subTaskService.Delete(task.TaskId);
             return Json(new[] { task }.ToDataSourceResult(request, ModelState));
+        }
+
+        private void UpdatePriceSubTask(int taskId)
+        {
+            var taskDb = subTaskService.GetById(taskId);
+            taskDb.Price = 0;
+            var durationInDays = (taskDb.End - taskDb.Start).Days;
+
+            foreach (var user in taskDb.Users)
+            {
+                taskDb.Price += user.Salary / UserConstants.WorkingDays * durationInDays;
+            }
+
+            subTaskService.Update(taskDb);
         }
 
         public virtual JsonResult UpdateTask([DataSourceRequest] DataSourceRequest request, ProjectDetailsViewModel task)
@@ -87,13 +103,15 @@ namespace Planex.Web.Areas.Lead.Controllers
                 taskDb.Start = task.Start;
                 taskDb.End = task.End;
                 taskDb.PercentComplete = task.PercentComplete;
-                subTaskService.Update(taskDb);
+                taskDb.Price = 0;                
 
                 var projectId = int.Parse(Session["ProjectId"].ToString());
                 var project = projectService.GetById(projectId);
                 var subTasks = subTaskService.GetAll().Where(x => x.ProjectId == projectId && x.ParentId == null);
                 project.PercentComplete = subTasks.Sum(x => x.PercentComplete)/subTasks.Count();
                 projectService.Update(project);
+
+                UpdatePriceSubTask(taskDb.Id);
             }
 
             return Json(new[] { task }.ToDataSourceResult(request, ModelState));
@@ -179,6 +197,7 @@ namespace Planex.Web.Areas.Lead.Controllers
                 var user = userService.GetAll().FirstOrDefault(x => x.IntId == assignment.ResourceId);
                 subtask.Users.Add(user);
                 subTaskService.Update(subtask);
+                UpdatePriceSubTask(assignment.TaskId);
             }
             return this.Json(assignment);
         }
@@ -193,6 +212,7 @@ namespace Planex.Web.Areas.Lead.Controllers
                 var user = userService.GetAll().FirstOrDefault(x => x.IntId == assignment.ResourceId);
                 subtask.Users.Remove(user);
                 subTaskService.Update(subtask);
+                UpdatePriceSubTask(assignment.TaskId);
             }
             return this.Json(assignment);
         }
@@ -207,6 +227,7 @@ namespace Planex.Web.Areas.Lead.Controllers
                 var user = userService.GetAll().FirstOrDefault(x => x.IntId == assignment.ResourceId);
                 subtask.Users.Add(user);
                 subTaskService.Update(subtask);
+                UpdatePriceSubTask(assignment.TaskId);
             }
             return this.Json(assignment);
         }

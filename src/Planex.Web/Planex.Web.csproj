@@ -227,14 +227,12 @@
     <Compile Include="Areas\Lead\Controllers\ProjectsController.cs" />
     <Compile Include="Areas\Lead\LeadAreaRegistration.cs" />
     <Compile Include="Areas\Lead\Models\Gantt\ProjectDetailsDependencyViewModel.cs" />
-    <Compile Include="Areas\Lead\Models\EstimationEditViewModelSubTask.cs" />
     <Compile Include="Areas\Lead\Models\Estimation\EstimationEditViewModel.cs" />
     <Compile Include="Areas\Lead\Models\Estimation\EstimationListViewModel.cs" />
     <Compile Include="Areas\Lead\Models\Gantt\ProjectDetailsResourseViewModel.cs" />
     <Compile Include="Areas\Lead\Views\ProjectIndexViewController.cs" />
     <Compile Include="Areas\Lead\Models\BaseProjectViewModel.cs" />
     <Compile Include="Areas\Lead\Models\Gantt\ProjectDetailsAssignmentsViewModel.cs" />
-    <Compile Include="Areas\Lead\Models\SubTask\SubTaskViewModel.cs" />
     <Compile Include="Areas\Lead\Models\Gantt\ProjectDetailsViewModel.cs" />
     <Compile Include="Areas\Manager\Controllers\BaseController.cs" />
     <Compile Include="Areas\Manager\Controllers\IndexController.cs" />
@@ -370,14 +368,11 @@
     <Content Include="Areas\HR\Views\Skills\Index.cshtml" />
     <Content Include="Areas\Lead\Views\Estimations\Index.cshtml" />
     <Content Include="Areas\Lead\Views\Estimations\Edit.cshtml" />
-    <Content Include="Areas\Lead\Views\Estimations\_SubTaskAdd.cshtml" />
-    <Content Include="Areas\Lead\Views\Estimations\_SubTaskEdit.cshtml" />
     <Content Include="Areas\Lead\Views\Estimations\_DetailsFiles.cshtml" />
     <Content Include="Areas\Lead\Views\Estimations\_DetailsSchema.cshtml" />
     <None Include="Areas\Lead\Views\Index\Index.cshtml" />
     <Content Include="Areas\HR\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Lead\Views\_ViewStart.cshtml" />
-    <Content Include="Areas\Lead\Views\Projects\Details.cshtml" />
     <None Include="Areas\Lead\Views\Projects\Index.cshtml" />
     <None Include="Areas\Manager\Views\Index\Index.cshtml" />
     <Content Include="Content\Kendo\kendo.black.min.css.map" />
@@ -808,7 +803,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\HR\Views\Base\" />
     <Folder Include="Areas\HR\Views\Shared\" />
-    <Folder Include="Areas\Lead\Models\Project\" />
     <Folder Include="Areas\Lead\Views\Base\" />
     <Folder Include="Areas\Lead\Views\Helper\" />
     <Folder Include="Areas\Lead\Views\Shared\" />
