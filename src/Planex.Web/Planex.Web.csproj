@@ -239,13 +239,13 @@
     <Compile Include="Areas\Manager\Controllers\JsonController.cs" />
     <Compile Include="Areas\Manager\Controllers\ProjectsController.cs" />
     <Compile Include="Areas\Manager\ManagerAreaRegistration.cs" />
+    <Compile Include="Areas\Manager\Models\Gantt\ProjectDetailsAssignmentsViewModel.cs" />
+    <Compile Include="Areas\Manager\Models\Gantt\ProjectDetailsDependencyViewModel.cs" />
+    <Compile Include="Areas\Manager\Models\Gantt\ProjectDetailsResourseViewModel.cs" />
+    <Compile Include="Areas\Manager\Models\Gantt\ProjectDetailsViewModel.cs" />
     <Compile Include="Areas\Manager\Models\Projects\ProjectDetailsViewModel.cs" />
     <Compile Include="Areas\Manager\Models\Projects\ProjectCreateViewModel.cs" />
     <Compile Include="Areas\Manager\Models\Projects\ProjectListViewModel.cs" />
-    <Compile Include="Areas\Manager\Models\SubTaskAssignentsViewModel.cs" />
-    <Compile Include="Areas\Manager\Models\SubTaskDependencyViewModel.cs" />
-    <Compile Include="Areas\Manager\Models\SubTaskResourceViewModel.cs" />
-    <Compile Include="Areas\Manager\Models\SubTaskViewModel.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />

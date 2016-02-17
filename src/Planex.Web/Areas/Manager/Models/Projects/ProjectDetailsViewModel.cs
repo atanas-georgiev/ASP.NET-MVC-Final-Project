@@ -43,6 +43,11 @@ namespace Planex.Web.Areas.Manager.Models.Projects
         [UIHint("Date")]
         public DateTime Start { get; set; }
 
+        [UIHint("Date")]
+        public DateTime End { get; set; }
+
+        public decimal FinalPrice { get; set; }
+
         [Required]
         [UIHint("Number")]
         public int Completed { get; set; }

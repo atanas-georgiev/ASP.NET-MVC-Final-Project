@@ -33,19 +33,44 @@
             </div>
         </div>
         <div class="form-group">
-            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Description, htmlAttributes: new {@class = "control-label col-md-2"})
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Description)
-                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                @Html.ValidationMessageFor(model => model.Description, "", new {@class = "text-danger"})
             </div>
         </div>
-        <div class="form-group">
-            @Html.LabelFor(model => model.Start, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Start)
-                @Html.ValidationMessageFor(model => model.Start, "", new { @class = "text-danger" })
+        @if (Model.State < TaskStateType.Started)
+        {
+            <div class="form-group">
+                @Html.LabelFor(model => model.Start, htmlAttributes: new {@class = "control-label col-md-2"})
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Start)
+                    @Html.ValidationMessageFor(model => model.Start, "", new {@class = "text-danger"})
+                </div>
             </div>
-        </div>
+        }
+
+        @if (Model.State >= TaskStateType.Started)
+        {
+            <div class="form-group">
+                @Html.LabelFor(model => model.Start, htmlAttributes: new {@class = "control-label col-md-2"})
+                <div class="col-md-10">
+                    @Html.DisplayFor(model => model.Start)
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.End, htmlAttributes: new {@class = "control-label col-md-2"})
+                <div class="col-md-10">
+                    @Html.DisplayFor(model => model.End)
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.FinalPrice, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DisplayFor(model => model.FinalPrice)
+                </div>
+            </div>
+        }
         <div class="form-group">
             @Html.LabelFor(model => model.Priority, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -85,87 +110,21 @@
             {
                 @Html.ActionLink("Send For Estimation", "SendForEstimation", new { id = Model.Id }, new { @class = "k-button" })
             }
+            @if (Model.State == TaskStateType.Estimated)
+            {
+            @Html.ActionLink("Approve", "Approve", new { id = Model.Id }, new { @class = "k-button" })
+            }
         </div>
     </div>
     }
 
-@*    <script>*@
-@*        $("#LeadId").data('kendoDropDownList').value(@Model.LeadId);*@
-@*    </script>*@
+    @if (Model.State >= TaskStateType.Estimated)
+    {
+        <div class="well k-content">
+            <h2 class="well-title">Estimation</h2>
+            @Html.Partial("_DetailsChart", Model)
+        </div>
+    }
 
-    @*    @using (Html.BeginForm())*@
-@*    {*@
-@*    @Html.AntiForgeryToken()*@
-@**@
-@*    <div class="form-horizontal">*@
-@*        <h4>ProjectDetailsViewModel</h4>*@
-@*        <hr />*@
-@*        @Html.ValidationSummary(true, "", new { @class = "text-danger" })*@
-@*        @Html.HiddenFor(model => model.Id)*@
-@**@
-@*        <div class="form-group">*@
-@*            @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })*@
-@*            <div class="col-md-10">*@
-@*                @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })*@
-@*                @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })*@
-@*            </div>*@
-@*        </div>*@
-@**@
-@*        <div class="form-group">*@
-@*            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })*@
-@*            <div class="col-md-10">*@
-@*                @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })*@
-@*                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })*@
-@*            </div>*@
-@*        </div>*@
-@**@
-@*        <div class="form-group">*@
-@*            @Html.LabelFor(model => model.ManagerName, htmlAttributes: new { @class = "control-label col-md-2" })*@
-@*            <div class="col-md-10">*@
-@*                @Html.EditorFor(model => model.ManagerName, new { htmlAttributes = new { @class = "form-control" } })*@
-@*                @Html.ValidationMessageFor(model => model.ManagerName, "", new { @class = "text-danger" })*@
-@*            </div>*@
-@*        </div>*@
-@**@
-@*        <div class="form-group">*@
-@*            @Html.LabelFor(model => model.LeadName, htmlAttributes: new { @class = "control-label col-md-2" })*@
-@*            <div class="col-md-10">*@
-@*                @Html.EditorFor(model => model.LeadName, new { htmlAttributes = new { @class = "form-control" } })*@
-@*                @Html.ValidationMessageFor(model => model.LeadName, "", new { @class = "text-danger" })*@
-@*            </div>*@
-@*        </div>*@
-@**@
-@*        <div class="form-group">*@
-@*            <div class="col-md-2">*@
-@*                <strong>Attachments</strong>*@
-@*            </div>*@
-@*            <div class="col-md-10">*@
-@*                @foreach (string file in Model.UploadedAttachmentFiles)*@
-@*                {*@
-@*                <a href="@file">@file</a>*@
-@*                    <br />*@
-@*                }*@
-@**@
-@*                @(Html.Kendo().Upload().Name("UploadedAttachments"))*@
-@*            </div>*@
-@*        </div>*@
-@**@
-@*        <div class="form-group">*@
-@*            <div class="col-md-offset-2 col-md-10">*@
-@*                @Html.ActionLink("Approve", "Approve", null, new { @class = "k-button" })*@
-@*            </div>*@
-@*        </div>*@
-@**@
-@*        <div class="form-group">*@
-@*            <div class="col-md-offset-2 col-md-10">*@
-@*                <input type="submit" value="Update" class="k-button" />*@
-@*            </div>*@
-@*        </div>*@
-@**@
-@*        @Html.Partial("_DetailsChart");*@
-@**@
-@**@
-@*    </div>*@
-@*    }*@
 
 </div>

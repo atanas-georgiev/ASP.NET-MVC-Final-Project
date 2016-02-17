@@ -2,8 +2,8 @@
 using System.Web.Mvc;
 using Planex.Data.Models;
 using Planex.Services.Projects;
+using Planex.Services.Tasks;
 using Planex.Services.Users;
-using Planex.Web.Areas.Manager.Models;
 using Planex.Web.Areas.Manager.Models.Projects;
 using Planex.Web.Infrastructure.Mappings;
 
@@ -12,11 +12,13 @@ namespace Planex.Web.Areas.Manager.Controllers
     public class ProjectsController : BaseController
     {
         private readonly IProjectService projectsService;
+        private readonly ITaskService subTaskService;
 
-        public ProjectsController(IUserService userService, IProjectService projectsService)
+        public ProjectsController(IUserService userService, IProjectService projectsService, ITaskService subTaskService)
             : base(userService)
         {
             this.projectsService = projectsService;
+            this.subTaskService = subTaskService;
         }
 
         public ActionResult Index()
@@ -59,9 +61,19 @@ namespace Planex.Web.Areas.Manager.Controllers
 
         public ActionResult Details(string id)
         {
-            Session["ProjectId"] = id;
+            Session["ProjectId"] = id;            
             var intId = int.Parse(id);
             var result = projectsService.GetAll().Where(x => x.Id == intId).To<ProjectDetailsViewModel>().FirstOrDefault();
+
+            var subTasks = subTaskService.GetAll().Where(x => x.ProjectId == intId);
+            
+            if (subTasks.Count() != 0)
+            {
+                result.Start = subTasks.OrderBy(x => x.Start).First().Start;
+                result.End = subTasks.OrderByDescending(x => x.End).First().End;
+                result.FinalPrice = subTasks.Sum(x => x.Price);
+            }
+            
             return View(result);
         }
 
@@ -105,8 +117,6 @@ namespace Planex.Web.Areas.Manager.Controllers
             projectsService.Update(project);
             return RedirectToAction("Index");
         }
-
-        
 
         public ActionResult Approve()
         {

@@ -1,82 +1,84 @@
 ﻿@using Kendo.Mvc.UI
-@using Planex.Web.Areas.Manager.Models
+@using Planex.Web.Areas.Manager.Models.Gantt
 
-
-@(Html.Kendo().Gantt<SubTaskViewModel, SubTaskDependencyViewModel>()
+@(Html.Kendo().Gantt<ProjectDetailsViewModel, ProjectDetailsDependencyViewModel>()
     .Name("gantt")
     .Columns(columns =>
     {
-        columns.Bound(c => c.TaskID).Title("ID").Width(50);
-        columns.Bound("title").Editable(false).Sortable(true);
-        columns.Bound("start").Title("Start Time").Format("{0:MM/dd/yyyy}").Width(100).Editable(false).Sortable(true);
-        columns.Bound("end").Title("End Time").Format("{0:MM/dd/yyyy}").Width(100).Editable(false).Sortable(true);
-        columns.Resources("Resources").Editable(false).Title("Assigned Resources");
+        columns.Bound("title").Editable(true).Sortable(true);
+        columns.Bound("start").Title("Start Time").Format("{0:MM/dd/yyyy}").Width(100).Editable(true).Sortable(true);
+        columns.Bound("end").Title("End Time").Format("{0:MM/dd/yyyy}").Width(100).Editable(true).Sortable(true);
+        //  columns.Resources("Users").Editable(true).Title("Assigned Resources");
     })
+    .Editable(true)
     .Views(views =>
     {
-        //        views.DayView();
-        //        views.WeekView(weekView => weekView.Selected(true));
+        views.DayView();
+        views.WeekView(weekView => weekView.Selected(true));
         views.MonthView();
     })
-    // .Height(700)
+    .Height(700)
     .ShowWorkHours(false)
-    .ShowWorkDays(true)
+    .ShowWorkDays(false)
     .Snap(false)
     .DataSource(d => d
         .Model(m =>
         {
-            m.Id(f => f.TaskID);
-            m.ParentId(f => f.ParentID);
-            m.OrderId(f => f.OrderId);
+            m.Id(f => f.TaskId);
+            m.ParentId(f => f.ParentTaskId);
+            m.OrderId(f => f.TaskOrderId);
             m.Field(f => f.Expanded).DefaultValue(true);
         })
-        .Read("ReadSubTasks", "Json")
-    //        .Create("CreateTask", "Gantt")
-    //        .Destroy("DestroyTask", "Gantt")
-    //        .Update("UpdateTask", "Gantt")
+        .Read("ReadTasks", "Json")
+        .Create("CreateTask", "Json")
+        .Destroy("DestroyTask", "Json")
+        .Update("UpdateTask", "Json")
     )
     .DependenciesDataSource(d => d
         .Model(m =>
         {
-            m.Id(f => f.DependencyID);
-            m.PredecessorId(f => f.PredecessorID);
-            m.SuccessorId(f => f.SuccessorID);
+            m.Id(f => f.DependencyId);
+            m.PredecessorId(f => f.PredecessorId);
+            m.SuccessorId(f => f.SuccessorId);
             m.Type(f => f.Type);
         })
-        .Read("ReadSubTaskDependencies", "Json")
-    //        .Create("CreateDependency", "Gantt")
-    //        .Destroy("DestroyDependency", "Gantt")
-    //        .Update("UpdateDependency", "Gantt")
+        .Read("ReadDependencies", "Json")
+        .Create("CreateDependency", "Json")
+        .Destroy("DestroyDependency", "Json")
+        .Update("UpdateDependency", "Json")
     )
-//    .Resources(r => r
-//                .Field("resources")
-//                .DataColorField("Color")
-//                .DataTextField("Name")
-//                .DataSource(d => d
-//                    .Custom()
-//                    .Schema(s => s
-//                        .Model(m => m.Id("ResourceId"))
-//                        .Data("Data")
-//                    )
-//                    .Transport(t =>
-//                    {
-//                        t.Read("ReadSubTaskResources", "Json");
-//                    })
-//                )
-//            )
-//        .Assignments<SubTaskAssignentsViewModel>(a => a
-//                    .DataTaskIdField("taskId")
-//                    .DataResourceIdField("resourceId")
-//                    .DataValueField("value")
-//                    .DataSource(d => d
-//                        .Model(m =>
-//                        {
-//                            m.Id(f => f.Id);
-//                        })
-//                        .Read("ReadSubTaskAssignments", "Json")
-////                        .Create("CreateAssignment", "Gantt")
-////                        .Destroy("DestroyAssignment", "Gantt")
-////                        .Update("UpdateAssignment", "Gantt")
-//                    )
-//                )
+    .Resources(r => r
+                .Field("Users")
+                .DataColorField("Color")
+                .DataTextField("Name")
+                .DataSource(d => d
+                    .Custom()
+                    .Schema(s => s
+                        .Model(m =>
+                        {
+                            m.Id("ResourseId");
+                        })
+                        .Data("Data")
+                    )
+                    .Transport(t =>
+                    {
+                        t.Read("ReadResources", "Json");
+                    })
+                )
+            )
+    .Assignments<ProjectDetailsAssignmentsViewModel>(a => a
+        .DataTaskIdField("TaskId")
+        .DataResourceIdField("ResourceId")
+        .DataValueField("Units")
+        .DataSource(d => d
+            .Model(m =>
+            {
+                m.Id(f => f.AssignmentId);
+            })
+            .Read("ReadAssignments", "Json")
+            .Create("CreateAssignments", "Json")
+            .Destroy("DestroyAssignments", "Json")
+            .Update("UpdateAssignments", "Json")
+        )
+    )
 )
