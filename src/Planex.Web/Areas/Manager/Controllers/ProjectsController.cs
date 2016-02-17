@@ -96,6 +96,18 @@ namespace Planex.Web.Areas.Manager.Controllers
             return RedirectToAction("Index");
         }
 
+        public ActionResult SendForEstimation(string id)
+        {
+            Session["ProjectId"] = id;
+            var intId = int.Parse(id);
+            var project = projectsService.GetById(intId);
+            project.State = TaskStateType.UnderEstimation;
+            projectsService.Update(project);
+            return RedirectToAction("Index");
+        }
+
+        
+
         public ActionResult Approve()
         {
             var taskId = int.Parse(Session["ProjectId"].ToString());

@@ -81,6 +81,10 @@
         <div class="form-group">
             <input type="submit" value="Edit" class="k-button"/>
             @Html.ActionLink("Remove", "Remove", new { id = Model.Id }, new { @class="k-button" })
+            @if (Model.State == TaskStateType.Draft)
+            {
+                @Html.ActionLink("Send For Estimation", "SendForEstimation", new { id = Model.Id }, new { @class = "k-button" })
+            }
         </div>
     </div>
     }
