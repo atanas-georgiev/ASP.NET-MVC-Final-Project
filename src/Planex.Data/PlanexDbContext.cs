@@ -1,9 +1,11 @@
-﻿using System.Data.Entity;
-using Microsoft.AspNet.Identity.EntityFramework;
-using Planex.Data.Models;
-
-namespace Planex.Data
+﻿namespace Planex.Data
 {
+    using System.Data.Entity;
+
+    using Microsoft.AspNet.Identity.EntityFramework;
+
+    using Planex.Data.Models;
+
     public class PlanexDbContext : IdentityDbContext<User>
     {
         public PlanexDbContext()
@@ -11,19 +13,19 @@ namespace Planex.Data
         {
         }
 
-        public virtual IDbSet<Skill> Skills { get; set; }
-
         public virtual IDbSet<Attachment> Attachments { get; set; }
-
-        public virtual IDbSet<Project> Projects { get; set; }
-
-        public virtual IDbSet<SubTask> Tasks { get; set; }
 
         public virtual IDbSet<Image> Images { get; set; }
 
-        public virtual IDbSet<Message> Messages { get; set; }        
+        public virtual IDbSet<Message> Messages { get; set; }
+
+        public virtual IDbSet<Project> Projects { get; set; }
+
+        public virtual IDbSet<Skill> Skills { get; set; }
 
         public virtual IDbSet<SubTaskDependency> SubTaskDependencies { get; set; }
+
+        public virtual IDbSet<SubTask> Tasks { get; set; }
 
         public static PlanexDbContext Create()
         {

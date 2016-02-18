@@ -1,11 +1,12 @@
-﻿using System;
-using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
-using System.Linq;
-
-namespace Planex.Data
+﻿namespace Planex.Data
 {
-    public class GenericRepository<T> : IRepository<T> where T : class
+    using System;
+    using System.Data.Entity;
+    using System.Data.Entity.Infrastructure;
+    using System.Linq;
+
+    public class GenericRepository<T> : IRepository<T>
+        where T : class
     {
         public GenericRepository(DbContext context)
         {
@@ -14,81 +15,83 @@ namespace Planex.Data
                 throw new ArgumentException("An instance of DbContext is required to use this repository.", "context");
             }
 
-            Context = context;
-            DbSet = Context.Set<T>();
+            this.Context = context;
+            this.DbSet = this.Context.Set<T>();
         }
-
-        protected IDbSet<T> DbSet { get; set; }
 
         protected DbContext Context { get; set; }
 
-        public virtual IQueryable<T> All()
-        {
-            return DbSet.AsQueryable();
-        }
-
-        public virtual T GetById(object id)
-        {
-            return DbSet.Find(id);
-        }
+        protected IDbSet<T> DbSet { get; set; }
 
         public virtual void Add(T entity)
         {
-            DbEntityEntry entry = Context.Entry(entity);
+            DbEntityEntry entry = this.Context.Entry(entity);
             if (entry.State != EntityState.Detached)
             {
                 entry.State = EntityState.Added;
             }
             else
             {
-                DbSet.Add(entity);
-                Context.SaveChanges();
+                this.DbSet.Add(entity);
+                this.Context.SaveChanges();
             }
         }
 
-        public virtual void Update(T entity)
+        public virtual IQueryable<T> All()
         {
-            DbEntityEntry entry = Context.Entry(entity);
-            if (entry.State == EntityState.Detached)
-            {
-                DbSet.Attach(entity);
-            }
-
-            entry.State = EntityState.Modified;
-            Context.SaveChanges();
+            return this.DbSet.AsQueryable();
         }
 
         public virtual void Delete(T entity)
         {
-            DbEntityEntry entry = Context.Entry(entity);
+            DbEntityEntry entry = this.Context.Entry(entity);
             if (entry.State != EntityState.Deleted)
             {
                 entry.State = EntityState.Deleted;
             }
             else
             {
-                DbSet.Attach(entity);
-                DbSet.Remove(entity);
+                this.DbSet.Attach(entity);
+                this.DbSet.Remove(entity);
             }
-            Context.SaveChanges();
+
+            this.Context.SaveChanges();
         }
 
         public virtual void Delete(object id)
         {
-            var entity = GetById(id);
+            var entity = this.GetById(id);
 
             if (entity != null)
             {
-                Delete(entity);
+                this.Delete(entity);
             }
-            Context.SaveChanges();
+
+            this.Context.SaveChanges();
         }
 
         public virtual void Detach(T entity)
         {
-            DbEntityEntry entry = Context.Entry(entity);
+            DbEntityEntry entry = this.Context.Entry(entity);
 
             entry.State = EntityState.Detached;
+        }
+
+        public virtual T GetById(object id)
+        {
+            return this.DbSet.Find(id);
+        }
+
+        public virtual void Update(T entity)
+        {
+            DbEntityEntry entry = this.Context.Entry(entity);
+            if (entry.State == EntityState.Detached)
+            {
+                this.DbSet.Attach(entity);
+            }
+
+            entry.State = EntityState.Modified;
+            this.Context.SaveChanges();
         }
     }
 }

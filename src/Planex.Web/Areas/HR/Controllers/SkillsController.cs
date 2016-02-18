@@ -1,28 +1,21 @@
-﻿﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Linq;
-using System.Net;
-using System.Web;
-using System.Web.Mvc;
-﻿using AutoMapper;
-﻿using AutoMapper.QueryableExtensions;
-﻿using Kendo.Mvc.Extensions;
-using Kendo.Mvc.UI;
-﻿using Planex.Data;
-﻿using Planex.Data.Models;
-﻿using Planex.Services.Skills;
-﻿using Planex.Services.Users;
-﻿using Planex.Web.Areas.HR.Models;
-﻿using Planex.Web.Infrastructure.Mappings;
-
-namespace Planex.Web.Areas.HR.Controllers
+﻿namespace Planex.Web.Areas.HR.Controllers
 {
+    using System.Web.Mvc;
+
+    using Kendo.Mvc.Extensions;
+    using Kendo.Mvc.UI;
+
+    using Planex.Data.Models;
+    using Planex.Services.Skills;
+    using Planex.Services.Users;
+    using Planex.Web.Areas.HR.Models;
+    using Planex.Web.Infrastructure.Mappings;
+
     public class SkillsController : BaseController
     {
-        protected IUserService userService;
         protected ISkillService skillService;
+
+        protected IUserService userService;
 
         public SkillsController(IUserService userService, ISkillService skillService)
         {
@@ -32,52 +25,49 @@ namespace Planex.Web.Areas.HR.Controllers
 
         public ActionResult Index()
         {
-            return View();
-        }
-
-        public ActionResult Skills_Read([DataSourceRequest]DataSourceRequest request)
-        {
-            var skills = skillService.GetAll().To<SkillViewModel>();            
-            return Json(skills.ToDataSourceResult(request));
+            return this.View();
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult Skills_Create([DataSourceRequest]DataSourceRequest request, SkillViewModel skill)
+        public ActionResult Skills_Create([DataSourceRequest] DataSourceRequest request, SkillViewModel skill)
         {
-            if (ModelState.IsValid)
+            if (this.ModelState.IsValid)
             {
-                var entity = new Skill
-                {
-                    Name = skill.Name
-                };
+                var entity = new Skill { Name = skill.Name };
 
-                skillService.Add(entity);
+                this.skillService.Add(entity);
                 skill.Id = entity.Id;
             }
 
-            return Json(new[] { skill }.ToDataSourceResult(request, ModelState));
+            return this.Json(new[] { skill }.ToDataSourceResult(request, this.ModelState));
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult Skills_Update([DataSourceRequest]DataSourceRequest request, SkillViewModel skill)
+        public ActionResult Skills_Destroy([DataSourceRequest] DataSourceRequest request, SkillViewModel skill)
         {
-            if (ModelState.IsValid)
+            if (this.ModelState.IsValid)
             {
-                skillService.UpdateName(skill.Id, skill.Name);                
+                this.skillService.Delete(skill.Id);
             }
 
-            return Json(new[] { skill }.ToDataSourceResult(request, ModelState));
+            return this.Json(new[] { skill }.ToDataSourceResult(request, this.ModelState));
+        }
+
+        public ActionResult Skills_Read([DataSourceRequest] DataSourceRequest request)
+        {
+            var skills = this.skillService.GetAll().To<SkillViewModel>();
+            return this.Json(skills.ToDataSourceResult(request));
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult Skills_Destroy([DataSourceRequest]DataSourceRequest request, SkillViewModel skill)
+        public ActionResult Skills_Update([DataSourceRequest] DataSourceRequest request, SkillViewModel skill)
         {
-            if (ModelState.IsValid)
+            if (this.ModelState.IsValid)
             {
-                skillService.Delete(skill.Id);                
+                this.skillService.UpdateName(skill.Id, skill.Name);
             }
 
-            return Json(new[] { skill }.ToDataSourceResult(request, ModelState));
+            return this.Json(new[] { skill }.ToDataSourceResult(request, this.ModelState));
         }
     }
 }

@@ -1,19 +1,25 @@
-﻿using System.Linq;
-using Planex.Data.Models;
-
-namespace Planex.Services.Users
+﻿namespace Planex.Services.Users
 {
+    using System.Linq;
+
+    using Planex.Data.Models;
+
     public interface IUserService
     {
-        IQueryable<string> GetRoles();
-        IQueryable<User> GetAll();
-        User GetById(string id);
         void Add(User user, string role);
-        void Update(User user);
-        string GetRoleName(User user);
+
+        IQueryable<User> GetAll();
 
         IQueryable<User> GetAllByRole(string role);
 
+        User GetById(string id);
+
+        string GetRoleName(User user);
+
+        IQueryable<string> GetRoles();
+
         void SetRoleName(User user, string name);
+
+        void Update(User user);
     }
 }

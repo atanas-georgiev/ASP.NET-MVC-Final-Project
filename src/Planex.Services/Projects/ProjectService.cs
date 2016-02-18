@@ -1,17 +1,19 @@
-﻿using System.Collections.Generic;
-using System.Data.Entity;
-using System.IO;
-using System.Linq;
-using System.Web;
-using Planex.Common;
-using Planex.Data;
-using Planex.Data.Models;
-
-namespace Planex.Services.Projects
+﻿namespace Planex.Services.Projects
 {
+    using System.Collections.Generic;
+    using System.Data.Entity;
+    using System.IO;
+    using System.Linq;
+    using System.Web;
+
+    using Planex.Common;
+    using Planex.Data;
+    using Planex.Data.Models;
+
     public class ProjectService : IProjectService
     {
         private DbContext context;
+
         private IRepository<Project> tasks;
 
         public ProjectService(DbContext context, IRepository<Project> tasks)
@@ -25,17 +27,10 @@ namespace Planex.Services.Projects
             this.tasks.Add(task);
         }
 
-        public void Update(Project task)
-        {
-            this.tasks.Update(task);
-        }
-
-        public void Remove(int id)
-        {
-            this.tasks.Delete(id);
-        }
-
-        public void AddAttachments(Project dbTask, List<HttpPostedFileBase> uploadedAttachments, HttpServerUtility server)
+        public void AddAttachments(
+            Project dbTask, 
+            List<HttpPostedFileBase> uploadedAttachments, 
+            HttpServerUtility server)
         {
             if (uploadedAttachments == null)
             {
@@ -56,12 +51,9 @@ namespace Planex.Services.Projects
             {
                 var filename = Path.GetFileName(file.FileName);
                 file.SaveAs(server.MapPath(TasksConstants.MainContentFolder + "\\" + dbTask.Id + "\\" + filename));
-                dbTask.Attachments.Add(new Attachment()
-                {
-                    Name = file.FileName
-                });
+                dbTask.Attachments.Add(new Attachment() { Name = file.FileName });
 
-                Update(dbTask);
+                this.Update(dbTask);
             }
         }
 
@@ -75,12 +67,22 @@ namespace Planex.Services.Projects
             return this.tasks.GetById(id);
         }
 
+        public void Remove(int id)
+        {
+            this.tasks.Delete(id);
+        }
+
         public void StartEstimation(int taskId, string userId)
         {
             var task = this.tasks.GetById(taskId);
             task.State = TaskStateType.UnderEstimation;
             task.LeadId = userId;
-            Update(task);
+            this.Update(task);
+        }
+
+        public void Update(Project task)
+        {
+            this.tasks.Update(task);
         }
     }
 }

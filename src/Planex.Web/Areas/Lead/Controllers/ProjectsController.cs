@@ -1,24 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-
-namespace Planex.Web.Areas.Lead.Controllers
+﻿namespace Planex.Web.Areas.Lead.Controllers
 {
+    using System.Web.Mvc;
+
     public class ProjectsController : Controller
     {
-        public ActionResult Index()
-        {
-            return View();
-        }
-
         public ActionResult Details(string id)
         {
-            Session["ProjectId"] = id;
-//            var intId = int.Parse(id);
-//            var result = taskService.GetAll().Where(x => x.Id == intId).To<ProjectDetailsViewModel>().FirstOrDefault();
-            return View();
+            this.Session["ProjectId"] = id;
+
+            // var intId = int.Parse(id);
+            // var result = taskService.GetAll().Where(x => x.Id == intId).To<ProjectDetailsViewModel>().FirstOrDefault();
+            return this.View();
+        }
+
+        public ActionResult Index()
+        {
+            return this.View();
         }
     }
 }

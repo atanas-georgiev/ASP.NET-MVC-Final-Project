@@ -1,44 +1,27 @@
 ﻿@using Kendo.Mvc.UI
 @using Planex.Web.Areas.Worker.Models.Assignments
-@model IEnumerable<AssignmentViewModel>
+@model IEnumerable<Planex.Web.Areas.Worker.Models.Assignments.AssignmentViewModel>
 
 @{
     ViewBag.Title = "Projects";
 }
 
-<br />
+<br/>
 <div class="well k-content">
     <h2 class="well-title">Projects</h2>
-@*    <div>*@
-@*        @Html.ActionLink("Create", "Create", "", new { @class = "k-button" })*@
-@*    </div>*@
+    @*    <div>*@
+    @*        @Html.ActionLink("Create", "Create", "", new { @class = "k-button" })*@
+    @*    </div>*@
 
-    @(Html.Kendo().Grid<AssignmentViewModel>()
-          .Name("grid")
-          .Columns(columns =>
+    @(Html.Kendo().Grid<AssignmentViewModel>().Name("grid").Columns(columns =>
           {
               columns.Template(@<text></text>).ClientTemplate("<a href='" + Url.Action("Details", "Projects", new { id = "#=Id#" }) + "'>Select</a>");
               columns.Bound(c => c.Title);
               columns.Bound(c => c.ProjectTitle);
               columns.Bound(c => c.Start).Format("{0:dd/MMMM/yyyy}");
-              columns.Bound(c => c.End).Format("{0:dd/MMMM/yyyy}"); ;
+              columns.Bound(c => c.End).Format("{0:dd/MMMM/yyyy}");
+              ;
               columns.Bound(c => c.PercentComplete);
               columns.Command(c => c.Edit());
-          })
-          .Editable(editable => editable.Mode(GridEditMode.PopUp))
-          .ColumnMenu()
-          .Pageable()
-          .Navigatable()
-          .Sortable(sortable =>
-          {
-              sortable.SortMode(GridSortMode.SingleColumn);
-          })
-          .Filterable()
-          .Scrollable()
-          .DataSource(dataSource => dataSource
-              .Ajax()
-              .Model(model => model.Id(p => p.Id))
-              .Read(read => read.Action("GetAllAssignments", "Json"))
-              .Update("EditAssignment", "Json")
-          ))
+          }).Editable(editable => editable.Mode(GridEditMode.PopUp)).ColumnMenu().Pageable().Navigatable().Sortable(sortable => { sortable.SortMode(GridSortMode.SingleColumn); }).Filterable().Scrollable().DataSource(dataSource => dataSource.Ajax().Model(model => model.Id(p => p.Id)).Read(read => read.Action("GetAllAssignments", "Json")).Update("EditAssignment", "Json")))
 </div>

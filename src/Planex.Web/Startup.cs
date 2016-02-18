@@ -1,14 +1,16 @@
 ﻿using Microsoft.Owin;
-using Owin;
 
-[assembly: OwinStartupAttribute(typeof(Planex.Web.Startup))]
+[assembly: OwinStartup(typeof(Planex.Web.Startup))]
+
 namespace Planex.Web
 {
+    using Owin;
+
     public partial class Startup
     {
         public void Configuration(IAppBuilder app)
         {
-            ConfigureAuth(app);
+            this.ConfigureAuth(app);
         }
     }
 }

@@ -1,30 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Web.Mvc;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Planex.Web;
-using Planex.Web.Controllers;
-
-namespace Planex.Web.Tests.Controllers
+﻿namespace Planex.Web.Tests.Controllers
 {
+    using System.Web.Mvc;
+
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+    using Planex.Web.Controllers;
+
     [TestClass]
     public class HomeControllerTest
     {
-        [TestMethod]
-        public void Index()
-        {
-            // Arrange
-            HomeController controller = new HomeController();
-
-            // Act
-            ViewResult result = controller.Index() as ViewResult;
-
-            // Assert
-            Assert.IsNotNull(result);
-        }
-
         [TestMethod]
         public void About()
         {
@@ -46,6 +30,19 @@ namespace Planex.Web.Tests.Controllers
 
             // Act
             ViewResult result = controller.Contact() as ViewResult;
+
+            // Assert
+            Assert.IsNotNull(result);
+        }
+
+        [TestMethod]
+        public void Index()
+        {
+            // Arrange
+            HomeController controller = new HomeController();
+
+            // Act
+            ViewResult result = controller.Index() as ViewResult;
 
             // Assert
             Assert.IsNotNull(result);

@@ -1,20 +1,21 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Web.Mvc;
-using Planex.Data.Models;
-using Planex.Web.Infrastructure.Mappings;
-
-namespace Planex.Web.Models.Messages
+﻿namespace Planex.Web.Models.Messages
 {
+    using System;
+    using System.ComponentModel.DataAnnotations;
+    using System.Web.Mvc;
+
+    using Planex.Data.Models;
+    using Planex.Web.Infrastructure.Mappings;
+
     public class MessageViewModel : IMapFrom<Message>
     {
-        [Key]        
+        [Key]
         public int Id;
-        
+
+        [UIHint("DateTime")]
+        public DateTime Date { get; set; }
+
         public MessageUserViewModel From { get; set; }
-        
-        public MessageUserViewModel To { get; set; }
 
         [Required]
         [MaxLength(100)]
@@ -28,7 +29,6 @@ namespace Planex.Web.Models.Messages
         [AllowHtml]
         public string Text { get; set; }
 
-        [UIHint("DateTime")]
-        public DateTime Date { get; set; }
+        public MessageUserViewModel To { get; set; }
     }
 }

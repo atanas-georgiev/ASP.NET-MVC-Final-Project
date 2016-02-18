@@ -1,19 +1,22 @@
-﻿using System.Collections.Generic;
-using System.Data.Entity;
-using System.IO;
-using System.Linq;
-using System.Web;
-using Planex.Common;
-using Planex.Data;
-using Planex.Data.Models;
-
-namespace Planex.Services.Tasks
+﻿namespace Planex.Services.Tasks
 {
+    using System.Collections.Generic;
+    using System.Data.Entity;
+    using System.IO;
+    using System.Linq;
+    using System.Web;
+
+    using Planex.Common;
+    using Planex.Data;
+    using Planex.Data.Models;
+
     public class TaskService : ITaskService
     {
         private DbContext context;
-        private IRepository<SubTask> tasks;
+
         private IRepository<SubTaskDependency> dependencies;
+
+        private IRepository<SubTask> tasks;
 
         public TaskService(DbContext context, IRepository<SubTask> tasks, IRepository<SubTaskDependency> dependencies)
         {
@@ -27,12 +30,10 @@ namespace Planex.Services.Tasks
             this.tasks.Add(task);
         }
 
-        public void Update(SubTask task)
-        {
-            this.tasks.Update(task);
-        }
-
-        public void AddAttachments(SubTask dbTask, List<HttpPostedFileBase> uploadedAttachments, HttpServerUtility server)
+        public void AddAttachments(
+            SubTask dbTask, 
+            List<HttpPostedFileBase> uploadedAttachments, 
+            HttpServerUtility server)
         {
             if (uploadedAttachments == null)
             {
@@ -49,37 +50,27 @@ namespace Planex.Services.Tasks
                 Directory.CreateDirectory(server.MapPath(TasksConstants.MainContentFolder + "\\" + dbTask.ProjectId));
             }
 
-            if (!Directory.Exists(server.MapPath(TasksConstants.MainContentFolder + "\\" + dbTask.ProjectId + "\\" + dbTask.Id)))
+            if (
+                !Directory.Exists(
+                    server.MapPath(TasksConstants.MainContentFolder + "\\" + dbTask.ProjectId + "\\" + dbTask.Id)))
             {
-                Directory.CreateDirectory(server.MapPath(TasksConstants.MainContentFolder + "\\" + dbTask.ProjectId + "\\" + dbTask.Id));
+                Directory.CreateDirectory(
+                    server.MapPath(TasksConstants.MainContentFolder + "\\" + dbTask.ProjectId + "\\" + dbTask.Id));
             }
 
             foreach (var file in uploadedAttachments)
             {
                 var filename = Path.GetFileName(file.FileName);
-                file.SaveAs(server.MapPath(TasksConstants.MainContentFolder + "\\" + dbTask.ProjectId + "\\" + dbTask.Id + "\\" + filename));
-//                dbTask.Attachments.Add(new Attachment()
-//                {
-//                    Name = file.FileName
-//                });
+                file.SaveAs(
+                    server.MapPath(
+                        TasksConstants.MainContentFolder + "\\" + dbTask.ProjectId + "\\" + dbTask.Id + "\\" + filename));
 
-                Update(dbTask);
+                // dbTask.Attachments.Add(new Attachment()
+                // {
+                // Name = file.FileName
+                // });
+                this.Update(dbTask);
             }
-        }
-
-        public IQueryable<SubTask> GetAll()
-        {
-            return this.tasks.All();
-        }
-
-        public SubTask GetById(int id)
-        {
-            return this.tasks.GetById(id);
-        }
-
-        public void Delete(int id)
-        {
-            this.tasks.Delete(id);
         }
 
         public void AddDependency(SubTaskDependency dep)
@@ -92,9 +83,29 @@ namespace Planex.Services.Tasks
             return this.dependencies.All();
         }
 
+        public void Delete(int id)
+        {
+            this.tasks.Delete(id);
+        }
+
         public void DeleteDependency(int id)
         {
             this.dependencies.Delete(id);
+        }
+
+        public IQueryable<SubTask> GetAll()
+        {
+            return this.tasks.All();
+        }
+
+        public SubTask GetById(int id)
+        {
+            return this.tasks.GetById(id);
+        }
+
+        public void Update(SubTask task)
+        {
+            this.tasks.Update(task);
         }
 
         public void UpdateDependency(SubTaskDependency task)

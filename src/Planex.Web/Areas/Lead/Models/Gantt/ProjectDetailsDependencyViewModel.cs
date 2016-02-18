@@ -1,10 +1,12 @@
-﻿using AutoMapper;
-using Kendo.Mvc.UI;
-using Planex.Data.Models;
-using Planex.Web.Infrastructure.Mappings;
-
-namespace Planex.Web.Areas.Lead.Models.Gantt
+﻿namespace Planex.Web.Areas.Lead.Models.Gantt
 {
+    using AutoMapper;
+
+    using Kendo.Mvc.UI;
+
+    using Planex.Data.Models;
+    using Planex.Web.Infrastructure.Mappings;
+
     public class ProjectDetailsDependencyViewModel : IGanttDependency, IMapFrom<SubTaskDependency>, IHaveCustomMappings
     {
         public int DependencyId { get; set; }
@@ -17,7 +19,7 @@ namespace Planex.Web.Areas.Lead.Models.Gantt
 
         public void CreateMappings(IConfiguration configuration)
         {
-            configuration.CreateMap<Planex.Data.Models.SubTask, ProjectDetailsDependencyViewModel>("")
+            configuration.CreateMap<SubTask, ProjectDetailsDependencyViewModel>(string.Empty)
                 .ForMember(m => m.DependencyId, opt => opt.MapFrom(c => c.Id))
                 .ForMember(m => m.SuccessorId, opt => opt.MapFrom(c => (int)c.DependencyId))
                 .ForMember(m => m.Type, opt => opt.MapFrom(c => DependencyType.StartFinish));

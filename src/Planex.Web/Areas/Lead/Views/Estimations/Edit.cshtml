@@ -1,14 +1,11 @@
-﻿@using System.Web.Mvc.Html
-@using Kendo.Mvc.UI
-@using Planex.Data.Models
-@using Planex.Web.Areas.Lead.Models.Estimation
+﻿@using Planex.Data.Models
 @model Planex.Web.Areas.Lead.Models.Estimation.EstimationEditViewModel
 
 @{
     ViewBag.Title = "Create project";
 }
 
-<br />
+<br/>
 <div class="well k-content">
     <h2 class="well-title">Project details</h2>
 
@@ -18,19 +15,19 @@
 
         <div class="form-horizontal">
             <div class="form-group">
-                @Html.LabelFor(model => model.Title, htmlAttributes: new {@class = "control-label col-md-2"})
+                @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     @Html.DisplayFor(model => model.Title)
                 </div>
             </div>
             <div class="form-group">
-                @Html.LabelFor(model => model.Description, htmlAttributes: new {@class = "control-label col-md-2"})
+                @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     @Html.Raw(Model.Description)
                 </div>
             </div>
             <div class="form-group">
-                @Html.LabelFor(model => model.Start, htmlAttributes: new {@class = "control-label col-md-2"})
+                @Html.LabelFor(model => model.Start, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     @Html.DisplayFor(model => model.Start)
                 </div>
@@ -41,7 +38,7 @@
             <div class="form-group">
                 @if (Model.State == TaskStateType.UnderEstimation)
                 {
-                    @Html.ActionLink("Send For Approval", "SendForApproval", new {id = Model.Id}, new {@class = "k-button"})
+                    @Html.ActionLink("Send For Approval", "SendForApproval", new { id = Model.Id }, new { @class = "k-button" })
                 }
             </div>
         </div>

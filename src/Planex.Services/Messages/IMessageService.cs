@@ -1,13 +1,17 @@
-﻿using System.Linq;
-using Planex.Data.Models;
-
-namespace Planex.Services.Messages
+﻿namespace Planex.Services.Messages
 {
+    using System.Linq;
+
+    using Planex.Data.Models;
+
     public interface IMessageService
     {
-        IQueryable<Message> GetAll();
         void Add(Message message);
-        void Update(Message message);
+
         void Delete(int id);
+
+        IQueryable<Message> GetAll();
+
+        void Update(Message message);
     }
 }

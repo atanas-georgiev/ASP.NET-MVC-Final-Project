@@ -1,6 +1,6 @@
 ﻿@using Kendo.Mvc.UI
 @using Planex.Web.Areas.Manager.Models.Projects
-@model IEnumerable<ProjectListViewModel>
+@model IEnumerable<Planex.Web.Areas.Manager.Models.Projects.ProjectListViewModel>
 
 @{
     ViewBag.Title = "Projects";
@@ -10,34 +10,18 @@
 <div class="well k-content">
     <h2 class="well-title">Projects</h2>
     <div>
-        @Html.ActionLink("Create", "Create", "", new {@class = "k-button"})
+        @Html.ActionLink("Create", "Create", "", new { @class = "k-button" })
     </div>
 
-    @(Html.Kendo().Grid<ProjectListViewModel>()
-          .Name("grid")
-          .Columns(columns =>
+    @(Html.Kendo().Grid<ProjectListViewModel>().Name("grid").Columns(columns =>
           {
-              columns.Template(@<text></text>).ClientTemplate("<a href='" + Url.Action("Details", "Projects", new {id = "#=Id#"}) + "'>Select</a>");
+              columns.Template(@<text></text>).ClientTemplate("<a href='" + Url.Action("Details", "Projects", new { id = "#=Id#" }) + "'>Select</a>");
               columns.Bound(c => c.Title);
               columns.Bound(c => c.Manager);
               columns.Bound(c => c.Lead);
               columns.Bound(c => c.Priority);
               columns.Bound(c => c.State);
               columns.Bound(c => c.Completed);
-          })
-          .ColumnMenu()
-          .Pageable()
-          .Navigatable()
-          .Sortable(sortable =>
-          {
-              sortable.SortMode(GridSortMode.SingleColumn);
-          })
-          .Filterable()
-          .Scrollable()
-          .DataSource(dataSource => dataSource
-              .Ajax()
-              .Model(model => model.Id(p => p.Id))
-              .Read(read => read.Action("ReadAllProjects", "Json"))
-          )
+          }).ColumnMenu().Pageable().Navigatable().Sortable(sortable => { sortable.SortMode(GridSortMode.SingleColumn); }).Filterable().Scrollable().DataSource(dataSource => dataSource.Ajax().Model(model => model.Id(p => p.Id)).Read(read => read.Action("ReadAllProjects", "Json")))
           )
 </div>

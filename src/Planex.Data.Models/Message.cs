@@ -1,23 +1,21 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-
-namespace Planex.Data.Models
+﻿namespace Planex.Data.Models
 {
+    using System;
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
+
     public class Message
     {
-        [Key]
-        public int Id { get; set; }
-
-        public string FromId { get; set; }
+        [Required]
+        public DateTime Date { get; set; }
 
         [ForeignKey("FromId")]
         public User From { get; set; }
 
-        public string ToId { get; set; }
+        public string FromId { get; set; }
 
-        [ForeignKey("ToId")]
-        public User To { get; set; }
+        [Key]
+        public int Id { get; set; }
 
         [Required]
         [MaxLength(100)]
@@ -27,8 +25,9 @@ namespace Planex.Data.Models
         [MaxLength(10000)]
         public string Text { get; set; }
 
-        [Required]
-        public DateTime Date { get; set; }
+        [ForeignKey("ToId")]
+        public User To { get; set; }
 
+        public string ToId { get; set; }
     }
 }

@@ -1,25 +1,31 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
-using Planex.Data;
-using Planex.Data.Models;
-
-namespace Planex.Services.Skills
+﻿namespace Planex.Services.Skills
 {
+    using System.Data.Entity;
+    using System.Linq;
+
+    using Planex.Data;
+    using Planex.Data.Models;
+
     public class SkillService : ISkillService
     {
         private DbContext context;
-        private IRepository<Skill> skills;        
+
+        private IRepository<Skill> skills;
 
         public SkillService(DbContext context, IRepository<Skill> skills)
         {
             this.context = context;
-            this.skills = skills;            
+            this.skills = skills;
+        }
+
+        public void Add(Skill skill)
+        {
+            this.skills.Add(skill);
+        }
+
+        public void Delete(int id)
+        {
+            this.skills.Delete(id);
         }
 
         public IQueryable<Skill> GetAll()
@@ -27,21 +33,11 @@ namespace Planex.Services.Skills
             return this.skills.All();
         }
 
-        public void Add(Skill skill)
-        {
-            this.skills.Add(skill);            
-        }
-
         public void UpdateName(int id, string name)
         {
-            var entity = skills.GetById(id);
+            var entity = this.skills.GetById(id);
             entity.Name = name;
-            skills.Update(entity);
-        }
-
-        public void Delete(int id)
-        {
-            skills.Delete(id);
+            this.skills.Update(entity);
         }
     }
 }

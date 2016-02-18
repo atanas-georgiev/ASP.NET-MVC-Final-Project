@@ -1,17 +1,18 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Threading.Tasks;
-
-namespace Planex.Data.Models
+﻿namespace Planex.Data.Models
 {
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
     using System.Security.Claims;
+    using System.Threading.Tasks;
+
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.EntityFramework;
 
     public class User : IdentityUser
     {
         private ICollection<Skill> skills;
+
         private ICollection<SubTask> subtasks;
 
         public User()
@@ -20,12 +21,17 @@ namespace Planex.Data.Models
             this.subtasks = new List<SubTask>();
         }
 
-        public int IntId { get; set; }
-
         [Required]
         [MinLength(2)]
         [MaxLength(50)]
         public string FirstName { get; set; }
+
+        [ForeignKey("ImageId")]
+        public virtual Image Image { get; set; }
+
+        public int? ImageId { get; set; }
+
+        public int IntId { get; set; }
 
         [Required]
         [MinLength(2)]
@@ -35,21 +41,30 @@ namespace Planex.Data.Models
         [Required]
         public decimal Salary { get; set; }
 
-        public int? ImageId { get; set; }
-
-        [ForeignKey("ImageId")]
-        public virtual Image Image { get; set; }
-
         public virtual ICollection<Skill> Skills
         {
-            get { return this.skills; }
-            set { this.skills = value; }
+            get
+            {
+                return this.skills;
+            }
+
+            set
+            {
+                this.skills = value;
+            }
         }
 
         public virtual ICollection<SubTask> SubTasks
         {
-            get { return this.subtasks; }
-            set { this.subtasks = value; }
+            get
+            {
+                return this.subtasks;
+            }
+
+            set
+            {
+                this.subtasks = value;
+            }
         }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<User> manager)

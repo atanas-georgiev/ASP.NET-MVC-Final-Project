@@ -1,17 +1,16 @@
-using System.Data.Entity.Migrations;
-using System.Linq;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
-using Planex.Data.Models;
-
 namespace Planex.Data.Migrations
 {
+    using System.Data.Entity.Migrations;
+    using System.Linq;
+
+    using Microsoft.AspNet.Identity.EntityFramework;
+
     public sealed class Configuration : DbMigrationsConfiguration<PlanexDbContext>
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = true;
-            AutomaticMigrationDataLossAllowed = true;
+            this.AutomaticMigrationsEnabled = true;
+            this.AutomaticMigrationDataLossAllowed = true;
         }
 
         protected override void Seed(PlanexDbContext context)

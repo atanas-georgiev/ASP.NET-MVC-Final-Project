@@ -1,19 +1,17 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
-using AutoMapper;
-using Planex.Data.Models;
-using Planex.Web.Infrastructure.Mappings;
-
-namespace Planex.Web.Areas.HR.Models
+﻿namespace Planex.Web.Areas.HR.Models
 {
-    public class UserEditViewModel: IMapFrom<User>, IHaveCustomMappings
-    {
-        [Key]
-        [System.Web.Mvc.HiddenInput(DisplayValue = false)]
-        public string Id { get; set; }
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+    using System.Linq;
+    using System.Web;
 
+    using AutoMapper;
+
+    using Planex.Data.Models;
+    using Planex.Web.Infrastructure.Mappings;
+
+    public class UserEditViewModel : IMapFrom<User>, IHaveCustomMappings
+    {
         [Required]
         [UIHint("Email")]
         public string Email { get; set; }
@@ -23,6 +21,12 @@ namespace Planex.Web.Areas.HR.Models
         [MaxLength(50)]
         [UIHint("String")]
         public string FirstName { get; set; }
+
+        [Key]
+        [System.Web.Mvc.HiddenInput(DisplayValue = false)]
+        public string Id { get; set; }
+
+        public int? ImageId { get; set; }
 
         [Required]
         [MinLength(2)]
@@ -34,19 +38,17 @@ namespace Planex.Web.Areas.HR.Models
         [UIHint("Currency")]
         public decimal PricePerHour { get; set; }
 
-        public int? ImageId { get; set; }
-
         [Required]
         [UIHint("DropDown")]
         public string Role { get; set; }
 
-        public HttpPostedFileBase UploadedImage { get; set; }
-
         public List<string> Skills { get; set; }
+
+        public HttpPostedFileBase UploadedImage { get; set; }
 
         public void CreateMappings(IConfiguration configuration)
         {
-            configuration.CreateMap<User, UserEditViewModel>("")
+            configuration.CreateMap<User, UserEditViewModel>(string.Empty)
                 .ForMember(m => m.Skills, opt => opt.MapFrom(c => c.Skills.Select(s => s.Name)));
         }
     }

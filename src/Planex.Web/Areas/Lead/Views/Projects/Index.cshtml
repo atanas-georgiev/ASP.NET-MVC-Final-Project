@@ -3,9 +3,7 @@
 
 <h1>Projects</h1>
 
-@(Html.Kendo().Grid<Planex.Web.Areas.Lead.Models.ProjectIndexViewController>()
-      .Name("grid")
-      .Columns(columns =>
+@(Html.Kendo().Grid<Planex.Web.Areas.Lead.Models.ProjectIndexViewController>().Name("grid").Columns(columns =>
       {
           columns.Template(@<text></text>).ClientTemplate("<a href='" + Url.Action("Details", "Projects", new { id = "#=Id#" }) + "'>Select</a>");
           columns.Bound(c => c.Title);
@@ -19,21 +17,9 @@
       //      {
       //          toolbar.Create();
       //      })
-      .ColumnMenu()
-      .Pageable()
-      .Navigatable()
-      .Sortable(sortable =>
-      {
-          sortable.SortMode(GridSortMode.SingleColumn);
-      })
-      .Filterable()
-      .Scrollable()
-      .DataSource(dataSource => dataSource
-          .Ajax()
-          .Model(model => model.Id(p => p.Id))
-          .Read(read => read.Action("ProjectsIndex_Read", "Helper"))
+      .ColumnMenu().Pageable().Navigatable().Sortable(sortable => { sortable.SortMode(GridSortMode.SingleColumn); }).Filterable().Scrollable().DataSource(dataSource => dataSource.Ajax().Model(model => model.Id(p => p.Id)).Read(read => read.Action("ProjectsIndex_Read", "Helper"))
       //          .Create(create => create.Action("Skills_Create", "Skills"))
       //          .Update(update => update.Action("Skills_Update", "Skills"))
       //          .Destroy(destroy => destroy.Action("Skills_Destroy", "Skills"))
       )
-)
+      )

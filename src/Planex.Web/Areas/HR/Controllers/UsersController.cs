@@ -1,29 +1,22 @@
-﻿﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Linq;
-using System.Net;
-using System.Web;
-using System.Web.Mvc;
-﻿using AutoMapper;
-﻿using Kendo.Mvc.Extensions;
-using Kendo.Mvc.UI;
-﻿using Planex.Data;
-﻿using Planex.Data.Models;
-﻿using Planex.Web.Areas.HR.Models;
-using AutoMapper.QueryableExtensions;
-﻿using Planex.Services.Skills;
-﻿using Planex.Services.Users;
-﻿using Planex.Web.Infrastructure.Mappings;
-﻿using WebGrease.Css.Extensions;
-
-namespace Planex.Web.Areas.HR.Controllers
+﻿namespace Planex.Web.Areas.HR.Controllers
 {
+    using System.Collections.Generic;
+    using System.Web.Mvc;
+
+    using Kendo.Mvc.Extensions;
+    using Kendo.Mvc.UI;
+
+    using Planex.Data.Models;
+    using Planex.Services.Skills;
+    using Planex.Services.Users;
+    using Planex.Web.Areas.HR.Models;
+    using Planex.Web.Infrastructure.Mappings;
+
     public class UsersController : BaseController
     {
-        protected IUserService userService;
         protected ISkillService skillService;
+
+        protected IUserService userService;
 
         public UsersController(IUserService userService, ISkillService skillService)
         {
@@ -33,48 +26,43 @@ namespace Planex.Web.Areas.HR.Controllers
 
         public ActionResult Index()
         {
-            ViewData["roles"] = new List<SelectListItem>();            
+            this.ViewData["roles"] = new List<SelectListItem>();
             var roles = this.userService.GetRoles();
 
             foreach (var role in roles)
             {
-                (ViewData["roles"] as List<SelectListItem>).Add(
-                    new SelectListItem()
-                    {
-                        Value = role,
-                        Text = role
-                    });
+                (this.ViewData["roles"] as List<SelectListItem>).Add(new SelectListItem() { Value = role, Text = role });
             }
 
-            ViewData["SelectedIndex"] = 0;
+            this.ViewData["SelectedIndex"] = 0;
 
-            return View();
-        }
-
-        public ActionResult Users_Read([DataSourceRequest]DataSourceRequest request)
-        {
-            var users = this.userService.GetAll().To<UserViewModel>();
-            return Json(users.ToDataSourceResult(request));
+            return this.View();
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult Users_Create([DataSourceRequest]DataSourceRequest request, UserViewModel user)
+        public ActionResult Users_Create([DataSourceRequest] DataSourceRequest request, UserViewModel user)
         {
-            if (ModelState.IsValid)
+            if (this.ModelState.IsValid)
             {
                 var entity = new User
-                {
-                    Email = user.Email,
-                    FirstName = user.FirstName,
-                    LastName = user.LastName,
-                    Salary = 0,
-                };
+                                 {
+                                     Email = user.Email, 
+                                     FirstName = user.FirstName, 
+                                     LastName = user.LastName, 
+                                     Salary = 0, 
+                                 };
 
                 this.userService.Add(entity, user.Role);
                 user.Id = entity.Id;
             }
 
-            return Json(new[] { user }.ToDataSourceResult(request, ModelState));
+            return this.Json(new[] { user }.ToDataSourceResult(request, this.ModelState));
+        }
+
+        public ActionResult Users_Read([DataSourceRequest] DataSourceRequest request)
+        {
+            var users = this.userService.GetAll().To<UserViewModel>();
+            return this.Json(users.ToDataSourceResult(request));
         }
     }
 }

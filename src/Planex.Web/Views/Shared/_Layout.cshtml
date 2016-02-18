@@ -1,8 +1,7 @@
-﻿@using Kendo.Mvc.UI
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8" />
+    <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Scripts.Render("~/bundles/jquery")
@@ -12,85 +11,66 @@
     @RenderSection("styles", required: false)
 </head>
 <body>
-    <div id="megaStore">
-        @(Html.Kendo().Menu()
-          .Name("Menu")
-          .Animation(animation =>
+<div id="megaStore">
+    @(Html.Kendo().Menu().Name("Menu").Animation(animation =>
           {
               animation.Open(open =>
-              {
-                  if (ViewBag.animation == "expand")
                   {
-                      open.Expand(ExpandDirection.Vertical);
-                  }
+                      if (ViewBag.animation == "expand")
+                      {
+                          open.Expand(ExpandDirection.Vertical);
+                      }
 
-                  if (ViewBag.animation == "slide")
-                  {
-                      open.SlideIn(SlideDirection.Down);
-                  }
+                      if (ViewBag.animation == "slide")
+                      {
+                          open.SlideIn(SlideDirection.Down);
+                      }
 
-                  if (true)
-                  {
-                      open.Fade(FadeDirection.In);
-                  }
-              });
-          })
-        .HoverDelay(100)
-      .Items(items =>
-      {
-          items.Add().Text("Home").Action("Index", "Home", new { area = string.Empty });
-          items.Add()
-              .Text("Manager")
-              .Items(children =>
+                      if (true)
+                      {
+                          open.Fade(FadeDirection.In);
+                      }
+                  });
+          }).HoverDelay(100).Items(items =>
               {
-                  children.Add().Text("Projects").Action("Index", "Projects", new { area = "Manager" });
-              });
-          items.Add()
-              .Text("Lead")
-              .Items(children =>
-              {
-                  children.Add().Text("Estimations").Action("Index", "Estimations", new { area = "Lead" });
-                  children.Add().Text("Projects").Action("Index", "Projects", new { area = "Lead" });
-              });
-          items.Add()
-              .Text("HR")
-              .Items(children =>
-              {
-                  children.Add().Text("People").Action("Index", "Users", new { area = "HR" });
-                  children.Add().Text("Skills").Action("Index", "Skills", new { area = "HR" });
+                  items.Add().Text("Home").Action("Index", "Home", new { area = string.Empty });
+                  items.Add().Text("Manager").Items(children => { children.Add().Text("Projects").Action("Index", "Projects", new { area = "Manager" }); });
+                  items.Add().Text("Lead").Items(children =>
+                      {
+                          children.Add().Text("Estimations").Action("Index", "Estimations", new { area = "Lead" });
+                          children.Add().Text("Projects").Action("Index", "Projects", new { area = "Lead" });
+                      });
+                  items.Add().Text("HR").Items(children =>
+                      {
+                          children.Add().Text("People").Action("Index", "Users", new { area = "HR" });
+                          children.Add().Text("Skills").Action("Index", "Skills", new { area = "HR" });
+                      });
+                  items.Add().Text("Worker").Items(children => { children.Add().Text("Assignments").Action("Index", "Assignments", new { area = "Worker" }); });
 
-              });
-          items.Add()
-              .Text("Worker")
-              .Items(children =>
-              {
-                  children.Add().Text("Assignments").Action("Index", "Assignments", new { area = "Worker" });
-              });
+                  items.Add().Visible(Context.User.Identity.IsAuthenticated).Text("Logout [" + Context.User.Identity.Name + "]").Action("LogOff", "Account");
+                  items.Add().Visible(!Context.User.Identity.IsAuthenticated).Text("Register").Action("Register", "Account");
+                  items.Add().Visible(!Context.User.Identity.IsAuthenticated).Text("Login").Action("Login", "Account");
+                  items.Add().Text("Inbox").Action("Inbox", "Messages", new { area = string.Empty });
+                  items.Add().Text("Send").Action("Send", "Messages", new { area = string.Empty });
+              })
+          )
 
-          items.Add().Visible(Context.User.Identity.IsAuthenticated).Text("Logout [" + Context.User.Identity.Name + "]").Action("LogOff", "Account");
-          items.Add().Visible(!Context.User.Identity.IsAuthenticated).Text("Register").Action("Register", "Account");
-          items.Add().Visible(!Context.User.Identity.IsAuthenticated).Text("Login").Action("Login", "Account");
-          items.Add().Text("Inbox").Action("Inbox", "Messages", new { area = string.Empty });
-          items.Add().Text("Send").Action("Send", "Messages", new { area = string.Empty });
-      })
-        )
+</div>
+<div class="container body-content text-center">
+    @RenderBody()
+    <hr/>
+    <footer>
+        <p>&copy; @DateTime.Now.Year - My KendoUI Application</p>
+    </footer>
+</div>
 
-    </div>
-    <div class="container body-content text-center">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My KendoUI Application</p>
-        </footer>
-    </div>
-
-    @Scripts.Render("~/bundles/bootstrap")
-    @Scripts.Render("~/bundles/kendo")
-    @RenderSection("scripts", required: false)
-    <script>
+@Scripts.Render("~/bundles/bootstrap")
+@Scripts.Render("~/bundles/kendo")
+@RenderSection("scripts", required: false)
+<script>
     $(function() {
         $('#menu').kendoMenu();
     })
-    </script>
+</script>
 </body>
 </html>

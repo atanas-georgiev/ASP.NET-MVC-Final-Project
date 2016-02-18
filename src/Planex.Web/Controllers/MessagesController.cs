@@ -1,59 +1,60 @@
-﻿using System;
-using System.Web.Mvc;
-using Planex.Data.Models;
-using Planex.Services.Messages;
-using Planex.Services.Users;
-using Planex.Web.Models.Messages;
-
-namespace Planex.Web.Controllers
+﻿namespace Planex.Web.Controllers
 {
+    using System;
+    using System.Web.Mvc;
+
+    using Planex.Data.Models;
+    using Planex.Services.Messages;
+    using Planex.Services.Users;
+    using Planex.Web.Models.Messages;
+
     public class MessagesController : BaseController
     {
         private readonly IMessageService messageService;
 
-        public MessagesController(IUserService userService, IMessageService messageService) : base(userService)
+        public MessagesController(IUserService userService, IMessageService messageService)
+            : base(userService)
         {
             this.messageService = messageService;
         }
 
         public ActionResult Inbox()
         {
-            return View();
+            return this.View();
         }
 
         public ActionResult Send()
         {
-            return View();
+            return this.View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Send(MessageCreateViewModel model)
         {
-            if (ModelState.IsValid)
+            if (this.ModelState.IsValid)
             {
-                var userToSend = userService.GetById(model.Receiver);
+                var userToSend = this.userService.GetById(model.Receiver);
                 var messageDb = new Message()
-                {
-                    From = UserProfile,
-                    To = userToSend,
-                    Subject = model.Subject,
-                    Text = model.Text,
-                    Date = DateTime.UtcNow
-                };
+                                    {
+                                        From = this.UserProfile, 
+                                        To = userToSend, 
+                                        Subject = model.Subject, 
+                                        Text = model.Text, 
+                                        Date = DateTime.UtcNow
+                                    };
 
-                messageService.Add(messageDb);
+                this.messageService.Add(messageDb);
 
-                return RedirectToAction("Inbox");                
+                return this.RedirectToAction("Inbox");
             }
 
-            return View(model);
+            return this.View(model);
         }
-
 
         public ActionResult View(string id)
         {
-            return View();
+            return this.View();
         }
     }
 }

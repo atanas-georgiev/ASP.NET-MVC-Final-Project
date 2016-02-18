@@ -1,16 +1,16 @@
-﻿using System.Data.Entity;
-using System.Reflection;
-using System.Web.Mvc;
-using Autofac;
-using Autofac.Integration.Mvc;
-using Planex.Data;
-using Planex.Services.Users;
-using Planex.Web.Areas.Lead.Controllers;
-using Planex.Web.Areas.Manager.Controllers;
-using BaseController = Planex.Web.Areas.HR.Controllers.BaseController;
-
-namespace Planex.Web
+﻿namespace Planex.Web
 {
+    using System.Data.Entity;
+    using System.Reflection;
+    using System.Web.Mvc;
+
+    using Autofac;
+    using Autofac.Integration.Mvc;
+
+    using Planex.Data;
+    using Planex.Services.Users;
+    using Planex.Web.Areas.HR.Controllers;
+
     public static class AutofacConfig
     {
         public static void RegisterAutofac()
@@ -43,23 +43,23 @@ namespace Planex.Web
 
         private static void RegisterServices(ContainerBuilder builder)
         {
-            builder.Register(x => new PlanexDbContext())
-                .As<DbContext>()
-                .InstancePerRequest();
+            builder.Register(x => new PlanexDbContext()).As<DbContext>().InstancePerRequest();
 
-            builder.RegisterAssemblyTypes(Assembly.GetAssembly(typeof(IUserService))).AsImplementedInterfaces().InstancePerRequest();
+            builder.RegisterAssemblyTypes(Assembly.GetAssembly(typeof(IUserService)))
+                .AsImplementedInterfaces()
+                .InstancePerRequest();
 
             builder.RegisterGeneric(typeof(GenericRepository<>)).As(typeof(IRepository<>)).InstancePerRequest();
 
-            //            builder.RegisterGeneric(typeof(PlanexData))
-            //                .As(typeof(IPlanexData))
-            //                .InstancePerRequest();
-//
-                        builder.RegisterAssemblyTypes(Assembly.GetExecutingAssembly())
-                            .AssignableTo<BaseController>().PropertiesAutowired().InstancePerRequest();
+            // builder.RegisterGeneric(typeof(PlanexData))
+            // .As(typeof(IPlanexData))
+            // .InstancePerRequest();
+            builder.RegisterAssemblyTypes(Assembly.GetExecutingAssembly())
+                .AssignableTo<BaseController>()
+                .PropertiesAutowired()
+                .InstancePerRequest();
 
-           // builder.RegisterType<JsonController>().InstancePerDependency();
+            // builder.RegisterType<JsonController>().InstancePerDependency();
         }
-
     }
 }

@@ -1,7 +1,7 @@
-﻿using AutoMapper;
-
-namespace Planex.Web.Infrastructure.Mappings
+﻿namespace Planex.Web.Infrastructure.Mappings
 {
+    using AutoMapper;
+
     public interface IHaveCustomMappings
     {
         void CreateMappings(IConfiguration configuration);

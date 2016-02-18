@@ -1,84 +1,28 @@
 ﻿@using Kendo.Mvc.UI
 @using Planex.Web.Areas.Manager.Models.Gantt
+@(Html.Kendo().Gantt<ProjectDetailsViewModel, ProjectDetailsDependencyViewModel>().Name("gantt").Columns(columns =>
+      {
+          columns.Bound("title").Editable(true).Sortable(true);
+          columns.Bound("start").Title("Start Time").Format("{0:MM/dd/yyyy}").Width(100).Editable(true).Sortable(true);
+          columns.Bound("end").Title("End Time").Format("{0:MM/dd/yyyy}").Width(100).Editable(true).Sortable(true);
 
-@(Html.Kendo().Gantt<ProjectDetailsViewModel, ProjectDetailsDependencyViewModel>()
-    .Name("gantt")
-    .Columns(columns =>
-    {
-        columns.Bound("title").Editable(true).Sortable(true);
-        columns.Bound("start").Title("Start Time").Format("{0:MM/dd/yyyy}").Width(100).Editable(true).Sortable(true);
-        columns.Bound("end").Title("End Time").Format("{0:MM/dd/yyyy}").Width(100).Editable(true).Sortable(true);
-        //  columns.Resources("Users").Editable(true).Title("Assigned Resources");
-    })
-    .Editable(true)
-    .Views(views =>
-    {
-        views.DayView();
-        views.WeekView(weekView => weekView.Selected(true));
-        views.MonthView();
-    })
-    .Height(700)
-    .ShowWorkHours(false)
-    .ShowWorkDays(false)
-    .Snap(false)
-    .DataSource(d => d
-        .Model(m =>
-        {
-            m.Id(f => f.TaskId);
-            m.ParentId(f => f.ParentTaskId);
-            m.OrderId(f => f.TaskOrderId);
-            m.Field(f => f.Expanded).DefaultValue(true);
-        })
-        .Read("ReadTasks", "Json")
-        .Create("CreateTask", "Json")
-        .Destroy("DestroyTask", "Json")
-        .Update("UpdateTask", "Json")
-    )
-    .DependenciesDataSource(d => d
-        .Model(m =>
-        {
-            m.Id(f => f.DependencyId);
-            m.PredecessorId(f => f.PredecessorId);
-            m.SuccessorId(f => f.SuccessorId);
-            m.Type(f => f.Type);
-        })
-        .Read("ReadDependencies", "Json")
-        .Create("CreateDependency", "Json")
-        .Destroy("DestroyDependency", "Json")
-        .Update("UpdateDependency", "Json")
-    )
-    .Resources(r => r
-                .Field("Users")
-                .DataColorField("Color")
-                .DataTextField("Name")
-                .DataSource(d => d
-                    .Custom()
-                    .Schema(s => s
-                        .Model(m =>
-                        {
-                            m.Id("ResourseId");
-                        })
-                        .Data("Data")
-                    )
-                    .Transport(t =>
-                    {
-                        t.Read("ReadResources", "Json");
-                    })
-                )
-            )
-    .Assignments<ProjectDetailsAssignmentsViewModel>(a => a
-        .DataTaskIdField("TaskId")
-        .DataResourceIdField("ResourceId")
-        .DataValueField("Units")
-        .DataSource(d => d
-            .Model(m =>
-            {
-                m.Id(f => f.AssignmentId);
-            })
-            .Read("ReadAssignments", "Json")
-            .Create("CreateAssignments", "Json")
-            .Destroy("DestroyAssignments", "Json")
-            .Update("UpdateAssignments", "Json")
-        )
-    )
-)
+          // columns.Resources("Users").Editable(true).Title("Assigned Resources");
+      }).Editable(true).Views(views =>
+          {
+              views.DayView();
+              views.WeekView(weekView => weekView.Selected(true));
+              views.MonthView();
+          }).Height(700).ShowWorkHours(false).ShowWorkDays(false).Snap(false).DataSource(d => d.Model(m =>
+              {
+                  m.Id(f => f.TaskId);
+                  m.ParentId(f => f.ParentTaskId);
+                  m.OrderId(f => f.TaskOrderId);
+                  m.Field(f => f.Expanded).DefaultValue(true);
+              }).Read("ReadTasks", "Json").Create("CreateTask", "Json").Destroy("DestroyTask", "Json").Update("UpdateTask", "Json")).DependenciesDataSource(d => d.Model(m =>
+                  {
+                      m.Id(f => f.DependencyId);
+                      m.PredecessorId(f => f.PredecessorId);
+                      m.SuccessorId(f => f.SuccessorId);
+                      m.Type(f => f.Type);
+                  }).Read("ReadDependencies", "Json").Create("CreateDependency", "Json").Destroy("DestroyDependency", "Json").Update("UpdateDependency", "Json")).Resources(r => r.Field("Users").DataColorField("Color").DataTextField("Name").DataSource(d => d.Custom().Schema(s => s.Model(m => { m.Id("ResourseId"); }).Data("Data")).Transport(t => { t.Read("ReadResources", "Json"); }))).Assignments<ProjectDetailsAssignmentsViewModel>(a => a.DataTaskIdField("TaskId").DataResourceIdField("ResourceId").DataValueField("Units").DataSource(d => d.Model(m => { m.Id(f => f.AssignmentId); }).Read("ReadAssignments", "Json").Create("CreateAssignments", "Json").Destroy("DestroyAssignments", "Json").Update("UpdateAssignments", "Json")))
+      )

@@ -1,24 +1,23 @@
-﻿using System.Web.Mvc;
-
-namespace Planex.Web.Areas.Lead
+﻿namespace Planex.Web.Areas.Lead
 {
-    public class LeadAreaRegistration : AreaRegistration 
+    using System.Web.Mvc;
+
+    public class LeadAreaRegistration : AreaRegistration
     {
-        public override string AreaName 
+        public override string AreaName
         {
-            get 
+            get
             {
                 return "Lead";
             }
         }
 
-        public override void RegisterArea(AreaRegistrationContext context) 
+        public override void RegisterArea(AreaRegistrationContext context)
         {
             context.MapRoute(
-                "Lead_default",
-                "Lead/{controller}/{action}/{id}",
-                new { action = "Index", id = UrlParameter.Optional }
-            );
+                "Lead_default", 
+                "Lead/{controller}/{action}/{id}", 
+                new { action = "Index", id = UrlParameter.Optional });
         }
     }
 }

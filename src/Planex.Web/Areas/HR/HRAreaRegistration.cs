@@ -1,24 +1,23 @@
-﻿using System.Web.Mvc;
-
-namespace Planex.Web.Areas.HR
+﻿namespace Planex.Web.Areas.HR
 {
-    public class HRAreaRegistration : AreaRegistration 
+    using System.Web.Mvc;
+
+    public class HRAreaRegistration : AreaRegistration
     {
-        public override string AreaName 
+        public override string AreaName
         {
-            get 
+            get
             {
                 return "HR";
             }
         }
 
-        public override void RegisterArea(AreaRegistrationContext context) 
+        public override void RegisterArea(AreaRegistrationContext context)
         {
             context.MapRoute(
-                "HR_default",
-                "HR/{controller}/{action}/{id}",
-                new { action = "Index", id = UrlParameter.Optional }
-            );
+                "HR_default", 
+                "HR/{controller}/{action}/{id}", 
+                new { action = "Index", id = UrlParameter.Optional });
         }
     }
 }

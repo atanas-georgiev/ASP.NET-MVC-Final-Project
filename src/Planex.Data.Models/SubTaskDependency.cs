@@ -1,7 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace Planex.Data.Models
+﻿namespace Planex.Data.Models
 {
+    using System.ComponentModel.DataAnnotations;
+
     using Kendo.Mvc.UI;
 
     public class SubTaskDependency
