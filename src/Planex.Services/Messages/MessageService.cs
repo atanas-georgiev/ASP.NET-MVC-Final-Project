@@ -4,15 +4,16 @@
     using System.Linq;
 
     using Planex.Data;
+    using Planex.Data.Common;
     using Planex.Data.Models;
 
     public class MessageService : IMessageService
     {
         private DbContext context;
 
-        private IRepository<Message> messages;
+        private IRepository<Message, int> messages;
 
-        public MessageService(DbContext context, IRepository<Message> messages)
+        public MessageService(DbContext context, IRepository<Message, int> messages)
         {
             this.context = context;
             this.messages = messages;

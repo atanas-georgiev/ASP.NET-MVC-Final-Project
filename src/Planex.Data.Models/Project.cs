@@ -5,7 +5,10 @@
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
 
-    public class Project
+    using Planex.Data.Common;
+    using Planex.Data.Common.Models;
+
+    public class Project : BaseModel<int>, IHavePrimaryKey<int>
     {
         private ICollection<Attachment> attachments;
 
@@ -33,9 +36,6 @@
         [Required]
         [MaxLength(10000)]
         public string Description { get; set; }
-
-        [Key]
-        public int Id { get; set; }
 
         [ForeignKey("LeadId")]
         public virtual User Lead { get; set; }

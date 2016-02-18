@@ -4,7 +4,10 @@
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations.Schema;
 
-    public class SubTask
+    using Planex.Data.Common;
+    using Planex.Data.Common.Models;
+
+    public class SubTask : BaseModel<int>, IHavePrimaryKey<int>
     {
         private ICollection<SubTask> dependencies;
 
@@ -32,18 +35,11 @@
             }
         }
 
-        [ForeignKey("DependencyId")]
-        public virtual SubTask Dependency { get; set; }
-
-        public int? DependencyId { get; set; }
-
         public string Description { get; set; }
 
         public int Duration { get; set; }
 
         public DateTime End { get; set; }
-
-        public int Id { get; set; }
 
         [ForeignKey("ParentId")]
         public virtual SubTask Parent { get; set; }

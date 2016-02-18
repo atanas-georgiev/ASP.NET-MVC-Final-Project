@@ -4,10 +4,13 @@
 
     using Kendo.Mvc.UI;
 
-    public class SubTaskDependency
+    using Planex.Data.Common;
+    using Planex.Data.Common.Models;
+
+    public class SubTaskDependency : BaseModel<int>, IHavePrimaryKey<int>
     {
         [Key]
-        public int DependencyId { get; set; }
+        public int Id { get; set; }
 
         public int PredecessorId { get; set; }
 

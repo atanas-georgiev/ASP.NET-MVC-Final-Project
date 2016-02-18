@@ -98,8 +98,7 @@
 
                                         return result;
                                     },
-                                10 * 60);
-           
+                                10 * 60);           
 
             return this.Json(projectsPublic.AsQueryable().ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
         }

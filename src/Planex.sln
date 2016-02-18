@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.23107.0
+VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Planex.Data.Models", "Planex.Data.Models\Planex.Data.Models.csproj", "{36E741AF-B659-4A5D-A595-5F0B9786AA9A}"
 EndProject
@@ -14,6 +14,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Planex.Web", "Planex.Web\Planex.Web.csproj", "{DA08A489-7E66-468C-9BD0-13F2CCD30B78}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Planex.Web.Tests", "Planex.Web.Tests\Planex.Web.Tests.csproj", "{F9D1AC44-C668-4602-B102-76C15817799A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Planex.Data.Common", "Planex.Data.Common\Planex.Data.Common.csproj", "{40E9124F-FE69-4CA1-BC6B-03D59136107C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{F9D1AC44-C668-4602-B102-76C15817799A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F9D1AC44-C668-4602-B102-76C15817799A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F9D1AC44-C668-4602-B102-76C15817799A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{40E9124F-FE69-4CA1-BC6B-03D59136107C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{40E9124F-FE69-4CA1-BC6B-03D59136107C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{40E9124F-FE69-4CA1-BC6B-03D59136107C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{40E9124F-FE69-4CA1-BC6B-03D59136107C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

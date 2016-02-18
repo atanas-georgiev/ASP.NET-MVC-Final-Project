@@ -5,7 +5,10 @@
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
 
-    public class Message
+    using Planex.Data.Common;
+    using Planex.Data.Common.Models;
+
+    public class Message : BaseModel<int>, IHavePrimaryKey<int>
     {
         [Required]
         public DateTime Date { get; set; }
@@ -14,9 +17,6 @@
         public User From { get; set; }
 
         public string FromId { get; set; }
-
-        [Key]
-        public int Id { get; set; }
 
         [Required]
         [MaxLength(100)]

@@ -8,15 +8,16 @@
 
     using Planex.Common;
     using Planex.Data;
+    using Planex.Data.Common;
     using Planex.Data.Models;
 
     public class ProjectService : IProjectService
     {
         private DbContext context;
 
-        private IRepository<Project> tasks;
+        private IRepository<Project, int> tasks;
 
-        public ProjectService(DbContext context, IRepository<Project> tasks)
+        public ProjectService(DbContext context, IRepository<Project, int> tasks)
         {
             this.context = context;
             this.tasks = tasks;

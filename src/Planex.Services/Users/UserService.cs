@@ -8,24 +8,25 @@
     using Microsoft.AspNet.Identity.EntityFramework;
 
     using Planex.Data;
+    using Planex.Data.Common;
     using Planex.Data.Models;
 
     public class UserService : IUserService
     {
         private DbContext context;
 
-        private IRepository<Image> images;
+        private IRepository<Image, int> images;
 
         RoleManager<IdentityRole> roleManager;
 
         private UserManager<User> userManager;
 
-        private IRepository<User> users;
+        private IRepository<User, string> users;
 
-        public UserService(DbContext context, IRepository<User> users, IRepository<Image> images)
+        public UserService(DbContext context, IRepository<User> users, IRepository<Image, int> images)
         {
-            this.context = context;
             this.users = users;
+            this.context = context;
             this.images = images;
             this.userManager = new UserManager<User>(new UserStore<User>(context));
             this.roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
@@ -34,6 +35,7 @@
         public void Add(User user, string role)
         {
             user.UserName = user.Email;
+            user.CreatedOn = DateTime.UtcNow;
             this.userManager.Create(user, "changeme");
             this.users.Add(user);
             user.IntId = int.Parse(Convert.ToUInt32(user.Id.GetHashCode()).ToString());

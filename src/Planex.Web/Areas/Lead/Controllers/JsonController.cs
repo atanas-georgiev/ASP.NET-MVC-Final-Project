@@ -119,10 +119,10 @@
             [DataSourceRequest] DataSourceRequest request, 
             ProjectDetailsDependencyViewModel dep)
         {
-            if (dep != null)
-            {
-                this.subTaskService.DeleteDependency(dep.DependencyId);
-            }
+//            if (dep != null)
+//            {
+//                this.subTaskService.DeleteDependency(dep.DependencyId);
+//            }
 
             return this.Json(dep);
         }
@@ -217,7 +217,7 @@
             if (dep != null)
             {
                 var depDb = this.subTaskService.AllDependencies()
-                    .FirstOrDefault(x => x.DependencyId == dep.DependencyId);
+                    .FirstOrDefault(x => x.Id == dep.Id);
                 depDb.PredecessorId = dep.PredecessorId;
                 depDb.SuccessorId = dep.SuccessorId;
                 depDb.Type = dep.Type;

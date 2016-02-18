@@ -1,5 +1,6 @@
 ﻿namespace Planex.Data.Models
 {
+    using System;
     using System.Collections.Generic;
     using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
@@ -10,7 +11,10 @@
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.EntityFramework;
 
-    public class User : IdentityUser
+    using Planex.Data.Common;
+    using Planex.Data.Common.Models;
+
+    public class User : IdentityUser, IHavePrimaryKey<string>, IAuditInfo, IDeletableEntity
     {
         private ICollection<Skill> skills;
 
@@ -77,5 +81,13 @@
             var userIdentity = await manager.CreateIdentityAsync(this, DefaultAuthenticationTypes.ApplicationCookie);
             return userIdentity;
         }
+
+        public DateTime CreatedOn { get; set; }
+
+        public DateTime? ModifiedOn { get; set; }
+
+        public bool IsDeleted { get; set; }
+
+        public DateTime? DeletedOn { get; set; }
     }
 }

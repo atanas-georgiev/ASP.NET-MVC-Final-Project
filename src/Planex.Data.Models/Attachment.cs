@@ -2,11 +2,11 @@
 {
     using System.ComponentModel.DataAnnotations;
 
-    public class Attachment
-    {
-        [Key]
-        public int Id { get; set; }
+    using Planex.Data.Common;
+    using Planex.Data.Common.Models;
 
+    public class Attachment : BaseModel<int>, IHavePrimaryKey<int>
+    {
         [MaxLength(300)]
         public string Name { get; set; }
     }

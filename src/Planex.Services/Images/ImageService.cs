@@ -3,15 +3,16 @@
     using System.Data.Entity;
 
     using Planex.Data;
+    using Planex.Data.Common;
     using Planex.Data.Models;
 
     public class ImageService : IImageService
     {
         private DbContext context;
 
-        private IRepository<Image> images;
+        private IRepository<Image, int> images;
 
-        public ImageService(DbContext context, IRepository<Image> images)
+        public ImageService(DbContext context, IRepository<Image, int> images)
         {
             this.context = context;
             this.images = images;

@@ -9,7 +9,7 @@
 
     public class ProjectDetailsDependencyViewModel : IGanttDependency, IMapFrom<SubTaskDependency>, IHaveCustomMappings
     {
-        public int DependencyId { get; set; }
+        public int Id { get; set; }
 
         public int PredecessorId { get; set; }
 
@@ -19,10 +19,10 @@
 
         public void CreateMappings(IConfiguration configuration)
         {
-            configuration.CreateMap<SubTask, ProjectDetailsDependencyViewModel>(string.Empty)
-                .ForMember(m => m.DependencyId, opt => opt.MapFrom(c => c.Id))
-                .ForMember(m => m.SuccessorId, opt => opt.MapFrom(c => (int)c.DependencyId))
-                .ForMember(m => m.Type, opt => opt.MapFrom(c => DependencyType.StartFinish));
+//            configuration.CreateMap<SubTask, ProjectDetailsDependencyViewModel>(string.Empty)
+//                .ForMember(m => m.DependencyId, opt => opt.MapFrom(c => c.Id))
+//                .ForMember(m => m.SuccessorId, opt => opt.MapFrom(c => (int)c.Id))
+//                .ForMember(m => m.Type, opt => opt.MapFrom(c => DependencyType.StartFinish));
         }
     }
 }

@@ -8,17 +8,18 @@
 
     using Planex.Common;
     using Planex.Data;
+    using Planex.Data.Common;
     using Planex.Data.Models;
 
     public class TaskService : ITaskService
     {
         private DbContext context;
 
-        private IRepository<SubTaskDependency> dependencies;
+        private IRepository<SubTaskDependency, int> dependencies;
 
-        private IRepository<SubTask> tasks;
+        private IRepository<SubTask, int> tasks;
 
-        public TaskService(DbContext context, IRepository<SubTask> tasks, IRepository<SubTaskDependency> dependencies)
+        public TaskService(DbContext context, IRepository<SubTask, int> tasks, IRepository<SubTaskDependency, int> dependencies)
         {
             this.context = context;
             this.tasks = tasks;

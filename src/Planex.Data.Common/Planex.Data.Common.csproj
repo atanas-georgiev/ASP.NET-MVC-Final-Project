@@ -4,15 +4,13 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{3173BECB-E152-4253-8540-3FF02007BC04}</ProjectGuid>
+    <ProjectGuid>{40E9124F-FE69-4CA1-BC6B-03D59136107C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Planex.Data</RootNamespace>
-    <AssemblyName>Planex.Data</AssemblyName>
+    <RootNamespace>Planex.Data.Common</RootNamespace>
+    <AssemblyName>Planex.Data.Common</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <NuGetPackageImportStamp>
-    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -40,14 +38,6 @@
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Microsoft.AspNet.Identity.EntityFramework, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.1\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -59,36 +49,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Properties\" />
+    <Compile Include="Repository.cs" />
+    <Compile Include="IRepository.cs" />
+    <Compile Include="Models\BaseModel{TKey}.cs" />
+    <Compile Include="Models\IAuditInfo.cs" />
+    <Compile Include="Models\IDeletableEntity.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="PlanexDbContext.cs" />
+    <Folder Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Planex.Data.Common\Planex.Data.Common.csproj">
-      <Project>{40e9124f-fe69-4ca1-bc6b-03d59136107c}</Project>
-      <Name>Planex.Data.Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Planex.Data.Models\Planex.Data.Models.csproj">
-      <Project>{36e741af-b659-4a5d-a595-5f0b9786aa9a}</Project>
-      <Name>Planex.Data.Models</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Import Project="..\packages\StyleCop.MSBuild.4.7.49.0\build\StyleCop.MSBuild.Targets" Condition="Exists('..\packages\StyleCop.MSBuild.4.7.49.0\build\StyleCop.MSBuild.Targets')" />
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('..\packages\StyleCop.MSBuild.4.7.49.0\build\StyleCop.MSBuild.Targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\StyleCop.MSBuild.4.7.49.0\build\StyleCop.MSBuild.Targets'))" />
-    <Error Condition="!Exists('..\packages\Visual-StyleCop.MSBuild.4.7.59.0\build\Visual-StyleCop.MSBuild.Targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Visual-StyleCop.MSBuild.4.7.59.0\build\Visual-StyleCop.MSBuild.Targets'))" />
-  </Target>
-  <Import Project="..\packages\Visual-StyleCop.MSBuild.4.7.59.0\build\Visual-StyleCop.MSBuild.Targets" Condition="Exists('..\packages\Visual-StyleCop.MSBuild.4.7.59.0\build\Visual-StyleCop.MSBuild.Targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

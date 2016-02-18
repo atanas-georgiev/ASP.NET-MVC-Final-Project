@@ -870,6 +870,10 @@
       <Project>{0ea65a04-b989-4f36-a9d0-e9ac9397f970}</Project>
       <Name>Planex.Common</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Planex.Data.Common\Planex.Data.Common.csproj">
+      <Project>{40e9124f-fe69-4ca1-bc6b-03d59136107c}</Project>
+      <Name>Planex.Data.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Planex.Data.Models\Planex.Data.Models.csproj">
       <Project>{36e741af-b659-4a5d-a595-5f0b9786aa9a}</Project>
       <Name>Planex.Data.Models</Name>
@@ -889,6 +893,9 @@
       <LastGenOutput>Default.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -41,11 +41,11 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -118,6 +118,10 @@
     <ProjectReference Include="..\Planex.Common\Planex.Common.csproj">
       <Project>{0ea65a04-b989-4f36-a9d0-e9ac9397f970}</Project>
       <Name>Planex.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Planex.Data.Common\Planex.Data.Common.csproj">
+      <Project>{40e9124f-fe69-4ca1-bc6b-03d59136107c}</Project>
+      <Name>Planex.Data.Common</Name>
     </ProjectReference>
     <ProjectReference Include="..\Planex.Data.Models\Planex.Data.Models.csproj">
       <Project>{36e741af-b659-4a5d-a595-5f0b9786aa9a}</Project>

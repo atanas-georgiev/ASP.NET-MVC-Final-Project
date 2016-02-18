@@ -3,7 +3,10 @@
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
-    public class Skill
+    using Planex.Data.Common;
+    using Planex.Data.Common.Models;
+
+    public class Skill : BaseModel<int>, IHavePrimaryKey<int>
     {
         private ICollection<SubTask> subTasks;
 
@@ -14,9 +17,6 @@
             this.users = new HashSet<User>();
             this.subTasks = new HashSet<SubTask>();
         }
-
-        [Key]
-        public int Id { get; set; }
 
         [Required]
         [MinLength(2)]

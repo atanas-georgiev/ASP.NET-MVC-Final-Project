@@ -4,15 +4,16 @@
     using System.Linq;
 
     using Planex.Data;
+    using Planex.Data.Common;
     using Planex.Data.Models;
 
     public class SkillService : ISkillService
     {
         private DbContext context;
 
-        private IRepository<Skill> skills;
+        private IRepository<Skill, int> skills;
 
-        public SkillService(DbContext context, IRepository<Skill> skills)
+        public SkillService(DbContext context, IRepository<Skill, int> skills)
         {
             this.context = context;
             this.skills = skills;

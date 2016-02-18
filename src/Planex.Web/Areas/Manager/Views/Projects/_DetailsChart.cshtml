@@ -20,7 +20,7 @@
                   m.Field(f => f.Expanded).DefaultValue(true);
               }).Read("ReadTasks", "Json").Create("CreateTask", "Json").Destroy("DestroyTask", "Json").Update("UpdateTask", "Json")).DependenciesDataSource(d => d.Model(m =>
                   {
-                      m.Id(f => f.DependencyId);
+                      m.Id(f => f.Id);
                       m.PredecessorId(f => f.PredecessorId);
                       m.SuccessorId(f => f.SuccessorId);
                       m.Type(f => f.Type);

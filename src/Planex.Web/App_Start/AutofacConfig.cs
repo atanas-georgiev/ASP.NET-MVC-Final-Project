@@ -8,6 +8,7 @@
     using Autofac.Integration.Mvc;
 
     using Planex.Data;
+    using Planex.Data.Common;
     using Planex.Services.Users;
     using Planex.Web.Areas.HR.Controllers;
 
@@ -49,11 +50,10 @@
                 .AsImplementedInterfaces()
                 .InstancePerRequest();
 
-            builder.RegisterGeneric(typeof(GenericRepository<>)).As(typeof(IRepository<>)).InstancePerRequest();
+            builder.RegisterGeneric(typeof(Repository<>)).As(typeof(IRepository<>)).InstancePerRequest();
+            builder.RegisterGeneric(typeof(Repository<,>)).As(typeof(IRepository<,>)).InstancePerRequest();
 
-            // builder.RegisterGeneric(typeof(PlanexData))
-            // .As(typeof(IPlanexData))
-            // .InstancePerRequest();
+
             builder.RegisterAssemblyTypes(Assembly.GetExecutingAssembly())
                 .AssignableTo<BaseController>()
                 .PropertiesAutowired()
