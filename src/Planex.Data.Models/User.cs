@@ -1,6 +1,7 @@
 ﻿namespace Planex.Data.Models
 {
     using System.Collections.Generic;
+    using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Security.Claims;
@@ -40,6 +41,10 @@
 
         [Required]
         public decimal Salary { get; set; }
+
+        [Required]
+        [DefaultValue(true)]
+        public bool ResetPassword { get; set; }
 
         public virtual ICollection<Skill> Skills
         {

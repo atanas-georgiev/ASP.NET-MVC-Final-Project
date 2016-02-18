@@ -10,23 +10,23 @@
     using Microsoft.Owin.Security;
 
     using Planex.Data.Models;
+    using Planex.Services.Users;
     using Planex.Web.Models;
 
     [Authorize]
-    public class AccountController : Controller
+    public class AccountController : BaseController
     {
         // Used for XSRF protection when adding external logins
         private const string XsrfKey = "XsrfId";
 
         private ApplicationSignInManager _signInManager;
-
         private ApplicationUserManager _userManager;
 
-        public AccountController()
+        public AccountController(IUserService userService) : base(userService)
         {
         }
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
+        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager, IUserService userService) : base(userService)
         {
             this.UserManager = userManager;
             this.SignInManager = signInManager;
@@ -243,7 +243,12 @@
             switch (result)
             {
                 case SignInStatus.Success:
-                    return this.RedirectToLocal(returnUrl);
+                    var user = this.userService.GetAll().FirstOrDefault(x => x.Email == model.Email);
+                    if (user != null && user.ResetPassword)
+                    {
+                        return this.RedirectToAction("ResetPassword");
+                    }
+                    return this.RedirectToAction("Index", "Home");
                 case SignInStatus.LockedOut:
                     return this.View("Lockout");
                 case SignInStatus.RequiresVerification:
@@ -257,9 +262,6 @@
             }
         }
 
-        // POST: /Account/LogOff
-        [HttpPost]
-        [ValidateAntiForgeryToken]
         public ActionResult LogOff()
         {
             this.AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
@@ -302,16 +304,13 @@
             return this.View(model);
         }
 
-        // GET: /Account/ResetPassword
-        [AllowAnonymous]
-        public ActionResult ResetPassword(string code)
+        public ActionResult ResetPassword()
         {
-            return code == null ? this.View("Error") : this.View();
+            return this.View();
         }
 
         // POST: /Account/ResetPassword
         [HttpPost]
-        [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> ResetPassword(ResetPasswordViewModel model)
         {
@@ -320,21 +319,9 @@
                 return this.View(model);
             }
 
-            var user = await this.UserManager.FindByNameAsync(model.Email);
-            if (user == null)
-            {
-                // Don't reveal that the user does not exist
-                return this.RedirectToAction("ResetPasswordConfirmation", "Account");
-            }
-
-            var result = await this.UserManager.ResetPasswordAsync(user.Id, model.Code, model.Password);
-            if (result.Succeeded)
-            {
-                return this.RedirectToAction("ResetPasswordConfirmation", "Account");
-            }
-
-            this.AddErrors(result);
-            return this.View();
+            this.UserProfile.ResetPassword = false;
+            this.userService.UpdatePassword(this.UserProfile, model.Password);
+            return this.RedirectToAction("Index", "Home");
         }
 
         // GET: /Account/ResetPasswordConfirmation

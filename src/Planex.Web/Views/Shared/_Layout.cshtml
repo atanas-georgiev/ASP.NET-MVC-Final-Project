@@ -48,7 +48,6 @@
                   items.Add().Text("Worker").Items(children => { children.Add().Text("Assignments").Action("Index", "Assignments", new { area = "Worker" }); });
 
                   items.Add().Visible(Context.User.Identity.IsAuthenticated).Text("Logout [" + Context.User.Identity.Name + "]").Action("LogOff", "Account");
-                  items.Add().Visible(!Context.User.Identity.IsAuthenticated).Text("Register").Action("Register", "Account");
                   items.Add().Visible(!Context.User.Identity.IsAuthenticated).Text("Login").Action("Login", "Account");
                   items.Add().Text("Inbox").Action("Inbox", "Messages", new { area = string.Empty });
                   items.Add().Text("Send").Action("Send", "Messages", new { area = string.Empty });

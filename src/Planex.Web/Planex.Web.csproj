@@ -851,7 +851,6 @@
     <Folder Include="Areas\Worker\Views\Shared\" />
     <Folder Include="Views\Grid\" />
     <Folder Include="Views\JSon\" />
-    <Folder Include="Views\Message\" />
     <Folder Include="Views\Skills\" />
     <Folder Include="Views\Users\" />
   </ItemGroup>

@@ -90,5 +90,12 @@
         {
             this.users.Update(user);
         }
+
+        public void UpdatePassword(User user, string password)
+        {
+            user.UserName = user.Email;
+            this.userManager.ChangePassword(user.Id, "changeme", password);
+            this.users.Update(user);
+        }
     }
 }

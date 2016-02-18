@@ -1,2 +1,2 @@
-﻿@(Html.Kendo().DropDownList().Name("Role").DataValueField("Value").DataTextField("Text").BindTo((IEnumerable<SelectListItem>)ViewData["roles"]).OptionLabel("Select roles").SelectedIndex((int)ViewData["SelectedIndex"])           
+﻿@(Html.Kendo().DropDownList().Name("Role").DataValueField("Value").DataTextField("Text").BindTo((IEnumerable<SelectListItem>)ViewData["roles"]).OptionLabel("Select roles").SelectedIndex((int)ViewData["SelectedIndex"]).HtmlAttributes(new { style = "width:100%" })
       )

@@ -1,6 +1,7 @@
 ﻿namespace Planex.Web.Areas.HR.Models
 {
     using System.Collections.Generic;
+    using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
     using System.Web;
@@ -42,8 +43,10 @@
         [UIHint("DropDown")]
         public string Role { get; set; }
 
+        [DisplayName("Skills")]
         public List<string> Skills { get; set; }
 
+        [DisplayName("Picture")]
         public HttpPostedFileBase UploadedImage { get; set; }
 
         public void CreateMappings(IConfiguration configuration)

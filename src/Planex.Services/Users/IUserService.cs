@@ -21,5 +21,7 @@
         void SetRoleName(User user, string name);
 
         void Update(User user);
+
+        void UpdatePassword(User user, string password);
     }
 }
