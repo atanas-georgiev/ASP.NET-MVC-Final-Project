@@ -64,6 +64,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\ASP.NET-MVC-Homeworks\04. Working-with-Data\Tweeter.Mvc\Libs\Kendo.Mvc.dll</HintPath>
     </Reference>
+    <Reference Include="Kendo.Mvc.resources, Version=2016.1.112.545, Culture=bg-BG, PublicKeyToken=121fae78165ba3d4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Libraries\Kendo.Mvc.resources.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
       <Private>True</Private>
@@ -402,6 +406,7 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Libraries\Kendo.Mvc.dll" />
+    <Content Include="Libraries\Kendo.Mvc.resources.dll" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Areas\Manager\Views\web.config" />
@@ -519,6 +524,8 @@
     <Content Include="Scripts\Kendo\bootstrap.js" />
     <Content Include="Scripts\Kendo\bootstrap.min.js" />
     <None Include="Scripts\Kendo\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\Kendo\cultures\kendo.culture.bg-BG.min.js" />
+    <Content Include="Scripts\Kendo\cultures\kendo.culture.bg.min.js" />
     <Content Include="Scripts\Kendo\jquery-1.10.2.js" />
     <Content Include="Scripts\Kendo\jquery-1.10.2.min.js" />
     <Content Include="Scripts\Kendo\jquery.min.js" />
@@ -649,6 +656,7 @@
     <Content Include="Scripts\Kendo\kendo.web.min.js" />
     <Content Include="Scripts\Kendo\kendo.webcomponents.min.js" />
     <Content Include="Scripts\Kendo\kendo.window.min.js" />
+    <Content Include="Scripts\Kendo\messages\kendo.messages.bg-BG.min.js" />
     <Content Include="Scripts\Kendo\modernizr-2.6.2.js" />
     <Content Include="Scripts\Kendo\pako_deflate.min.js" />
     <Content Include="Scripts\Kendo\respond.js" />

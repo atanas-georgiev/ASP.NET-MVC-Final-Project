@@ -9,9 +9,25 @@
     @Styles.Render("~/Content/css")
     @Styles.Render("~/Content/kendo")
     @RenderSection("styles", required: false)
+
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/kendo")
+    @Scripts.Render("~/Scripts/kendo/cultures/kendo.culture.bg.min.js")
+    @Scripts.Render("~/Scripts/kendo/cultures/kendo.culture.bg-BG.min.js")
+    @Scripts.Render("~/Scripts/kendo/messages/kendo.messages.bg-BG.min.js")
+    @RenderSection("scripts", required: false)
+
+    @{
+        var culture = System.Globalization.CultureInfo.CurrentCulture.ToString();
+    }
+
+    <script>
+        kendo.culture("@culture");
+    </script>
+
 </head>
 <body>
-<div id="megaStore">
+<div id="planexMenu">
     @(Html.Kendo().Menu().Name("Menu").Animation(animation =>
           {
               animation.Open(open =>
@@ -56,6 +72,7 @@
 
 </div>
 <div class="container body-content text-center">
+    <h1>@culture</h1>
     @RenderBody()
     <hr/>
     <footer>
@@ -63,9 +80,7 @@
     </footer>
 </div>
 
-@Scripts.Render("~/bundles/bootstrap")
-@Scripts.Render("~/bundles/kendo")
-@RenderSection("scripts", required: false)
+
 <script>
     $(function() {
         $('#menu').kendoMenu();

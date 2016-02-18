@@ -1,6 +1,9 @@
 ﻿namespace Planex.Web.Controllers
 {
+    using System;
+    using System.Globalization;
     using System.Linq;
+    using System.Threading;
     using System.Web.Mvc;
 
     using Planex.Services.Cache;
@@ -31,6 +34,18 @@
             }
 
             return this.View(homeModel);
+        }
+
+        protected override void Initialize(System.Web.Routing.RequestContext requestContext)
+        {
+            string[] languages = requestContext.HttpContext.Request.UserLanguages;
+
+            if (languages != null)
+            {
+                Thread.CurrentThread.CurrentCulture = Thread.CurrentThread.CurrentUICulture = new CultureInfo(languages[0]);
+            }
+
+            base.Initialize(requestContext);
         }
     }
 }
