@@ -10,7 +10,7 @@
     public class MessageCreateViewModel : IMapFrom<Message>
     {
         [Key]
-        public int Id;
+        public int Id { get; set; }
 
         [UIHint("DateTime")]
         public DateTime Date { get; set; }
@@ -30,5 +30,7 @@
         [DataType(DataType.MultilineText)]
         [AllowHtml]
         public string Text { get; set; }
+
+        public bool IsRead { get; set; }
     }
 }

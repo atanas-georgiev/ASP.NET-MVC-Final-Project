@@ -10,6 +10,7 @@
     using Microsoft.Owin.Security;
 
     using Planex.Web.Models;
+    using Planex.Web.Models.Account;
 
     [Authorize]
     public class ManageController : Controller
@@ -17,9 +18,9 @@
         // Used for XSRF protection when adding external logins
         private const string XsrfKey = "XsrfId";
 
-        private ApplicationSignInManager _signInManager;
+        private ApplicationSignInManager signInManager;
 
-        private ApplicationUserManager _userManager;
+        private ApplicationUserManager userManager;
 
         public ManageController()
         {
@@ -52,12 +53,12 @@
         {
             get
             {
-                return this._signInManager ?? this.HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
+                return this.signInManager ?? this.HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
             }
 
             private set
             {
-                this._signInManager = value;
+                this.signInManager = value;
             }
         }
 
@@ -65,12 +66,12 @@
         {
             get
             {
-                return this._userManager ?? this.HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+                return this.userManager ?? this.HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
             }
 
             private set
             {
-                this._userManager = value;
+                this.userManager = value;
             }
         }
 
@@ -383,10 +384,10 @@
 
         protected override void Dispose(bool disposing)
         {
-            if (disposing && this._userManager != null)
+            if (disposing && this.userManager != null)
             {
-                this._userManager.Dispose();
-                this._userManager = null;
+                this.userManager.Dispose();
+                this.userManager = null;
             }
 
             base.Dispose(disposing);

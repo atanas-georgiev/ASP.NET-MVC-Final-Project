@@ -49,7 +49,18 @@
 
         public virtual JsonResult ReadMessages([DataSourceRequest] DataSourceRequest request)
         {
-            var result = this.messageService.GetAll().Where(x => x.To.Id == this.UserProfile.Id).To<MessageViewModel>();
+            var result = this.messageService.GetAll()
+                .Where(x => x.To.Id == this.UserProfile.Id)
+                .To<MessageViewModel>();
+            return this.Json(result.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
+        }
+
+        public virtual JsonResult ReadUnreadMessages([DataSourceRequest] DataSourceRequest request)
+        {
+            var result = this.messageService.GetAll()
+                .Where(x => x.To.Id == this.UserProfile.Id && x.IsRead == false)
+                .OrderByDescending(x => x.Date)
+                .To<MessageViewModel>();
             return this.Json(result.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
         }
     }

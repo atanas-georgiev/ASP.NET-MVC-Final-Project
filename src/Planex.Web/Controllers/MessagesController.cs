@@ -1,11 +1,13 @@
 ﻿namespace Planex.Web.Controllers
 {
     using System;
+    using System.Linq;
     using System.Web.Mvc;
 
     using Planex.Data.Models;
     using Planex.Services.Messages;
     using Planex.Services.Users;
+    using Planex.Web.Infrastructure.Mappings;
     using Planex.Web.Models.Messages;
 
     public class MessagesController : BaseController
@@ -54,7 +56,16 @@
 
         public ActionResult View(string id)
         {
-            return this.View();
+            var intId = int.Parse(id);
+            var messageDb = this.messageService.GetAll().FirstOrDefault(x => x.Id == intId);
+            if (messageDb != null)
+            {
+                messageDb.IsRead = true;
+                this.messageService.Update(messageDb);
+            }
+
+            var message = this.messageService.GetAll().Where(x => x.Id == intId).To<MessageViewModel>().FirstOrDefault();
+            return this.View(message);
         }
     }
 }

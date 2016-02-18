@@ -1,26 +1,30 @@
 ﻿namespace Planex.Web.Controllers
 {
+    using System.Linq;
     using System.Web.Mvc;
 
-    public class HomeController : Controller
+    using Planex.Services.Messages;
+    using Planex.Services.Users;
+    using Planex.Web.Models.Home;
+
+    public class HomeController : BaseController
     {
-        public ActionResult About()
+        private readonly IMessageService messageService;
+
+        public HomeController(IUserService userService, IMessageService messageService)
+            : base(userService)
         {
-            this.ViewBag.Message = "Your application description page.";
-
-            return this.View();
-        }
-
-        public ActionResult Contact()
-        {
-            this.ViewBag.Message = "Your contact page.";
-
-            return this.View();
+            this.messageService = messageService;
         }
 
         public ActionResult Index()
         {
-            return this.View();
+            var homeModel = new HomeViewModel();
+            homeModel.Messages = new MessageHomeViewModel();
+            homeModel.Messages.UnreadMessagesCount =
+                this.messageService.GetAll().Where(x => x.To.Id == this.UserProfile.Id).Count(x => x.IsRead == false);
+            
+            return this.View(homeModel);
         }
     }
 }

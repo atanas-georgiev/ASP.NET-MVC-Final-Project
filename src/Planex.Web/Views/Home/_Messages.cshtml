@@ -1,0 +1,28 @@
+﻿@using Planex.Web.Models.Messages
+<br/>
+
+<script type="text/x-kendo-tmpl" id="template">
+    <div>
+        <a href="/Messages/View/#:Id#"><h4>#:Subject# from #:From.Name# (#=kendo.toString(Date, "G")#)</h4></a>
+    </div>
+</script>
+
+<div class="well k-content">
+    <h3 class="well-title">New Messages</h3>
+    <hr/>
+    <div class="row">
+        <div class="demo-section k-content wide">
+            @(Html.Kendo().ListView<MessageViewModel>("Messages")
+                .Name("messagesListView")
+                .TagName("div")
+                .ClientTemplateId("template")
+                .DataSource(dataSource =>
+                {
+                    dataSource.Read(read => read.Action("ReadUnreadMessages", "JsonData"));
+                }))
+        </div>
+    </div>
+</div>
+
+
+

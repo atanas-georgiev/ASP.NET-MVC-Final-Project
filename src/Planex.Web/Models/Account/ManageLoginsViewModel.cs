@@ -1,4 +1,4 @@
-namespace Planex.Web.Models
+namespace Planex.Web.Models.Account
 {
     using System.Collections.Generic;
 

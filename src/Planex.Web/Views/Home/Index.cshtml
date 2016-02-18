@@ -1,7 +1,12 @@
-﻿@{
+﻿@model Planex.Web.Models.Home.HomeViewModel
+
+@{
     ViewBag.Title = "Home Page";
 }
 
-<div class="jumbotron">
-    <h1>Hello</h1>
-</div>
+@if (Context.User.Identity.IsAuthenticated && Model.Messages.UnreadMessagesCount != 0)
+{
+    @Html.Partial("_Messages")
+}
+
+<br />

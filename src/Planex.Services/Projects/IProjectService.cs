@@ -10,7 +10,7 @@
     {
         void Add(Project task);
 
-        void AddAttachments(Project dbTask, List<HttpPostedFileBase> uploadedAttachments, HttpServerUtility server);
+        void AddAttachments(Project dbtask, List<HttpPostedFileBase> uploadedAttachments, HttpServerUtility server);
 
         IQueryable<Project> GetAll();
 

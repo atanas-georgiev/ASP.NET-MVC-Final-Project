@@ -1,11 +1,10 @@
-namespace Planex.Web.Models
+namespace Planex.Web.Models.Account
 {
     using System.ComponentModel.DataAnnotations;
 
-    public class ForgotPasswordViewModel
+    public class ForgotViewModel
     {
         [Required]
-        [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }
     }

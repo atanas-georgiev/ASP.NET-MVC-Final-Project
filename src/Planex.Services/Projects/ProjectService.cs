@@ -28,7 +28,7 @@
         }
 
         public void AddAttachments(
-            Project dbTask, 
+            Project dbtask, 
             List<HttpPostedFileBase> uploadedAttachments, 
             HttpServerUtility server)
         {
@@ -42,18 +42,18 @@
                 Directory.CreateDirectory(server.MapPath(TasksConstants.MainContentFolder));
             }
 
-            if (!Directory.Exists(server.MapPath(TasksConstants.MainContentFolder + "\\" + dbTask.Id)))
+            if (!Directory.Exists(server.MapPath(TasksConstants.MainContentFolder + "\\" + dbtask.Id)))
             {
-                Directory.CreateDirectory(server.MapPath(TasksConstants.MainContentFolder + "\\" + dbTask.Id));
+                Directory.CreateDirectory(server.MapPath(TasksConstants.MainContentFolder + "\\" + dbtask.Id));
             }
 
             foreach (var file in uploadedAttachments)
             {
                 var filename = Path.GetFileName(file.FileName);
-                file.SaveAs(server.MapPath(TasksConstants.MainContentFolder + "\\" + dbTask.Id + "\\" + filename));
-                dbTask.Attachments.Add(new Attachment() { Name = file.FileName });
+                file.SaveAs(server.MapPath(TasksConstants.MainContentFolder + "\\" + dbtask.Id + "\\" + filename));
+                dbtask.Attachments.Add(new Attachment() { Name = file.FileName });
 
-                this.Update(dbTask);
+                this.Update(dbtask);
             }
         }
 

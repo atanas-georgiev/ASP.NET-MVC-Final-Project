@@ -8,6 +8,7 @@
     using AutoMapper;
 
     using Planex.Data.Models;
+    using Planex.Services.Messages;
     using Planex.Services.Users;
 
     public abstract class BaseController : Controller

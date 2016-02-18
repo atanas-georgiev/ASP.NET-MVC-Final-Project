@@ -1,8 +1,8 @@
-namespace Planex.Web.Models
+namespace Planex.Web.Models.Account
 {
     using System.ComponentModel.DataAnnotations;
 
-    public class SetPasswordViewModel
+    public class ChangePasswordViewModel
     {
         [DataType(DataType.Password)]
         [Display(Name = "Confirm new password")]
@@ -14,5 +14,10 @@ namespace Planex.Web.Models
         [DataType(DataType.Password)]
         [Display(Name = "New password")]
         public string NewPassword { get; set; }
+
+        [Required]
+        [DataType(DataType.Password)]
+        [Display(Name = "Current password")]
+        public string OldPassword { get; set; }
     }
 }

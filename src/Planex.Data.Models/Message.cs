@@ -1,6 +1,7 @@
 ﻿namespace Planex.Data.Models
 {
     using System;
+    using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
 
@@ -27,6 +28,10 @@
 
         [ForeignKey("ToId")]
         public User To { get; set; }
+
+        [Required]
+        [DefaultValue(true)]
+        public bool IsRead { get; set; }
 
         public string ToId { get; set; }
     }

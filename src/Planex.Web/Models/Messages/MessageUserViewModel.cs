@@ -23,6 +23,8 @@
         [UIHint("String")]
         public string Name { get; set; }
 
+        public bool IsRead { get; set; }
+
         public void CreateMappings(IConfiguration configuration)
         {
             configuration.CreateMap<User, MessageUserViewModel>(string.Empty)

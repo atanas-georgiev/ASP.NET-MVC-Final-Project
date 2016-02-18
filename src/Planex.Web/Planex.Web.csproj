@@ -268,26 +268,28 @@
     <Compile Include="Infrastructure\Mappings\IMapFrom.cs" />
     <Compile Include="Infrastructure\Mappings\IMapTo.cs" />
     <Compile Include="Infrastructure\Mappings\QueryableExtensions.cs" />
-    <Compile Include="Models\ExternalLoginConfirmationViewModel.cs" />
-    <Compile Include="Models\AddPhoneNumberViewModel.cs" />
-    <Compile Include="Models\ChangePasswordViewModel.cs" />
-    <Compile Include="Models\ConfigureTwoFactorViewModel.cs" />
-    <Compile Include="Models\ExternalLoginListViewModel.cs" />
-    <Compile Include="Models\FactorViewModel.cs" />
-    <Compile Include="Models\ForgotPasswordViewModel.cs" />
-    <Compile Include="Models\ForgotViewModel.cs" />
-    <Compile Include="Models\LoginViewModel.cs" />
-    <Compile Include="Models\ManageLoginsViewModel.cs" />
-    <Compile Include="Models\IndexViewModel.cs" />
+    <Compile Include="Models\Account\ExternalLoginConfirmationViewModel.cs" />
+    <Compile Include="Models\Account\AddPhoneNumberViewModel.cs" />
+    <Compile Include="Models\Account\ChangePasswordViewModel.cs" />
+    <Compile Include="Models\Account\ConfigureTwoFactorViewModel.cs" />
+    <Compile Include="Models\Account\ExternalLoginListViewModel.cs" />
+    <Compile Include="Models\Account\FactorViewModel.cs" />
+    <Compile Include="Models\Account\ForgotPasswordViewModel.cs" />
+    <Compile Include="Models\Account\ForgotViewModel.cs" />
+    <Compile Include="Models\Account\LoginViewModel.cs" />
+    <Compile Include="Models\Account\ManageLoginsViewModel.cs" />
+    <Compile Include="Models\Account\IndexViewModel.cs" />
+    <Compile Include="Models\Home\HomeViewModel.cs" />
+    <Compile Include="Models\Home\MessageHomeViewModel.cs" />
     <Compile Include="Models\Messages\MessageCreateViewModel.cs" />
     <Compile Include="Models\Messages\MessageUserViewModel.cs" />
     <Compile Include="Models\Messages\MessageViewModel.cs" />
-    <Compile Include="Models\RegisterViewModel.cs" />
-    <Compile Include="Models\ResetPasswordViewModel.cs" />
-    <Compile Include="Models\SendCodeViewModel.cs" />
-    <Compile Include="Models\SetPasswordViewModel.cs" />
-    <Compile Include="Models\VerifyCodeViewModel.cs" />
-    <Compile Include="Models\VerifyPhoneNumberViewModel.cs" />
+    <Compile Include="Models\Account\RegisterViewModel.cs" />
+    <Compile Include="Models\Account\ResetPasswordViewModel.cs" />
+    <Compile Include="Models\Account\SendCodeViewModel.cs" />
+    <Compile Include="Models\Account\SetPasswordViewModel.cs" />
+    <Compile Include="Models\Account\VerifyCodeViewModel.cs" />
+    <Compile Include="Models\Account\VerifyPhoneNumberViewModel.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -656,8 +658,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
     <Content Include="Views\Account\ConfirmEmail.cshtml" />
@@ -833,8 +833,10 @@
     <Content Include="Views\Shared\DisplayTemplates\Url.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Percent.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\AssignmentViewModel.cshtml" />
+    <Content Include="Views\Home\_Messages.cshtml" />
     <None Include="Views\Messages\Inbox.cshtml" />
     <None Include="Views\Messages\Send.cshtml" />
+    <None Include="Views\Messages\View.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

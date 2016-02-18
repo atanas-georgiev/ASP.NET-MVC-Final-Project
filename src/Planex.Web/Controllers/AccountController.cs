@@ -12,6 +12,7 @@
     using Planex.Data.Models;
     using Planex.Services.Users;
     using Planex.Web.Models;
+    using Planex.Web.Models.Account;
 
     [Authorize]
     public class AccountController : BaseController
