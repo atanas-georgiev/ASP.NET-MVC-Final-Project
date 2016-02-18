@@ -1,10 +1,13 @@
 ﻿namespace Planex.Web.Models.Messages
 {
     using System;
+    using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
     using System.Web.Mvc;
 
     using Planex.Data.Models;
+    using Planex.Web.App_LocalResources;
+    using Planex.Web.Infrastructure.Localization;
     using Planex.Web.Infrastructure.Mappings;
 
     public class MessageCreateViewModel : IMapFrom<Message>
@@ -15,13 +18,15 @@
         [UIHint("DateTime")]
         public DateTime Date { get; set; }
 
-        [Required]
         [UIHint("String")]
+        [LocalizedDisplay("Receiver")]
+        [LocalizedRequired("Receiver")]
         public string Receiver { get; set; }
 
-        [Required]
         [MaxLength(100)]
         [UIHint("String")]
+        [LocalizedDisplay("Subject")]
+        [LocalizedRequired("Subject")]
         public string Subject { get; set; }
 
         [Required]

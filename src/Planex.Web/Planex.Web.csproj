@@ -199,10 +199,20 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App_LocalResources\Default.Designer.cs">
+    <Compile Include="App_LocalResources\ErrorMessages.bg.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Default.resx</DependentUpon>
+      <DependentUpon>ErrorMessages.bg.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_LocalResources\ErrorMessages.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ErrorMessages.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_LocalResources\ModelLabels.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModelLabels.resx</DependentUpon>
     </Compile>
     <Compile Include="App_Start\ApplicationSignInManager.cs" />
     <Compile Include="App_Start\ApplicationUserManager.cs" />
@@ -264,6 +274,8 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Infrastructure\Extensions\ControllerExtensions.cs" />
+    <Compile Include="Infrastructure\Localization\LocalizedDisplayAttribute.cs" />
+    <Compile Include="Infrastructure\Localization\LocalizedRequiredAttribute.cs" />
     <Compile Include="Infrastructure\Mappings\IHaveCustomMappings.cs" />
     <Compile Include="Infrastructure\Mappings\IMapFrom.cs" />
     <Compile Include="Infrastructure\Mappings\IMapTo.cs" />
@@ -842,6 +854,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="App_GlobalResources\" />
     <Folder Include="Areas\HR\Views\Base\" />
     <Folder Include="Areas\HR\Views\Shared\" />
     <Folder Include="Areas\Lead\Views\Base\" />
@@ -888,14 +901,24 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_LocalResources\Default.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Default.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </Content>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <WCFMetadata Include="Service References\" />
+    <EmbeddedResource Include="App_LocalResources\ErrorMessages.bg.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ErrorMessages.bg.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App_LocalResources\ErrorMessages.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ErrorMessages.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App_LocalResources\ModelLabels.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ModelLabels.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="App_LocalResources\ModelLabels.bg.resx" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

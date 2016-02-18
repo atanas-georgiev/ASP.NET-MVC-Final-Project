@@ -22,14 +22,14 @@ namespace Planex.Web.App_LocalResources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class Default {
+    public class ErrorMessages {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Default() {
+        internal ErrorMessages() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace Planex.Web.App_LocalResources {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Planex.Web.App_LocalResources.Default", typeof(Default).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Planex.Web.App_LocalResources.ErrorMessages", typeof(ErrorMessages).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,20 +61,20 @@ namespace Planex.Web.App_LocalResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to First Name.
+        ///   Looks up a localized string similar to Please specify a receiver.
         /// </summary>
-        public static string UserFirstName {
+        public static string Receiver {
             get {
-                return ResourceManager.GetString("UserFirstName", resourceCulture);
+                return ResourceManager.GetString("Receiver", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Last Name.
+        ///   Looks up a localized string similar to Please specify a subject.
         /// </summary>
-        public static string UserLastName {
+        public static string Subject {
             get {
-                return ResourceManager.GetString("UserLastName", resourceCulture);
+                return ResourceManager.GetString("Subject", resourceCulture);
             }
         }
     }
