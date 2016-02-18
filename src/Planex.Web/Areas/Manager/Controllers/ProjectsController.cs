@@ -53,7 +53,8 @@
                                      ManagerId = this.UserProfile.Id, 
                                      Priority = model.Priority, 
                                      State = TaskStateType.Draft, 
-                                     Start = model.Start, 
+                                     Start = model.Start,
+                                     End = model.Start,
                                      PercentComplete = 0, 
                                      LeadId = model.LeadId, 
                                      Price = 0
@@ -86,6 +87,20 @@
                 result.End = subTasks.OrderByDescending(x => x.End).First().End;
                 result.FinalPrice = subTasks.Sum(x => x.Price);
             }
+
+            var project = this.projectsService.GetById(intId);
+
+            if (result.End != project.End)
+            {
+                project.End = result.End;                
+            }
+
+            if (project.Subtasks.Count() != 0)
+            {
+                project.PercentComplete = project.Subtasks.Sum(x => x.PercentComplete) / project.Subtasks.Count;
+            }
+            
+            this.projectsService.Update(project);
 
             return this.View(result);
         }

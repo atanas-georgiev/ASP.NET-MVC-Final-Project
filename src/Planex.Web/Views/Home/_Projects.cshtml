@@ -1,0 +1,35 @@
+﻿@using Planex.Web.Models.Home
+@using Planex.Web.Models.Messages
+<br />
+
+<div class="well k-content">
+    <h3 class="well-title">Active Projects</h3>
+    <hr />
+    @(Html.Kendo().TreeList<ProjectHomeViewModel>()
+        .Name("treelistProjects")
+        .Columns(columns =>
+        {
+            columns.Add().Field(e => e.Title);
+            columns.Add().Field(e => e.Start).Format("{0:MM/dd/yyyy}");
+            columns.Add().Field(e => e.End).Format("{0:MM/dd/yyyy}");
+            columns.Add().Field(e => e.PercentComplete);
+        })
+        .Filterable()
+        .Sortable()
+        .DataSource(dataSource => dataSource
+            .Read(read => read.Action("ReadAllProjects", "JsonData"))
+            .ServerOperation(false)
+            .Model(m =>
+            {
+                m.Id(f => f.Id);
+                m.ParentId(f => f.ParentId);
+                m.Expanded(false);
+                m.Field(f => f.Title);
+                m.Field(f => f.Start);
+                m.Field(f => f.End);
+                m.Field(f => f.PercentComplete);
+            })
+        )
+        .Height(540)
+    )
+</div>

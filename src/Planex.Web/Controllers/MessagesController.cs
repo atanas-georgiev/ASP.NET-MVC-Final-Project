@@ -10,6 +10,8 @@
     using Planex.Web.Infrastructure.Mappings;
     using Planex.Web.Models.Messages;
 
+    using Vereyon.Web;
+
     public class MessagesController : BaseController
     {
         private readonly IMessageService messageService;
@@ -65,6 +67,10 @@
             }
 
             var message = this.messageService.GetAll().Where(x => x.Id == intId).To<MessageViewModel>().FirstOrDefault();
+
+            var sanitizer = HtmlSanitizer.SimpleHtml5DocumentSanitizer();
+            message.Text = sanitizer.Sanitize(message.Text);
+
             return this.View(message);
         }
     }

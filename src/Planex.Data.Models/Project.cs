@@ -59,6 +59,8 @@
         [Required]
         public DateTime Start { get; set; }
 
+        public DateTime End { get; set; }
+
         [Required]
         public TaskStateType State { get; set; }
 

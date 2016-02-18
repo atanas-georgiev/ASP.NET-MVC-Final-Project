@@ -6,12 +6,14 @@
     using Kendo.Mvc.Extensions;
     using Kendo.Mvc.UI;
 
+    using Planex.Data.Models;
     using Planex.Services.Messages;
     using Planex.Services.Projects;
     using Planex.Services.Skills;
     using Planex.Services.Tasks;
     using Planex.Services.Users;
     using Planex.Web.Infrastructure.Mappings;
+    using Planex.Web.Models.Home;
     using Planex.Web.Models.Messages;
 
     public class JsonDataController : BaseController
@@ -25,10 +27,10 @@
         private readonly ITaskService subTaskService;
 
         public JsonDataController(
-            IUserService userService, 
-            ISkillService skillService, 
-            ITaskService subTaskService, 
-            IProjectService projectService, 
+            IUserService userService,
+            ISkillService skillService,
+            ITaskService subTaskService,
+            IProjectService projectService,
             IMessageService messageService)
             : base(userService)
         {
@@ -62,6 +64,29 @@
                 .OrderByDescending(x => x.Date)
                 .To<MessageViewModel>();
             return this.Json(result.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
+        }
+
+        public virtual JsonResult ReadAllProjects([DataSourceRequest] DataSourceRequest request)
+        {
+            var projects = this.projectService.GetAll().Where(x => x.State >= TaskStateType.Started);
+            var result = this.subTaskService.GetAll().Where(x => x.Project.State >= TaskStateType.Started).To<ProjectHomeViewModel>().ToList();
+            
+            foreach (var project in projects)
+            {
+                result.Add(
+                    new ProjectHomeViewModel()
+                        {
+                            Title = project.Title,
+                            Start = project.Start,
+                            End = project.End,
+                            HasChildren = project.Subtasks.Any(),
+                            ParentId = null,
+                            Id = project.Id + 100000,
+                            PercentComplete = project.PercentComplete * 100
+                        });
+            }
+
+            return this.Json(result.AsQueryable().ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
         }
     }
 }

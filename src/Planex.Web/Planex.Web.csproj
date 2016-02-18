@@ -281,6 +281,7 @@
     <Compile Include="Models\Account\IndexViewModel.cs" />
     <Compile Include="Models\Home\HomeViewModel.cs" />
     <Compile Include="Models\Home\MessageHomeViewModel.cs" />
+    <Compile Include="Models\Home\ProjectHomeViewModel.cs" />
     <Compile Include="Models\Messages\MessageCreateViewModel.cs" />
     <Compile Include="Models\Messages\MessageUserViewModel.cs" />
     <Compile Include="Models\Messages\MessageViewModel.cs" />
@@ -834,6 +835,7 @@
     <Content Include="Views\Shared\EditorTemplates\Percent.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\AssignmentViewModel.cshtml" />
     <Content Include="Views\Home\_Messages.cshtml" />
+    <Content Include="Views\Home\_Projects.cshtml" />
     <None Include="Views\Messages\Inbox.cshtml" />
     <None Include="Views\Messages\Send.cshtml" />
     <None Include="Views\Messages\View.cshtml" />
