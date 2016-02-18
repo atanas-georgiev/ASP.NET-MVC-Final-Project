@@ -7,6 +7,7 @@
     using Kendo.Mvc.UI;
 
     using Planex.Data.Models;
+    using Planex.Services.Cache;
     using Planex.Services.Messages;
     using Planex.Services.Projects;
     using Planex.Services.Skills;
@@ -26,18 +27,22 @@
 
         private readonly ITaskService subTaskService;
 
+        private readonly ICacheService cacheService;
+
         public JsonDataController(
             IUserService userService,
             ISkillService skillService,
             ITaskService subTaskService,
             IProjectService projectService,
-            IMessageService messageService)
+            IMessageService messageService,
+            ICacheService cacheService)
             : base(userService)
         {
             this.skillService = skillService;
             this.subTaskService = subTaskService;
             this.projectService = projectService;
             this.messageService = messageService;
+            this.cacheService = cacheService;
         }
 
         public ActionResult GetAllUsers([DataSourceRequest] DataSourceRequest request)
@@ -68,25 +73,35 @@
 
         public virtual JsonResult ReadAllProjects([DataSourceRequest] DataSourceRequest request)
         {
-            var projects = this.projectService.GetAll().Where(x => x.State >= TaskStateType.Started);
-            var result = this.subTaskService.GetAll().Where(x => x.Project.State >= TaskStateType.Started).To<ProjectHomeViewModel>().ToList();
-            
-            foreach (var project in projects)
-            {
-                result.Add(
-                    new ProjectHomeViewModel()
-                        {
-                            Title = project.Title,
-                            Start = project.Start,
-                            End = project.End,
-                            HasChildren = project.Subtasks.Any(),
-                            ParentId = null,
-                            Id = project.Id + 100000,
-                            PercentComplete = project.PercentComplete * 100
-                        });
-            }
+            var projectsPublic =
+                            this.cacheService.Get(
+                                "categories",
+                                () =>
+                                    {
+                                        var projects = this.projectService.GetAll().Where(x => x.State >= TaskStateType.Started);
+                                        var result = this.subTaskService.GetAll().Where(x => x.Project.State >= TaskStateType.Started).To<ProjectHomeViewModel>().ToList();
 
-            return this.Json(result.AsQueryable().ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
+                                        foreach (var project in projects)
+                                        {
+                                            result.Add(
+                                                new ProjectHomeViewModel()
+                                                {
+                                                    Title = project.Title,
+                                                    Start = project.Start,
+                                                    End = project.End,
+                                                    HasChildren = project.Subtasks.Any(),
+                                                    ParentId = null,
+                                                    Id = project.Id + 100000,
+                                                    PercentComplete = project.PercentComplete * 100
+                                                });
+                                        }
+
+                                        return result;
+                                    },
+                                10 * 60);
+           
+
+            return this.Json(projectsPublic.AsQueryable().ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
         }
     }
 }

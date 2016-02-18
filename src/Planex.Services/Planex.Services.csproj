@@ -99,6 +99,8 @@
     <Folder Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Cache\CacheService.cs" />
+    <Compile Include="Cache\ICacheService.cs" />
     <Compile Include="Images\IImageService.cs" />
     <Compile Include="Images\ImageService.cs" />
     <Compile Include="Messages\IMessageService.cs" />

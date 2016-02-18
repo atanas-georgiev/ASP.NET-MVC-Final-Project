@@ -3,13 +3,14 @@
     using System.Linq;
     using System.Web.Mvc;
 
+    using Planex.Services.Cache;
     using Planex.Services.Messages;
     using Planex.Services.Users;
     using Planex.Web.Models.Home;
 
     public class HomeController : BaseController
     {
-        private readonly IMessageService messageService;
+        private readonly IMessageService messageService;        
 
         public HomeController(IUserService userService, IMessageService messageService)
             : base(userService)
