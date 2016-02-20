@@ -233,6 +233,28 @@
             return this.Json(dep);
         }
 
+        public virtual JsonResult UpdateTaskOnlyProgress(
+            [DataSourceRequest] DataSourceRequest request,
+            ProjectDetailsViewModel task)
+        {
+            if (this.ModelState.IsValid)
+            {
+                var taskDb = this.subTaskService.GetById(task.TaskId);
+
+                taskDb.PercentComplete = task.PercentComplete;
+
+                var projectId = int.Parse(this.Session["ProjectId"].ToString());
+                var project = this.projectService.GetById(projectId);
+                var subTasks = this.subTaskService.GetAll().Where(x => x.ProjectId == projectId && x.ParentId == null);
+                project.PercentComplete = subTasks.Sum(x => x.PercentComplete) / subTasks.Count();
+                this.projectService.Update(project);
+
+                this.UpdatePriceSubTask(taskDb.Id);
+            }
+
+            return this.Json(new[] { task }.ToDataSourceResult(request, this.ModelState));
+        }
+
         public virtual JsonResult UpdateTask(
             [DataSourceRequest] DataSourceRequest request, 
             ProjectDetailsViewModel task)

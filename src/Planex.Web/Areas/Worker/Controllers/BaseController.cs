@@ -8,6 +8,7 @@
     using Planex.Data.Models;
     using Planex.Services.Users;
 
+    [Authorize(Roles = "Worker")]
     public class BaseController : Controller
     {
         protected IUserService userService;

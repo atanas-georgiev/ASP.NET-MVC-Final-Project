@@ -518,7 +518,11 @@
     <Content Include="Areas\Manager\Views\Projects\_DetailsFiles.cshtml" />
     <Content Include="Areas\Worker\Views\web.config" />
     <Content Include="Areas\Worker\Views\Assignments\Edit.cshtml" />
-    <None Include="Areas\Worker\Views\Assignments\Index.cshtml" />
+    <Content Include="Areas\Lead\Views\Projects\_DetailsFiles.cshtml" />
+    <Content Include="Areas\Lead\Views\Projects\_DetailsSchema.cshtml" />
+    <Content Include="Areas\Worker\Views\Assignments\Index.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Areas\Worker\Views\_ViewStart.cshtml" />
     <None Include="Properties\PublishProfiles\server.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
@@ -866,9 +870,15 @@
     <Content Include="Views\Shared\EditorTemplates\AssignmentViewModel.cshtml" />
     <Content Include="Views\Home\_Messages.cshtml" />
     <Content Include="Views\Home\_Projects.cshtml" />
-    <None Include="Views\Messages\Inbox.cshtml" />
-    <None Include="Views\Messages\Send.cshtml" />
-    <None Include="Views\Messages\View.cshtml" />
+    <Content Include="Views\Messages\Inbox.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\Messages\Send.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\Messages\View.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Views\Shared\EditorTemplates\DropDown.cshtml" />
   </ItemGroup>
   <ItemGroup>

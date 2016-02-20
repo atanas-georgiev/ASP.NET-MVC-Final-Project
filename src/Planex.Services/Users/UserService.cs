@@ -39,6 +39,7 @@
             user.CreatedOn = DateTime.UtcNow;
             this.userManager.Create(user, "changeme");
             user.IntId = int.Parse(user.Id.GetHashCode().ToString());
+            user.ResetPassword = true;
             this.users.Update(user);
             this.userManager.AddToRole(user.Id, role);
         }

@@ -27,64 +27,100 @@
 
 </head>
 <body>
-<div id="planexMenu">
-    @(Html.Kendo().Menu().Name("Menu").Animation(animation =>
-          {
-              animation.Open(open =>
-                  {
-                      if (ViewBag.animation == "expand")
-                      {
-                          open.Expand(ExpandDirection.Vertical);
-                      }
+    <div id="planexMenu">
+        @(Html.Kendo().Menu().Name("Menu").Animation(animation =>
+    {
+        animation.Open(open =>
+        {
+            if (ViewBag.animation == "expand")
+            {
+                open.Expand(ExpandDirection.Vertical);
+            }
 
-                      if (ViewBag.animation == "slide")
-                      {
-                          open.SlideIn(SlideDirection.Down);
-                      }
+            if (ViewBag.animation == "slide")
+            {
+                open.SlideIn(SlideDirection.Down);
+            }
 
-                      if (true)
-                      {
-                          open.Fade(FadeDirection.In);
-                      }
-                  });
-          }).HoverDelay(100).Items(items =>
-              {
-                  items.Add().Text("<span class=\"glyphicon glyphicon-home\"></span> Home").Encoded(false).Action("Index", "Home", new { area = string.Empty });
-                  items.Add().Text("Manager").Items(children => { children.Add().Text("<span class=\"glyphicon glyphicon-calendar\"></span> Projects").Encoded(false).Action("Index", "Projects", new { area = "Manager" }); });
-                  items.Add().Text("Lead").Items(children =>
-                      {
-                          children.Add().Text("Estimations").Action("Index", "Estimations", new { area = "Lead" });
-                          children.Add().Text("Projects").Action("Index", "Projects", new { area = "Lead" });
-                      });
-                  items.Add().Text("HR").Items(children =>
-                      {
-                          children.Add().Text("People").Action("Index", "Users", new { area = "HR" });
-                          children.Add().Text("Skills").Action("Index", "Skills", new { area = "HR" });
-                      });
-                  items.Add().Text("Worker").Items(children => { children.Add().Text("Assignments").Action("Index", "Assignments", new { area = "Worker" }); });
+            if (true)
+            {
+                open.Fade(FadeDirection.In);
+            }
+        });
+    }).HoverDelay(100).Items(items =>
+    {
+        // Home page, public
+        items.Add().Text("<span class=\"glyphicon glyphicon-home\"></span> Home").Encoded(false).Action("Index", "Home", new { area = string.Empty });
 
-                  items.Add().Visible(Context.User.Identity.IsAuthenticated).Text("Logout [" + Context.User.Identity.Name + "]").Action("LogOff", "Account");
-                  items.Add().Visible(!Context.User.Identity.IsAuthenticated).Text("Login").Action("Login", "Account");
-                  items.Add().Text("Inbox").Action("Inbox", "Messages", new { area = string.Empty });
-                  items.Add().Text("Send").Action("Send", "Messages", new { area = string.Empty });
-              })
-          )
+        if (Context.User.Identity.IsAuthenticated)
+        {
+            // Manager section
+            if (User.IsInRole("Manager"))
+            {
+                items.Add().Text("<span class=\"glyphicon glyphicon-edit\"></span> Projects").Encoded(false).Items(children =>
+                {
+                    children.Add().Text("<span class=\"glyphicon glyphicon-share\"></span> Add").Encoded(false).Action("Create", "Projects", new { area = "Manager" });
+                    children.Add().Text("<span class=\"glyphicon glyphicon-check\"></span> List").Encoded(false).Action("Index", "Projects", new { area = "Manager" });
+                });
+                items.Add().Text("<span class=\"glyphicon glyphicon-print\"></span> HR").Encoded(false).Items(children =>
+                {
+                    children.Add().Text("<span class=\"glyphicon glyphicon-user\"></span> Users").Encoded(false).Action("Index", "Users", new { area = "HR" });
+                    children.Add().Text("<span class=\"glyphicon glyphicon-file\"></span> Skills").Encoded(false).Action("Index", "Skills", new { area = "HR" });
+                });
+            }
+            //HR section
+            else if (User.IsInRole("HR"))
+            {
+                items.Add().Text("<span class=\"glyphicon glyphicon-print\"></span> HR").Encoded(false).Items(children =>
+                {
+                    children.Add().Text("<span class=\"glyphicon glyphicon-user\"></span> Users").Encoded(false).Action("Index", "Users", new { area = "HR" });
+                    children.Add().Text("<span class=\"glyphicon glyphicon-file\"></span> Skills").Encoded(false).Action("Index", "Skills", new { area = "HR" });
+                });
+            }
+            // Lead section
+            else if (User.IsInRole("Lead"))
+            {
+                items.Add().Text("<span class=\"glyphicon glyphicon-edit\"></span> Projects").Encoded(false).Action("Index", "Projects", new { area = "Lead" });
+                items.Add().Text("<span class=\"glyphicon glyphicon-check\"></span> Estimations").Encoded(false).Action("Index", "Estimations", new { area = "Lead" });
+            }
+            // Worker section
+            else if (User.IsInRole("Lead"))
+            {
+                items.Add().Text("<span class=\"glyphicon glyphicon-edit\"></span> Projects").Encoded(false).Action("Index", "Assignments", new { area = "Wroker" });               
+            }
+            // Other authorized part
+            items.Add().Text("<span class=\"glyphicon glyphicon-print\"></span> Messages").Encoded(false).Items(children =>
+            {
+                children.Add().Text("<span class=\"glyphicon glyphicon-tag\"></span> New").Encoded(false).Action("Send", "Messages", new { area = string.Empty });
+                children.Add().Text("<span class=\"glyphicon glyphicon-inbox\"></span> Inbox").Encoded(false).Action("Inbox", "Messages", new { area = string.Empty });
+            });
+            items.Add().Text("<span class=\"glyphicon glyphicon-user\"></span> " + Context.User.Identity.Name).Encoded(false).Items(children =>
+            {
+                children.Add().Text("<span class=\"glyphicon glyphicon-duplicate\"></span> Profile").Encoded(false).Action("Profile", "Account", new { area = string.Empty });
+                children.Add().Text("<span class=\"glyphicon glyphicon-log-out\"></span> Logout").Encoded(false).Action("LogOff", "Account", new { area = string.Empty });
+            });
+        }
+        else
+        {
+            items.Add().Text("<span class=\"glyphicon glyphicon-log-in\"></span> Login").Encoded(false).Action("Login", "Account", new { area = string.Empty });
+        }
+    }))
 
-</div>
-<div class="container body-content text-center">
-    <h1>@culture</h1>
-    @RenderBody()
-    <hr/>
-    <footer>
-        <p>&copy; @DateTime.Now.Year - My KendoUI Application</p>
-    </footer>
-</div>
+    </div>
+    <div class="container body-content text-center">
+        <h1>@culture</h1>
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - My KendoUI Application</p>
+        </footer>
+    </div>
 
 
-<script>
-    $(function() {
-        $('#menu').kendoMenu();
-    })
-</script>
+    <script>
+        $(function () {
+            $('#menu').kendoMenu();
+        })
+    </script>
 </body>
 </html>

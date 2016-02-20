@@ -40,6 +40,11 @@ namespace Planex.Data.Migrations
             var user = new User { UserName = "System", Email = "System@System.com", FirstName = "System", LastName = "Message", Salary = 0, CreatedOn = DateTime.UtcNow };
             userManager.Create(user, "System");
             userManager.AddToRole(user.Id, "Manager");
+
+            var user2 = new User { UserName = "Admin", Email = "admin@planex.com", FirstName = "Admin", LastName = "Admin", Salary = 0, CreatedOn = DateTime.UtcNow };
+            userManager.Create(user2, "123456");
+            userManager.AddToRole(user2.Id, "Manager");
+
             context.SaveChanges();
         }
     }

@@ -12,6 +12,7 @@
 
     using Vereyon.Web;
 
+    [Authorize]
     public class MessagesController : BaseController
     {
         private readonly IMessageService messageService;
