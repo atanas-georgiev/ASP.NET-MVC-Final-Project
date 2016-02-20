@@ -15,17 +15,21 @@
     {
         private DbContext context;
 
-        private IRepository<Project, int> tasks;
+        private IRepository<Project, int> projects;
+        private IRepository<SubTask, int> subtasks;
+        private IRepository<Message, int> messages;
 
-        public ProjectService(DbContext context, IRepository<Project, int> tasks)
+        public ProjectService(DbContext context, IRepository<Project, int> projects, IRepository<SubTask, int> subtasks, IRepository<Message, int> messages)
         {
             this.context = context;
-            this.tasks = tasks;
+            this.projects = projects;
+            this.subtasks = subtasks;
+            this.messages = messages;
         }
 
         public void Add(Project task)
         {
-            this.tasks.Add(task);
+            this.projects.Add(task);
         }
 
         public void AddAttachments(
@@ -60,22 +64,38 @@
 
         public IQueryable<Project> GetAll()
         {
-            return this.tasks.All();
+            return this.projects.All();
         }
 
         public Project GetById(int id)
         {
-            return this.tasks.GetById(id);
+            return this.projects.GetById(id);
         }
 
         public void Remove(int id)
         {
-            this.tasks.Delete(id);
+            var projectDb = this.GetAll().FirstOrDefault(x => x.Id == id);
+            if (projectDb != null)
+            {
+                var tasks = projectDb.Subtasks;
+                foreach (var task in tasks)
+                {
+                    this.subtasks.Delete(task);
+                }
+
+                var messagesDb = this.messages.All().Where(x => x.ProjectId == projectDb.Id);
+                foreach (var message in messagesDb)
+                {
+                    this.messages.Delete(message);
+                }
+            }
+
+            this.projects.Delete(id);
         }
 
         public void StartEstimation(int taskId, string userId)
         {
-            var task = this.tasks.GetById(taskId);
+            var task = this.projects.GetById(taskId);
             task.State = TaskStateType.UnderEstimation;
             task.LeadId = userId;
             this.Update(task);
@@ -83,7 +103,7 @@
 
         public void Update(Project task)
         {
-            this.tasks.Update(task);
+            this.projects.Update(task);
         }
     }
 }

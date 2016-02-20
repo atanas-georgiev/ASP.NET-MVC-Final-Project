@@ -1,5 +1,6 @@
 ﻿@using Kendo.Mvc.UI
 @using Planex.Data.Models
+@using Planex.Web.App_LocalResources
 @model Planex.Web.Areas.Manager.Models.Projects.ProjectDetailsViewModel
 
 <script type="text/x-kendo-tmpl" id="template">
@@ -12,52 +13,49 @@
 </script>
 
 @{
-    ViewBag.Title = "Create project";
+    ViewBag.Title = HtmlLabels.ProjectDetails;
 }
 
-<br/>
+<br />
 <div class="well k-content">
-    <h2 class="well-title">Create project</h2>
-
+    <h3 class="well-title">@HtmlLabels.ProjectDetails</h3>
+    <hr />
     @using (Html.BeginForm())
     {
-        @Html.AntiForgeryToken()
+    @Html.AntiForgeryToken()
 
-        <div class="form-horizontal">
-            @Html.ValidationSummary(true, string.Empty, new { @class = "text-danger" })
+    <div class="form-horizontal">
+        @Html.ValidationSummary(false, string.Empty, new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Title)
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Description)
+            </div>
+        </div>
+        @if (Model.State < TaskStateType.Started)
+        {
             <div class="form-group">
-                @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.Start, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.Title)
-                    @Html.ValidationMessageFor(model => model.Title, string.Empty, new { @class = "text-danger" })
+                    @Html.EditorFor(model => model.Start)
                 </div>
             </div>
+        }
+
+        @if (Model.State >= TaskStateType.Estimated)
+        {
             <div class="form-group">
-                @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.Start, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.Description)
-                    @Html.ValidationMessageFor(model => model.Description, string.Empty, new { @class = "text-danger" })
+                    @Html.DisplayFor(model => model.Start)
                 </div>
             </div>
-            @if (Model.State < TaskStateType.Started)
-            {
-                <div class="form-group">
-                    @Html.LabelFor(model => model.Start, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.Start)
-                        @Html.ValidationMessageFor(model => model.Start, string.Empty, new { @class = "text-danger" })
-                    </div>
-                </div>
-            }
-
-            @if (Model.State >= TaskStateType.Started)
-            {
-                <div class="form-group">
-                    @Html.LabelFor(model => model.Start, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.DisplayFor(model => model.Start)
-                    </div>
-                </div>
                 <div class="form-group">
                     @Html.LabelFor(model => model.End, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
@@ -67,55 +65,53 @@
                 <div class="form-group">
                     @Html.LabelFor(model => model.FinalPrice, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
-                        @Html.DisplayFor(model => model.FinalPrice)
+                        <span class="pull-left">@Html.DisplayFor(model => model.FinalPrice)</span>                        
                     </div>
                 </div>
-            }
-            <div class="form-group">
-                @Html.LabelFor(model => model.Priority, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.Kendo().DropDownList().Name("Priority").BindTo(Enum.GetNames(typeof(PriorityType)).ToList())
-                    @Html.ValidationMessageFor(model => model.Priority, string.Empty, new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="form-group">
-                @Html.LabelFor(model => model.LeadId, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @(Html.Kendo().DropDownListFor(model => model.LeadId).Name("LeadId").DataTextField("name").DataValueField("id").DataSource(source => { source.Read(read => { read.Action("GetAllLeadUsers", "Json"); }).ServerFiltering(false); }).Value(Model.LeadName)
-                          )
-                </div>
-            </div>
-            @Html.Partial("_DetailsFiles", Model.UploadedAttachmentFiles)
-            <div class="form-group">
-                <div class="col-md-2">
-
-                </div>
-                <div class="col-md-10">
-                    @(Html.Kendo().Upload().Name("UploadedAttachments"))
-                </div>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Edit" class="k-button"/>
-                @Html.ActionLink("Remove", "Remove", new { id = Model.Id }, new { @class = "k-button" })
-                @if (Model.State == TaskStateType.Draft)
-                {
-                    @Html.ActionLink("Send For Estimation", "SendForEstimation", new { id = Model.Id }, new { @class = "k-button" })
-                }
-                @if (Model.State == TaskStateType.Estimated)
-                {
-                    @Html.ActionLink("Approve", "Approve", new { id = Model.Id }, new { @class = "k-button" })
-                }
+        }
+        <div class="form-group">
+            @Html.LabelFor(model => model.Priority, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.Kendo().DropDownList().Name("Priority").BindTo(Enum.GetNames(typeof(PriorityType)).ToList()).HtmlAttributes(new { @class = "pull-left" })
             </div>
         </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.LeadId, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @(Html.Kendo().DropDownListFor(model => model.LeadId).Name("LeadId").DataTextField("name").DataValueField("id").DataSource(source => { source.Read(read => { read.Action("GetAllLeadUsers", "Json"); }).ServerFiltering(false); }).Value(Model.LeadName).HtmlAttributes(new { @class = "pull-left" }))
+            </div>
+        </div>
+        @Html.Partial("_DetailsFiles", Model.UploadedAttachmentFiles)
+        <div class="form-group">
+            <div class="col-md-2">
+
+            </div>
+            <div class="col-md-10">
+                @(Html.Kendo().Upload().Name("UploadedAttachments").ShowFileList(true))
+            </div>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="@HtmlLabels.ProjectEdit" class="k-button" />
+            @Html.ActionLink(HtmlLabels.ProjectRemove, "Remove", new { id = Model.Id }, new { @class = "k-button" })
+            @if (Model.State == TaskStateType.Draft)
+                {
+                @Html.ActionLink(HtmlLabels.ProjectSendForEstimation, "SendForEstimation", new { id = Model.Id }, new { @class = "k-button" })
+            }
+            @if (Model.State == TaskStateType.Estimated)
+                {
+                @Html.ActionLink(HtmlLabels.ProjectApprove, "Approve", new { id = Model.Id }, new { @class = "k-button" })
+            }
+        </div>
+    </div>
     }
 
     @if (Model.State >= TaskStateType.Estimated)
     {
-        <div class="well k-content">
-            <h2 class="well-title">Estimation</h2>
-            @Html.Partial("_DetailsChart", Model)
-        </div>
+    <div class="well k-content">
+        @Html.Partial("_DetailsChart", Model)
+    </div>
     }
 
 
 </div>
+

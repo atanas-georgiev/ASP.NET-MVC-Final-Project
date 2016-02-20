@@ -10,48 +10,50 @@
     using AutoMapper;
 
     using Planex.Data.Models;
+    using Planex.Web.Infrastructure.Localization;
     using Planex.Web.Infrastructure.Mappings;
 
     public class ProjectDetailsViewModel : IMapFrom<Project>, IHaveCustomMappings
     {
-        [Required]
-        [UIHint("Number")]
-        public int Completed { get; set; }
-
-        [Required]
-        [MaxLength(10000)]
         [UIHint("Editor")]
-        [DataType(DataType.MultilineText)]
+        [LocalizedRequired("RequiredFiled")]
+        [LocalizedDisplay("ProjectDescription")]
         [AllowHtml]
         public string Description { get; set; }
 
         [UIHint("Date")]
+        [LocalizedDisplay("ProjectEndDate")]
         public DateTime End { get; set; }
 
+        [LocalizedDisplay("ProjectPrice")]
         public decimal FinalPrice { get; set; }
 
         [Key]
         [HiddenInput(DisplayValue = false)]
         public int Id { get; set; }
 
-        [Required]
+        [LocalizedRequired("RequiredFiled")]
+        [LocalizedDisplay("ProjectLead")]
         public string LeadId { get; set; }
 
         public string LeadName { get; set; }
 
-        [Required]
+        [LocalizedRequired("RequiredFiled")]
+        [LocalizedDisplay("ProjectPriority")]
         public PriorityType Priority { get; set; }
 
-        [Required]
         [UIHint("Date")]
+        [LocalizedRequired("RequiredFiled")]
+        [LocalizedDisplay("ProjectStartDate")]
         public DateTime Start { get; set; }
 
-        [Required]
+        [LocalizedRequired("RequiredFiled")]
+        [LocalizedDisplay("ProjectState")]
         public TaskStateType State { get; set; }
 
-        [Required]
-        [MaxLength(100)]
         [UIHint("String")]
+        [LocalizedRequired("RequiredFiled")]
+        [LocalizedDisplay("ProjectTitle")]
         public string Title { get; set; }
 
         public List<string> UploadedAttachmentFiles { get; set; }
@@ -62,8 +64,7 @@
         {
             configuration.CreateMap<Project, ProjectDetailsViewModel>(string.Empty)
                 .ForMember(m => m.LeadName, opt => opt.MapFrom(c => c.Lead.FirstName + " " + c.Lead.LastName))
-                .ForMember(m => m.UploadedAttachmentFiles, opt => opt.MapFrom(c => c.Attachments.Select(x => x.Name)))
-                .ForMember(m => m.Completed, opt => opt.MapFrom(c => 0));
+                .ForMember(m => m.UploadedAttachmentFiles, opt => opt.MapFrom(c => c.Attachments.Select(x => x.Name)));
         }
     }
 }

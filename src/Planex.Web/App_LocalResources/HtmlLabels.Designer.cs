@@ -61,11 +61,47 @@ namespace Planex.Web.App_LocalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Approve.
+        /// </summary>
+        public static string ProjectApprove {
+            get {
+                return ResourceManager.GetString("ProjectApprove", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Create Project.
         /// </summary>
         public static string ProjectCreate {
             get {
                 return ResourceManager.GetString("ProjectCreate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Project Details.
+        /// </summary>
+        public static string ProjectDetails {
+            get {
+                return ResourceManager.GetString("ProjectDetails", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit.
+        /// </summary>
+        public static string ProjectEdit {
+            get {
+                return ResourceManager.GetString("ProjectEdit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remove.
+        /// </summary>
+        public static string ProjectRemove {
+            get {
+                return ResourceManager.GetString("ProjectRemove", resourceCulture);
             }
         }
         
@@ -84,6 +120,15 @@ namespace Planex.Web.App_LocalResources {
         public static string ProjectSelect {
             get {
                 return ResourceManager.GetString("ProjectSelect", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Send for estimation.
+        /// </summary>
+        public static string ProjectSendForEstimation {
+            get {
+                return ResourceManager.GetString("ProjectSendForEstimation", resourceCulture);
             }
         }
     }

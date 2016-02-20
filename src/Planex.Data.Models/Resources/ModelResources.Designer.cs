@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Planex.Web.App_LocalResources {
+namespace Planex.Data.Models.Resources {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace Planex.Web.App_LocalResources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class ModelLabels {
+    public class ModelResources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal ModelLabels() {
+        internal ModelResources() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace Planex.Web.App_LocalResources {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Planex.Web.App_LocalResources.ModelLabels", typeof(ModelLabels).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Planex.Data.Models.Resources.ModelResources", typeof(ModelResources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,92 +61,47 @@ namespace Planex.Web.App_LocalResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Completed[%].
+        ///   Looks up a localized string similar to Draft.
         /// </summary>
-        public static string ProjectCompleted {
+        public static string ProjectStateDraft {
             get {
-                return ResourceManager.GetString("ProjectCompleted", resourceCulture);
+                return ResourceManager.GetString("ProjectStateDraft", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Description.
+        ///   Looks up a localized string similar to Estimated.
         /// </summary>
-        public static string ProjectDescription {
+        public static string ProjectStateEstimated {
             get {
-                return ResourceManager.GetString("ProjectDescription", resourceCulture);
+                return ResourceManager.GetString("ProjectStateEstimated", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to End Date.
+        ///   Looks up a localized string similar to Finished.
         /// </summary>
-        public static string ProjectEndDate {
+        public static string ProjectStateFinished {
             get {
-                return ResourceManager.GetString("ProjectEndDate", resourceCulture);
+                return ResourceManager.GetString("ProjectStateFinished", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Lead.
+        ///   Looks up a localized string similar to Under Estimation.
         /// </summary>
-        public static string ProjectLead {
+        public static string ProjectStateRequestedEstimation {
             get {
-                return ResourceManager.GetString("ProjectLead", resourceCulture);
+                return ResourceManager.GetString("ProjectStateRequestedEstimation", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Manager.
+        ///   Looks up a localized string similar to Started.
         /// </summary>
-        public static string ProjectManager {
+        public static string ProjectStateStarted {
             get {
-                return ResourceManager.GetString("ProjectManager", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Price.
-        /// </summary>
-        public static string ProjectPrice {
-            get {
-                return ResourceManager.GetString("ProjectPrice", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Priority.
-        /// </summary>
-        public static string ProjectPriority {
-            get {
-                return ResourceManager.GetString("ProjectPriority", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Start Date.
-        /// </summary>
-        public static string ProjectStartDate {
-            get {
-                return ResourceManager.GetString("ProjectStartDate", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to State.
-        /// </summary>
-        public static string ProjectState {
-            get {
-                return ResourceManager.GetString("ProjectState", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Title.
-        /// </summary>
-        public static string ProjectTitle {
-            get {
-                return ResourceManager.GetString("ProjectTitle", resourceCulture);
+                return ResourceManager.GetString("ProjectStateStarted", resourceCulture);
             }
         }
     }

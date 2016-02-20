@@ -44,7 +44,7 @@
             }
             catch (Exception ex)
             {
-                return 0;
+                throw new Exception();
             }
             
         }

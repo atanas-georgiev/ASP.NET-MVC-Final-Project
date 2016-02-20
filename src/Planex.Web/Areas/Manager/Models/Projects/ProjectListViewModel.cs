@@ -50,7 +50,7 @@
             configuration.CreateMap<Project, ProjectListViewModel>(string.Empty)
                 .ForMember(m => m.Manager, opt => opt.MapFrom(c => c.Manager.FirstName + " " + c.Manager.LastName))
                 .ForMember(m => m.Lead, opt => opt.MapFrom(c => c.Lead.FirstName + " " + c.Lead.LastName))
-                .ForMember(m => m.Completed, opt => opt.MapFrom(c => c.PercentComplete));
+                .ForMember(m => m.Completed, opt => opt.MapFrom(c => c.PercentComplete * 100));
         }
     }
 }

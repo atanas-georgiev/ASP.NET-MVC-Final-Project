@@ -1,9 +1,13 @@
 namespace Planex.Data.Migrations
 {
+    using System;
     using System.Data.Entity.Migrations;
     using System.Linq;
 
+    using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.EntityFramework;
+
+    using Planex.Data.Models;
 
     public sealed class Configuration : DbMigrationsConfiguration<PlanexDbContext>
     {
@@ -29,6 +33,13 @@ namespace Planex.Data.Migrations
             context.Roles.AddOrUpdate(x => x.Name, new IdentityRole("Lead"));
             context.Roles.AddOrUpdate(x => x.Name, new IdentityRole("Worker"));
             context.Roles.AddOrUpdate(x => x.Name, new IdentityRole("HR"));
+            context.SaveChanges();
+
+            var userStore = new UserStore<User>(context);
+            var userManager = new UserManager<User>(userStore);
+            var user = new User { UserName = "System", Email = "System@System.com", FirstName = "System", LastName = "Message", Salary = 0, CreatedOn = DateTime.UtcNow };
+            userManager.Create(user, "System");
+            userManager.AddToRole(user.Id, "Manager");
             context.SaveChanges();
         }
     }

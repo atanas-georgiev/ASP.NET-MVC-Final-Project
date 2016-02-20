@@ -56,26 +56,26 @@
                 if (_shuttingDown)
                     return;
 
-                var projects =
-                    this.projectService.All().Where(x => x.PercentComplete == 1 && x.State != TaskStateType.Finished);
-                var systemUser = userService.All().FirstOrDefault(x => x.FirstName == "System" && x.LastName == "Message");
-
-                foreach (var project in projects)
-                {
-                    project.State = TaskStateType.Finished;
-                    this.messageSrv.SendSystemMessage(systemUser.Id, project.LeadId, SystemMessageType.ProjectCompleted, project.Id, null);
-                    this.messageSrv.SendSystemMessage(systemUser.Id, project.ManagerId, SystemMessageType.ProjectCompleted, project.Id, null);
-                    this.projectService.Update(project);
-                }
-
-                var tasks = this.subTaskService.All().Where(x => x.PercentComplete != 1 && x.End < DateTime.UtcNow && x.IsUserNotified != null && x.IsUserNotified.Value == false);
-
-                foreach (var task in tasks)
-                {
-                    task.IsUserNotified = true;
-                    this.messageSrv.SendSystemMessage(systemUser.Id, task.Project.ManagerId, SystemMessageType.ProjectCompleted, task.Project.Id, task.Id);
-                    this.subTaskService.Update(task);
-                }
+//                var projects =
+//                    this.projectService.All().Where(x => x.PercentComplete == 1 && x.State != TaskStateType.Finished);
+//                var systemUser = userService.All().FirstOrDefault(x => x.FirstName == "System" && x.LastName == "Message");
+//
+//                foreach (var project in projects)
+//                {
+//                    project.State = TaskStateType.Finished;
+//                    this.messageSrv.SendSystemMessage(systemUser.Id, project.LeadId, SystemMessageType.ProjectCompleted, project.Id, null);
+//                    this.messageSrv.SendSystemMessage(systemUser.Id, project.ManagerId, SystemMessageType.ProjectCompleted, project.Id, null);
+//                    this.projectService.Update(project);
+//                }
+//
+//                var tasks = this.subTaskService.All().Where(x => x.PercentComplete != 1 && x.End < DateTime.UtcNow && x.IsUserNotified != null && x.IsUserNotified.Value == false);
+//
+//                foreach (var task in tasks)
+//                {
+//                    task.IsUserNotified = true;
+//                    this.messageSrv.SendSystemMessage(systemUser.Id, task.Project.ManagerId, SystemMessageType.ProjectCompleted, task.Project.Id, task.Id);
+//                    this.subTaskService.Update(task);
+//                }
             }
         }
 

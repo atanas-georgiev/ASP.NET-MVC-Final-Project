@@ -38,7 +38,7 @@
             user.CreatedOn = DateTime.UtcNow;
             this.userManager.Create(user, "changeme");
             this.users.Add(user);
-            user.IntId = int.Parse(Convert.ToUInt32(user.Id.GetHashCode()).ToString());
+            user.IntId = int.Parse(user.Id.GetHashCode().ToString());
             this.users.Update(user);
             this.userManager.AddToRole(user.Id, role);
         }

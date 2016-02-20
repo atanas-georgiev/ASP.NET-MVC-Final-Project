@@ -153,7 +153,7 @@
         public ActionResult Remove(string id)
         {
             this.Session["ProjectId"] = id;
-            var intId = int.Parse(id);
+            var intId = int.Parse(id);            
             this.projectsService.Remove(intId);
             return this.RedirectToAction("Index");
         }

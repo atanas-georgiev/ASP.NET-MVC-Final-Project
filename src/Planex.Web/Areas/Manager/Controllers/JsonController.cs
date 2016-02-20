@@ -92,7 +92,8 @@
                             Start = task.Start, 
                             End = task.End, 
                             PercentComplete = 0, 
-                            Price = 0
+                            Price = 0,
+                            IsUserNotified = false
                         });
             }
 

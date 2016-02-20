@@ -7,7 +7,7 @@
         @foreach (string file in Model)
         {
             var link = "../../../../Content/Attachments/" + @Session["ProjectId"].ToString() + "/" + @file;
-            <a href=@link>@file</a>
+            <a href=@link class="pull-left">@file</a>
             <br/>
         }
     </div>
