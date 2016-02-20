@@ -431,9 +431,9 @@
     <Content Include="Areas\Lead\Views\Estimations\Edit.cshtml" />
     <Content Include="Areas\Lead\Views\Estimations\_DetailsFiles.cshtml" />
     <Content Include="Areas\Lead\Views\Estimations\_DetailsSchema.cshtml" />
-    <None Include="Areas\Lead\Views\Index\Index.cshtml" />
     <Content Include="Areas\HR\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Lead\Views\_ViewStart.cshtml" />
+    <None Include="Areas\Lead\Views\Projects\Edit.cshtml" />
     <None Include="Areas\Lead\Views\Projects\Index.cshtml" />
     <Content Include="Content\Kendo\kendo.black.min.css.map" />
     <Content Include="Content\Kendo\kendo.black.mobile.min.css.map" />
@@ -874,9 +874,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="App_GlobalResources\" />
-    <Folder Include="Areas\Lead\Views\Base\" />
-    <Folder Include="Areas\Lead\Views\Helper\" />
-    <Folder Include="Areas\Lead\Views\Shared\" />
     <Folder Include="Areas\Worker\Views\Base\" />
     <Folder Include="Areas\Worker\Views\Json\" />
     <Folder Include="Areas\Worker\Views\Shared\" />

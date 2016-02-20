@@ -147,6 +147,12 @@
   <data name="Users" xml:space="preserve">
     <value>Employees</value>
   </data>
+  <data name="LeadEstimate" xml:space="preserve">
+    <value>Estimate</value>
+  </data>
+  <data name="LeadEstimations" xml:space="preserve">
+    <value>Estimations</value>
+  </data>
   <data name="UserDetails" xml:space="preserve">
     <value>Employee details</value>
   </data>

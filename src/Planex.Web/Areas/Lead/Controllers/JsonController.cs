@@ -21,20 +21,34 @@
     {
         private readonly IProjectService projectService;
 
-        private readonly ISkillService skillService;
-
         private readonly ITaskService subTaskService;
 
         public JsonController(
             IUserService userService, 
-            ISkillService skillService, 
             ITaskService subTaskService, 
             IProjectService projectService)
             : base(userService)
         {
-            this.skillService = skillService;
             this.subTaskService = subTaskService;
             this.projectService = projectService;
+        }
+
+        public virtual JsonResult ReadEstimations([DataSourceRequest] DataSourceRequest request)
+        {
+            var result =
+                this.projectService.GetAll()
+                    .Where(x => x.LeadId == this.UserProfile.Id && x.State == TaskStateType.UnderEstimation)
+                    .To<EstimationListViewModel>();
+            return this.Json(result.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
+        }
+
+        public virtual JsonResult ReadProjects([DataSourceRequest] DataSourceRequest request)
+        {
+            var result =
+                this.projectService.GetAll()
+                    .Where(x => x.LeadId == this.UserProfile.Id && x.State == TaskStateType.Started)
+                    .To<EstimationListViewModel>();
+            return this.Json(result.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult CreateAssignments(
@@ -46,7 +60,7 @@
             if (assignment != null)
             {
                 var subtask = this.subTaskService.GetById(assignment.TaskId);
-                var user = this.userService.GetAll().FirstOrDefault(x => x.IntId == assignment.ResourceId);
+                var user = this.UserService.GetAll().FirstOrDefault(x => x.IntId == assignment.ResourceId);
                 subtask.Users.Add(user);
                 this.subTaskService.Update(subtask);
                 this.UpdatePriceSubTask(assignment.TaskId);
@@ -90,7 +104,8 @@
                             Start = task.Start, 
                             End = task.End, 
                             PercentComplete = 0, 
-                            Price = 0
+                            Price = 0,
+                            IsUserNotified = false
                         });
             }
 
@@ -106,7 +121,7 @@
             if (assignment != null)
             {
                 var subtask = this.subTaskService.GetById(assignment.TaskId);
-                var user = this.userService.GetAll().FirstOrDefault(x => x.IntId == assignment.ResourceId);
+                var user = this.UserService.GetAll().FirstOrDefault(x => x.IntId == assignment.ResourceId);
                 subtask.Users.Remove(user);
                 this.subTaskService.Update(subtask);
                 this.UpdatePriceSubTask(assignment.TaskId);
@@ -119,10 +134,10 @@
             [DataSourceRequest] DataSourceRequest request, 
             ProjectDetailsDependencyViewModel dep)
         {
-//            if (dep != null)
-//            {
-//                this.subTaskService.DeleteDependency(dep.DependencyId);
-//            }
+            if (dep != null)
+            {
+                this.subTaskService.DeleteDependency(dep.Id);
+            }
 
             return this.Json(dep);
         }
@@ -168,19 +183,10 @@
             return this.Json(result.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
         }
 
-        public virtual JsonResult ReadEstimations([DataSourceRequest] DataSourceRequest request)
-        {
-            var result =
-                this.projectService.GetAll()
-                    .Where(x => /*x.LeadId == UserProfile.Id &&*/ x.State == TaskStateType.UnderEstimation)
-                    .To<EstimationListViewModel>();
-            return this.Json(result.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
-        }
-
         // Gantt resources
         public virtual JsonResult ReadResources([DataSourceRequest] DataSourceRequest request)
         {
-            var result = this.userService.GetAllByRole("Worker").To<ProjectDetailsResourseViewModel>();
+            var result = this.UserService.GetAllByRole("Worker").To<ProjectDetailsResourseViewModel>();
             return this.Json(result.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
         }
 
@@ -201,7 +207,7 @@
             if (assignment != null)
             {
                 var subtask = this.subTaskService.GetById(assignment.TaskId);
-                var user = this.userService.GetAll().FirstOrDefault(x => x.IntId == assignment.ResourceId);
+                var user = this.UserService.GetAll().FirstOrDefault(x => x.IntId == assignment.ResourceId);
                 subtask.Users.Add(user);
                 this.subTaskService.Update(subtask);
                 this.UpdatePriceSubTask(assignment.TaskId);

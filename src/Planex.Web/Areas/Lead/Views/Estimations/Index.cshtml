@@ -1,14 +1,22 @@
 ﻿@using Kendo.Mvc.UI
+@using Planex.Web.App_LocalResources
 @using Planex.Web.Areas.Lead.Models.Estimation
 @model IEnumerable<Planex.Web.Areas.Lead.Models.Estimation.EstimationListViewModel>
 
-<h1>My estimation list</h1>
+@{
+    ViewBag.Title = HtmlLabels.LeadEstimations;
+}
 
-@(Html.Kendo().Grid<EstimationListViewModel>().Name("grid").Columns(columns =>
+<br />
+<div class="well k-content">
+    <h3 class="well-title">@HtmlLabels.LeadEstimations</h3>
+    <hr />
+    @(Html.Kendo().Grid<EstimationListViewModel>().Name("grid").Columns(columns =>
       {
-          columns.Template(@<text></text>).ClientTemplate("<a href='" + Url.Action("Edit", "Estimations", new { id = "#=Id#" }) + "'>Estimate</a>");
+          columns.Template(@<text></text>).ClientTemplate("<a href='" + Url.Action("Edit", "Estimations", new { id = "#=Id#" }) + "'>" + @HtmlLabels.LeadEstimate + "</a>");
           columns.Bound(c => c.Title);
           columns.Bound(c => c.Manager);
           columns.Bound(c => c.Priority);
       }).ColumnMenu().Editable(editable => editable.Mode(GridEditMode.PopUp)).Pageable().Navigatable().Sortable(sortable => { sortable.SortMode(GridSortMode.SingleColumn); }).Filterable().Scrollable().DataSource(dataSource => dataSource.Ajax().Model(model => model.Id(p => p.Id)).Read(read => read.Action("ReadEstimations", "Json")))
-      )
+    )
+</div>

@@ -6,13 +6,13 @@
     using System.Web.Mvc;
 
     using Planex.Data.Models;
+    using Planex.Web.Infrastructure.Localization;
 
     public class BaseProjectViewModel
     {
-        [Required]
-        [MaxLength(10000)]
+        [LocalizedDisplay("ProjectDescription")]
+        [LocalizedRequired("RequiredFiled")]
         [UIHint("String")]
-        [DataType(DataType.MultilineText)]
         [AllowHtml]
         public string Description { get; set; }
 
@@ -20,23 +20,27 @@
         [HiddenInput(DisplayValue = false)]
         public int Id { get; set; }
 
-        [Required]
+        [LocalizedDisplay("ProjectManager")]
+        [LocalizedRequired("RequiredFiled")]
         [UIHint("String")]
         public string Manager { get; set; }
 
-        [Required]
+        [LocalizedDisplay("ProjectPriority")]
+        [LocalizedRequired("RequiredFiled")]
         [UIHint("String")]
         public PriorityType Priority { get; set; }
 
-        [Required]
+        [LocalizedDisplay("ProjectStartDate")]
+        [LocalizedRequired("RequiredFiled")]
         [UIHint("Date")]
         public DateTime Start { get; set; }
 
-        [Required]
+        [LocalizedDisplay("ProjectState")]
+        [LocalizedRequired("RequiredFiled")]
         public TaskStateType State { get; set; }
 
-        [Required]
-        [MaxLength(100)]
+        [LocalizedDisplay("ProjectTitle")]
+        [LocalizedRequired("RequiredFiled")]
         [UIHint("String")]
         public string Title { get; set; }
 

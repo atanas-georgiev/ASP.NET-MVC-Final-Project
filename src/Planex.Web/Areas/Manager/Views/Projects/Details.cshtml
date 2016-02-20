@@ -38,7 +38,7 @@
                 @Html.EditorFor(model => model.Description)
             </div>
         </div>
-        @if (Model.State < TaskStateType.Started)
+        @if (Model.State < TaskStateType.Estimated)
         {
             <div class="form-group">
                 @Html.LabelFor(model => model.Start, htmlAttributes: new { @class = "control-label col-md-2" })

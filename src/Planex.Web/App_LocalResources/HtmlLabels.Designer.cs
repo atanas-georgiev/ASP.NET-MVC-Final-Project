@@ -61,6 +61,24 @@ namespace Planex.Web.App_LocalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Estimate.
+        /// </summary>
+        public static string LeadEstimate {
+            get {
+                return ResourceManager.GetString("LeadEstimate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Estimations.
+        /// </summary>
+        public static string LeadEstimations {
+            get {
+                return ResourceManager.GetString("LeadEstimations", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Approve.
         /// </summary>
         public static string ProjectApprove {

@@ -4,12 +4,10 @@
 
     public class ProjectsController : Controller
     {
-        public ActionResult Details(string id)
+        public ActionResult Edit(string id)
         {
             this.Session["ProjectId"] = id;
 
-            // var intId = int.Parse(id);
-            // var result = taskService.GetAll().Where(x => x.Id == intId).To<ProjectDetailsViewModel>().FirstOrDefault();
             return this.View();
         }
 
