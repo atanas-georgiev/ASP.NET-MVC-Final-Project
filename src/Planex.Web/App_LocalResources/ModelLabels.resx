@@ -147,4 +147,25 @@
   <data name="ProjectTitle" xml:space="preserve">
     <value>Title</value>
   </data>
+  <data name="SkillName" xml:space="preserve">
+    <value>Skill</value>
+  </data>
+  <data name="UserEmail" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="UserFirstName" xml:space="preserve">
+    <value>First Name</value>
+  </data>
+  <data name="UserImage" xml:space="preserve">
+    <value>Image</value>
+  </data>
+  <data name="UserLastName" xml:space="preserve">
+    <value>Last Name</value>
+  </data>
+  <data name="UserRole" xml:space="preserve">
+    <value>Role</value>
+  </data>
+  <data name="UserSalary" xml:space="preserve">
+    <value>Salary</value>
+  </data>
 </root>

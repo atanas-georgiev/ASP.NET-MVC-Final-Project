@@ -2,6 +2,8 @@
 {
     using System.Linq;
 
+    using Microsoft.AspNet.Identity.EntityFramework;
+
     using Planex.Data.Models;
 
     public interface IUserService
@@ -16,7 +18,11 @@
 
         string GetRoleName(User user);
 
-        IQueryable<string> GetRoles();
+        string GetRoleNameById(string roleId);
+
+        string GetRoleIdByName(string roleName);
+
+        IQueryable<IdentityRole> GetRoles();
 
         void SetRoleName(User user, string name);
 

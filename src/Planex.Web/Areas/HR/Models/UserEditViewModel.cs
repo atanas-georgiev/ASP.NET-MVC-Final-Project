@@ -9,17 +9,18 @@
     using AutoMapper;
 
     using Planex.Data.Models;
+    using Planex.Web.Infrastructure.Localization;
     using Planex.Web.Infrastructure.Mappings;
 
     public class UserEditViewModel : IMapFrom<User>, IHaveCustomMappings
     {
-        [Required]
+        [LocalizedDisplay("UserEmail")]
+        [LocalizedRequired("RequiredFiled")]
         [UIHint("Email")]
         public string Email { get; set; }
 
-        [Required]
-        [MinLength(2)]
-        [MaxLength(50)]
+        [LocalizedDisplay("UserFirstName")]
+        [LocalizedRequired("RequiredFiled")]
         [UIHint("String")]
         public string FirstName { get; set; }
 
@@ -29,30 +30,31 @@
 
         public int? ImageId { get; set; }
 
-        [Required]
-        [MinLength(2)]
-        [MaxLength(50)]
+        [LocalizedDisplay("UserLastName")]
+        [LocalizedRequired("RequiredFiled")]
         [UIHint("String")]
         public string LastName { get; set; }
 
-        [Required]
+        [LocalizedDisplay("Salary")]
+        [LocalizedRequired("RequiredFiled")]
         [UIHint("Currency")]
-        public decimal PricePerHour { get; set; }
+        public decimal Salary { get; set; }
 
-        [Required]
-        [UIHint("DropDown")]
-        public string Role { get; set; }
+        [LocalizedDisplay("UserRole")]
+        [LocalizedRequired("RequiredFiled")]
+        public string RoleId { get; set; }
 
-        [DisplayName("Skills")]
+        [LocalizedDisplay("SkillName")]
         public List<string> Skills { get; set; }
 
-        [DisplayName("Picture")]
+        [LocalizedDisplay("UserImage")]
         public HttpPostedFileBase UploadedImage { get; set; }
 
         public void CreateMappings(IConfiguration configuration)
         {
             configuration.CreateMap<User, UserEditViewModel>(string.Empty)
-                .ForMember(m => m.Skills, opt => opt.MapFrom(c => c.Skills.Select(s => s.Name)));
+                .ForMember(m => m.Skills, opt => opt.MapFrom(c => c.Skills.Select(s => s.Name)))
+                .ForMember(m => m.RoleId, opt => opt.MapFrom(c => c.Roles.FirstOrDefault().RoleId));
         }
     }
 }

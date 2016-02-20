@@ -141,4 +141,16 @@
   <data name="ProjectSendForEstimation" xml:space="preserve">
     <value>Send for estimation</value>
   </data>
+  <data name="Skills" xml:space="preserve">
+    <value>Skills</value>
+  </data>
+  <data name="Users" xml:space="preserve">
+    <value>Employees</value>
+  </data>
+  <data name="UserDetails" xml:space="preserve">
+    <value>Employee details</value>
+  </data>
+  <data name="UserSelect" xml:space="preserve">
+    <value>Select</value>
+  </data>
 </root>

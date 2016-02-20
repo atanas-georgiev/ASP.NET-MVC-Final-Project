@@ -239,8 +239,9 @@
     <Compile Include="App_Start\SmsService.cs" />
     <Compile Include="App_Start\Startup.cs" />
     <Compile Include="Areas\HR\Controllers\BaseController.cs" />
+    <Compile Include="Areas\HR\Controllers\IndexController.cs" />
+    <Compile Include="Areas\HR\Controllers\JsonController.cs" />
     <Compile Include="Areas\HR\Controllers\SkillsController.cs" />
-    <Compile Include="Areas\HR\Controllers\UserDetailsController.cs" />
     <Compile Include="Areas\HR\Controllers\UsersController.cs" />
     <Compile Include="Areas\HR\HRAreaRegistration.cs" />
     <Compile Include="Areas\HR\Models\SkillViewModel.cs" />
@@ -424,7 +425,7 @@
     <Content Include="Areas\Lead\Views\web.config" />
     <Content Include="Areas\HR\Views\web.config" />
     <Content Include="Areas\HR\Views\Users\Index.cshtml" />
-    <Content Include="Areas\HR\Views\UserDetails\Index.cshtml" />
+    <Content Include="Areas\HR\Views\Users\Details.cshtml" />
     <Content Include="Areas\HR\Views\Skills\Index.cshtml" />
     <Content Include="Areas\Lead\Views\Estimations\Index.cshtml" />
     <Content Include="Areas\Lead\Views\Estimations\Edit.cshtml" />
@@ -844,7 +845,6 @@
     <Content Include="Views\Shared\EditorTemplates\String.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Time.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Url.cshtml" />
-    <Content Include="Views\Shared\EditorTemplates\DropDown.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\EnumDropDown.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Editor.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\Currency.cshtml" />
@@ -869,12 +869,11 @@
     <None Include="Views\Messages\Inbox.cshtml" />
     <None Include="Views\Messages\Send.cshtml" />
     <None Include="Views\Messages\View.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\DropDown.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="App_GlobalResources\" />
-    <Folder Include="Areas\HR\Views\Base\" />
-    <Folder Include="Areas\HR\Views\Shared\" />
     <Folder Include="Areas\Lead\Views\Base\" />
     <Folder Include="Areas\Lead\Views\Helper\" />
     <Folder Include="Areas\Lead\Views\Shared\" />

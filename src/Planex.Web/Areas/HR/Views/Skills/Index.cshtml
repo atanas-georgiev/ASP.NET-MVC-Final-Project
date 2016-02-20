@@ -1,6 +1,17 @@
 ﻿@using Kendo.Mvc.UI
+@using Planex.Web.App_LocalResources
 @using Planex.Web.Areas.HR.Models
-@(Html.Kendo().Grid<SkillViewModel>().Name("grid").Columns(columns =>
+
+@{
+    ViewBag.Title = HtmlLabels.Skills;
+}
+
+<br />
+<div class="well k-content">
+    <h3 class="well-title">@HtmlLabels.Skills</h3>
+    <hr />
+    <br />
+    @(Html.Kendo().Grid<SkillViewModel>().Name("grid").Columns(columns =>
       {
           columns.Bound(c => c.Name);
           columns.Command(command =>
@@ -8,5 +19,6 @@
                   command.Edit();
                   command.Destroy();
               });
-      }).ToolBar(toolbar => { toolbar.Create(); }).ColumnMenu().Editable(editable => editable.Mode(GridEditMode.PopUp)).Pageable().Navigatable().Sortable(sortable => { sortable.SortMode(GridSortMode.SingleColumn); }).Filterable().Scrollable().DataSource(dataSource => dataSource.Ajax().Model(model => model.Id(p => p.Id)).Read(read => read.Action("Skills_Read", "Skills")).Create(create => create.Action("Skills_Create", "Skills")).Update(update => update.Action("Skills_Update", "Skills")).Destroy(destroy => destroy.Action("Skills_Destroy", "Skills")))
-      )
+      }).ToolBar(toolbar => { toolbar.Create(); }).ColumnMenu().Editable(editable => editable.Mode(GridEditMode.PopUp)).Pageable().Navigatable().Sortable(sortable => { sortable.SortMode(GridSortMode.SingleColumn); }).Filterable().Scrollable().DataSource(dataSource => dataSource.Ajax().Model(model => model.Id(p => p.Id)).Read(read => read.Action("SkillsRead", "Json")).Create(create => create.Action("SkillsCreate", "Json")).Update(update => update.Action("SkillsUpdate", "Json")).Destroy(destroy => destroy.Action("SkillsDestroy", "Json")))
+    )
+</div>

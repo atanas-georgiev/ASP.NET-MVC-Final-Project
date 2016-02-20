@@ -3,6 +3,7 @@
     using System;
     using System.Data.Entity;
     using System.Linq;
+    using System.Web.Security;
 
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.EntityFramework;
@@ -37,7 +38,6 @@
             user.UserName = user.Email;
             user.CreatedOn = DateTime.UtcNow;
             this.userManager.Create(user, "changeme");
-            this.users.Add(user);
             user.IntId = int.Parse(user.Id.GetHashCode().ToString());
             this.users.Update(user);
             this.userManager.AddToRole(user.Id, role);
@@ -67,9 +67,20 @@
             return result;
         }
 
-        public IQueryable<string> GetRoles()
+        public string GetRoleNameById(string roleId)
         {
-            var result = this.roleManager.Roles.Select(x => x.Name);
+            var result = this.roleManager.Roles.Where(x => x.Id == roleId).Select(x => x.Name).FirstOrDefault();
+            return result;
+        }
+
+        public string GetRoleIdByName(string roleName)
+        {
+            return string.Empty;//this.roleManager.Roles.Where(x => x.Id == roleId).Select(x => x.Name).FirstOrDefault();
+        }
+
+        public IQueryable<IdentityRole> GetRoles()
+        {
+            var result = this.roleManager.Roles;
             return result.AsQueryable();
         }
 

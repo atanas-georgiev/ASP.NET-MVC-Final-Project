@@ -10,6 +10,7 @@
         {
             this.ErrorMessageResourceType = typeof(ErrorMessages);
             this.ErrorMessageResourceName = error;
+            
         }
     }
 }

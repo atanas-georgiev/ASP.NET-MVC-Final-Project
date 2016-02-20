@@ -1,7 +1,18 @@
 ﻿@using Kendo.Mvc.UI
-@(Html.Kendo().Grid<Planex.Web.Areas.HR.Models.UserViewModel>().Name("grid").Columns(columns =>
+@using Planex.Web.App_LocalResources
+
+@{
+    ViewBag.Title = HtmlLabels.Users;
+}
+
+<br />
+<div class="well k-content">
+    <h3 class="well-title">@HtmlLabels.Users</h3>
+    <hr />
+    <br />
+    @(Html.Kendo().Grid<Planex.Web.Areas.HR.Models.UserViewModel>().Name("grid").Columns(columns =>
       {
-          columns.Template(@<text></text>).ClientTemplate("<a href='" + Url.Action("Index", "UserDetails", new { id = "#=Id#" }) + "'>View user</a>");
+          columns.Template(@<text></text>).ClientTemplate("<a href='" + Url.Action("Details", "Users", new { id = "#=Id#" }) + "'>" + @HtmlLabels.UserSelect + "</a>");
           columns.Bound(c => c.Email);
           columns.Bound(c => c.FirstName);
           columns.Bound(c => c.LastName);
@@ -10,5 +21,6 @@
           {
               selectable.Mode(GridSelectionMode.Single);
               selectable.Type(GridSelectionType.Row);
-          }).Sortable(sortable => { sortable.SortMode(GridSortMode.SingleColumn); }).Filterable().Scrollable().DataSource(dataSource => dataSource.Ajax().Model(model => model.Id(p => p.Id)).Read(read => read.Action("Users_Read", "Users")).Create(create => create.Action("Users_Create", "Users")))
-      )
+          }).Sortable(sortable => { sortable.SortMode(GridSortMode.SingleColumn); }).Filterable().Scrollable().DataSource(dataSource => dataSource.Ajax().Model(model => model.Id(p => p.Id)).Read(read => read.Action("UsersRead", "Json")).Create(create => create.Action("UsersCreate", "Json")))
+          )
+</div>
