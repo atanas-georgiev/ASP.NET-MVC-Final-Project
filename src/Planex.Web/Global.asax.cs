@@ -6,7 +6,10 @@
     using System.Web.Optimization;
     using System.Web.Routing;
 
+    using FluentScheduler;
+
     using Planex.Web.Infrastructure.Localization;
+    using Planex.Web.Infrastructure.Scheduler;
 
     public class MvcApplication : HttpApplication
     {
@@ -14,6 +17,8 @@
         {
             ViewEngines.Engines.Clear();
             ViewEngines.Engines.Add(new RazorViewEngine());
+
+            TaskManager.Initialize(new PlanexScheduler());
 
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
@@ -25,6 +30,7 @@
 
             var autoMapperConfig = new AutoMapperConfig();
             autoMapperConfig.Execute(Assembly.GetExecutingAssembly());
+
         }
     }
 }

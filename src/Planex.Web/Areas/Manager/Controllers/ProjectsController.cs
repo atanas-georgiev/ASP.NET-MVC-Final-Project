@@ -13,16 +13,16 @@
 
     public class ProjectsController : BaseController
     {
+        private readonly IMessageService messageService;
+
         private readonly IProjectService projectsService;
 
         private readonly ITaskService subTaskService;
 
-        private readonly IMessageService messageService;
-
         public ProjectsController(
             IUserService userService, 
             IProjectService projectsService, 
-            ITaskService subTaskService,
+            ITaskService subTaskService, 
             IMessageService messageService)
             : base(userService)
         {
@@ -37,7 +37,12 @@
             var project = this.projectsService.GetById(taskId);
             project.State = TaskStateType.Started;
             this.projectsService.Update(project);
-            this.messageService.SendSystemMessage(project.ManagerId, project.LeadId, SystemMessageType.ProjectApproved, project.Id, null);
+            this.messageService.SendSystemMessage(
+                project.ManagerId, 
+                project.LeadId, 
+                SystemMessageType.ProjectApproved, 
+                project.Id, 
+                null);
             return this.RedirectToAction("Index");
         }
 
@@ -52,23 +57,23 @@
         {
             if (this.ModelState.IsValid && model != null)
             {
-                var dbTask = new Project()
+                var task = new Project()
                                  {
                                      Title = model.Title, 
                                      Description = model.Description, 
                                      ManagerId = this.UserProfile.Id, 
                                      Priority = model.Priority, 
                                      State = TaskStateType.Draft, 
-                                     Start = model.Start,
-                                     End = model.Start,
+                                     Start = model.Start, 
+                                     End = model.Start, 
                                      PercentComplete = 0, 
                                      LeadId = model.LeadId, 
                                      Price = 0
                                  };
 
-                this.projectsService.Add(dbTask);
+                this.projectsService.Add(task);
                 this.projectsService.AddAttachments(
-                    dbTask, 
+                    task, 
                     model.UploadedAttachments, 
                     System.Web.HttpContext.Current.Server);
 
@@ -89,23 +94,26 @@
 
             if (subTasks.Count() != 0)
             {
-                result.Start = subTasks.OrderBy(x => x.Start).First().Start;
-                result.End = subTasks.OrderByDescending(x => x.End).First().End;
-                result.FinalPrice = subTasks.Sum(x => x.Price);
+                if (result != null)
+                {
+                    result.Start = subTasks.OrderBy(x => x.Start).First().Start;
+                    result.End = subTasks.OrderByDescending(x => x.End).First().End;
+                    result.FinalPrice = subTasks.Sum(x => x.Price);
+                }
             }
 
             var project = this.projectsService.GetById(intId);
 
-            if (result.End != project.End)
+            if (result != null && result.End != project.End)
             {
-                project.End = result.End;                
+                project.End = result.End;
             }
 
             if (project.Subtasks.Count() != 0)
             {
                 project.PercentComplete = project.Subtasks.Sum(x => x.PercentComplete) / project.Subtasks.Count;
             }
-            
+
             this.projectsService.Update(project);
 
             return this.View(result);
@@ -157,7 +165,12 @@
             var project = this.projectsService.GetById(intId);
             project.State = TaskStateType.UnderEstimation;
             this.projectsService.Update(project);
-            this.messageService.SendSystemMessage(project.ManagerId, project.LeadId, SystemMessageType.ProjectRequestedEstimation, project.Id, null);
+            this.messageService.SendSystemMessage(
+                project.ManagerId, 
+                project.LeadId, 
+                SystemMessageType.ProjectRequestedEstimation, 
+                project.Id, 
+                null);
             return this.RedirectToAction("Index");
         }
     }

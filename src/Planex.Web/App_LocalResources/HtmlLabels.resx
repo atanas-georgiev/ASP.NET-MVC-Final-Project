@@ -117,34 +117,13 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="ProjectCompleted" xml:space="preserve">
-    <value>Completed[%}</value>
+  <data name="ProjectCreate" xml:space="preserve">
+    <value>Create Project</value>
   </data>
-  <data name="ProjectDescription" xml:space="preserve">
-    <value>Description</value>
+  <data name="Projects" xml:space="preserve">
+    <value>Projects</value>
   </data>
-  <data name="ProjectEndDate" xml:space="preserve">
-    <value>End Date</value>
-  </data>
-  <data name="ProjectLead" xml:space="preserve">
-    <value>Lead</value>
-  </data>
-  <data name="ProjectManager" xml:space="preserve">
-    <value>Manager</value>
-  </data>
-  <data name="ProjectPrice" xml:space="preserve">
-    <value>Price</value>
-  </data>
-  <data name="ProjectPriority" xml:space="preserve">
-    <value>Priority</value>
-  </data>
-  <data name="ProjectStartDate" xml:space="preserve">
-    <value>Start Date</value>
-  </data>
-  <data name="ProjectState" xml:space="preserve">
-    <value>State</value>
-  </data>
-  <data name="ProjectTitle" xml:space="preserve">
-    <value>Title</value>
+  <data name="ProjectSelect" xml:space="preserve">
+    <value>Select</value>
   </data>
 </root>

@@ -10,14 +10,14 @@
 
     public class BaseController : Controller
     {
-        protected IUserService userService;
-
         public BaseController(IUserService userService)
         {
-            this.userService = userService;
+            this.UserService = userService;
         }
 
         protected User UserProfile { get; private set; }
+
+        protected IUserService UserService { get; set; }
 
         protected override IAsyncResult BeginExecute(
             RequestContext requestContext, 
@@ -25,7 +25,7 @@
             object state)
         {
             this.UserProfile =
-                this.userService.GetAll()
+                this.UserService.GetAll()
                     .FirstOrDefault(u => u.UserName == requestContext.HttpContext.User.Identity.Name);
             return base.BeginExecute(requestContext, callback, state);
         }

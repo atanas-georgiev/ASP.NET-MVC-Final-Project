@@ -2,6 +2,8 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
 
     using Planex.Data.Common;
@@ -61,6 +63,10 @@
         public int? SkillId { get; set; }
 
         public DateTime Start { get; set; }
+
+        [Required]
+        [DefaultValue(false)]
+        public bool? IsUserNotified { get; set; }
 
         public virtual ICollection<SubTask> Subtasks
         {

@@ -28,8 +28,8 @@
             if (this.HttpContext.User.Identity.IsAuthenticated)
             {                
                 homeModel.Messages = new MessageHomeViewModel();
-//                homeModel.Messages.UnreadMessagesCount =
-//                this.messageService.GetAll().Where(x => x.To.Id == this.UserProfile.Id).Count(x => x.IsRead == false);                
+                homeModel.Messages.UnreadMessagesCount =
+                this.messageService.GetAll().Where(x => x.To.Id == this.UserProfile.Id).Count(x => x.IsRead == false);                
             }
 
             return this.View(homeModel);

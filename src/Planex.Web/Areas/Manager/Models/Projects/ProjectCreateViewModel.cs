@@ -12,10 +12,9 @@
 
     public class ProjectCreateViewModel : IMapFrom<Project>
     {
+        [LocalizedDisplay("ProjectDescription")]
         [LocalizedRequired("RequiredFiled")]
-        [MaxLength(10000)]
         [UIHint("Editor")]
-        [DataType(DataType.MultilineText)]
         [AllowHtml]
         public string Description { get; set; }
 
@@ -23,22 +22,26 @@
         [HiddenInput(DisplayValue = false)]
         public int Id { get; set; }
 
+        [LocalizedDisplay("ProjectLead")]
         [LocalizedRequired("RequiredFiled")]
         public string LeadId { get; set; }
 
+        [LocalizedDisplay("ProjectPrice")]
         [LocalizedRequired("RequiredFiled")]
         public decimal Price { get; set; }
 
+        [LocalizedDisplay("ProjectPriority")]
         [LocalizedRequired("RequiredFiled")]
         public PriorityType Priority { get; set; }
 
+        [LocalizedDisplay("ProjectStartDate")]
         [LocalizedRequired("RequiredFiled")]
         [UIHint("Date")]
         public DateTime Start { get; set; }
 
-        [LocalizedRequired("RequiredFiled")]
         public TaskStateType State { get; set; }
 
+        [LocalizedDisplay("ProjectTitle")]
         [LocalizedRequired("RequiredFiled")]
         [MaxLength(100)]
         [UIHint("String")]

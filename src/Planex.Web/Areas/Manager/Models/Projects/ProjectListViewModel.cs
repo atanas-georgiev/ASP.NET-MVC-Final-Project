@@ -7,46 +7,42 @@
     using AutoMapper;
 
     using Planex.Data.Models;
+    using Planex.Web.Infrastructure.Localization;
     using Planex.Web.Infrastructure.Mappings;
 
     public class ProjectListViewModel : IMapFrom<Project>, IHaveCustomMappings
-    {
-        [Required]
+    {        
         [UIHint("Number")]
+        [LocalizedDisplay("ProjectCompleted")]
         public string Completed { get; set; }
 
         [Key]
         [HiddenInput(DisplayValue = false)]
         public int Id { get; set; }
 
-        [Required]
         [MaxLength(100)]
         [UIHint("String")]
+        [LocalizedDisplay("ProjectLead")]
         public string Lead { get; set; }
 
-        [Required]
-        [MaxLength(100)]
         [UIHint("String")]
+        [LocalizedDisplay("ProjectManager")]
         public string Manager { get; set; }
 
-        [Required]
-        [MaxLength(100)]
         [UIHint("String")]
+        [LocalizedDisplay("ProjectPriority")]
         public PriorityType Priority { get; set; }
 
-        [Required]
-        [MaxLength(100)]
         [UIHint("Date")]
+        [LocalizedDisplay("ProjectStartDate")]
         public DateTime Start { get; set; }
 
-        [Required]
-        [MaxLength(100)]
         [UIHint("String")]
+        [LocalizedDisplay("ProjectState")]
         public TaskStateType State { get; set; }
 
-        [Required]
-        [MaxLength(100)]
         [UIHint("String")]
+        [LocalizedDisplay("ProjectTitle")]
         public string Title { get; set; }
 
         public void CreateMappings(IConfiguration configuration)

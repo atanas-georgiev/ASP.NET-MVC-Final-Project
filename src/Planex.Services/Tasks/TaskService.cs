@@ -19,11 +19,25 @@
 
         private IRepository<SubTask, int> tasks;
 
-        public TaskService(DbContext context, IRepository<SubTask, int> tasks, IRepository<SubTaskDependency, int> dependencies)
+        private IRepository<Project, int> projects;
+
+        public TaskService(DbContext context, IRepository<SubTask, int> tasks, IRepository<SubTaskDependency, int> dependencies, IRepository<Project, int> projects)
         {
             this.context = context;
             this.tasks = tasks;
             this.dependencies = dependencies;
+            this.projects = projects;
+        }
+
+        private void UpdateProjectCompleteness(Project project)
+        {
+            var subTasks = project.Subtasks;//.Where(x => x.ParentId == null);
+
+            if (subTasks.Count() != 0)
+            {
+                project.PercentComplete = subTasks.Sum(x => x.PercentComplete) / subTasks.Count();
+                this.projects.Update(project);
+            }
         }
 
         public void Add(SubTask task)
@@ -107,6 +121,7 @@
         public void Update(SubTask task)
         {
             this.tasks.Update(task);
+            this.UpdateProjectCompleteness(task.Project);
         }
 
         public void UpdateDependency(SubTaskDependency task)

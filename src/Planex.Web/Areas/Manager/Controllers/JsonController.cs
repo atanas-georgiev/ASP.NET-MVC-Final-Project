@@ -48,7 +48,7 @@
             if (assignment != null)
             {
                 var subtask = this.subTaskService.GetById(assignment.TaskId);
-                var user = this.userService.GetAll().FirstOrDefault(x => x.IntId == assignment.ResourceId);
+                var user = this.UserService.GetAll().FirstOrDefault(x => x.IntId == assignment.ResourceId);
                 subtask.Users.Add(user);
                 this.subTaskService.Update(subtask);
                 this.UpdatePriceSubTask(assignment.TaskId);
@@ -108,7 +108,7 @@
             if (assignment != null)
             {
                 var subtask = this.subTaskService.GetById(assignment.TaskId);
-                var user = this.userService.GetAll().FirstOrDefault(x => x.IntId == assignment.ResourceId);
+                var user = this.UserService.GetAll().FirstOrDefault(x => x.IntId == assignment.ResourceId);
                 subtask.Users.Remove(user);
                 this.subTaskService.Update(subtask);
                 this.UpdatePriceSubTask(assignment.TaskId);
@@ -140,7 +140,7 @@
         public ActionResult GetAllLeadUsers([DataSourceRequest] DataSourceRequest request)
         {
             var leads =
-                this.userService.GetAllByRole("Lead")
+                this.UserService.GetAllByRole("Lead")
                     .Select(x => new { id = x.Id, name = x.FirstName + " " + x.LastName });
             return this.Json(leads, JsonRequestBehavior.AllowGet);
         }
@@ -187,7 +187,7 @@
         // Gantt resources
         public virtual JsonResult ReadResources([DataSourceRequest] DataSourceRequest request)
         {
-            var result = this.userService.GetAllByRole("Worker").To<ProjectDetailsResourseViewModel>();
+            var result = this.UserService.GetAllByRole("Worker").To<ProjectDetailsResourseViewModel>();
             return this.Json(result.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
         }
 
@@ -208,7 +208,7 @@
             if (assignment != null)
             {
                 var subtask = this.subTaskService.GetById(assignment.TaskId);
-                var user = this.userService.GetAll().FirstOrDefault(x => x.IntId == assignment.ResourceId);
+                var user = this.UserService.GetAll().FirstOrDefault(x => x.IntId == assignment.ResourceId);
                 subtask.Users.Add(user);
                 this.subTaskService.Update(subtask);
                 this.UpdatePriceSubTask(assignment.TaskId);

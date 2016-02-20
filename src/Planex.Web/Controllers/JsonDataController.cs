@@ -78,8 +78,8 @@
                                 "categories",
                                 () =>
                                     {
-                                        var projects = this.projectService.GetAll().Where(x => x.State >= TaskStateType.Started);
-                                        var result = this.subTaskService.GetAll().Where(x => x.Project.State >= TaskStateType.Started).To<ProjectHomeViewModel>().ToList();
+                                        var projects = this.projectService.GetAll().Where(x => x.State == TaskStateType.Started);
+                                        var result = this.subTaskService.GetAll().Where(x => x.Project.State == TaskStateType.Started).To<ProjectHomeViewModel>().ToList();
 
                                         foreach (var project in projects)
                                         {

@@ -56,6 +56,10 @@
       <HintPath>..\packages\AutoMapper.4.2.0\lib\net45\AutoMapper.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="FluentScheduler, Version=3.1.46.0, Culture=neutral, PublicKeyToken=b76503528a14ebd1, processorArchitecture=MSIL">
+      <HintPath>..\packages\FluentScheduler.3.1.46\lib\net40\FluentScheduler.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="HtmlAgilityPack, Version=1.4.9.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
       <HintPath>..\packages\HtmlAgilityPack.1.4.9\lib\Net45\HtmlAgilityPack.dll</HintPath>
       <Private>True</Private>
@@ -213,6 +217,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ErrorMessages.resx</DependentUpon>
     </Compile>
+    <Compile Include="App_LocalResources\HtmlLabels.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>HtmlLabels.resx</DependentUpon>
+    </Compile>
     <Compile Include="App_LocalResources\ModelLabels.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -284,6 +293,8 @@
     <Compile Include="Infrastructure\Mappings\IMapFrom.cs" />
     <Compile Include="Infrastructure\Mappings\IMapTo.cs" />
     <Compile Include="Infrastructure\Mappings\QueryableExtensions.cs" />
+    <Compile Include="Infrastructure\Scheduler\PlanexScheduler.cs" />
+    <Compile Include="Infrastructure\Scheduler\ProjectStateTask.cs" />
     <Compile Include="Models\Account\ExternalLoginConfirmationViewModel.cs" />
     <Compile Include="Models\Account\AddPhoneNumberViewModel.cs" />
     <Compile Include="Models\Account\ChangePasswordViewModel.cs" />
@@ -423,7 +434,6 @@
     <Content Include="Areas\HR\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Lead\Views\_ViewStart.cshtml" />
     <None Include="Areas\Lead\Views\Projects\Index.cshtml" />
-    <None Include="Areas\Manager\Views\Index\Index.cshtml" />
     <Content Include="Content\Kendo\kendo.black.min.css.map" />
     <Content Include="Content\Kendo\kendo.black.mobile.min.css.map" />
     <Content Include="Content\Kendo\kendo.blueopal.min.css.map" />
@@ -868,9 +878,6 @@
     <Folder Include="Areas\Lead\Views\Base\" />
     <Folder Include="Areas\Lead\Views\Helper\" />
     <Folder Include="Areas\Lead\Views\Shared\" />
-    <Folder Include="Areas\Manager\Views\Base\" />
-    <Folder Include="Areas\Manager\Views\Json\" />
-    <Folder Include="Areas\Manager\Views\Shared\" />
     <Folder Include="Areas\Worker\Views\Base\" />
     <Folder Include="Areas\Worker\Views\Json\" />
     <Folder Include="Areas\Worker\Views\Shared\" />
@@ -919,6 +926,10 @@
     <EmbeddedResource Include="App_LocalResources\ErrorMessages.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ErrorMessages.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App_LocalResources\HtmlLabels.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>HtmlLabels.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="App_LocalResources\ModelLabels.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
