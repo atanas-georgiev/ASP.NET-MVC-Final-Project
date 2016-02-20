@@ -6,6 +6,8 @@
     using Kendo.Mvc.Extensions;
     using Kendo.Mvc.UI;
 
+    using Planex.Data.Models;
+    using Planex.Services.Messages;
     using Planex.Services.Projects;
     using Planex.Services.Skills;
     using Planex.Services.Tasks;
@@ -21,16 +23,20 @@
 
         private readonly ITaskService subTaskService;
 
+        private readonly IMessageService messageService;
+
         public JsonController(
             IUserService userService, 
             ISkillService skillService, 
             ITaskService subTaskService, 
-            IProjectService projectService)
+            IProjectService projectService,
+            IMessageService messageService)
             : base(userService)
         {
             this.skillService = skillService;
             this.subTaskService = subTaskService;
             this.projectService = projectService;
+            this.messageService = messageService;
         }
 
         public virtual ActionResult EditAssignment(
@@ -42,6 +48,11 @@
                 var taskDb = this.subTaskService.GetById(task.Id);
                 taskDb.PercentComplete = task.PercentComplete / 100;
                 this.subTaskService.Update(taskDb);
+
+                if (task.PercentComplete == 100)
+                {
+                    this.messageService.SendSystemMessage(this.UserProfile.Id, taskDb.Project.LeadId, SystemMessageType.TaskComplete, taskDb.Project.Id, taskDb.Id);
+                }
             }
 
             return this.Json(request);

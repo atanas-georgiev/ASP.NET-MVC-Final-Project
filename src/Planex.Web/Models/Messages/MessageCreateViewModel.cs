@@ -20,19 +20,19 @@
 
         [UIHint("String")]
         [LocalizedDisplay("Receiver")]
-        [LocalizedRequired("Receiver")]
+        [LocalizedRequired("RequiredFiled")]
         public string Receiver { get; set; }
 
         [MaxLength(100)]
         [UIHint("String")]
         [LocalizedDisplay("Subject")]
-        [LocalizedRequired("Subject")]
+        [LocalizedRequired("RequiredFiled")]
         public string Subject { get; set; }
 
-        [Required]
         [MaxLength(10000)]
         [UIHint("Editor")]
-        [DataType(DataType.MultilineText)]
+        [LocalizedDisplay("Subject")]
+        [LocalizedRequired("RequiredFiled")]
         [AllowHtml]
         public string Text { get; set; }
 

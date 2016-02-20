@@ -2,9 +2,6 @@
 @using Planex.Data.Models
 @model Planex.Web.Areas.Manager.Models.Projects.ProjectCreateViewModel
 
-@{
-    ViewBag.Title = "Create project";
-}
 
 <br/>
 <div class="well k-content">
@@ -47,7 +44,7 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.LeadId, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @(Html.Kendo().DropDownListFor(model => model.LeadId).Name("LeadId").OptionLabel("Select Lead ...").DataTextField("name").DataValueField("id").DataSource(source => { source.Read(read => { read.Action("GetAllLeadUsers", "Json"); }).ServerFiltering(false); })
+                    @(Html.Kendo().DropDownListFor(model => model.LeadId).Name("LeadId").DataTextField("name").DataValueField("id").DataSource(source => { source.Read(read => { read.Action("GetAllLeadUsers", "Json"); }).ServerFiltering(false); })
                           )
                 </div>
             </div>

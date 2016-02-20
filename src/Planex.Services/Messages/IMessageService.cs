@@ -13,5 +13,7 @@
         IQueryable<Message> GetAll();
 
         void Update(Message message);
+
+        void SendSystemMessage(string senderId, string receiverId, SystemMessageType messageType, int? projectId, int? taskId);
     }
 }

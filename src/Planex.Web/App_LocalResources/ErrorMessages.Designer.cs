@@ -70,6 +70,15 @@ namespace Planex.Web.App_LocalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The {0} field is required!.
+        /// </summary>
+        public static string RequiredFiled {
+            get {
+                return ResourceManager.GetString("RequiredFiled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Please specify a subject.
         /// </summary>
         public static string Subject {

@@ -117,13 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Receiver" xml:space="preserve">
-    <value>Въведете получател</value>
+  <data name="ProjectRequestedEstimationSubject" xml:space="preserve">
+    <value>Заявка за анализ на проект {0}</value>
   </data>
-  <data name="RequiredFiled" xml:space="preserve">
-    <value>Полето {0} е задължително!</value>
-  </data>
-  <data name="Subject" xml:space="preserve">
-    <value>Въведете заглавие</value>
+  <data name="ProjectRequestedEstimationText" xml:space="preserve">
+    <value>Hello {0}, new estimation task was requested by manager {1}. Project name is {2}. You can check you estimation list for more details.</value>
   </data>
 </root>

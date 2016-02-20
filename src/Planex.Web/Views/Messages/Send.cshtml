@@ -17,7 +17,7 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.Receiver, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @(Html.Kendo().DropDownListFor(model => model.Receiver).Name("Receiver").OptionLabel("Select User").DataTextField("name").DataValueField("id").DataSource(source => { source.Read(read => { read.Action("GetAllUsers", "JsonData"); }).ServerFiltering(false); })
+                    @(Html.Kendo().DropDownListFor(model => model.Receiver).Name("Receiver").DataTextField("name").DataValueField("id").DataSource(source => { source.Read(read => { read.Action("GetAllUsers", "JsonData"); }).ServerFiltering(false); })
                           )
                 </div>
             </div>

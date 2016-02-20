@@ -4,6 +4,7 @@
     using System.Web.Mvc;
 
     using Planex.Data.Models;
+    using Planex.Services.Messages;
     using Planex.Services.Projects;
     using Planex.Services.Tasks;
     using Planex.Services.Users;
@@ -16,22 +17,27 @@
 
         private readonly ITaskService subTaskService;
 
+        private readonly IMessageService messageService;
+
         public ProjectsController(
             IUserService userService, 
             IProjectService projectsService, 
-            ITaskService subTaskService)
+            ITaskService subTaskService,
+            IMessageService messageService)
             : base(userService)
         {
             this.projectsService = projectsService;
             this.subTaskService = subTaskService;
+            this.messageService = messageService;
         }
 
         public ActionResult Approve()
         {
             var taskId = int.Parse(this.Session["ProjectId"].ToString());
-            var task = this.projectsService.GetById(taskId);
-            task.State = TaskStateType.Started;
-            this.projectsService.Update(task);
+            var project = this.projectsService.GetById(taskId);
+            project.State = TaskStateType.Started;
+            this.projectsService.Update(project);
+            this.messageService.SendSystemMessage(project.ManagerId, project.LeadId, SystemMessageType.ProjectApproved, project.Id, null);
             return this.RedirectToAction("Index");
         }
 
@@ -151,6 +157,7 @@
             var project = this.projectsService.GetById(intId);
             project.State = TaskStateType.UnderEstimation;
             this.projectsService.Update(project);
+            this.messageService.SendSystemMessage(project.ManagerId, project.LeadId, SystemMessageType.ProjectRequestedEstimation, project.Id, null);
             return this.RedirectToAction("Index");
         }
     }

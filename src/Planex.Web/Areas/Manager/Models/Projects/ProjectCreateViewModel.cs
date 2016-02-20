@@ -7,11 +7,12 @@
     using System.Web.Mvc;
 
     using Planex.Data.Models;
+    using Planex.Web.Infrastructure.Localization;
     using Planex.Web.Infrastructure.Mappings;
 
     public class ProjectCreateViewModel : IMapFrom<Project>
     {
-        [Required]
+        [LocalizedRequired("RequiredFiled")]
         [MaxLength(10000)]
         [UIHint("Editor")]
         [DataType(DataType.MultilineText)]
@@ -22,23 +23,23 @@
         [HiddenInput(DisplayValue = false)]
         public int Id { get; set; }
 
-        [Required]
+        [LocalizedRequired("RequiredFiled")]
         public string LeadId { get; set; }
 
-        [Required]
+        [LocalizedRequired("RequiredFiled")]
         public decimal Price { get; set; }
 
-        [Required]
+        [LocalizedRequired("RequiredFiled")]
         public PriorityType Priority { get; set; }
 
-        [Required]
+        [LocalizedRequired("RequiredFiled")]
         [UIHint("Date")]
         public DateTime Start { get; set; }
 
-        [Required]
+        [LocalizedRequired("RequiredFiled")]
         public TaskStateType State { get; set; }
 
-        [Required]
+        [LocalizedRequired("RequiredFiled")]
         [MaxLength(100)]
         [UIHint("String")]
         public string Title { get; set; }

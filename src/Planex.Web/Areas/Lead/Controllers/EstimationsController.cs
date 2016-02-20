@@ -4,6 +4,7 @@
     using System.Web.Mvc;
 
     using Planex.Data.Models;
+    using Planex.Services.Messages;
     using Planex.Services.Projects;
     using Planex.Services.Skills;
     using Planex.Services.Tasks;
@@ -17,17 +18,21 @@
     {
         private readonly ITaskService subTaskService;
 
-        private readonly IProjectService taskService;
+        private readonly IProjectService projectService;
+
+        private readonly IMessageService messageService;
 
         public EstimationsController(
             IUserService userService, 
-            IProjectService taskService, 
-            ISkillService skillService, 
+            IProjectService projectService, 
+            ISkillService skillService,
+            IMessageService messageService,
             ITaskService subTaskService)
             : base(userService)
         {
-            this.taskService = taskService;
+            this.projectService = projectService;
             this.subTaskService = subTaskService;
+            this.messageService = messageService;
         }
 
         public ActionResult Edit(string id)
@@ -35,7 +40,7 @@
             this.Session["ProjectId"] = id;
             var intId = int.Parse(id);
             var requestedEstimationTask =
-                this.taskService.GetAll().Where(x => x.Id == intId).To<EstimationEditViewModel>().FirstOrDefault();
+                this.projectService.GetAll().Where(x => x.Id == intId).To<EstimationEditViewModel>().FirstOrDefault();
             var requestedEstimationTaskSubTasks =
                 this.subTaskService.GetAll()
                     .Where(x => x.ProjectId == requestedEstimationTask.Id)
@@ -66,9 +71,10 @@
 
         public ActionResult SendForApproval()
         {
-            var task = this.taskService.GetById(int.Parse(this.Session["ProjectId"].ToString()));
-            task.State = TaskStateType.Estimated;
-            this.taskService.Update(task);
+            var project = this.projectService.GetById(int.Parse(this.Session["ProjectId"].ToString()));
+            project.State = TaskStateType.Estimated;
+            this.projectService.Update(project);
+            this.messageService.SendSystemMessage(project.LeadId, project.ManagerId, SystemMessageType.ProjectEstimated, project.Id, null);
             return this.RedirectToAction("Index");
         }
     }

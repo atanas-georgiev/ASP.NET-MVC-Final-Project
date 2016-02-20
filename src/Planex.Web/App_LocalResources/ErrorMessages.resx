@@ -120,6 +120,9 @@
   <data name="Receiver" xml:space="preserve">
     <value>Please specify a receiver</value>
   </data>
+  <data name="RequiredFiled" xml:space="preserve">
+    <value>The {0} field is required!</value>
+  </data>
   <data name="Subject" xml:space="preserve">
     <value>Please specify a subject</value>
   </data>

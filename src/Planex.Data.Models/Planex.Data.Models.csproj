@@ -73,6 +73,7 @@
     <Compile Include="SubTask.cs" />
     <Compile Include="Project.cs" />
     <Compile Include="SubTaskDependency.cs" />
+    <Compile Include="SystemMessageType.cs" />
     <Compile Include="TaskStateType.cs" />
     <Compile Include="User.cs" />
   </ItemGroup>

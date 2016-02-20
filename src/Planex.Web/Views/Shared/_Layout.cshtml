@@ -49,8 +49,8 @@
                   });
           }).HoverDelay(100).Items(items =>
               {
-                  items.Add().Text("Home").Action("Index", "Home", new { area = string.Empty });
-                  items.Add().Text("Manager").Items(children => { children.Add().Text("Projects").Action("Index", "Projects", new { area = "Manager" }); });
+                  items.Add().Text("<span class=\"glyphicon glyphicon-home\"></span> Home").Encoded(false).Action("Index", "Home", new { area = string.Empty });
+                  items.Add().Text("Manager").Items(children => { children.Add().Text("<span class=\"glyphicon glyphicon-calendar\"></span> Projects").Encoded(false).Action("Index", "Projects", new { area = "Manager" }); });
                   items.Add().Text("Lead").Items(children =>
                       {
                           children.Add().Text("Estimations").Action("Index", "Estimations", new { area = "Lead" });
