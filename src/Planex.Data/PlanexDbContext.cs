@@ -46,7 +46,6 @@
             {
                 throw new Exception();
             }
-            
         }
 
         private void ApplyAuditInfoRules()
@@ -56,7 +55,8 @@
                 this.ChangeTracker.Entries()
                     .Where(
                         e =>
-                        e.Entity is IAuditInfo && ((e.State == EntityState.Added) || (e.State == EntityState.Modified))))
+                        e.Entity is IAuditInfo && ((e.State == EntityState.Added) || (e.State == EntityState.Modified)))
+                )
             {
                 var entity = (IAuditInfo)entry.Entity;
                 if (entry.State == EntityState.Added && entity.CreatedOn == default(DateTime))

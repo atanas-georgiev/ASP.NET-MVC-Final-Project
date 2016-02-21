@@ -4,13 +4,10 @@
     using System.Data.Entity;
     using System.Linq;
     using System.Threading;
-    using System.Timers;
 
     using Planex.Data.Common;
     using Planex.Data.Models;
     using Planex.Services.Messages;
-
-    using Timer = System.Timers.Timer;
 
     public class PlanexScheduler : IPlanexScheduler
     {
@@ -41,28 +38,28 @@
 
             this.TimerWorker();
 
-            //            if (thread == null)
-            //            {
-            //                thread = new Thread(new ThreadStart(this.ThreadFunc));
-            //                thread.IsBackground = true;
-            //                thread.Name = "ThreadFunc";
-            //                thread.Start();
-            //            }
+            // if (thread == null)
+            // {
+            // thread = new Thread(new ThreadStart(this.ThreadFunc));
+            // thread.IsBackground = true;
+            // thread.Name = "ThreadFunc";
+            // thread.Start();
+            // }
         }
 
-//        protected void ThreadFunc()
-//        {
-//            Timer t = new System.Timers.Timer();
-//            t.Elapsed += new System.Timers.ElapsedEventHandler(this.TimerWorker);
-//            t.Interval = 10000;
-//            t.Enabled = true;
-//            t.AutoReset = true;
-//            t.Start();
-//        }
-
+        // protected void ThreadFunc()
+        // {
+        // Timer t = new System.Timers.Timer();
+        // t.Elapsed += new System.Timers.ElapsedEventHandler(this.TimerWorker);
+        // t.Interval = 10000;
+        // t.Enabled = true;
+        // t.AutoReset = true;
+        // t.Start();
+        // }
         protected void TimerWorker()
         {
-            var projectsDb = this.projects.All().Where(x => x.PercentComplete == 1 && x.State != TaskStateType.Finished).ToList();
+            var projectsDb =
+                this.projects.All().Where(x => x.PercentComplete == 1 && x.State != TaskStateType.Finished).ToList();
             var systemUser = this.users.All().FirstOrDefault(x => x.FirstName == "System" && x.LastName == "Message");
 
             foreach (var project in projectsDb)
@@ -88,7 +85,8 @@
                     .Where(
                         x =>
                         x.PercentComplete != 1 && x.End < DateTime.UtcNow && x.IsUserNotified != null
-                        && x.IsUserNotified.Value == false).ToList();
+                        && x.IsUserNotified.Value == false)
+                    .ToList();
 
             foreach (var task in tasksDb)
             {

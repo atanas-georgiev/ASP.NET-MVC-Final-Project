@@ -37,6 +37,8 @@
         [MaxLength(10000)]
         public string Description { get; set; }
 
+        public DateTime End { get; set; }
+
         [ForeignKey("LeadId")]
         public virtual User Lead { get; set; }
 
@@ -58,8 +60,6 @@
 
         [Required]
         public DateTime Start { get; set; }
-
-        public DateTime End { get; set; }
 
         [Required]
         public TaskStateType State { get; set; }

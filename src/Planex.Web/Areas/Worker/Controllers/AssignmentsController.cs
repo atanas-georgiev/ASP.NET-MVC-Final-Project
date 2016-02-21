@@ -1,12 +1,9 @@
 ﻿namespace Planex.Web.Areas.Worker.Controllers
 {
-    using System.Linq;
     using System.Web.Mvc;
 
     using Planex.Services.Tasks;
     using Planex.Services.Users;
-    using Planex.Web.Areas.Worker.Models.Assignments;
-    using Planex.Web.Infrastructure.Mappings;
 
     public class AssignmentsController : BaseController
     {

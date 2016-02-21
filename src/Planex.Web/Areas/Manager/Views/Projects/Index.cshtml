@@ -10,7 +10,7 @@
 <br/>
 <div class="well k-content">
     <h3 class="well-title">@HtmlLabels.Projects</h3>
-    <hr />
+    <hr/>
     <div>
         @Html.ActionLink(@HtmlLabels.ProjectCreate, "Create", "", new { @class = "k-button" })
     </div>
@@ -25,5 +25,5 @@
               columns.Bound(c => c.State);
               columns.Bound(c => c.Completed);
           }).ColumnMenu().Pageable().Navigatable().Sortable(sortable => { sortable.SortMode(GridSortMode.SingleColumn); }).Filterable().Scrollable().DataSource(dataSource => dataSource.Ajax().Model(model => model.Id(p => p.Id)).Read(read => read.Action("ReadAllProjects", "Json")))
-    )
+          )
 </div>

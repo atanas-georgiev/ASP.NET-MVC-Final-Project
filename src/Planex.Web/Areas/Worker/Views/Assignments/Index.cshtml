@@ -1,7 +1,7 @@
 ﻿@using Kendo.Mvc.UI
 @using Planex.Web.App_LocalResources
 @using Planex.Web.Areas.Worker.Models.Assignments
-@model IEnumerable<Planex.Web.Areas.Worker.Models.Assignments.AssignmentViewModel>
+@model IEnumerable<AssignmentViewModel>
 
 @{
     ViewBag.Title = HtmlLabels.Tasks;
@@ -9,7 +9,7 @@
 
 <div class="well k-content">
     <h3 class="well-title">@HtmlLabels.Tasks</h3>
-    <hr />
+    <hr/>
 
     @(Html.Kendo().Grid<AssignmentViewModel>().Name("grid").Columns(columns =>
           {
@@ -17,7 +17,6 @@
               columns.Bound(c => c.ProjectTitle);
               columns.Bound(c => c.Start).Format("{0:dd/MMMM/yyyy}");
               columns.Bound(c => c.End).Format("{0:dd/MMMM/yyyy}");
-              ;
               columns.Bound(c => c.PercentComplete);
               columns.Command(c => c.Edit());
           }).Editable(editable => editable.Mode(GridEditMode.PopUp)).ColumnMenu().Pageable().Navigatable().Sortable(sortable => { sortable.SortMode(GridSortMode.SingleColumn); }).Filterable().Scrollable().DataSource(dataSource => dataSource.Ajax().Model(model => model.Id(p => p.Id)).Read(read => read.Action("GetAllAssignments", "Json")).Update("EditAssignment", "Json")))

@@ -1,9 +1,7 @@
 ﻿namespace Planex.Web.Areas.HR.Controllers
 {
     using System.Linq;
-    using System.Security.Cryptography.X509Certificates;
     using System.Web.Mvc;
-    using System.Web.Security;
 
     using Kendo.Mvc.Extensions;
     using Kendo.Mvc.UI;
@@ -22,6 +20,12 @@
             : base(userService)
         {
             this.skillService = skillService;
+        }
+
+        public ActionResult GetAllRoles([DataSourceRequest] DataSourceRequest request)
+        {
+            var roles = this.UserService.GetRoles();
+            return this.Json(roles, JsonRequestBehavior.AllowGet);
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
@@ -72,37 +76,35 @@
             if (this.ModelState.IsValid)
             {
                 var entity = new User
-                {
-                    Email = user.Email,
-                    FirstName = user.FirstName,
-                    LastName = user.LastName,
-                    Salary = 0,                    
-                };
+                                 {
+                                     Email = user.Email, 
+                                     FirstName = user.FirstName, 
+                                     LastName = user.LastName, 
+                                     Salary = 0, 
+                                 };
 
                 this.UserService.Add(entity, user.RoleId);
                 user.Id = entity.Id;
             }
 
             var resultData = new[] { user };
-            return Json(resultData.AsQueryable().ToDataSourceResult(request, ModelState));
+            return this.Json(resultData.AsQueryable().ToDataSourceResult(request, this.ModelState));
         }
 
         public ActionResult UsersRead([DataSourceRequest] DataSourceRequest request)
         {
-            var users = this.UserService.GetAll().Where(x => x.FirstName != "System" && x.LastName != "Message").To<UserViewModel>().ToList();
-            
+            var users =
+                this.UserService.GetAll()
+                    .Where(x => x.FirstName != "System" && x.LastName != "Message")
+                    .To<UserViewModel>()
+                    .ToList();
+
             foreach (var user in users)
             {
-                 user.Role = this.UserService.GetRoleNameById(user.RoleId);
+                user.Role = this.UserService.GetRoleNameById(user.RoleId);
             }
 
             return this.Json(users.ToDataSourceResult(request));
-        }
-
-        public ActionResult GetAllRoles([DataSourceRequest] DataSourceRequest request)
-        {
-            var roles = this.UserService.GetRoles();            
-            return this.Json(roles, JsonRequestBehavior.AllowGet);
         }
     }
 }

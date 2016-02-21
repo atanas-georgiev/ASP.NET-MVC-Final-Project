@@ -10,15 +10,17 @@
 
     public class MessageViewModel : IMapFrom<Message>
     {
-        [Key]
-        public int Id { get; set; }
-
         [UIHint("DateTime")]
         [LocalizedDisplay("MessageDate")]
         public DateTime Date { get; set; }
 
         [LocalizedDisplay("MessageSender")]
         public MessageUserViewModel From { get; set; }
+
+        [Key]
+        public int Id { get; set; }
+
+        public bool IsRead { get; set; }
 
         [LocalizedDisplay("MessageSubject")]
         [LocalizedRequired("RequiredFiled")]
@@ -30,8 +32,6 @@
         [DataType(DataType.MultilineText)]
         [AllowHtml]
         public string Text { get; set; }
-
-        public bool IsRead { get; set; }
 
         public MessageUserViewModel To { get; set; }
     }

@@ -3,12 +3,10 @@
     using System;
     using System.Data.Entity;
     using System.Linq;
-    using System.Web.Security;
 
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.EntityFramework;
 
-    using Planex.Data;
     using Planex.Data.Common;
     using Planex.Data.Models;
 
@@ -62,6 +60,13 @@
             return this.users.GetById(id);
         }
 
+        public string GetRoleIdByName(string roleName)
+        {
+            return string.Empty;
+
+                // this.roleManager.Roles.Where(x => x.Id == roleId).Select(x => x.Name).FirstOrDefault();
+        }
+
         public string GetRoleName(User user)
         {
             var result = this.userManager.GetRoles(user.Id).FirstOrDefault();
@@ -74,11 +79,6 @@
             return result;
         }
 
-        public string GetRoleIdByName(string roleName)
-        {
-            return string.Empty;//this.roleManager.Roles.Where(x => x.Id == roleId).Select(x => x.Name).FirstOrDefault();
-        }
-
         public IQueryable<IdentityRole> GetRoles()
         {
             var result = this.roleManager.Roles;
@@ -88,7 +88,7 @@
         public void SetRoleName(User user, string name)
         {
             var role = this.GetRoleNameById(name);
-            this.userManager.RemoveFromRole(user.Id, role);            
+            this.userManager.RemoveFromRole(user.Id, role);
             this.userManager.AddToRole(user.Id, role);
             this.users.Update(user);
         }

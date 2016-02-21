@@ -85,13 +85,13 @@
             {
                 var taskDb = new SubTask()
                                  {
-                                     ProjectId = projectId,
-                                     Title = task.Title,
-                                     ParentId = task.ParentTaskId,
-                                     Start = task.Start,
-                                     End = task.End,
-                                     PercentComplete = 0,
-                                     Price = 0,
+                                     ProjectId = projectId, 
+                                     Title = task.Title, 
+                                     ParentId = task.ParentTaskId, 
+                                     Start = task.Start, 
+                                     End = task.End, 
+                                     PercentComplete = 0, 
+                                     Price = 0, 
                                      IsUserNotified = false
                                  };
 
@@ -227,8 +227,7 @@
         {
             if (dep != null)
             {
-                var depDb = this.subTaskService.AllDependencies()
-                    .FirstOrDefault(x => x.Id == dep.Id);
+                var depDb = this.subTaskService.AllDependencies().FirstOrDefault(x => x.Id == dep.Id);
                 depDb.PredecessorId = dep.PredecessorId;
                 depDb.SuccessorId = dep.SuccessorId;
                 depDb.Type = dep.Type;

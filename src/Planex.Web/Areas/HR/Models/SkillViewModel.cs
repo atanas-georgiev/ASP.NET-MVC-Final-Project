@@ -14,7 +14,7 @@
 
         [UIHint("String")]
         [LocalizedDisplay("SkillName")]
-        [LocalizedRequired("RequiredFiled")]        
+        [LocalizedRequired("RequiredFiled")]
         public string Name { get; set; }
     }
 }

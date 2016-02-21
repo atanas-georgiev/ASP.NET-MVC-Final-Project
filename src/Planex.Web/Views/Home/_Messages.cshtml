@@ -13,14 +13,7 @@
     <hr/>
     <div class="row">
         <div class="demo-section k-content wide">
-            @(Html.Kendo().ListView<MessageViewModel>("Messages")
-                .Name("messagesListView")
-                .TagName("div")
-                .ClientTemplateId("template")
-                .DataSource(dataSource =>
-                {
-                    dataSource.Read(read => read.Action("ReadUnreadMessages", "JsonData"));
-                }))
+            @(Html.Kendo().ListView<MessageViewModel>("Messages").Name("messagesListView").TagName("div").ClientTemplateId("template").DataSource(dataSource => { dataSource.Read(read => read.Action("ReadUnreadMessages", "JsonData")); }))
         </div>
     </div>
 </div>

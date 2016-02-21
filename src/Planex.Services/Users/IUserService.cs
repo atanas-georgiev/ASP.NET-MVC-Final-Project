@@ -16,11 +16,11 @@
 
         User GetById(string id);
 
+        string GetRoleIdByName(string roleName);
+
         string GetRoleName(User user);
 
         string GetRoleNameById(string roleId);
-
-        string GetRoleIdByName(string roleName);
 
         IQueryable<IdentityRole> GetRoles();
 

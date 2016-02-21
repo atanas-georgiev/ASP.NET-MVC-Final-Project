@@ -2,11 +2,16 @@
 {
     public enum SystemMessageType
     {
-        ProjectRequestedEstimation,
-        ProjectEstimated,
-        ProjectApproved,
-        ProjectCompleted,
-        TaskComplete,
+        ProjectRequestedEstimation, 
+
+        ProjectEstimated, 
+
+        ProjectApproved, 
+
+        ProjectCompleted, 
+
+        TaskComplete, 
+
         TaskOverDue
     }
 }

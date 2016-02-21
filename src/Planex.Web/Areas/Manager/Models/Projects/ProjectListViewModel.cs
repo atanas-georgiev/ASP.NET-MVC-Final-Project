@@ -11,7 +11,7 @@
     using Planex.Web.Infrastructure.Mappings;
 
     public class ProjectListViewModel : IMapFrom<Project>, IHaveCustomMappings
-    {        
+    {
         [UIHint("Number")]
         [LocalizedDisplay("ProjectCompleted")]
         public string Completed { get; set; }

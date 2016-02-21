@@ -13,14 +13,27 @@
     [Authorize]
     public class ProfileController : BaseController
     {
-        private readonly ISkillService skillService;
-
         private readonly IImageService imageService;
 
-        public ProfileController(IUserService userService, ISkillService skillService, IImageService imageService) : base(userService)
+        private readonly ISkillService skillService;
+
+        public ProfileController(IUserService userService, ISkillService skillService, IImageService imageService)
+            : base(userService)
         {
             this.skillService = skillService;
             this.imageService = imageService;
+        }
+
+        public ActionResult Image(int id)
+        {
+            var image = this.imageService.GetById(id);
+
+            if (image == null)
+            {
+                return this.Content(string.Empty);
+            }
+
+            return this.File(image.Content, "image/" + image.FileExtension);
         }
 
         public ActionResult Index()
@@ -61,10 +74,11 @@
                         var content = memory.GetBuffer();
 
                         entity.Image = new Image
-                        {
-                            Content = content,
-                            FileExtension = user.UploadedImage.FileName.Split(new[] { '.' }).Last()
-                        };
+                                           {
+                                               Content = content, 
+                                               FileExtension =
+                                                   user.UploadedImage.FileName.Split(new[] { '.' }).Last()
+                                           };
                     }
                 }
 
@@ -73,18 +87,6 @@
             }
 
             return this.View(user);
-        }
-
-        public ActionResult Image(int id)
-        {
-            var image = this.imageService.GetById(id);
-
-            if (image == null)
-            {
-                return this.Content(string.Empty);
-            }
-
-            return this.File(image.Content, "image/" + image.FileExtension);
         }
     }
 }

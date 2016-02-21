@@ -1,48 +1,26 @@
 ﻿namespace Planex.Web.Areas.HR.Controllers
 {
-    using System.Collections.Generic;
     using System.IO;
     using System.Linq;
     using System.Web.Mvc;
-
-    using Kendo.Mvc.Extensions;
-    using Kendo.Mvc.UI;
 
     using Planex.Data.Models;
     using Planex.Services.Images;
     using Planex.Services.Skills;
     using Planex.Services.Users;
     using Planex.Web.Areas.HR.Models;
-    using Planex.Web.Infrastructure.Mappings;
 
     public class UsersController : BaseController
     {
-        private readonly ISkillService skillService;
-
         private readonly IImageService imageService;
 
-        public UsersController(IUserService userService, ISkillService skillService, IImageService imageService) : base(userService)
+        private readonly ISkillService skillService;
+
+        public UsersController(IUserService userService, ISkillService skillService, IImageService imageService)
+            : base(userService)
         {
             this.skillService = skillService;
             this.imageService = imageService;
-        }
-
-        public ActionResult Index()
-        {
-            return this.View();
-        }
-
-        public ActionResult Image(int id)
-        {
-            var image = this.imageService.GetById(id);
-            
-            if (image == null)
-            {
-                return this.Content(string.Empty);
-
-            }
-
-            return this.File(image.Content, "image/" + image.FileExtension);
         }
 
         public ActionResult Details(string id)
@@ -85,11 +63,11 @@
                         var content = memory.GetBuffer();
 
                         entity.Image = new Image
-                        {
-                            Content = content,
-                            FileExtension =
+                                           {
+                                               Content = content, 
+                                               FileExtension =
                                                    user.UploadedImage.FileName.Split(new[] { '.' }).Last()
-                        };
+                                           };
                     }
                 }
 
@@ -99,6 +77,23 @@
             }
 
             return this.View(user);
+        }
+
+        public ActionResult Image(int id)
+        {
+            var image = this.imageService.GetById(id);
+
+            if (image == null)
+            {
+                return this.Content(string.Empty);
+            }
+
+            return this.File(image.Content, "image/" + image.FileExtension);
+        }
+
+        public ActionResult Index()
+        {
+            return this.View();
         }
     }
 }

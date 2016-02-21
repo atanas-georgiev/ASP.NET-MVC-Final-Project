@@ -15,17 +15,17 @@
 
     public class ProjectsController : BaseController
     {
-        private readonly ITaskService subTaskService;
+        private readonly IMessageService messageService;
 
         private readonly IProjectService projectService;
 
-        private readonly IMessageService messageService;
+        private readonly ITaskService subTaskService;
 
         public ProjectsController(
-            IUserService userService,
-            IProjectService projectService,
-            ISkillService skillService,
-            IMessageService messageService,
+            IUserService userService, 
+            IProjectService projectService, 
+            ISkillService skillService, 
+            IMessageService messageService, 
             ITaskService subTaskService)
             : base(userService)
         {

@@ -5,7 +5,6 @@
     using System.Data.Entity;
     using System.Linq;
 
-    using Planex.Data;
     using Planex.Data.Common;
     using Planex.Data.Models;
 
@@ -13,12 +12,20 @@
     {
         private DbContext context;
 
-        private IRepository<Project, int> projects;
         private IRepository<Message, int> messages;
-        private IRepository<User> users;
+
+        private IRepository<Project, int> projects;
+
         private IRepository<SubTask, int> tasks;
 
-        public MessageService(DbContext context, IRepository<Message, int> messages, IRepository<User> users, IRepository<Project, int> projects, IRepository<SubTask, int> tasks)
+        private IRepository<User> users;
+
+        public MessageService(
+            DbContext context, 
+            IRepository<Message, int> messages, 
+            IRepository<User> users, 
+            IRepository<Project, int> projects, 
+            IRepository<SubTask, int> tasks)
         {
             this.context = context;
             this.messages = messages;
@@ -49,8 +56,8 @@
             {
                 var toUser = users.FirstOrDefault(x => x.Id == systemMessage.ToId);
                 var fromUser = users.FirstOrDefault(x => x.Id == systemMessage.FromId);
-                
-                var project = this.projects.All().FirstOrDefault(x => x.Id == systemMessage.ProjectId);                
+
+                var project = this.projects.All().FirstOrDefault(x => x.Id == systemMessage.ProjectId);
                 string projectTitle = string.Empty;
                 if (project != null)
                 {
@@ -68,114 +75,174 @@
                 {
                     case SystemMessageType.ProjectRequestedEstimation:
                         {
-                            allSystemModified.Add(new Message()
-                            {
-                                Id = systemMessage.Id,
-                                IsRead = systemMessage.IsRead,
-                                FromId = systemUser.Id,
-                                From = systemUser,
-                                ToId = toUser.Id,
-                                To = toUser,
-                                Subject = string.Format(SystemMessagesResources.ProjectRequestedEstimationSubject.ToString(), projectTitle),
-                                Text = string.Format(SystemMessagesResources.ProjectRequestedEstimationText, toUser.FirstName + " " + toUser.LastName, fromUser.FirstName + " " + fromUser.LastName, projectTitle),
-                                Date = systemMessage.Date,
-                            });
+                            allSystemModified.Add(
+                                new Message()
+                                    {
+                                        Id = systemMessage.Id, 
+                                        IsRead = systemMessage.IsRead, 
+                                        FromId = systemUser.Id, 
+                                        From = systemUser, 
+                                        ToId = toUser.Id, 
+                                        To = toUser, 
+                                        Subject =
+                                            string.Format(
+                                                SystemMessagesResources.ProjectRequestedEstimationSubject
+                                            .ToString(), 
+                                                projectTitle), 
+                                        Text =
+                                            string.Format(
+                                                SystemMessagesResources.ProjectRequestedEstimationText, 
+                                                toUser.FirstName + " " + toUser.LastName, 
+                                                fromUser.FirstName + " " + fromUser.LastName, 
+                                                projectTitle), 
+                                        Date = systemMessage.Date, 
+                                    });
                             break;
                         }
+
                     case SystemMessageType.ProjectEstimated:
                         {
-                            allSystemModified.Add(new Message()
-                            {
-                                Id = systemMessage.Id,
-                                IsRead = systemMessage.IsRead,
-                                FromId = systemUser.Id,
-                                From = systemUser,
-                                ToId = toUser.Id,
-                                To = toUser,
-                                Subject = string.Format(SystemMessagesResources.ProjectEstimatedSubject.ToString(), projectTitle),
-                                Text = string.Format(SystemMessagesResources.ProjectEstimatedText, toUser.FirstName + " " + toUser.LastName, fromUser.FirstName + " " + fromUser.LastName, projectTitle),
-                                Date = systemMessage.Date,
-                            });
+                            allSystemModified.Add(
+                                new Message()
+                                    {
+                                        Id = systemMessage.Id, 
+                                        IsRead = systemMessage.IsRead, 
+                                        FromId = systemUser.Id, 
+                                        From = systemUser, 
+                                        ToId = toUser.Id, 
+                                        To = toUser, 
+                                        Subject =
+                                            string.Format(
+                                                SystemMessagesResources.ProjectEstimatedSubject.ToString(), 
+                                                projectTitle), 
+                                        Text =
+                                            string.Format(
+                                                SystemMessagesResources.ProjectEstimatedText, 
+                                                toUser.FirstName + " " + toUser.LastName, 
+                                                fromUser.FirstName + " " + fromUser.LastName, 
+                                                projectTitle), 
+                                        Date = systemMessage.Date, 
+                                    });
                             break;
                         }
+
                     case SystemMessageType.TaskComplete:
                         {
-                            allSystemModified.Add(new Message()
-                            {
-                                Id = systemMessage.Id,
-                                IsRead = systemMessage.IsRead,
-                                FromId = systemUser.Id,
-                                From = systemUser,
-                                ToId = toUser.Id,
-                                To = toUser,
-                                Subject = string.Format(SystemMessagesResources.TaskCompletedSubject.ToString(), subtaskTitle),
-                                Text = string.Format(SystemMessagesResources.TaskCompletedText, toUser.FirstName + " " + toUser.LastName, fromUser.FirstName + " " + fromUser.LastName, subtaskTitle, projectTitle, fromUser.FirstName + " " + fromUser.LastName),
-                                Date = systemMessage.Date,
-                            });
+                            allSystemModified.Add(
+                                new Message()
+                                    {
+                                        Id = systemMessage.Id, 
+                                        IsRead = systemMessage.IsRead, 
+                                        FromId = systemUser.Id, 
+                                        From = systemUser, 
+                                        ToId = toUser.Id, 
+                                        To = toUser, 
+                                        Subject =
+                                            string.Format(
+                                                SystemMessagesResources.TaskCompletedSubject.ToString(), 
+                                                subtaskTitle), 
+                                        Text =
+                                            string.Format(
+                                                SystemMessagesResources.TaskCompletedText, 
+                                                toUser.FirstName + " " + toUser.LastName, 
+                                                fromUser.FirstName + " " + fromUser.LastName, 
+                                                subtaskTitle, 
+                                                projectTitle, 
+                                                fromUser.FirstName + " " + fromUser.LastName), 
+                                        Date = systemMessage.Date, 
+                                    });
                             break;
                         }
+
                     case SystemMessageType.ProjectApproved:
                         {
-                            allSystemModified.Add(new Message()
-                            {
-                                Id = systemMessage.Id,
-                                IsRead = systemMessage.IsRead,
-                                FromId = systemUser.Id,
-                                From = systemUser,
-                                ToId = toUser.Id,
-                                To = toUser,
-                                Subject = string.Format(SystemMessagesResources.ProjectApprovedSubject.ToString(), projectTitle),
-                                Text = string.Format(SystemMessagesResources.ProjectApprovedSubject, toUser.FirstName + " " + toUser.LastName, fromUser.FirstName + " " + fromUser.LastName, projectTitle),
-                                Date = systemMessage.Date,
-                            });
+                            allSystemModified.Add(
+                                new Message()
+                                    {
+                                        Id = systemMessage.Id, 
+                                        IsRead = systemMessage.IsRead, 
+                                        FromId = systemUser.Id, 
+                                        From = systemUser, 
+                                        ToId = toUser.Id, 
+                                        To = toUser, 
+                                        Subject =
+                                            string.Format(
+                                                SystemMessagesResources.ProjectApprovedSubject.ToString(), 
+                                                projectTitle), 
+                                        Text =
+                                            string.Format(
+                                                SystemMessagesResources.ProjectApprovedSubject, 
+                                                toUser.FirstName + " " + toUser.LastName, 
+                                                fromUser.FirstName + " " + fromUser.LastName, 
+                                                projectTitle), 
+                                        Date = systemMessage.Date, 
+                                    });
                             break;
                         }
+
                     case SystemMessageType.ProjectCompleted:
                         {
-                            allSystemModified.Add(new Message()
-                            {
-                                Id = systemMessage.Id,
-                                IsRead = systemMessage.IsRead,
-                                FromId = systemUser.Id,
-                                From = systemUser,
-                                ToId = toUser.Id,
-                                To = toUser,
-                                Subject = string.Format(SystemMessagesResources.ProjectCompletedSubject.ToString(), projectTitle),
-                                Text = string.Format(SystemMessagesResources.ProjectCompletedText, toUser.FirstName + " " + toUser.LastName, fromUser.FirstName + " " + fromUser.LastName, projectTitle),
-                                Date = systemMessage.Date,
-                            });
+                            allSystemModified.Add(
+                                new Message()
+                                    {
+                                        Id = systemMessage.Id, 
+                                        IsRead = systemMessage.IsRead, 
+                                        FromId = systemUser.Id, 
+                                        From = systemUser, 
+                                        ToId = toUser.Id, 
+                                        To = toUser, 
+                                        Subject =
+                                            string.Format(
+                                                SystemMessagesResources.ProjectCompletedSubject.ToString(), 
+                                                projectTitle), 
+                                        Text =
+                                            string.Format(
+                                                SystemMessagesResources.ProjectCompletedText, 
+                                                toUser.FirstName + " " + toUser.LastName, 
+                                                fromUser.FirstName + " " + fromUser.LastName, 
+                                                projectTitle), 
+                                        Date = systemMessage.Date, 
+                                    });
                             break;
                         }
+
                     case SystemMessageType.TaskOverDue:
                         {
-                            allSystemModified.Add(new Message()
-                            {
-                                Id = systemMessage.Id,
-                                IsRead = systemMessage.IsRead,
-                                FromId = systemUser.Id,
-                                From = systemUser,
-                                ToId = toUser.Id,
-                                To = toUser,
-                                Subject = string.Format(SystemMessagesResources.TaskOverdueSubject.ToString(), subtaskTitle),
-                                Text = string.Format(SystemMessagesResources.TaskOverdueText, toUser.FirstName + " " + toUser.LastName, subtaskTitle),
-                                Date = systemMessage.Date,
-                            });
+                            allSystemModified.Add(
+                                new Message()
+                                    {
+                                        Id = systemMessage.Id, 
+                                        IsRead = systemMessage.IsRead, 
+                                        FromId = systemUser.Id, 
+                                        From = systemUser, 
+                                        ToId = toUser.Id, 
+                                        To = toUser, 
+                                        Subject =
+                                            string.Format(
+                                                SystemMessagesResources.TaskOverdueSubject.ToString(), 
+                                                subtaskTitle), 
+                                        Text =
+                                            string.Format(
+                                                SystemMessagesResources.TaskOverdueText, 
+                                                toUser.FirstName + " " + toUser.LastName, 
+                                                subtaskTitle), 
+                                        Date = systemMessage.Date, 
+                                    });
                             break;
                         }
                 }
             }
+
             allSystemModified.AddRange(allNonSystem);
             return allSystemModified.AsQueryable();
         }
 
-        public void Update(Message message)
-        {
-            var messageDb = this.messages.All().FirstOrDefault(x => x.Id == message.Id);
-            messageDb.IsRead = message.IsRead;
-            this.messages.Update(messageDb);
-        }
-
-        public void SendSystemMessage(string senderId, string receiverId, SystemMessageType messageType, int? projectId, int? taskId)
+        public void SendSystemMessage(
+            string senderId, 
+            string receiverId, 
+            SystemMessageType messageType, 
+            int? projectId, 
+            int? taskId)
         {
             var message = new Message();
             message.FromId = senderId;
@@ -188,6 +255,13 @@
             message.Text = "System";
             message.Date = DateTime.UtcNow;
             this.Add(message);
+        }
+
+        public void Update(Message message)
+        {
+            var messageDb = this.messages.All().FirstOrDefault(x => x.Id == message.Id);
+            messageDb.IsRead = message.IsRead;
+            this.messages.Update(messageDb);
         }
     }
 }

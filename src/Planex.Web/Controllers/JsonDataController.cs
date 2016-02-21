@@ -19,6 +19,8 @@
 
     public class JsonDataController : BaseController
     {
+        private readonly ICacheService cacheService;
+
         private readonly IMessageService messageService;
 
         private readonly IProjectService projectService;
@@ -27,14 +29,12 @@
 
         private readonly ITaskService subTaskService;
 
-        private readonly ICacheService cacheService;
-
         public JsonDataController(
-            IUserService userService,
-            ISkillService skillService,
-            ITaskService subTaskService,
-            IProjectService projectService,
-            IMessageService messageService,
+            IUserService userService, 
+            ISkillService skillService, 
+            ITaskService subTaskService, 
+            IProjectService projectService, 
+            IMessageService messageService, 
             ICacheService cacheService)
             : base(userService)
         {
@@ -54,6 +54,41 @@
             return this.Json(users, JsonRequestBehavior.AllowGet);
         }
 
+        public virtual JsonResult ReadAllProjects([DataSourceRequest] DataSourceRequest request)
+        {
+            var projectsPublic = this.cacheService.Get(
+                "categories", 
+                () =>
+                    {
+                        var projects = this.projectService.GetAll().Where(x => x.State == TaskStateType.Started);
+                        var result =
+                            this.subTaskService.GetAll()
+                                .Where(x => x.Project.State == TaskStateType.Started)
+                                .To<ProjectHomeViewModel>()
+                                .ToList();
+
+                        foreach (var project in projects)
+                        {
+                            result.Add(
+                                new ProjectHomeViewModel()
+                                    {
+                                        Title = project.Title, 
+                                        Start = project.Start, 
+                                        End = project.End, 
+                                        HasChildren = project.Subtasks.Any(), 
+                                        ParentId = null, 
+                                        Id = project.Id + 100000, 
+                                        PercentComplete = project.PercentComplete * 100
+                                    });
+                        }
+
+                        return result;
+                    }, 
+                10 * 60);
+
+            return this.Json(projectsPublic.AsQueryable().ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
+        }
+
         public virtual JsonResult ReadMessages([DataSourceRequest] DataSourceRequest request)
         {
             var result = this.messageService.GetAll().Where(x => x.To.Id == this.UserProfile.Id).To<MessageViewModel>();
@@ -62,43 +97,12 @@
 
         public virtual JsonResult ReadUnreadMessages([DataSourceRequest] DataSourceRequest request)
         {
-            var result = this.messageService.GetAll()
-                .Where(x => x.To.Id == this.UserProfile.Id && x.IsRead == false)
-                .OrderByDescending(x => x.Date)
-                .To<MessageViewModel>();
+            var result =
+                this.messageService.GetAll()
+                    .Where(x => x.To.Id == this.UserProfile.Id && x.IsRead == false)
+                    .OrderByDescending(x => x.Date)
+                    .To<MessageViewModel>();
             return this.Json(result.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
-        }
-
-        public virtual JsonResult ReadAllProjects([DataSourceRequest] DataSourceRequest request)
-        {
-            var projectsPublic =
-                            this.cacheService.Get(
-                                "categories",
-                                () =>
-                                    {
-                                        var projects = this.projectService.GetAll().Where(x => x.State == TaskStateType.Started);
-                                        var result = this.subTaskService.GetAll().Where(x => x.Project.State == TaskStateType.Started).To<ProjectHomeViewModel>().ToList();
-
-                                        foreach (var project in projects)
-                                        {
-                                            result.Add(
-                                                new ProjectHomeViewModel()
-                                                {
-                                                    Title = project.Title,
-                                                    Start = project.Start,
-                                                    End = project.End,
-                                                    HasChildren = project.Subtasks.Any(),
-                                                    ParentId = null,
-                                                    Id = project.Id + 100000,
-                                                    PercentComplete = project.PercentComplete * 100
-                                                });
-                                        }
-
-                                        return result;
-                                    },
-                                10 * 60);           
-
-            return this.Json(projectsPublic.AsQueryable().ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
         }
     }
 }

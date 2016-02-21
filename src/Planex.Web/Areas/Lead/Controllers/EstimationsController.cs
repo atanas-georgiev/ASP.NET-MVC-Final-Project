@@ -16,17 +16,17 @@
 
     public class EstimationsController : BaseController
     {
-        private readonly ITaskService subTaskService;
+        private readonly IMessageService messageService;
 
         private readonly IProjectService projectService;
 
-        private readonly IMessageService messageService;
+        private readonly ITaskService subTaskService;
 
         public EstimationsController(
             IUserService userService, 
             IProjectService projectService, 
-            ISkillService skillService,
-            IMessageService messageService,
+            ISkillService skillService, 
+            IMessageService messageService, 
             ITaskService subTaskService)
             : base(userService)
         {
@@ -74,7 +74,12 @@
             var project = this.projectService.GetById(int.Parse(this.Session["ProjectId"].ToString()));
             project.State = TaskStateType.Estimated;
             this.projectService.Update(project);
-            this.messageService.SendSystemMessage(project.LeadId, project.ManagerId, SystemMessageType.ProjectEstimated, project.Id, null);
+            this.messageService.SendSystemMessage(
+                project.LeadId, 
+                project.ManagerId, 
+                SystemMessageType.ProjectEstimated, 
+                project.Id, 
+                null);
             return this.RedirectToAction("Index");
         }
     }

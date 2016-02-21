@@ -5,7 +5,7 @@
     using Planex.Data.Common.Models;
 
     public interface IRepository<T> : IRepository<T, string>
-    where T : class, IHavePrimaryKey<string>, IDeletableEntity, IAuditInfo
+        where T : class, IHavePrimaryKey<string>, IDeletableEntity, IAuditInfo
     {
     }
 
@@ -20,19 +20,19 @@
     public interface IDbGenericRepository<T, in TKey>
         where T : class
     {
-        IQueryable<T> All();
-
-        T GetById(TKey id);
-
         void Add(T entity);
+
+        IQueryable<T> All();
 
         void Delete(T entity);
 
         void Delete(TKey entity);
 
-        void Update(T entity);
+        T GetById(TKey id);
 
         void Save();
+
+        void Update(T entity);
     }
 
     public interface IHavePrimaryKey<TKey>

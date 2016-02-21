@@ -1,12 +1,11 @@
 ﻿namespace Planex.Web.Controllers
 {
-    using System;
     using System.Globalization;
     using System.Linq;
     using System.Threading;
     using System.Web.Mvc;
+    using System.Web.Routing;
 
-    using Planex.Services.Cache;
     using Planex.Services.Messages;
     using Planex.Services.Users;
     using Planex.Web.Infrastructure.Scheduler;
@@ -30,22 +29,25 @@
             var homeModel = new HomeViewModel();
 
             if (this.HttpContext.User.Identity.IsAuthenticated)
-            {                
+            {
                 homeModel.Messages = new MessageHomeViewModel();
                 homeModel.Messages.UnreadMessagesCount =
-                this.messageService.GetAll().Where(x => x.To.Id == this.UserProfile.Id).Count(x => x.IsRead == false);                
+                    this.messageService.GetAll()
+                        .Where(x => x.To.Id == this.UserProfile.Id)
+                        .Count(x => x.IsRead == false);
             }
 
             return this.View(homeModel);
         }
 
-        protected override void Initialize(System.Web.Routing.RequestContext requestContext)
+        protected override void Initialize(RequestContext requestContext)
         {
             string[] languages = requestContext.HttpContext.Request.UserLanguages;
 
             if (languages != null)
             {
-                Thread.CurrentThread.CurrentCulture = Thread.CurrentThread.CurrentUICulture = new CultureInfo(languages[0]);
+                Thread.CurrentThread.CurrentCulture =
+                    Thread.CurrentThread.CurrentUICulture = new CultureInfo(languages[0]);
             }
 
             base.Initialize(requestContext);

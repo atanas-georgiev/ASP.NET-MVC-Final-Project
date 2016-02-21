@@ -21,8 +21,8 @@
         protected IUserService UserService { get; set; }
 
         protected override IAsyncResult BeginExecute(
-            RequestContext requestContext,
-            AsyncCallback callback,
+            RequestContext requestContext, 
+            AsyncCallback callback, 
             object state)
         {
             this.UserProfile =

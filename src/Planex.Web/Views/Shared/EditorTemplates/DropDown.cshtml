@@ -1,25 +1,2 @@
-﻿@(Html.Kendo().DropDownList()
-          .Name("RoleId")
-          .DataTextField("Text")
-          .DataValueField("Value")
-          .BindTo(new List<SelectListItem>
-            () {
-            new SelectListItem() {
-            Text = "Manager",
-            Value = "Manager"
-            },
-            new SelectListItem() {
-            Text = "Lead",
-            Value = "Lead"
-            },
-            new SelectListItem() {
-            Text = "Worker",
-            Value = "Worker"
-            },
-            new SelectListItem() {
-            Text = "HR",
-            Value = "HR"
-            }
-        })
-    .Value("Worker")    
-)
+﻿@(Html.Kendo().DropDownList().Name("RoleId").DataTextField("Text").DataValueField("Value").BindTo(new List<SelectListItem>() { new SelectListItem() { Text = "Manager", Value = "Manager" }, new SelectListItem() { Text = "Lead", Value = "Lead" }, new SelectListItem() { Text = "Worker", Value = "Worker" }, new SelectListItem() { Text = "HR", Value = "HR" } }).Value("Worker")    
+      )

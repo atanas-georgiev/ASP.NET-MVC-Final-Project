@@ -7,7 +7,6 @@
     using System.Web;
 
     using Planex.Common;
-    using Planex.Data;
     using Planex.Data.Common;
     using Planex.Data.Models;
 
@@ -17,27 +16,20 @@
 
         private IRepository<SubTaskDependency, int> dependencies;
 
-        private IRepository<SubTask, int> tasks;
-
         private IRepository<Project, int> projects;
 
-        public TaskService(DbContext context, IRepository<SubTask, int> tasks, IRepository<SubTaskDependency, int> dependencies, IRepository<Project, int> projects)
+        private IRepository<SubTask, int> tasks;
+
+        public TaskService(
+            DbContext context, 
+            IRepository<SubTask, int> tasks, 
+            IRepository<SubTaskDependency, int> dependencies, 
+            IRepository<Project, int> projects)
         {
             this.context = context;
             this.tasks = tasks;
             this.dependencies = dependencies;
             this.projects = projects;
-        }
-
-        private void UpdateProjectCompleteness(Project project)
-        {
-            var subTasks = project.Subtasks;//.Where(x => x.ParentId == null);
-
-            if (subTasks.Count() != 0)
-            {
-                project.PercentComplete = subTasks.Sum(x => x.PercentComplete) / subTasks.Count();
-                this.projects.Update(project);
-            }
         }
 
         public void Add(SubTask task)
@@ -127,6 +119,17 @@
         public void UpdateDependency(SubTaskDependency task)
         {
             this.dependencies.Update(task);
+        }
+
+        private void UpdateProjectCompleteness(Project project)
+        {
+            var subTasks = project.Subtasks; // .Where(x => x.ParentId == null);
+
+            if (subTasks.Count() != 0)
+            {
+                project.PercentComplete = subTasks.Sum(x => x.PercentComplete) / subTasks.Count();
+                this.projects.Update(project);
+            }
         }
     }
 }

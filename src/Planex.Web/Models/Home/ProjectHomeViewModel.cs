@@ -11,23 +11,23 @@
 
     public class ProjectHomeViewModel : IMapFrom<SubTask>, IHaveCustomMappings
     {
-        public int Id { get; set; }
-
-        public int? ParentId { get; set; }
-
-        [LocalizedDisplay("ProjectTitle")]
-        public string Title { get; set; }
-
-        [LocalizedDisplay("ProjectStartDate")]
-        public DateTime Start { get; set; }
-
         [LocalizedDisplay("ProjectEndDate")]
         public DateTime End { get; set; }
 
         public bool HasChildren { get; set; }
 
+        public int Id { get; set; }
+
+        public int? ParentId { get; set; }
+
         [LocalizedDisplay("ProjectCompleted")]
         public decimal PercentComplete { get; set; }
+
+        [LocalizedDisplay("ProjectStartDate")]
+        public DateTime Start { get; set; }
+
+        [LocalizedDisplay("ProjectTitle")]
+        public string Title { get; set; }
 
         public void CreateMappings(IConfiguration configuration)
         {

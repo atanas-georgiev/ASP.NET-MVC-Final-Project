@@ -2,7 +2,6 @@
 {
     using System.Data.Entity;
 
-    using Planex.Data;
     using Planex.Data.Common;
     using Planex.Data.Models;
 

@@ -26,6 +26,10 @@
             this.subtasks = new List<SubTask>();
         }
 
+        public DateTime CreatedOn { get; set; }
+
+        public DateTime? DeletedOn { get; set; }
+
         [Required]
         [MinLength(2)]
         [MaxLength(50)]
@@ -38,19 +42,21 @@
 
         public int IntId { get; set; }
 
+        public bool IsDeleted { get; set; }
+
         [Required]
         [MinLength(2)]
         [MaxLength(50)]
         public string LastName { get; set; }
 
-        [Required]
-        public decimal Salary { get; set; }
+        public DateTime? ModifiedOn { get; set; }
 
         [Required]
         [DefaultValue(true)]
         public bool ResetPassword { get; set; }
 
-        public string Theme { get; set; }
+        [Required]
+        public decimal Salary { get; set; }
 
         public virtual ICollection<Skill> Skills
         {
@@ -78,18 +84,12 @@
             }
         }
 
+        public string Theme { get; set; }
+
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<User> manager)
         {
             var userIdentity = await manager.CreateIdentityAsync(this, DefaultAuthenticationTypes.ApplicationCookie);
             return userIdentity;
         }
-
-        public DateTime CreatedOn { get; set; }
-
-        public DateTime? ModifiedOn { get; set; }
-
-        public bool IsDeleted { get; set; }
-
-        public DateTime? DeletedOn { get; set; }
     }
 }

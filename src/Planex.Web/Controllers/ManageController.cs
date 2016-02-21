@@ -9,7 +9,6 @@
     using Microsoft.AspNet.Identity.Owin;
     using Microsoft.Owin.Security;
 
-    using Planex.Web.Models;
     using Planex.Web.Models.Account;
 
     [Authorize]
@@ -246,7 +245,9 @@
         {
             this.ViewBag.StatusMessage = message == ManageMessageId.RemoveLoginSuccess
                                              ? "The external login was removed."
-                                             : message == ManageMessageId.Error ? "An error has occurred." : string.Empty;
+                                             : message == ManageMessageId.Error
+                                                   ? "An error has occurred."
+                                                   : string.Empty;
             var user = await this.UserManager.FindByIdAsync(this.User.Identity.GetUserId());
             if (user == null)
             {

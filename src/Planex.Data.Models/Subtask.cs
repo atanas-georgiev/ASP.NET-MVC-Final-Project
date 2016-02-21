@@ -43,6 +43,10 @@
 
         public DateTime End { get; set; }
 
+        [Required]
+        [DefaultValue(false)]
+        public bool? IsUserNotified { get; set; }
+
         [ForeignKey("ParentId")]
         public virtual SubTask Parent { get; set; }
 
@@ -63,10 +67,6 @@
         public int? SkillId { get; set; }
 
         public DateTime Start { get; set; }
-
-        [Required]
-        [DefaultValue(false)]
-        public bool? IsUserNotified { get; set; }
 
         public virtual ICollection<SubTask> Subtasks
         {

@@ -1,6 +1,4 @@
-﻿@using System.Web.Mvc.Html
-@using Planex.Data.Models
-@using Planex.Web.App_LocalResources
+﻿@using Planex.Web.App_LocalResources
 @model Planex.Web.Models.Messages.MessageViewModel
 
 @{
@@ -13,34 +11,34 @@
 
     @using (Html.BeginForm())
     {
-    @Html.AntiForgeryToken()
+        @Html.AntiForgeryToken()
 
-    <div class="form-horizontal">
-        <div class="form-group">
-            @Html.LabelFor(model => model.Date, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DisplayFor(model => model.Date)
+        <div class="form-horizontal">
+            <div class="form-group">
+                @Html.LabelFor(model => model.Date, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DisplayFor(model => model.Date)
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.From.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DisplayFor(model => model.From.Name)
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Subject, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.Raw(Model.Subject)
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Text, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DisplayFor(model => model.Text)
+                </div>
             </div>
         </div>
-        <div class="form-group">
-            @Html.LabelFor(model => model.From.Name, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DisplayFor(model => model.From.Name)
-            </div>
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(model => model.Subject, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.Raw(Model.Subject)
-            </div>
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(model => model.Text, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DisplayFor(model => model.Text)
-            </div>
-        </div>
-    </div>
     }
 
 </div>

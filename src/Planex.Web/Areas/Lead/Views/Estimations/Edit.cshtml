@@ -8,43 +8,42 @@
 
 <div class="well k-content">
     <h3 class="well-title">@HtmlLabels.ProjectDetails "@Model.Title"</h3>
-    <hr />
+    <hr/>
 
     @using (Html.BeginForm())
     {
-    @Html.AntiForgeryToken()
+        @Html.AntiForgeryToken()
 
-    <div class="form-horizontal">
-        <div class="form-group">
-            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.Raw(Model.Description)
+        <div class="form-horizontal">
+            <div class="form-group">
+                @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.Raw(Model.Description)
+                </div>
             </div>
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(model => model.Start, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DisplayFor(model => model.Start)
+            <div class="form-group">
+                @Html.LabelFor(model => model.Start, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DisplayFor(model => model.Start)
+                </div>
             </div>
-        </div>
 
-        @Html.Partial("_DetailsFiles", Model.UploadedAttachmentFiles)
+            @Html.Partial("_DetailsFiles", Model.UploadedAttachmentFiles)
 
-        <div class="form-group">
-            @if (Model.State == TaskStateType.UnderEstimation)
+            <div class="form-group">
+                @if (Model.State == TaskStateType.UnderEstimation)
                 {
-                @Html.ActionLink("Send For Approval", "SendForApproval", new { id = Model.Id }, new { @class = "k-button" })
-            }
+                    @Html.ActionLink("Send For Approval", "SendForApproval", new { id = Model.Id }, new { @class = "k-button" })
+                }
+            </div>
         </div>
-    </div>
     }
 
 </div>
 
 
-
 <div class="well k-content">
     <h3 class="well-title">@HtmlLabels.LeadEstimate</h3>
-    <hr />
+    <hr/>
     @Html.Partial("_DetailsSchema", Model)
 </div>

@@ -1,7 +1,5 @@
 ﻿namespace Planex.Web.Areas.Manager.Models.Gantt
 {
-    using AutoMapper;
-
     using Kendo.Mvc.UI;
 
     using Planex.Data.Models;

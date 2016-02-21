@@ -33,24 +33,24 @@
         [UIHint("String")]
         public string LastName { get; set; }
 
+        [LocalizedDisplay("UserRole")]
+        public string RoleId { get; set; }
+
         [LocalizedDisplay("Salary")]
         [LocalizedRequired("RequiredFiled")]
         [UIHint("Currency")]
         public decimal Salary { get; set; }
 
-        [LocalizedDisplay("UserRole")]
-        public string RoleId { get; set; }
-
         [LocalizedDisplay("SkillName")]
         public List<string> Skills { get; set; }
-
-        [LocalizedDisplay("UserImage")]
-        public HttpPostedFileBase UploadedImage { get; set; }
 
         [LocalizedDisplay("Theme")]
         [LocalizedRequired("RequiredFiled")]
         [UIHint("DropDownThemes")]
         public string Theme { get; set; }
+
+        [LocalizedDisplay("UserImage")]
+        public HttpPostedFileBase UploadedImage { get; set; }
 
         public void CreateMappings(IConfiguration configuration)
         {

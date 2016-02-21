@@ -9,43 +9,39 @@
 
     // TODO: Why BaseModel<int> instead BaseModel<TKey>?
     public class Repository<T, TKey> : IRepository<T, TKey>
-        where T : BaseModel<TKey>, IHavePrimaryKey<TKey>
-        where TKey : struct
+        where T : BaseModel<TKey>, IHavePrimaryKey<TKey> where TKey : struct
     {
         public Repository(DbContext context)
         {
             if (context == null)
             {
-                throw new ArgumentException("An instance of DbContext is required to use this repository.", nameof(context));
+                throw new ArgumentException(
+                    "An instance of DbContext is required to use this repository.", 
+                    nameof(context));
             }
 
             this.Context = context;
             this.DbSet = this.Context.Set<T>();
         }
 
+        private DbContext Context { get; }
+
         private IDbSet<T> DbSet { get; }
 
-        private DbContext Context { get; }
+        public void Add(T entity)
+        {
+            this.DbSet.Add(entity);
+            this.Save();
+        }
 
         public IQueryable<T> All()
         {
             return this.DbSet.Where(x => !x.IsDeleted);
         }
 
-        public T GetById(TKey id)
-        {
-            return this.DbSet.Find(id);
-        }
-
         public IQueryable<T> AllWithDeleted()
         {
             return this.DbSet;
-        }
-
-        public void Add(T entity)
-        {
-            this.DbSet.Add(entity);
-            this.Save();
         }
 
         public void Delete(T entity)
@@ -54,6 +50,7 @@
             entity.DeletedOn = DateTime.Now;
             this.Save();
         }
+
         public virtual void Delete(TKey id)
         {
             var entity = this.GetById(id);
@@ -64,6 +61,22 @@
             }
 
             this.Save();
+        }
+
+        public T GetById(TKey id)
+        {
+            return this.DbSet.Find(id);
+        }
+
+        public void HardDelete(T entity)
+        {
+            this.DbSet.Remove(entity);
+            this.Save();
+        }
+
+        public void Save()
+        {
+            this.Context.SaveChanges();
         }
 
         public void Update(T entity)
@@ -77,56 +90,42 @@
             entry.State = EntityState.Modified;
             this.Save();
         }
-
-        public void HardDelete(T entity)
-        {
-            this.DbSet.Remove(entity);
-            this.Save();
-        }
-
-        public void Save()
-        {
-            this.Context.SaveChanges();
-        }
     }
 
     public class Repository<T> : IRepository<T>
-           where T : class, IHavePrimaryKey<string>, IDeletableEntity, IAuditInfo
+        where T : class, IHavePrimaryKey<string>, IDeletableEntity, IAuditInfo
     {
         public Repository(DbContext context)
         {
             if (context == null)
             {
-                throw new ArgumentException("An instance of DbContext is required to use this repository.", nameof(context));
+                throw new ArgumentException(
+                    "An instance of DbContext is required to use this repository.", 
+                    nameof(context));
             }
 
             this.Context = context;
             this.DbSet = this.Context.Set<T>();
         }
 
+        private DbContext Context { get; }
+
         private IDbSet<T> DbSet { get; }
 
-        private DbContext Context { get; }
+        public void Add(T entity)
+        {
+            this.DbSet.Add(entity);
+            this.Save();
+        }
 
         public IQueryable<T> All()
         {
             return this.DbSet.Where(x => !x.IsDeleted);
         }
 
-        public T GetById(string id)
-        {
-            return this.All().FirstOrDefault(x => x.Id == id);
-        }
-
         public IQueryable<T> AllWithDeleted()
         {
             return this.DbSet;
-        }
-
-        public void Add(T entity)
-        {
-            this.DbSet.Add(entity);
-            this.Save();
         }
 
         public void Delete(T entity)
@@ -148,16 +147,9 @@
             this.Save();
         }
 
-        public void Update(T entity)
+        public T GetById(string id)
         {
-            DbEntityEntry entry = this.Context.Entry(entity);
-            if (entry.State == EntityState.Detached)
-            {
-                this.DbSet.Attach(entity);
-            }
-
-            entry.State = EntityState.Modified;
-            this.Save();
+            return this.All().FirstOrDefault(x => x.Id == id);
         }
 
         public void HardDelete(T entity)
@@ -169,6 +161,18 @@
         public void Save()
         {
             this.Context.SaveChanges();
+        }
+
+        public void Update(T entity)
+        {
+            DbEntityEntry entry = this.Context.Entry(entity);
+            if (entry.State == EntityState.Detached)
+            {
+                this.DbSet.Attach(entity);
+            }
+
+            entry.State = EntityState.Modified;
+            this.Save();
         }
     }
 }

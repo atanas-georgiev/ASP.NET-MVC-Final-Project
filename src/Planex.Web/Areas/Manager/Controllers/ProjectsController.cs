@@ -59,18 +59,18 @@
             if (this.ModelState.IsValid && model != null)
             {
                 var task = new Project()
-                                 {
-                                     Title = model.Title, 
-                                     Description = model.Description, 
-                                     ManagerId = this.UserProfile.Id, 
-                                     Priority = model.Priority, 
-                                     State = TaskStateType.Draft, 
-                                     Start = model.Start, 
-                                     End = model.Start, 
-                                     PercentComplete = 0, 
-                                     LeadId = model.LeadId, 
-                                     Price = 0
-                                 };
+                               {
+                                   Title = model.Title, 
+                                   Description = model.Description, 
+                                   ManagerId = this.UserProfile.Id, 
+                                   Priority = model.Priority, 
+                                   State = TaskStateType.Draft, 
+                                   Start = model.Start, 
+                                   End = model.Start, 
+                                   PercentComplete = 0, 
+                                   LeadId = model.LeadId, 
+                                   Price = 0
+                               };
 
                 this.projectsService.Add(task);
                 this.projectsService.AddAttachments(
@@ -155,7 +155,7 @@
         public ActionResult Remove(string id)
         {
             this.Session["ProjectId"] = id;
-            var intId = int.Parse(id);            
+            var intId = int.Parse(id);
             this.projectsService.Remove(intId);
             return this.RedirectToAction("Index");
         }

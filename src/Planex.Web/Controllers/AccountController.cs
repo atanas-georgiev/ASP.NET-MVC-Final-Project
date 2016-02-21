@@ -11,7 +11,6 @@
 
     using Planex.Data.Models;
     using Planex.Services.Users;
-    using Planex.Web.Models;
     using Planex.Web.Models.Account;
 
     [Authorize]
@@ -21,13 +20,19 @@
         private const string XsrfKey = "XsrfId";
 
         private ApplicationSignInManager _signInManager;
+
         private ApplicationUserManager _userManager;
 
-        public AccountController(IUserService userService) : base(userService)
+        public AccountController(IUserService userService)
+            : base(userService)
         {
         }
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager, IUserService userService) : base(userService)
+        public AccountController(
+            ApplicationUserManager userManager, 
+            ApplicationSignInManager signInManager, 
+            IUserService userService)
+            : base(userService)
         {
             this.UserManager = userManager;
             this.SignInManager = signInManager;
@@ -249,6 +254,7 @@
                     {
                         return this.RedirectToAction("ResetPassword");
                     }
+
                     return this.RedirectToAction("Index", "Home");
                 case SignInStatus.LockedOut:
                     return this.View("Lockout");

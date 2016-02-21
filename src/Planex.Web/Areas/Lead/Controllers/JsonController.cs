@@ -10,7 +10,6 @@
     using Planex.Common;
     using Planex.Data.Models;
     using Planex.Services.Projects;
-    using Planex.Services.Skills;
     using Planex.Services.Tasks;
     using Planex.Services.Users;
     using Planex.Web.Areas.Lead.Models.Estimation;
@@ -23,32 +22,11 @@
 
         private readonly ITaskService subTaskService;
 
-        public JsonController(
-            IUserService userService, 
-            ITaskService subTaskService, 
-            IProjectService projectService)
+        public JsonController(IUserService userService, ITaskService subTaskService, IProjectService projectService)
             : base(userService)
         {
             this.subTaskService = subTaskService;
             this.projectService = projectService;
-        }
-
-        public virtual JsonResult ReadEstimations([DataSourceRequest] DataSourceRequest request)
-        {
-            var result =
-                this.projectService.GetAll()
-                    .Where(x => x.LeadId == this.UserProfile.Id && x.State == TaskStateType.UnderEstimation)
-                    .To<EstimationListViewModel>();
-            return this.Json(result.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
-        }
-
-        public virtual JsonResult ReadProjects([DataSourceRequest] DataSourceRequest request)
-        {
-            var result =
-                this.projectService.GetAll()
-                    .Where(x => x.LeadId == this.UserProfile.Id && x.State == TaskStateType.Started)
-                    .To<EstimationListViewModel>();
-            return this.Json(result.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult CreateAssignments(
@@ -97,13 +75,13 @@
             {
                 var taskDb = new SubTask()
                                  {
-                                     ProjectId = projectId,
-                                     Title = task.Title,
-                                     ParentId = task.ParentTaskId,
-                                     Start = task.Start,
-                                     End = task.End,
-                                     PercentComplete = 0,
-                                     Price = 0,
+                                     ProjectId = projectId, 
+                                     Title = task.Title, 
+                                     ParentId = task.ParentTaskId, 
+                                     Start = task.Start, 
+                                     End = task.End, 
+                                     PercentComplete = 0, 
+                                     Price = 0, 
                                      IsUserNotified = false
                                  };
 
@@ -186,6 +164,24 @@
             return this.Json(result.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
         }
 
+        public virtual JsonResult ReadEstimations([DataSourceRequest] DataSourceRequest request)
+        {
+            var result =
+                this.projectService.GetAll()
+                    .Where(x => x.LeadId == this.UserProfile.Id && x.State == TaskStateType.UnderEstimation)
+                    .To<EstimationListViewModel>();
+            return this.Json(result.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
+        }
+
+        public virtual JsonResult ReadProjects([DataSourceRequest] DataSourceRequest request)
+        {
+            var result =
+                this.projectService.GetAll()
+                    .Where(x => x.LeadId == this.UserProfile.Id && x.State == TaskStateType.Started)
+                    .To<EstimationListViewModel>();
+            return this.Json(result.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
+        }
+
         // Gantt resources
         public virtual JsonResult ReadResources([DataSourceRequest] DataSourceRequest request)
         {
@@ -225,8 +221,7 @@
         {
             if (dep != null)
             {
-                var depDb = this.subTaskService.AllDependencies()
-                    .FirstOrDefault(x => x.Id == dep.Id);
+                var depDb = this.subTaskService.AllDependencies().FirstOrDefault(x => x.Id == dep.Id);
                 depDb.PredecessorId = dep.PredecessorId;
                 depDb.SuccessorId = dep.SuccessorId;
                 depDb.Type = dep.Type;
@@ -234,28 +229,6 @@
             }
 
             return this.Json(dep);
-        }
-
-        public virtual JsonResult UpdateTaskOnlyProgress(
-            [DataSourceRequest] DataSourceRequest request,
-            ProjectDetailsViewModel task)
-        {
-            if (this.ModelState.IsValid)
-            {
-                var taskDb = this.subTaskService.GetById(task.TaskId);
-
-                taskDb.PercentComplete = task.PercentComplete;
-
-                var projectId = int.Parse(this.Session["ProjectId"].ToString());
-                var project = this.projectService.GetById(projectId);
-                var subTasks = this.subTaskService.GetAll().Where(x => x.ProjectId == projectId && x.ParentId == null);
-                project.PercentComplete = subTasks.Sum(x => x.PercentComplete) / subTasks.Count();
-                this.projectService.Update(project);
-
-                this.UpdatePriceSubTask(taskDb.Id);
-            }
-
-            return this.Json(new[] { task }.ToDataSourceResult(request, this.ModelState));
         }
 
         public virtual JsonResult UpdateTask(
@@ -283,6 +256,28 @@
 
                 task.TaskId = taskDb.Id;
                 task.ParentTaskId = taskDb.ParentId;
+            }
+
+            return this.Json(new[] { task }.ToDataSourceResult(request, this.ModelState));
+        }
+
+        public virtual JsonResult UpdateTaskOnlyProgress(
+            [DataSourceRequest] DataSourceRequest request, 
+            ProjectDetailsViewModel task)
+        {
+            if (this.ModelState.IsValid)
+            {
+                var taskDb = this.subTaskService.GetById(task.TaskId);
+
+                taskDb.PercentComplete = task.PercentComplete;
+
+                var projectId = int.Parse(this.Session["ProjectId"].ToString());
+                var project = this.projectService.GetById(projectId);
+                var subTasks = this.subTaskService.GetAll().Where(x => x.ProjectId == projectId && x.ParentId == null);
+                project.PercentComplete = subTasks.Sum(x => x.PercentComplete) / subTasks.Count();
+                this.projectService.Update(project);
+
+                this.UpdatePriceSubTask(taskDb.Id);
             }
 
             return this.Json(new[] { task }.ToDataSourceResult(request, this.ModelState));

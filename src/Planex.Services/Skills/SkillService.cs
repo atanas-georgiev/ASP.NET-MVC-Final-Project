@@ -3,7 +3,6 @@
     using System.Data.Entity;
     using System.Linq;
 
-    using Planex.Data;
     using Planex.Data.Common;
     using Planex.Data.Models;
 

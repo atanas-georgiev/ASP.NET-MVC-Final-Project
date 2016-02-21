@@ -17,13 +17,13 @@
         [System.Web.Mvc.HiddenInput(DisplayValue = false)]
         public string Id { get; set; }
 
+        public bool IsRead { get; set; }
+
         [Required]
         [MinLength(2)]
         [MaxLength(50)]
         [UIHint("String")]
         public string Name { get; set; }
-
-        public bool IsRead { get; set; }
 
         public void CreateMappings(IConfiguration configuration)
         {

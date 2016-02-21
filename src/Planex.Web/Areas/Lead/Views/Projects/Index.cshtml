@@ -7,16 +7,16 @@
     ViewBag.Title = HtmlLabels.Projects;
 }
 
-<br />
+<br/>
 <div class="well k-content">
     <h3 class="well-title">@HtmlLabels.Projects</h3>
-    <hr />
+    <hr/>
     @(Html.Kendo().Grid<EstimationListViewModel>().Name("grid").Columns(columns =>
-      {
-          columns.Template(@<text></text>).ClientTemplate("<a href='" + Url.Action("Edit", "Projects", new { id = "#=Id#" }) + "'>" + @HtmlLabels.ProjectSelect + "</a>");
-          columns.Bound(c => c.Title);
-          columns.Bound(c => c.Manager);
-          columns.Bound(c => c.Priority);
-      }).ColumnMenu().Editable(editable => editable.Mode(GridEditMode.PopUp)).Pageable().Navigatable().Sortable(sortable => { sortable.SortMode(GridSortMode.SingleColumn); }).Filterable().Scrollable().DataSource(dataSource => dataSource.Ajax().Model(model => model.Id(p => p.Id)).Read(read => read.Action("ReadProjects", "Json")))
-    )
+          {
+              columns.Template(@<text></text>).ClientTemplate("<a href='" + Url.Action("Edit", "Projects", new { id = "#=Id#" }) + "'>" + @HtmlLabels.ProjectSelect + "</a>");
+              columns.Bound(c => c.Title);
+              columns.Bound(c => c.Manager);
+              columns.Bound(c => c.Priority);
+          }).ColumnMenu().Editable(editable => editable.Mode(GridEditMode.PopUp)).Pageable().Navigatable().Sortable(sortable => { sortable.SortMode(GridSortMode.SingleColumn); }).Filterable().Scrollable().DataSource(dataSource => dataSource.Ajax().Model(model => model.Id(p => p.Id)).Read(read => read.Action("ReadProjects", "Json")))
+          )
 </div>

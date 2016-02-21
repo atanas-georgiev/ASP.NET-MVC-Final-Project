@@ -31,14 +31,13 @@
         [UIHint("String")]
         public string LastName { get; set; }
 
+        [HiddenInput(DisplayValue = false)]
+        public string Role { get; set; }
+
         [UIHint("DropDown")]
         [LocalizedDisplay("UserRole")]
         [LocalizedRequired("RequiredFiled")]
-       
         public string RoleId { get; set; }
-
-        [HiddenInput(DisplayValue = false)]
-        public string Role { get; set; }
 
         public void CreateMappings(IConfiguration configuration)
         {

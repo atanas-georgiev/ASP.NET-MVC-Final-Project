@@ -1,15 +1,11 @@
 ﻿namespace Planex.Web.Controllers
 {
     using System;
-    using System.Globalization;
     using System.Linq;
     using System.Web.Mvc;
     using System.Web.Routing;
 
-    using AutoMapper;
-
     using Planex.Data.Models;
-    using Planex.Services.Messages;
     using Planex.Services.Users;
 
     public abstract class BaseController : Controller
@@ -24,8 +20,8 @@
         protected IUserService UserService { get; set; }
 
         protected override IAsyncResult BeginExecute(
-            RequestContext requestContext,
-            AsyncCallback callback,
+            RequestContext requestContext, 
+            AsyncCallback callback, 
             object state)
         {
             this.UserProfile =

@@ -17,19 +17,19 @@
 
     public class JsonController : BaseController
     {
+        private readonly IMessageService messageService;
+
         private readonly IProjectService projectService;
 
         private readonly ISkillService skillService;
 
         private readonly ITaskService subTaskService;
 
-        private readonly IMessageService messageService;
-
         public JsonController(
             IUserService userService, 
             ISkillService skillService, 
             ITaskService subTaskService, 
-            IProjectService projectService,
+            IProjectService projectService, 
             IMessageService messageService)
             : base(userService)
         {
@@ -51,7 +51,12 @@
 
                 if (task.PercentComplete == 100)
                 {
-                    this.messageService.SendSystemMessage(this.UserProfile.Id, taskDb.Project.LeadId, SystemMessageType.TaskComplete, taskDb.Project.Id, taskDb.Id);
+                    this.messageService.SendSystemMessage(
+                        this.UserProfile.Id, 
+                        taskDb.Project.LeadId, 
+                        SystemMessageType.TaskComplete, 
+                        taskDb.Project.Id, 
+                        taskDb.Id);
                 }
             }
 
