@@ -50,5 +50,11 @@
 
             base.Initialize(requestContext);
         }
+
+        protected override void OnException(ExceptionContext filterContext)
+        {
+            filterContext.ExceptionHandled = true;
+            filterContext.Result = this.RedirectToAction("Index", "Error");
+        }
     }
 }

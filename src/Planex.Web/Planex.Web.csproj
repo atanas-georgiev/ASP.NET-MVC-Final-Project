@@ -280,6 +280,7 @@
     <Compile Include="Areas\Worker\WorkerAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\JsonDataController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -526,6 +527,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Areas\Worker\Views\_ViewStart.cshtml" />
+    <None Include="Properties\PublishProfiles\Home.pubxml" />
     <None Include="Properties\PublishProfiles\server.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -694,7 +696,9 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Shared\Error.cshtml" />
+    <None Include="Views\Shared\Error.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
@@ -882,8 +886,13 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Views\Shared\EditorTemplates\DropDown.cshtml" />
-    <None Include="Views\Profile\Index.cshtml" />
+    <Content Include="Views\Profile\Index.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Views\Shared\_Notifications.cshtml" />
+    <Content Include="Views\Shared\NotFound.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -891,6 +900,7 @@
     <Folder Include="Areas\Worker\Views\Base\" />
     <Folder Include="Areas\Worker\Views\Json\" />
     <Folder Include="Areas\Worker\Views\Shared\" />
+    <Folder Include="Views\Error\" />
     <Folder Include="Views\Grid\" />
     <Folder Include="Views\JSon\" />
     <Folder Include="Views\Skills\" />

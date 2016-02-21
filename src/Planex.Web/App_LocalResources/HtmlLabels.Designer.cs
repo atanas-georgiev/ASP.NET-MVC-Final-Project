@@ -70,6 +70,15 @@ namespace Planex.Web.App_LocalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Error.
+        /// </summary>
+        public static string Error {
+            get {
+                return ResourceManager.GetString("Error", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to An error occurred while processing your request.
         /// </summary>
         public static string ErrorException {
@@ -223,7 +232,7 @@ namespace Planex.Web.App_LocalResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to New.
+        ///   Looks up a localized string similar to New Message.
         /// </summary>
         public static string MenuMessagesNew {
             get {
@@ -322,7 +331,7 @@ namespace Planex.Web.App_LocalResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Create Project.
+        ///   Looks up a localized string similar to Create New Project.
         /// </summary>
         public static string ProjectCreate {
             get {
@@ -439,7 +448,7 @@ namespace Planex.Web.App_LocalResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Update Profile.
+        ///   Looks up a localized string similar to Save Changes.
         /// </summary>
         public static string UserUpdateProfile {
             get {
