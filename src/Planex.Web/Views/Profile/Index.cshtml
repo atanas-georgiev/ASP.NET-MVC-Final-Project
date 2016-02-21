@@ -48,6 +48,10 @@
                 @Html.LabelFor(model => model.Skills, htmlAttributes: new { @class = "control-label col-md-2" })
                 @(Html.Kendo().MultiSelect().Name("Skills").BindTo((List<string>)ViewData["skills"]).Value(Model.Skills).HtmlAttributes(new { @class = "pull-left" }))
             </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Theme, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.EditorFor(model => model.Theme)
+            </div>
             <div>
                 <input type="submit" value="@HtmlLabels.UserUpdateProfile" class="k-button pull-left"/>
                 <br/>

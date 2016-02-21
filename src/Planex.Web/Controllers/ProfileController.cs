@@ -41,6 +41,7 @@
                 var entity = this.UserService.GetById(this.UserProfile.Id);
                 entity.FirstName = user.FirstName;
                 entity.LastName = user.LastName;
+                entity.Theme = user.Theme;
                 entity.Skills.Clear();
 
                 if (user.Skills != null)

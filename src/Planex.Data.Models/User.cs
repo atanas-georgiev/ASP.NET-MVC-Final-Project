@@ -50,6 +50,8 @@
         [DefaultValue(true)]
         public bool ResetPassword { get; set; }
 
+        public string Theme { get; set; }
+
         public virtual ICollection<Skill> Skills
         {
             get

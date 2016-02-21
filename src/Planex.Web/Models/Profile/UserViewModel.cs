@@ -47,6 +47,11 @@
         [LocalizedDisplay("UserImage")]
         public HttpPostedFileBase UploadedImage { get; set; }
 
+        [LocalizedDisplay("Theme")]
+        [LocalizedRequired("RequiredFiled")]
+        [UIHint("DropDownThemes")]
+        public string Theme { get; set; }
+
         public void CreateMappings(IConfiguration configuration)
         {
             configuration.CreateMap<User, UserViewModel>(string.Empty)

@@ -328,20 +328,6 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\Kendo\Black\editor.png" />
-    <Content Include="Content\Kendo\Black\imagebrowser.png" />
-    <Content Include="Content\Kendo\Black\indeterminate.gif" />
-    <Content Include="Content\Kendo\Black\loading-image.gif" />
-    <Content Include="Content\Kendo\Black\loading.gif" />
-    <Content Include="Content\Kendo\Black\loading_2x.gif" />
-    <Content Include="Content\Kendo\Black\markers.png" />
-    <Content Include="Content\Kendo\Black\markers_2x.png" />
-    <Content Include="Content\Kendo\Black\slider-h.gif" />
-    <Content Include="Content\Kendo\Black\slider-v.gif" />
-    <Content Include="Content\Kendo\Black\sprite.png" />
-    <Content Include="Content\Kendo\Black\sprite_2x.png" />
-    <Content Include="Content\Kendo\Black\sprite_kpi.png" />
-    <Content Include="Content\Kendo\Black\sprite_kpi_2x.png" />
     <Content Include="Content\Kendo\kendo.black.min.css" />
     <Content Include="Content\Kendo\kendo.black.mobile.min.css" />
     <Content Include="Content\Kendo\kendo.blueopal.min.css" />
@@ -696,6 +682,7 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\DropDownThemes.cshtml" />
     <None Include="Views\Shared\Error.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -900,6 +887,25 @@
     <Folder Include="Areas\Worker\Views\Base\" />
     <Folder Include="Areas\Worker\Views\Json\" />
     <Folder Include="Areas\Worker\Views\Shared\" />
+    <Folder Include="Content\Kendo\Black\" />
+    <Folder Include="Content\Kendo\BlueOpal\" />
+    <Folder Include="Content\Kendo\Bootstrap\" />
+    <Folder Include="Content\Kendo\Default\" />
+    <Folder Include="Content\Kendo\Fiori\" />
+    <Folder Include="Content\Kendo\Flat\" />
+    <Folder Include="Content\Kendo\fonts\" />
+    <Folder Include="Content\Kendo\HighContrast\" />
+    <Folder Include="Content\Kendo\images\" />
+    <Folder Include="Content\Kendo\MaterialBlack\" />
+    <Folder Include="Content\Kendo\Material\" />
+    <Folder Include="Content\Kendo\MetroBlack\" />
+    <Folder Include="Content\Kendo\Metro\" />
+    <Folder Include="Content\Kendo\Moonlight\" />
+    <Folder Include="Content\Kendo\Nova\" />
+    <Folder Include="Content\Kendo\Office365\" />
+    <Folder Include="Content\Kendo\Silver\" />
+    <Folder Include="Content\Kendo\textures\" />
+    <Folder Include="Content\Kendo\Uniform\" />
     <Folder Include="Views\Error\" />
     <Folder Include="Views\Grid\" />
     <Folder Include="Views\JSon\" />

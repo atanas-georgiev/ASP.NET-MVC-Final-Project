@@ -11,6 +11,15 @@
     @Styles.Render("~/Content/kendo")
     @RenderSection("styles", required: false)
 
+    @if(Context.User.Identity.IsAuthenticated && ViewBag.Theme != null)
+    {
+        @Styles.Render(ViewBag.Theme)
+    }
+    else
+    {
+        @Styles.Render("~/Content/kendo/kendo.black.min.css")
+    }
+
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/kendo")
     @Scripts.Render("~/Scripts/kendo/cultures/kendo.culture.bg.min.js")

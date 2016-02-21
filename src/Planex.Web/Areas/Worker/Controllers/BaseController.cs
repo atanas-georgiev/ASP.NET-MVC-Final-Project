@@ -28,6 +28,15 @@
             this.UserProfile =
                 this.userService.GetAll()
                     .FirstOrDefault(u => u.UserName == requestContext.HttpContext.User.Identity.Name);
+
+            if (requestContext.HttpContext.User.Identity.IsAuthenticated)
+            {
+                if (this.UserProfile != null)
+                {
+                    this.ViewBag.Theme = this.UserProfile.Theme;
+                }
+            }
+
             return base.BeginExecute(requestContext, callback, state);
         }
     }

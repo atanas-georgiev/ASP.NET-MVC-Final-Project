@@ -14,7 +14,7 @@
 
     public abstract class BaseController : Controller
     {
-        public BaseController(IUserService userService)
+        protected BaseController(IUserService userService)
         {
             this.UserService = userService;
         }
@@ -31,6 +31,15 @@
             this.UserProfile =
                 this.UserService.GetAll()
                     .FirstOrDefault(u => u.UserName == requestContext.HttpContext.User.Identity.Name);
+
+            if (requestContext.HttpContext.User.Identity.IsAuthenticated)
+            {
+                if (this.UserProfile != null)
+                {
+                    this.ViewBag.Theme = this.UserProfile.Theme;
+                }
+            }
+
             return base.BeginExecute(requestContext, callback, state);
         }
     }

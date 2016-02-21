@@ -70,7 +70,7 @@ namespace Planex.Web.App_LocalResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Receiver.
+        ///   Looks up a localized string similar to To.
         /// </summary>
         public static string MessageReceiver {
             get {
@@ -79,7 +79,7 @@ namespace Planex.Web.App_LocalResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Sender.
+        ///   Looks up a localized string similar to From.
         /// </summary>
         public static string MessageSender {
             get {
@@ -93,15 +93,6 @@ namespace Planex.Web.App_LocalResources {
         public static string MessageSubject {
             get {
                 return ResourceManager.GetString("MessageSubject", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Text.
-        /// </summary>
-        public static string MessageText {
-            get {
-                return ResourceManager.GetString("MessageText", resourceCulture);
             }
         }
         
@@ -133,7 +124,7 @@ namespace Planex.Web.App_LocalResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Lead.
+        ///   Looks up a localized string similar to Project Lead.
         /// </summary>
         public static string ProjectLead {
             get {
@@ -196,11 +187,20 @@ namespace Planex.Web.App_LocalResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Skill.
+        ///   Looks up a localized string similar to Skills.
         /// </summary>
         public static string SkillName {
             get {
                 return ResourceManager.GetString("SkillName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Theme.
+        /// </summary>
+        public static string Theme {
+            get {
+                return ResourceManager.GetString("Theme", resourceCulture);
             }
         }
         
@@ -241,7 +241,7 @@ namespace Planex.Web.App_LocalResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Role.
+        ///   Looks up a localized string similar to Position.
         /// </summary>
         public static string UserRole {
             get {
@@ -250,7 +250,7 @@ namespace Planex.Web.App_LocalResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Salary.
+        ///   Looks up a localized string similar to Remuneration.
         /// </summary>
         public static string UserSalary {
             get {
