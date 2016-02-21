@@ -77,13 +77,13 @@
             var projectDb = this.GetAll().FirstOrDefault(x => x.Id == id);
             if (projectDb != null)
             {
-                var tasks = projectDb.Subtasks;
+                var tasks = projectDb.Subtasks.ToList();
                 foreach (var task in tasks)
                 {
                     this.subtasks.Delete(task);
                 }
 
-                var messagesDb = this.messages.All().Where(x => x.ProjectId == projectDb.Id);
+                var messagesDb = this.messages.All().Where(x => x.ProjectId == projectDb.Id).ToList();
                 foreach (var message in messagesDb)
                 {
                     this.messages.Delete(message);

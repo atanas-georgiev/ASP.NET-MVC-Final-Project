@@ -53,12 +53,14 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.Start, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
+                    <div class="hidden">@Html.EditorFor(model => model.Start)</div>                    
                     @Html.DisplayFor(model => model.Start)
                 </div>
             </div>
                 <div class="form-group">
                     @Html.LabelFor(model => model.End, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
+                        <div class="hidden">@Html.EditorFor(model => model.End)</div>   
                         @Html.DisplayFor(model => model.End)
                     </div>
                 </div>

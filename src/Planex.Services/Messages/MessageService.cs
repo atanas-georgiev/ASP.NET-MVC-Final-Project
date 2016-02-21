@@ -49,6 +49,21 @@
             {
                 var toUser = users.FirstOrDefault(x => x.Id == systemMessage.ToId);
                 var fromUser = users.FirstOrDefault(x => x.Id == systemMessage.FromId);
+                
+                var project = this.projects.All().FirstOrDefault(x => x.Id == systemMessage.ProjectId);                
+                string projectTitle = string.Empty;
+                if (project != null)
+                {
+                    projectTitle = project.Title;
+                }
+
+                var subTask = this.tasks.All().FirstOrDefault(x => x.Id == systemMessage.SubTaskId);
+                string subtaskTitle = string.Empty;
+                if (subTask != null)
+                {
+                    subtaskTitle = subTask.Title;
+                }
+
                 switch (systemMessage.MessageType)
                 {
                     case SystemMessageType.ProjectRequestedEstimation:
@@ -61,8 +76,8 @@
                                 From = systemUser,
                                 ToId = toUser.Id,
                                 To = toUser,
-                                Subject = String.Format(SystemMessagesResources.ProjectRequestedEstimationSubject.ToString(), this.projects.All().FirstOrDefault(x => x.Id == systemMessage.ProjectId).Title),
-                                Text = String.Format(SystemMessagesResources.ProjectRequestedEstimationText, toUser.FirstName + " " + toUser.LastName, fromUser.FirstName + " " + fromUser.LastName, this.projects.All().FirstOrDefault(x => x.Id == systemMessage.ProjectId).Title),
+                                Subject = string.Format(SystemMessagesResources.ProjectRequestedEstimationSubject.ToString(), projectTitle),
+                                Text = string.Format(SystemMessagesResources.ProjectRequestedEstimationText, toUser.FirstName + " " + toUser.LastName, fromUser.FirstName + " " + fromUser.LastName, projectTitle),
                                 Date = systemMessage.Date,
                             });
                             break;
@@ -77,8 +92,8 @@
                                 From = systemUser,
                                 ToId = toUser.Id,
                                 To = toUser,
-                                Subject = String.Format(SystemMessagesResources.ProjectEstimatedSubject.ToString(), this.projects.All().FirstOrDefault(x => x.Id == systemMessage.ProjectId).Title),
-                                Text = String.Format(SystemMessagesResources.ProjectEstimatedText, toUser.FirstName + " " + toUser.LastName, fromUser.FirstName + " " + fromUser.LastName, this.projects.All().FirstOrDefault(x => x.Id == systemMessage.ProjectId).Title),
+                                Subject = string.Format(SystemMessagesResources.ProjectEstimatedSubject.ToString(), projectTitle),
+                                Text = string.Format(SystemMessagesResources.ProjectEstimatedText, toUser.FirstName + " " + toUser.LastName, fromUser.FirstName + " " + fromUser.LastName, projectTitle),
                                 Date = systemMessage.Date,
                             });
                             break;
@@ -93,8 +108,8 @@
                                 From = systemUser,
                                 ToId = toUser.Id,
                                 To = toUser,
-                                Subject = String.Format(SystemMessagesResources.TaskCompletedSubject.ToString(), this.tasks.All().FirstOrDefault(x => x.Id == systemMessage.SubTaskId).Title),
-                                Text = String.Format(SystemMessagesResources.TaskCompletedText, toUser.FirstName + " " + toUser.LastName, fromUser.FirstName + " " + fromUser.LastName, this.tasks.All().FirstOrDefault(x => x.Id == systemMessage.SubTaskId).Title, this.projects.All().FirstOrDefault(x => x.Id == systemMessage.ProjectId).Title, fromUser.FirstName + " " + fromUser.LastName),
+                                Subject = string.Format(SystemMessagesResources.TaskCompletedSubject.ToString(), subtaskTitle),
+                                Text = string.Format(SystemMessagesResources.TaskCompletedText, toUser.FirstName + " " + toUser.LastName, fromUser.FirstName + " " + fromUser.LastName, subtaskTitle, projectTitle, fromUser.FirstName + " " + fromUser.LastName),
                                 Date = systemMessage.Date,
                             });
                             break;
@@ -109,8 +124,8 @@
                                 From = systemUser,
                                 ToId = toUser.Id,
                                 To = toUser,
-                                Subject = String.Format(SystemMessagesResources.ProjectApprovedSubject.ToString(), this.projects.All().FirstOrDefault(x => x.Id == systemMessage.ProjectId).Title),
-                                Text = String.Format(SystemMessagesResources.ProjectApprovedSubject, toUser.FirstName + " " + toUser.LastName, fromUser.FirstName + " " + fromUser.LastName, this.projects.All().FirstOrDefault(x => x.Id == systemMessage.ProjectId).Title),
+                                Subject = string.Format(SystemMessagesResources.ProjectApprovedSubject.ToString(), projectTitle),
+                                Text = string.Format(SystemMessagesResources.ProjectApprovedSubject, toUser.FirstName + " " + toUser.LastName, fromUser.FirstName + " " + fromUser.LastName, projectTitle),
                                 Date = systemMessage.Date,
                             });
                             break;
@@ -125,8 +140,8 @@
                                 From = systemUser,
                                 ToId = toUser.Id,
                                 To = toUser,
-                                Subject = String.Format(SystemMessagesResources.ProjectCompletedSubject.ToString(), this.projects.All().FirstOrDefault(x => x.Id == systemMessage.ProjectId).Title),
-                                Text = String.Format(SystemMessagesResources.ProjectCompletedText, toUser.FirstName + " " + toUser.LastName, fromUser.FirstName + " " + fromUser.LastName, this.projects.All().FirstOrDefault(x => x.Id == systemMessage.ProjectId).Title),
+                                Subject = string.Format(SystemMessagesResources.ProjectCompletedSubject.ToString(), projectTitle),
+                                Text = string.Format(SystemMessagesResources.ProjectCompletedText, toUser.FirstName + " " + toUser.LastName, fromUser.FirstName + " " + fromUser.LastName, projectTitle),
                                 Date = systemMessage.Date,
                             });
                             break;
@@ -141,8 +156,8 @@
                                 From = systemUser,
                                 ToId = toUser.Id,
                                 To = toUser,
-                                Subject = String.Format(SystemMessagesResources.TaskOverdueSubject.ToString(), this.tasks.All().FirstOrDefault(x => x.Id == systemMessage.SubTaskId).Title),
-                                Text = String.Format(SystemMessagesResources.TaskOverdueText, toUser.FirstName + " " + toUser.LastName, this.tasks.All().FirstOrDefault(x => x.Id == systemMessage.SubTaskId).Title),
+                                Subject = string.Format(SystemMessagesResources.TaskOverdueSubject.ToString(), subtaskTitle),
+                                Text = string.Format(SystemMessagesResources.TaskOverdueText, toUser.FirstName + " " + toUser.LastName, subtaskTitle),
                                 Date = systemMessage.Date,
                             });
                             break;

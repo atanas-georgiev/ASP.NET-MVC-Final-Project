@@ -95,18 +95,21 @@
 
             if (this.ModelState.IsValid)
             {
-                this.subTaskService.Add(
-                    new SubTask()
-                        {
-                            ProjectId = projectId, 
-                            Title = task.Title, 
-                            ParentId = task.ParentTaskId, 
-                            Start = task.Start, 
-                            End = task.End, 
-                            PercentComplete = 0, 
-                            Price = 0,
-                            IsUserNotified = false
-                        });
+                var taskDb = new SubTask()
+                                 {
+                                     ProjectId = projectId,
+                                     Title = task.Title,
+                                     ParentId = task.ParentTaskId,
+                                     Start = task.Start,
+                                     End = task.End,
+                                     PercentComplete = 0,
+                                     Price = 0,
+                                     IsUserNotified = false
+                                 };
+
+                this.subTaskService.Add(taskDb);
+                task.TaskId = taskDb.Id;
+                task.ParentTaskId = taskDb.ParentId;
             }
 
             return this.Json(new[] { task }.ToDataSourceResult(request, this.ModelState));
@@ -277,6 +280,9 @@
                 this.projectService.Update(project);
 
                 this.UpdatePriceSubTask(taskDb.Id);
+
+                task.TaskId = taskDb.Id;
+                task.ParentTaskId = taskDb.ParentId;
             }
 
             return this.Json(new[] { task }.ToDataSourceResult(request, this.ModelState));
