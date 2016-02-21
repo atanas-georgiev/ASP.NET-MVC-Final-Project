@@ -97,133 +97,19 @@
 	<resheader name="writer">
 		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
 	</resheader>
-	<data name="ProjectApprove" xml:space="preserve">
-		<value>Одобри</value>
+	<data name="ProjectStateDraft" xml:space="preserve">
+		<value>Чернова</value>
 	</data>
-	<data name="ProjectCreate" xml:space="preserve">
-		<value>Създаване на нов проект</value>
+	<data name="ProjectStateEstimated" xml:space="preserve">
+		<value>Анализиран</value>
 	</data>
-	<data name="ProjectDetails" xml:space="preserve">
-		<value>Детайли на проекта</value>
+	<data name="ProjectStateFinished" xml:space="preserve">
+		<value>Приключен</value>
 	</data>
-	<data name="ProjectEdit" xml:space="preserve">
-		<value>Редактирай</value>
+	<data name="ProjectStateRequestedEstimation" xml:space="preserve">
+		<value>В процес на анализ</value>
 	</data>
-	<data name="ProjectRemove" xml:space="preserve">
-		<value>Премахни</value>
-	</data>
-	<data name="Projects" xml:space="preserve">
-		<value>Проекти</value>
-	</data>
-	<data name="ProjectSelect" xml:space="preserve">
-		<value>Преглед</value>
-	</data>
-	<data name="ProjectSendForEstimation" xml:space="preserve">
-		<value>Изпрати за анализ</value>
-	</data>
-	<data name="Skills" xml:space="preserve">
-		<value>Умения</value>
-	</data>
-	<data name="Users" xml:space="preserve">
-		<value>Служители</value>
-	</data>
-	<data name="LeadEstimate" xml:space="preserve">
-		<value>Анализирай</value>
-	</data>
-	<data name="LeadEstimations" xml:space="preserve">
-		<value>Анализи</value>
-	</data>
-	<data name="UserDetails" xml:space="preserve">
-		<value>Детайли за служителя</value>
-	</data>
-	<data name="UserSelect" xml:space="preserve">
-		<value>Избери</value>
-	</data>
-	<data name="Messages" xml:space="preserve">
-		<value>Съобщения</value>
-	</data>
-	<data name="MessagesInbox" xml:space="preserve">
-		<value>Пощенска кутия</value>
-	</data>
-	<data name="MessagesNew" xml:space="preserve">
-		<value>Ново съобщение</value>
-	</data>
-	<data name="MessagesSend" xml:space="preserve">
-		<value>Изпрати</value>
-	</data>
-	<data name="MessagesView" xml:space="preserve">
-		<value>Преглед</value>
-	</data>
-	<data name="Tasks" xml:space="preserve">
-		<value>Задачи</value>
-	</data>
-	<data name="UserUpdatePassword" xml:space="preserve">
-		<value>Подновяване на парола</value>
-	</data>
-	<data name="UserUpdateProfile" xml:space="preserve">
-		<value>Запази промените</value>
-	</data>
-	<data name="CompanyName" xml:space="preserve">
-		<value>Планекс</value>
-	</data>
-	<data name="ErrorException" xml:space="preserve">
-		<value>Възникна грешка при обработването на вашата заявка</value>
-	</data>
-	<data name="ErrorNotFound" xml:space="preserve">
-		<value>Страницата не е намерена</value>
-	</data>
-	<data name="HomePageActiveProjects" xml:space="preserve">
-		<value>Активни проекти</value>
-	</data>
-	<data name="HomePageNewMessages" xml:space="preserve">
-		<value>Нови съобщения</value>
-	</data>
-	<data name="MenuHome" xml:space="preserve">
-		<value>Начална страница</value>
-	</data>
-	<data name="MenuHR" xml:space="preserve">
-		<value>Човешки ресурси</value>
-	</data>
-	<data name="MenuHRSkills" xml:space="preserve">
-		<value>Умения</value>
-	</data>
-	<data name="MenuHRUsers" xml:space="preserve">
-		<value>Служители</value>
-	</data>
-	<data name="MenuLeadEstimations" xml:space="preserve">
-		<value>Анализи</value>
-	</data>
-	<data name="MenuLeadProjects" xml:space="preserve">
-		<value>Проекти</value>
-	</data>
-	<data name="MenuManagerProjects" xml:space="preserve">
-		<value>Проекти</value>
-	</data>
-	<data name="MenuManagerProjectsAdd" xml:space="preserve">
-		<value>Добави</value>
-	</data>
-	<data name="MenuManagerProjectsList" xml:space="preserve">
-		<value>Списък</value>
-	</data>
-	<data name="MenuMessages" xml:space="preserve">
-		<value>Съобщения</value>
-	</data>
-	<data name="MenuMessagesInbox" xml:space="preserve">
-		<value>Входящи</value>
-	</data>
-	<data name="MenuMessagesNew" xml:space="preserve">
-		<value>Ново съобщение</value>
-	</data>
-	<data name="MenuUserLogin" xml:space="preserve">
-		<value>Вход</value>
-	</data>
-	<data name="MenuUserLogout" xml:space="preserve">
-		<value>Изход</value>
-	</data>
-	<data name="MenuUserProfile" xml:space="preserve">
-		<value>Профил</value>
-	</data>
-	<data name="MenuWorkerTasks" xml:space="preserve">
-		<value>Задачи</value>
+	<data name="ProjectStateStarted" xml:space="preserve">
+		<value>Активен</value>
 	</data>
 </root>

@@ -1,6 +1,6 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
-  <!-- 
+	<!-- 
     Microsoft ResX Schema 
     
     Version 2.0
@@ -59,191 +59,191 @@
             : using a System.ComponentModel.TypeConverter
             : and then encoded with base64 encoding.
     -->
-  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
-    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
-    <xsd:element name="root" msdata:IsDataSet="true">
-      <xsd:complexType>
-        <xsd:choice maxOccurs="unbounded">
-          <xsd:element name="metadata">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" />
-              </xsd:sequence>
-              <xsd:attribute name="name" use="required" type="xsd:string" />
-              <xsd:attribute name="type" type="xsd:string" />
-              <xsd:attribute name="mimetype" type="xsd:string" />
-              <xsd:attribute ref="xml:space" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="assembly">
-            <xsd:complexType>
-              <xsd:attribute name="alias" type="xsd:string" />
-              <xsd:attribute name="name" type="xsd:string" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="data">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
-              </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
-              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
-              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
-              <xsd:attribute ref="xml:space" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="resheader">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-              </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" />
-            </xsd:complexType>
-          </xsd:element>
-        </xsd:choice>
-      </xsd:complexType>
-    </xsd:element>
-  </xsd:schema>
-  <resheader name="resmimetype">
-    <value>text/microsoft-resx</value>
-  </resheader>
-  <resheader name="version">
-    <value>2.0</value>
-  </resheader>
-  <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </resheader>
-  <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </resheader>
-  <data name="ProjectApprove" xml:space="preserve">
+	<xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+		<xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+		<xsd:element name="root" msdata:IsDataSet="true">
+			<xsd:complexType>
+				<xsd:choice maxOccurs="unbounded">
+					<xsd:element name="metadata">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" />
+							</xsd:sequence>
+							<xsd:attribute name="name" use="required" type="xsd:string" />
+							<xsd:attribute name="type" type="xsd:string" />
+							<xsd:attribute name="mimetype" type="xsd:string" />
+							<xsd:attribute ref="xml:space" />
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element name="assembly">
+						<xsd:complexType>
+							<xsd:attribute name="alias" type="xsd:string" />
+							<xsd:attribute name="name" type="xsd:string" />
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element name="data">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+								<xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+							</xsd:sequence>
+							<xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+							<xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+							<xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+							<xsd:attribute ref="xml:space" />
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element name="resheader">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+							</xsd:sequence>
+							<xsd:attribute name="name" type="xsd:string" use="required" />
+						</xsd:complexType>
+					</xsd:element>
+				</xsd:choice>
+			</xsd:complexType>
+		</xsd:element>
+	</xsd:schema>
+	<resheader name="resmimetype">
+		<value>text/microsoft-resx</value>
+	</resheader>
+	<resheader name="version">
+		<value>2.0</value>
+	</resheader>
+	<resheader name="reader">
+		<value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+	<resheader name="writer">
+		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+	<data name="ProjectApprove" xml:space="preserve">
     <value>Approve</value>
   </data>
-  <data name="ProjectCreate" xml:space="preserve">
-    <value>Create Project</value>
+	<data name="ProjectCreate" xml:space="preserve">
+    <value>Create New Project</value>
   </data>
-  <data name="ProjectDetails" xml:space="preserve">
+	<data name="ProjectDetails" xml:space="preserve">
     <value>Project Details</value>
   </data>
-  <data name="ProjectEdit" xml:space="preserve">
+	<data name="ProjectEdit" xml:space="preserve">
     <value>Edit</value>
   </data>
-  <data name="ProjectRemove" xml:space="preserve">
+	<data name="ProjectRemove" xml:space="preserve">
     <value>Remove</value>
   </data>
-  <data name="Projects" xml:space="preserve">
+	<data name="Projects" xml:space="preserve">
     <value>Projects</value>
   </data>
-  <data name="ProjectSelect" xml:space="preserve">
+	<data name="ProjectSelect" xml:space="preserve">
     <value>Select</value>
   </data>
-  <data name="ProjectSendForEstimation" xml:space="preserve">
+	<data name="ProjectSendForEstimation" xml:space="preserve">
     <value>Send for estimation</value>
   </data>
-  <data name="Skills" xml:space="preserve">
+	<data name="Skills" xml:space="preserve">
     <value>Skills</value>
   </data>
-  <data name="Users" xml:space="preserve">
+	<data name="Users" xml:space="preserve">
     <value>Employees</value>
   </data>
-  <data name="LeadEstimate" xml:space="preserve">
+	<data name="LeadEstimate" xml:space="preserve">
     <value>Estimate</value>
   </data>
-  <data name="LeadEstimations" xml:space="preserve">
+	<data name="LeadEstimations" xml:space="preserve">
     <value>Estimations</value>
   </data>
-  <data name="UserDetails" xml:space="preserve">
+	<data name="UserDetails" xml:space="preserve">
     <value>Employee details</value>
   </data>
-  <data name="UserSelect" xml:space="preserve">
+	<data name="UserSelect" xml:space="preserve">
     <value>Select</value>
   </data>
-  <data name="Messages" xml:space="preserve">
+	<data name="Messages" xml:space="preserve">
     <value>Messages</value>
   </data>
-  <data name="MessagesInbox" xml:space="preserve">
+	<data name="MessagesInbox" xml:space="preserve">
     <value>Inbox</value>
   </data>
-  <data name="MessagesNew" xml:space="preserve">
+	<data name="MessagesNew" xml:space="preserve">
     <value>New Message</value>
   </data>
-  <data name="MessagesSend" xml:space="preserve">
+	<data name="MessagesSend" xml:space="preserve">
     <value>Send</value>
   </data>
-  <data name="MessagesView" xml:space="preserve">
+	<data name="MessagesView" xml:space="preserve">
     <value>View</value>
   </data>
-  <data name="Tasks" xml:space="preserve">
+	<data name="Tasks" xml:space="preserve">
     <value>Tasks</value>
   </data>
-  <data name="UserUpdatePassword" xml:space="preserve">
+	<data name="UserUpdatePassword" xml:space="preserve">
     <value>Update Password</value>
   </data>
-  <data name="UserUpdateProfile" xml:space="preserve">
-    <value>Update Profile</value>
+	<data name="UserUpdateProfile" xml:space="preserve">
+    <value>Save Changes</value>
   </data>
-  <data name="CompanyName" xml:space="preserve">
+	<data name="CompanyName" xml:space="preserve">
     <value>Planex</value>
   </data>
-  <data name="ErrorException" xml:space="preserve">
+	<data name="ErrorException" xml:space="preserve">
     <value>An error occurred while processing your request</value>
   </data>
-  <data name="ErrorNotFound" xml:space="preserve">
+	<data name="ErrorNotFound" xml:space="preserve">
     <value>Page not found</value>
   </data>
-  <data name="HomePageActiveProjects" xml:space="preserve">
+	<data name="HomePageActiveProjects" xml:space="preserve">
     <value>Active Projects</value>
   </data>
-  <data name="HomePageNewMessages" xml:space="preserve">
+	<data name="HomePageNewMessages" xml:space="preserve">
     <value>New Messages</value>
   </data>
-  <data name="MenuHome" xml:space="preserve">
+	<data name="MenuHome" xml:space="preserve">
     <value>Home</value>
   </data>
-  <data name="MenuHR" xml:space="preserve">
+	<data name="MenuHR" xml:space="preserve">
     <value>HR</value>
   </data>
-  <data name="MenuHRSkills" xml:space="preserve">
+	<data name="MenuHRSkills" xml:space="preserve">
     <value>Skills</value>
   </data>
-  <data name="MenuHRUsers" xml:space="preserve">
+	<data name="MenuHRUsers" xml:space="preserve">
     <value>Employees</value>
   </data>
-  <data name="MenuLeadEstimations" xml:space="preserve">
+	<data name="MenuLeadEstimations" xml:space="preserve">
     <value>Estimations</value>
   </data>
-  <data name="MenuLeadProjects" xml:space="preserve">
+	<data name="MenuLeadProjects" xml:space="preserve">
     <value>Projects</value>
   </data>
-  <data name="MenuManagerProjects" xml:space="preserve">
+	<data name="MenuManagerProjects" xml:space="preserve">
     <value>Projects</value>
   </data>
-  <data name="MenuManagerProjectsAdd" xml:space="preserve">
+	<data name="MenuManagerProjectsAdd" xml:space="preserve">
     <value>Add</value>
   </data>
-  <data name="MenuManagerProjectsList" xml:space="preserve">
+	<data name="MenuManagerProjectsList" xml:space="preserve">
     <value>List</value>
   </data>
-  <data name="MenuMessages" xml:space="preserve">
+	<data name="MenuMessages" xml:space="preserve">
     <value>Messages</value>
   </data>
-  <data name="MenuMessagesInbox" xml:space="preserve">
+	<data name="MenuMessagesInbox" xml:space="preserve">
     <value>Inbox</value>
   </data>
-  <data name="MenuMessagesNew" xml:space="preserve">
-    <value>New</value>
+	<data name="MenuMessagesNew" xml:space="preserve">
+    <value>New Message</value>
   </data>
-  <data name="MenuUserLogin" xml:space="preserve">
+	<data name="MenuUserLogin" xml:space="preserve">
     <value>Login</value>
   </data>
-  <data name="MenuUserLogout" xml:space="preserve">
+	<data name="MenuUserLogout" xml:space="preserve">
     <value>Logout</value>
   </data>
-  <data name="MenuUserProfile" xml:space="preserve">
+	<data name="MenuUserProfile" xml:space="preserve">
     <value>Profile</value>
   </data>
-  <data name="MenuWorkerTasks" xml:space="preserve">
+	<data name="MenuWorkerTasks" xml:space="preserve">
     <value>Tasks</value>
   </data>
 </root>

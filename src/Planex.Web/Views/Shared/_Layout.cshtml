@@ -109,8 +109,13 @@
 
     </div>
     <div class="container body-content text-center">
-        <h1>@culture</h1>
-        @RenderBody()
+        <div class="container">
+            @Html.Partial("_Notifications")
+        </div>
+        <div class="container">
+            @RenderBody()
+        </div>
+       
         <hr />
         <footer>
             <p>&copy; @DateTime.Now.Year - My KendoUI Application</p>

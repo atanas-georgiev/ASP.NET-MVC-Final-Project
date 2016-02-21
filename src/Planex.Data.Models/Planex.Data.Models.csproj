@@ -93,6 +93,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Resources\ModelResources.bg.resx" />
     <EmbeddedResource Include="Resources\ModelResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ModelResources.Designer.cs</LastGenOutput>

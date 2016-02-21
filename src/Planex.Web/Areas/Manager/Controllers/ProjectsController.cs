@@ -9,6 +9,7 @@
     using Planex.Services.Tasks;
     using Planex.Services.Users;
     using Planex.Web.Areas.Manager.Models.Projects;
+    using Planex.Web.Extensions;
     using Planex.Web.Infrastructure.Mappings;
 
     public class ProjectsController : BaseController
@@ -147,6 +148,7 @@
 
         public ActionResult Index()
         {
+            this.AddNotification("THIS IS SOME TESTSTSTSTST!", NotificationType.ERROR);
             return this.View();
         }
 
