@@ -61,6 +61,51 @@ namespace Planex.Web.App_LocalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Date.
+        /// </summary>
+        public static string MessageDate {
+            get {
+                return ResourceManager.GetString("MessageDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Receiver.
+        /// </summary>
+        public static string MessageReceiver {
+            get {
+                return ResourceManager.GetString("MessageReceiver", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sender.
+        /// </summary>
+        public static string MessageSender {
+            get {
+                return ResourceManager.GetString("MessageSender", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Subject.
+        /// </summary>
+        public static string MessageSubject {
+            get {
+                return ResourceManager.GetString("MessageSubject", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Text.
+        /// </summary>
+        public static string MessageText {
+            get {
+                return ResourceManager.GetString("MessageText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Completed[%].
         /// </summary>
         public static string ProjectCompleted {

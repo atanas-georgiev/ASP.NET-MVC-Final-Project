@@ -159,6 +159,21 @@
   <data name="UserSelect" xml:space="preserve">
     <value>Select</value>
   </data>
+  <data name="Messages" xml:space="preserve">
+    <value>Messages</value>
+  </data>
+  <data name="MessagesInbox" xml:space="preserve">
+    <value>Inbox</value>
+  </data>
+  <data name="MessagesNew" xml:space="preserve">
+    <value>New Message</value>
+  </data>
+  <data name="MessagesSend" xml:space="preserve">
+    <value>Send</value>
+  </data>
+  <data name="MessagesView" xml:space="preserve">
+    <value>View</value>
+  </data>
   <data name="UserUpdatePassword" xml:space="preserve">
     <value>Update Password</value>
   </data>

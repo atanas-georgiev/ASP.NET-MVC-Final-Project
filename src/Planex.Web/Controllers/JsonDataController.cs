@@ -49,16 +49,14 @@
         {
             var users =
                 this.UserService.GetAll()
-                    .Where(x => x.Id != this.UserProfile.Id)
+                    .Where(x => x.Id != this.UserProfile.Id && x.FirstName != "System" && x.LastName != "Message")
                     .Select(x => new { id = x.Id, name = x.FirstName + " " + x.LastName });
             return this.Json(users, JsonRequestBehavior.AllowGet);
         }
 
         public virtual JsonResult ReadMessages([DataSourceRequest] DataSourceRequest request)
         {
-            var result = this.messageService.GetAll()
-                .Where(x => x.To.Id == this.UserProfile.Id)
-                .To<MessageViewModel>();
+            var result = this.messageService.GetAll().Where(x => x.To.Id == this.UserProfile.Id).To<MessageViewModel>();
             return this.Json(result.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
         }
 

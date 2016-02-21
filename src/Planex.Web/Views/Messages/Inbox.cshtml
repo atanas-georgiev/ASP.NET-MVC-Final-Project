@@ -1,9 +1,6 @@
-﻿@using Planex.Web.Models.Messages
+﻿@using Planex.Web.App_LocalResources
+@using Planex.Web.Models.Messages
 @model IEnumerable<Planex.Web.Models.Messages.MessageViewModel>
-
-@{
-    ViewBag.Title = "Inbox";
-}
 
 <style>
     .red {
@@ -25,16 +22,20 @@
     }
 </script>
 
-<br />
-<div class="well k-content">
-    <h2 class="well-title">Messages</h2>
-    <div>
-        @Html.ActionLink("New message", "Send", "", new { @class = "k-button" })
-    </div>
+@{
+    ViewBag.Title = HtmlLabels.MessagesInbox;
+}
 
+<div class="well k-content">
+    <h3 class="well-title">@HtmlLabels.MessagesInbox</h3>
+    <hr />
+    <div>
+        @Html.ActionLink(HtmlLabels.MessagesNew, "Send", "", new { @class = "k-button" })
+    </div>
+    <br/>
     @(Html.Kendo().Grid<MessageViewModel>().Name("grid").Columns(columns =>
           {
-              columns.Template(@<text></text>).ClientTemplate("<a href='" + Url.Action("View", "Messages", new { id = "#=Id#" }) + "'>View</a>");
+              columns.Template(@<text></text>).ClientTemplate("<a href='" + Url.Action("View", "Messages", new { id = "#=Id#" }) + "'>" + @HtmlLabels.MessagesView + "</a>");
               columns.Bound(c => c.From.Name);
               columns.Bound(c => c.Subject);
               columns.Bound(c => c.Date).Format("{0:MM/dd/yyyy hh:mm}");
@@ -42,7 +43,6 @@
           .Filterable().Scrollable()
           .Events(events => events.DataBound("onDataBound"))
           .DataSource(dataSource => dataSource.Ajax().Model(model => model.Id(p => p.Id)).Sort(s => s.Add("Date").Descending()).Read(read => read.Action("ReadMessages", "JsonData"))
-
         )
     )
 </div>

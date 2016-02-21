@@ -117,6 +117,21 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="MessageDate" xml:space="preserve">
+    <value>Date</value>
+  </data>
+  <data name="MessageReceiver" xml:space="preserve">
+    <value>Receiver</value>
+  </data>
+  <data name="MessageSender" xml:space="preserve">
+    <value>Sender</value>
+  </data>
+  <data name="MessageSubject" xml:space="preserve">
+    <value>Subject</value>
+  </data>
+  <data name="MessageText" xml:space="preserve">
+    <value>Text</value>
+  </data>
   <data name="ProjectCompleted" xml:space="preserve">
     <value>Completed[%]</value>
   </data>

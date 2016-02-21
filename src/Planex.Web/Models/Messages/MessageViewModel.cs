@@ -5,6 +5,7 @@
     using System.Web.Mvc;
 
     using Planex.Data.Models;
+    using Planex.Web.Infrastructure.Localization;
     using Planex.Web.Infrastructure.Mappings;
 
     public class MessageViewModel : IMapFrom<Message>
@@ -13,18 +14,19 @@
         public int Id { get; set; }
 
         [UIHint("DateTime")]
+        [LocalizedDisplay("MessageDate")]
         public DateTime Date { get; set; }
 
+        [LocalizedDisplay("MessageSender")]
         public MessageUserViewModel From { get; set; }
 
-        [Required]
-        [MaxLength(100)]
+        [LocalizedDisplay("MessageSubject")]
+        [LocalizedRequired("RequiredFiled")]
         [UIHint("String")]
         public string Subject { get; set; }
 
-        [Required]
-        [MaxLength(10000)]
-        [UIHint("Editor")]
+        [LocalizedDisplay("MessageText")]
+        [LocalizedRequired("RequiredFiled")]
         [DataType(DataType.MultilineText)]
         [AllowHtml]
         public string Text { get; set; }
