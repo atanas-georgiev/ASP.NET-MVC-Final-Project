@@ -183,4 +183,67 @@
   <data name="UserUpdateProfile" xml:space="preserve">
     <value>Update Profile</value>
   </data>
+  <data name="CompanyName" xml:space="preserve">
+    <value>Planex</value>
+  </data>
+  <data name="ErrorException" xml:space="preserve">
+    <value>An error occurred while processing your request</value>
+  </data>
+  <data name="ErrorNotFound" xml:space="preserve">
+    <value>Page not found</value>
+  </data>
+  <data name="HomePageActiveProjects" xml:space="preserve">
+    <value>Active Projects</value>
+  </data>
+  <data name="HomePageNewMessages" xml:space="preserve">
+    <value>New Messages</value>
+  </data>
+  <data name="MenuHome" xml:space="preserve">
+    <value>Home</value>
+  </data>
+  <data name="MenuHR" xml:space="preserve">
+    <value>HR</value>
+  </data>
+  <data name="MenuHRSkills" xml:space="preserve">
+    <value>Skills</value>
+  </data>
+  <data name="MenuHRUsers" xml:space="preserve">
+    <value>Employees</value>
+  </data>
+  <data name="MenuLeadEstimations" xml:space="preserve">
+    <value>Estimations</value>
+  </data>
+  <data name="MenuLeadProjects" xml:space="preserve">
+    <value>Projects</value>
+  </data>
+  <data name="MenuManagerProjects" xml:space="preserve">
+    <value>Projects</value>
+  </data>
+  <data name="MenuManagerProjectsAdd" xml:space="preserve">
+    <value>Add</value>
+  </data>
+  <data name="MenuManagerProjectsList" xml:space="preserve">
+    <value>List</value>
+  </data>
+  <data name="MenuMessages" xml:space="preserve">
+    <value>Messages</value>
+  </data>
+  <data name="MenuMessagesInbox" xml:space="preserve">
+    <value>Inbox</value>
+  </data>
+  <data name="MenuMessagesNew" xml:space="preserve">
+    <value>New</value>
+  </data>
+  <data name="MenuUserLogin" xml:space="preserve">
+    <value>Login</value>
+  </data>
+  <data name="MenuUserLogout" xml:space="preserve">
+    <value>Logout</value>
+  </data>
+  <data name="MenuUserProfile" xml:space="preserve">
+    <value>Profile</value>
+  </data>
+  <data name="MenuWorkerTasks" xml:space="preserve">
+    <value>Tasks</value>
+  </data>
 </root>

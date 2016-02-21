@@ -6,6 +6,7 @@
     using AutoMapper;
 
     using Planex.Data.Models;
+    using Planex.Web.Infrastructure.Localization;
     using Planex.Web.Infrastructure.Mappings;
 
     public class ProjectHomeViewModel : IMapFrom<SubTask>, IHaveCustomMappings
@@ -14,14 +15,18 @@
 
         public int? ParentId { get; set; }
 
+        [LocalizedDisplay("ProjectTitle")]
         public string Title { get; set; }
 
+        [LocalizedDisplay("ProjectStartDate")]
         public DateTime Start { get; set; }
 
+        [LocalizedDisplay("ProjectEndDate")]
         public DateTime End { get; set; }
 
         public bool HasChildren { get; set; }
 
+        [LocalizedDisplay("ProjectCompleted")]
         public decimal PercentComplete { get; set; }
 
         public void CreateMappings(IConfiguration configuration)

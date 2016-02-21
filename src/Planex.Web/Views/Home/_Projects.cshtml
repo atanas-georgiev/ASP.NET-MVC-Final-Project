@@ -1,9 +1,10 @@
-﻿@using Planex.Web.Models.Home
+﻿@using Planex.Web.App_LocalResources
+@using Planex.Web.Models.Home
 @using Planex.Web.Models.Messages
 <br />
 
 <div class="well k-content">
-    <h3 class="well-title">Active Projects</h3>
+    <h3 class="well-title">@HtmlLabels.HomePageActiveProjects</h3>
     <hr />
     @(Html.Kendo().TreeList<ProjectHomeViewModel>()
         .Name("treelistProjects")

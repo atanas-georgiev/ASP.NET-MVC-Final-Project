@@ -1,7 +1,8 @@
-﻿@model Planex.Web.Models.Home.HomeViewModel
+﻿@using Planex.Web.App_LocalResources
+@model Planex.Web.Models.Home.HomeViewModel
 
 @{
-    ViewBag.Title = "Home Page";
+    ViewBag.Title = @HtmlLabels.MenuHome;
 }
 
 @if (Context.User.Identity.IsAuthenticated && Model.Messages.UnreadMessagesCount != 0)

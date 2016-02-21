@@ -61,6 +61,51 @@ namespace Planex.Web.App_LocalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Planex.
+        /// </summary>
+        public static string CompanyName {
+            get {
+                return ResourceManager.GetString("CompanyName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An error occurred while processing your request.
+        /// </summary>
+        public static string ErrorException {
+            get {
+                return ResourceManager.GetString("ErrorException", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Page not found.
+        /// </summary>
+        public static string ErrorNotFound {
+            get {
+                return ResourceManager.GetString("ErrorNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Active Projects.
+        /// </summary>
+        public static string HomePageActiveProjects {
+            get {
+                return ResourceManager.GetString("HomePageActiveProjects", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to New Messages.
+        /// </summary>
+        public static string HomePageNewMessages {
+            get {
+                return ResourceManager.GetString("HomePageNewMessages", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Estimate.
         /// </summary>
         public static string LeadEstimate {
@@ -75,6 +120,150 @@ namespace Planex.Web.App_LocalResources {
         public static string LeadEstimations {
             get {
                 return ResourceManager.GetString("LeadEstimations", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Home.
+        /// </summary>
+        public static string MenuHome {
+            get {
+                return ResourceManager.GetString("MenuHome", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to HR.
+        /// </summary>
+        public static string MenuHR {
+            get {
+                return ResourceManager.GetString("MenuHR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Skills.
+        /// </summary>
+        public static string MenuHRSkills {
+            get {
+                return ResourceManager.GetString("MenuHRSkills", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Employees.
+        /// </summary>
+        public static string MenuHRUsers {
+            get {
+                return ResourceManager.GetString("MenuHRUsers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Estimations.
+        /// </summary>
+        public static string MenuLeadEstimations {
+            get {
+                return ResourceManager.GetString("MenuLeadEstimations", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Projects.
+        /// </summary>
+        public static string MenuLeadProjects {
+            get {
+                return ResourceManager.GetString("MenuLeadProjects", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Projects.
+        /// </summary>
+        public static string MenuManagerProjects {
+            get {
+                return ResourceManager.GetString("MenuManagerProjects", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add.
+        /// </summary>
+        public static string MenuManagerProjectsAdd {
+            get {
+                return ResourceManager.GetString("MenuManagerProjectsAdd", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to List.
+        /// </summary>
+        public static string MenuManagerProjectsList {
+            get {
+                return ResourceManager.GetString("MenuManagerProjectsList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Messages.
+        /// </summary>
+        public static string MenuMessages {
+            get {
+                return ResourceManager.GetString("MenuMessages", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Inbox.
+        /// </summary>
+        public static string MenuMessagesInbox {
+            get {
+                return ResourceManager.GetString("MenuMessagesInbox", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to New.
+        /// </summary>
+        public static string MenuMessagesNew {
+            get {
+                return ResourceManager.GetString("MenuMessagesNew", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Login.
+        /// </summary>
+        public static string MenuUserLogin {
+            get {
+                return ResourceManager.GetString("MenuUserLogin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Logout.
+        /// </summary>
+        public static string MenuUserLogout {
+            get {
+                return ResourceManager.GetString("MenuUserLogout", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Profile.
+        /// </summary>
+        public static string MenuUserProfile {
+            get {
+                return ResourceManager.GetString("MenuUserProfile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tasks.
+        /// </summary>
+        public static string MenuWorkerTasks {
+            get {
+                return ResourceManager.GetString("MenuWorkerTasks", resourceCulture);
             }
         }
         
