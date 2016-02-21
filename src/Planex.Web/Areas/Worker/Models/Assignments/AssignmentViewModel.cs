@@ -5,11 +5,13 @@
     using System.Web.Mvc;
 
     using Planex.Data.Models;
+    using Planex.Web.Infrastructure.Localization;
     using Planex.Web.Infrastructure.Mappings;
 
     public class AssignmentViewModel : IMapFrom<SubTask>
     {
-        [Required]
+        [LocalizedDisplay("ProjectEndDate")]
+        [LocalizedRequired("RequiredFiled")]
         [UIHint("Date")]
         public DateTime End { get; set; }
 
@@ -17,7 +19,8 @@
         [HiddenInput(DisplayValue = false)]
         public int Id { get; set; }
 
-        [Required]
+        [LocalizedDisplay("ProjectCompleted")]
+        [LocalizedRequired("RequiredFiled")]
         [UIHint("Percent")]
         [Range(0, 100)]
         public decimal PercentComplete { get; set; }
@@ -25,15 +28,18 @@
         [Key]
         public int ProjectId { get; set; }
 
+        [LocalizedDisplay("ProjectTitle")]
+        [LocalizedRequired("RequiredFiled")]
         [UIHint("String")]
         public string ProjectTitle { get; set; }
 
-        [Required]
+        [LocalizedDisplay("ProjectStartDate")]
+        [LocalizedRequired("RequiredFiled")]
         [UIHint("Date")]
         public DateTime Start { get; set; }
 
-        [Required]
-        [MaxLength(100)]
+        [LocalizedDisplay("ProjectTitle")]
+        [LocalizedRequired("RequiredFiled")]
         [UIHint("String")]
         public string Title { get; set; }
     }

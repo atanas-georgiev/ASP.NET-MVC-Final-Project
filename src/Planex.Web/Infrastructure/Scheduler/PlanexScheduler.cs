@@ -96,7 +96,7 @@
                 this.messageService.SendSystemMessage(
                     systemUser.Id, 
                     task.Project.ManagerId, 
-                    SystemMessageType.ProjectCompleted, 
+                    SystemMessageType.TaskOverDue, 
                     task.Project.Id, 
                     task.Id);
                 this.tasks.Update(task);

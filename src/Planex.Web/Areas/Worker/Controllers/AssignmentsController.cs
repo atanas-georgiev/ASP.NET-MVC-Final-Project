@@ -18,13 +18,6 @@
             this.subTaskService = subTaskService;
         }
 
-        public ActionResult Edit(string id)
-        {
-            var intId = int.Parse(id);
-            var task = this.subTaskService.GetAll().Where(x => x.Id == intId).To<AssignmentViewModel>().FirstOrDefault();
-            return this.View(task);
-        }
-
         public ActionResult Index()
         {
             return this.View();

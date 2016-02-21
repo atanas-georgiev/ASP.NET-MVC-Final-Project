@@ -142,7 +142,7 @@
                                 ToId = toUser.Id,
                                 To = toUser,
                                 Subject = String.Format(SystemMessagesResources.TaskOverdueSubject.ToString(), this.tasks.All().FirstOrDefault(x => x.Id == systemMessage.SubTaskId).Title),
-                                Text = String.Format(SystemMessagesResources.TaskOverdueText, toUser.FirstName + " " + toUser.LastName, fromUser.FirstName + " " + fromUser.LastName, this.tasks.All().FirstOrDefault(x => x.Id == systemMessage.SubTaskId).Title),
+                                Text = String.Format(SystemMessagesResources.TaskOverdueText, toUser.FirstName + " " + toUser.LastName, this.tasks.All().FirstOrDefault(x => x.Id == systemMessage.SubTaskId).Title),
                                 Date = systemMessage.Date,
                             });
                             break;

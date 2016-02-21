@@ -84,9 +84,9 @@
                 items.Add().Text("<span class=\"glyphicon glyphicon-check\"></span> Estimations").Encoded(false).Action("Index", "Estimations", new { area = "Lead" });
             }
             // Worker section
-            else if (User.IsInRole("Lead"))
+            else if (User.IsInRole("Worker"))
             {
-                items.Add().Text("<span class=\"glyphicon glyphicon-edit\"></span> Projects").Encoded(false).Action("Index", "Assignments", new { area = "Wroker" });
+                items.Add().Text("<span class=\"glyphicon glyphicon-edit\"></span> Tasks").Encoded(false).Action("Index", "Assignments", new { area = "Worker" });
             }
             // Other authorized part
             items.Add().Text("<span class=\"glyphicon glyphicon-print\"></span> Messages").Encoded(false).Items(children =>

@@ -160,7 +160,7 @@ namespace Planex.Services.Messages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Hello {0], task {1} was not completed in time. Please check the status..
+        ///   Looks up a localized string similar to Hello {0}, task {1} was not completed in time. Please check the status..
         /// </summary>
         public static string TaskOverdueText {
             get {

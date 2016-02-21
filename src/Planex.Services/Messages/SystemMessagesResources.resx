@@ -151,6 +151,6 @@
     <value>Task {0} overdue!</value>
   </data>
   <data name="TaskOverdueText" xml:space="preserve">
-    <value>Hello {0], task {1} was not completed in time. Please check the status.</value>
+    <value>Hello {0}, task {1} was not completed in time. Please check the status.</value>
   </data>
 </root>

@@ -519,7 +519,6 @@
     <Content Include="Areas\Manager\Views\Projects\Index.cshtml" />
     <Content Include="Areas\Manager\Views\Projects\_DetailsFiles.cshtml" />
     <Content Include="Areas\Worker\Views\web.config" />
-    <Content Include="Areas\Worker\Views\Assignments\Edit.cshtml" />
     <Content Include="Areas\Lead\Views\Projects\_DetailsFiles.cshtml" />
     <Content Include="Areas\Lead\Views\Projects\_DetailsSchema.cshtml" />
     <Content Include="Areas\Worker\Views\Assignments\Index.cshtml">

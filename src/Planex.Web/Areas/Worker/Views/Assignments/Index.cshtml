@@ -1,21 +1,18 @@
 ﻿@using Kendo.Mvc.UI
+@using Planex.Web.App_LocalResources
 @using Planex.Web.Areas.Worker.Models.Assignments
 @model IEnumerable<Planex.Web.Areas.Worker.Models.Assignments.AssignmentViewModel>
 
 @{
-    ViewBag.Title = "Projects";
+    ViewBag.Title = HtmlLabels.Tasks;
 }
 
-<br/>
 <div class="well k-content">
-    <h2 class="well-title">Projects</h2>
-    @*    <div>*@
-    @*        @Html.ActionLink("Create", "Create", "", new { @class = "k-button" })*@
-    @*    </div>*@
+    <h3 class="well-title">@HtmlLabels.Tasks</h3>
+    <hr />
 
     @(Html.Kendo().Grid<AssignmentViewModel>().Name("grid").Columns(columns =>
           {
-              columns.Template(@<text></text>).ClientTemplate("<a href='" + Url.Action("Details", "Projects", new { id = "#=Id#" }) + "'>Select</a>");
               columns.Bound(c => c.Title);
               columns.Bound(c => c.ProjectTitle);
               columns.Bound(c => c.Start).Format("{0:dd/MMMM/yyyy}");
