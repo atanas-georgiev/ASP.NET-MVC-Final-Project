@@ -8,7 +8,7 @@
     using Planex.Data.Models;
     using Planex.Services.Users;
 
-    [Authorize(Roles = "Lead")]
+    [Authorize(Roles = "Lead, Manager")]
     public abstract class BaseController : Controller
     {
         protected BaseController(IUserService userService)

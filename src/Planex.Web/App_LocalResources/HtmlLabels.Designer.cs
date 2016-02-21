@@ -185,5 +185,23 @@ namespace Planex.Web.App_LocalResources {
                 return ResourceManager.GetString("UserSelect", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Update Password.
+        /// </summary>
+        public static string UserUpdatePassword {
+            get {
+                return ResourceManager.GetString("UserUpdatePassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Update Profile.
+        /// </summary>
+        public static string UserUpdateProfile {
+            get {
+                return ResourceManager.GetString("UserUpdateProfile", resourceCulture);
+            }
+        }
     }
 }

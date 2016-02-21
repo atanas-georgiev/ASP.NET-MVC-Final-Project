@@ -39,7 +39,7 @@
         {
             if (this.ModelState.IsValid)
             {
-                var userToSend = this.userService.GetById(model.Receiver);
+                var userToSend = this.UserService.GetById(model.Receiver);
                 var messageDb = new Message()
                                     {
                                         From = this.UserProfile, 

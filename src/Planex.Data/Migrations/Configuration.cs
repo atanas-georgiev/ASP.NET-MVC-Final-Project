@@ -29,23 +29,30 @@ namespace Planex.Data.Migrations
 
         private void SeedRoles(PlanexDbContext context)
         {
+            RoleManager<IdentityRole> roleManager;
+            UserManager<User> userManager = new UserManager<User>(new UserStore<User>(context));
+        
             context.Roles.AddOrUpdate(x => x.Name, new IdentityRole("Manager"));
             context.Roles.AddOrUpdate(x => x.Name, new IdentityRole("Lead"));
             context.Roles.AddOrUpdate(x => x.Name, new IdentityRole("Worker"));
             context.Roles.AddOrUpdate(x => x.Name, new IdentityRole("HR"));
             context.SaveChanges();
 
-            var userStore = new UserStore<User>(context);
-            var userManager = new UserManager<User>(userStore);
-            var user = new User { UserName = "System", Email = "System@System.com", FirstName = "System", LastName = "Message", Salary = 0, CreatedOn = DateTime.UtcNow };
-            userManager.Create(user, "System");
-            userManager.AddToRole(user.Id, "Manager");
-
-            var user2 = new User { UserName = "Admin", Email = "admin@planex.com", FirstName = "Admin", LastName = "Admin", Salary = 0, CreatedOn = DateTime.UtcNow };
-            userManager.Create(user2, "123456");
-            userManager.AddToRole(user2.Id, "Manager");
-
+//            //var userStore = new UserStore<User>(context);
+//            var userManager = new UserManager<User>(userStore);
+            var user = new User { UserName = "admin@planex.com", Email = "admin@planex.com", FirstName = "System", LastName = "Message", Salary = 0, CreatedOn = DateTime.UtcNow, ResetPassword = true };
+            userManager.Create(user, "changeme");
             context.SaveChanges();
+            userManager.AddToRole(user.Id, "Manager");
+            context.SaveChanges();
+
+            //            user.UserName = user.Email;
+            //            user.CreatedOn = DateTime.UtcNow;
+            //            this.userManager.Create(user, "changeme");
+            //            user.IntId = int.Parse(user.Id.GetHashCode().ToString());
+            //            user.ResetPassword = true;
+            //            this.users.Update(user);
+            //            this.userManager.AddToRole(user.Id, role);
         }
     }
 }

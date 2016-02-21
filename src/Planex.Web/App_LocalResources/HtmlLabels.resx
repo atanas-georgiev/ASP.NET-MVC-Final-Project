@@ -159,4 +159,10 @@
   <data name="UserSelect" xml:space="preserve">
     <value>Select</value>
   </data>
+  <data name="UserUpdatePassword" xml:space="preserve">
+    <value>Update Password</value>
+  </data>
+  <data name="UserUpdateProfile" xml:space="preserve">
+    <value>Update Profile</value>
+  </data>
 </root>

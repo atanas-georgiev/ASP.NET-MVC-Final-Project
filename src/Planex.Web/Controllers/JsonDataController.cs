@@ -48,7 +48,7 @@
         public ActionResult GetAllUsers([DataSourceRequest] DataSourceRequest request)
         {
             var users =
-                this.userService.GetAll()
+                this.UserService.GetAll()
                     .Where(x => x.Id != this.UserProfile.Id)
                     .Select(x => new { id = x.Id, name = x.FirstName + " " + x.LastName });
             return this.Json(users, JsonRequestBehavior.AllowGet);

@@ -87,16 +87,9 @@
 
         public void SetRoleName(User user, string name)
         {
-            // todo: remove try catch
-            try
-            {
-                this.userManager.RemoveFromRole(user.Id, this.GetRoleName(user));
-            }
-            catch (Exception)
-            {
-            }
-
-            this.userManager.AddToRole(user.Id, name);
+            var role = this.GetRoleNameById(name);
+            this.userManager.RemoveFromRole(user.Id, role);            
+            this.userManager.AddToRole(user.Id, role);
             this.users.Update(user);
         }
 

@@ -244,7 +244,7 @@
             switch (result)
             {
                 case SignInStatus.Success:
-                    var user = this.userService.GetAll().FirstOrDefault(x => x.Email == model.Email);
+                    var user = this.UserService.GetAll().FirstOrDefault(x => x.Email == model.Email);
                     if (user != null && user.ResetPassword)
                     {
                         return this.RedirectToAction("ResetPassword");
@@ -321,7 +321,7 @@
             }
 
             this.UserProfile.ResetPassword = false;
-            this.userService.UpdatePassword(this.UserProfile, model.Password);
+            this.UserService.UpdatePassword(this.UserProfile, model.Password);
             return this.RedirectToAction("Index", "Home");
         }
 

@@ -284,6 +284,7 @@
     <Compile Include="Controllers\JsonDataController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MessagesController.cs" />
+    <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -319,6 +320,7 @@
     <Compile Include="Models\Account\SetPasswordViewModel.cs" />
     <Compile Include="Models\Account\VerifyCodeViewModel.cs" />
     <Compile Include="Models\Account\VerifyPhoneNumberViewModel.cs" />
+    <Compile Include="Models\Profile\UserViewModel.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -880,6 +882,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Views\Shared\EditorTemplates\DropDown.cshtml" />
+    <None Include="Views\Profile\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
