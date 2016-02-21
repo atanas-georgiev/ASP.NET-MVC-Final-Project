@@ -79,6 +79,24 @@ namespace Planex.Services.Messages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Project {0} completed..
+        /// </summary>
+        public static string ProjectCompletedSubject {
+            get {
+                return ResourceManager.GetString("ProjectCompletedSubject", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hello {0}, project {1} was completed. Good Job!.
+        /// </summary>
+        public static string ProjectCompletedText {
+            get {
+                return ResourceManager.GetString("ProjectCompletedText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Estimation completed for project {0}.
         /// </summary>
         public static string ProjectEstimatedSubject {
@@ -129,6 +147,24 @@ namespace Planex.Services.Messages {
         public static string TaskCompletedText {
             get {
                 return ResourceManager.GetString("TaskCompletedText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Task {0} overdue!.
+        /// </summary>
+        public static string TaskOverdueSubject {
+            get {
+                return ResourceManager.GetString("TaskOverdueSubject", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hello {0], task {1} was not completed in time. Please check the status..
+        /// </summary>
+        public static string TaskOverdueText {
+            get {
+                return ResourceManager.GetString("TaskOverdueText", resourceCulture);
             }
         }
     }

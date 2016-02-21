@@ -11,6 +11,7 @@
     using Planex.Data.Common;
     using Planex.Services.Users;
     using Planex.Web.Areas.HR.Controllers;
+    using Planex.Web.Infrastructure.Scheduler;
 
     public static class AutofacConfig
     {
@@ -45,6 +46,10 @@
         private static void RegisterServices(ContainerBuilder builder)
         {
             builder.Register(x => new PlanexDbContext()).As<DbContext>().InstancePerRequest();
+
+            builder.RegisterAssemblyTypes(Assembly.GetAssembly(typeof(IPlanexScheduler)))
+                .AsImplementedInterfaces()
+                .InstancePerRequest();
 
             builder.RegisterAssemblyTypes(Assembly.GetAssembly(typeof(IUserService)))
                 .AsImplementedInterfaces()

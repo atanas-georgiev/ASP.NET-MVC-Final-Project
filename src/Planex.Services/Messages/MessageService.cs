@@ -115,6 +115,38 @@
                             });
                             break;
                         }
+                    case SystemMessageType.ProjectCompleted:
+                        {
+                            allSystemModified.Add(new Message()
+                            {
+                                Id = systemMessage.Id,
+                                IsRead = systemMessage.IsRead,
+                                FromId = systemUser.Id,
+                                From = systemUser,
+                                ToId = toUser.Id,
+                                To = toUser,
+                                Subject = String.Format(SystemMessagesResources.ProjectCompletedSubject.ToString(), this.projects.All().FirstOrDefault(x => x.Id == systemMessage.ProjectId).Title),
+                                Text = String.Format(SystemMessagesResources.ProjectCompletedText, toUser.FirstName + " " + toUser.LastName, fromUser.FirstName + " " + fromUser.LastName, this.projects.All().FirstOrDefault(x => x.Id == systemMessage.ProjectId).Title),
+                                Date = systemMessage.Date,
+                            });
+                            break;
+                        }
+                    case SystemMessageType.TaskOverDue:
+                        {
+                            allSystemModified.Add(new Message()
+                            {
+                                Id = systemMessage.Id,
+                                IsRead = systemMessage.IsRead,
+                                FromId = systemUser.Id,
+                                From = systemUser,
+                                ToId = toUser.Id,
+                                To = toUser,
+                                Subject = String.Format(SystemMessagesResources.TaskOverdueSubject.ToString(), this.tasks.All().FirstOrDefault(x => x.Id == systemMessage.SubTaskId).Title),
+                                Text = String.Format(SystemMessagesResources.TaskOverdueText, toUser.FirstName + " " + toUser.LastName, fromUser.FirstName + " " + fromUser.LastName, this.tasks.All().FirstOrDefault(x => x.Id == systemMessage.SubTaskId).Title),
+                                Date = systemMessage.Date,
+                            });
+                            break;
+                        }
                 }
             }
             allSystemModified.AddRange(allNonSystem);

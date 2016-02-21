@@ -9,16 +9,20 @@
     using Planex.Services.Cache;
     using Planex.Services.Messages;
     using Planex.Services.Users;
+    using Planex.Web.Infrastructure.Scheduler;
     using Planex.Web.Models.Home;
 
     public class HomeController : BaseController
     {
-        private readonly IMessageService messageService;        
+        private readonly IMessageService messageService;
 
-        public HomeController(IUserService userService, IMessageService messageService)
+        private IPlanexScheduler scheduler;
+
+        public HomeController(IUserService userService, IMessageService messageService, IPlanexScheduler scheduler)
             : base(userService)
         {
             this.messageService = messageService;
+            this.scheduler = scheduler;
         }
 
         public ActionResult Index()

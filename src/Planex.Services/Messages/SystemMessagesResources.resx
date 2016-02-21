@@ -123,6 +123,12 @@
   <data name="ProjectApprovedText" xml:space="preserve">
     <value>Hello {0}, your estimation was approved by manager {1}. Project name is {2}. The project is not started.</value>
   </data>
+  <data name="ProjectCompletedSubject" xml:space="preserve">
+    <value>Project {0} completed.</value>
+  </data>
+  <data name="ProjectCompletedText" xml:space="preserve">
+    <value>Hello {0}, project {1} was completed. Good Job!</value>
+  </data>
   <data name="ProjectEstimatedSubject" xml:space="preserve">
     <value>Estimation completed for project {0}</value>
   </data>
@@ -140,5 +146,11 @@
   </data>
   <data name="TaskCompletedText" xml:space="preserve">
     <value>Hello {0}, task {1} from project {2} was completed by {3}</value>
+  </data>
+  <data name="TaskOverdueSubject" xml:space="preserve">
+    <value>Task {0} overdue!</value>
+  </data>
+  <data name="TaskOverdueText" xml:space="preserve">
+    <value>Hello {0], task {1} was not completed in time. Please check the status.</value>
   </data>
 </root>

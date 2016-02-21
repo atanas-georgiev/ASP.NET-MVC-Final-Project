@@ -1,6 +1,7 @@
 ﻿namespace Planex.Web
 {
     using System.Reflection;
+    using System.Threading;
     using System.Web;
     using System.Web.Mvc;
     using System.Web.Optimization;
@@ -20,8 +21,6 @@
             ViewEngines.Engines.Clear();
             ViewEngines.Engines.Add(new RazorViewEngine());
 
-//            TaskManager.Initialize(new PlanexScheduler());
-
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
@@ -31,7 +30,6 @@
 
             var autoMapperConfig = new AutoMapperConfig();
             autoMapperConfig.Execute(Assembly.GetExecutingAssembly());
-
         }
     }
 }

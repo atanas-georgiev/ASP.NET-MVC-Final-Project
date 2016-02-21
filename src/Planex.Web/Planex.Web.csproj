@@ -295,8 +295,8 @@
     <Compile Include="Infrastructure\Mappings\IMapFrom.cs" />
     <Compile Include="Infrastructure\Mappings\IMapTo.cs" />
     <Compile Include="Infrastructure\Mappings\QueryableExtensions.cs" />
+    <Compile Include="Infrastructure\Scheduler\IPlanexScheduler.cs" />
     <Compile Include="Infrastructure\Scheduler\PlanexScheduler.cs" />
-    <Compile Include="Infrastructure\Scheduler\ProjectStateTask.cs" />
     <Compile Include="Models\Account\ExternalLoginConfirmationViewModel.cs" />
     <Compile Include="Models\Account\AddPhoneNumberViewModel.cs" />
     <Compile Include="Models\Account\ChangePasswordViewModel.cs" />
