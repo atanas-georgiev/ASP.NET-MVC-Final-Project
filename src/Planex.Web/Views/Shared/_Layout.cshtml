@@ -1,4 +1,5 @@
 ﻿@using Planex.Web.App_LocalResources
+@using Planex.Web.Infrastructure.Notifications.Toastr
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,8 +10,8 @@
     @Scripts.Render("~/bundles/jqueryajax")
     @Styles.Render("~/Content/css")
     @Styles.Render("~/Content/kendo")
-    @RenderSection("styles", required: false)
-
+    @Styles.Render("~/Content/toastr")
+    
     @if (Context.User.Identity.IsAuthenticated && ViewBag.Theme != null)
     {
         @Styles.Render(ViewBag.Theme)
@@ -19,12 +20,15 @@
     {
         @Styles.Render("~/Content/kendo/kendo.black.min.css")
     }
+    @RenderSection("styles", required: false)
+
 
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/kendo")
     @Scripts.Render("~/Scripts/kendo/cultures/kendo.culture.bg.min.js")
     @Scripts.Render("~/Scripts/kendo/cultures/kendo.culture.bg-BG.min.js")
     @Scripts.Render("~/Scripts/kendo/messages/kendo.messages.bg-BG.min.js")
+    @Scripts.Render("~/bundles/toastr")
 
     <script>
         kendo.culture("@System.Globalization.CultureInfo.CurrentCulture.ToString()");
@@ -119,15 +123,17 @@
 
 </div>
 <div class="container body-content text-center">
-    <div class="container">
-        @RenderBody()
-    </div>
+        @Html.Partial("_Toastr")
+    
+        <div class="container">        
+            @RenderBody()
+        </div>
 
-    <hr/>
-    <footer>
-        <p>&copy; @DateTime.Now.Year - My KendoUI Application</p>
-    </footer>
-</div>
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - My KendoUI Application</p>
+        </footer>
+    </div>
 
 
 <script>

@@ -24,10 +24,11 @@
             bundles.Add(
                 new StyleBundle("~/Content/kendo").Include(
                     "~/Content/kendo/kendo.common.min.css", 
-                    "~/Content/kendo/kendo.common-bootstrap.min.css"
+                    "~/Content/kendo/kendo.common-bootstrap.min.css"));
 
-                    // "~/Content/kendo/kendo.black.min.css"
-                    ));
+            bundles.Add(new StyleBundle("~/content/toastr", 
+                            "http://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css")
+                            .Include("~/Content/toastr.min.css"));
 
             bundles.Add(new StyleBundle("~/Content/custom").Include("~/Content/site.css"));
         }
@@ -47,9 +48,7 @@
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include("~/Scripts/jquery.validate*"));
 
-            // Use the development version of Modernizr to develop with and learn from. Then, when you're
-            // ready for production, use the build tool at http://modernizr.com to pick only the tests you need.
-            bundles.Add(new ScriptBundle("~/bundles/modernizr").Include("~/Scripts/modernizr-*"));
+            bundles.Add(new ScriptBundle("~/bundles/toastr", "http://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js").Include("~/Scripts/toastr.min.js"));
 
             bundles.Add(
                 new ScriptBundle("~/bundles/bootstrap").Include("~/Scripts/bootstrap.js", "~/Scripts/respond.js"));

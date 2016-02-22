@@ -301,12 +301,16 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Infrastructure\Extensions\ControllerExtensions.cs" />
     <Compile Include="Infrastructure\Localization\LocalizedDisplayAttribute.cs" />
     <Compile Include="Infrastructure\Localization\LocalizedRequiredAttribute.cs" />
     <Compile Include="Infrastructure\Mappings\IHaveCustomMappings.cs" />
     <Compile Include="Infrastructure\Mappings\IMapFrom.cs" />
     <Compile Include="Infrastructure\Mappings\IMapTo.cs" />
     <Compile Include="Infrastructure\Mappings\QueryableExtensions.cs" />
+    <Compile Include="Infrastructure\Notifications\Toastr\ToastMessage.cs" />
+    <Compile Include="Infrastructure\Notifications\Toastr\Toastr.cs" />
+    <Compile Include="Infrastructure\Notifications\Toastr\ToastType.cs" />
     <Compile Include="Infrastructure\Scheduler\IPlanexScheduler.cs" />
     <Compile Include="Infrastructure\Scheduler\PlanexScheduler.cs" />
     <Compile Include="Models\Account\LoginViewModel.cs" />
@@ -398,6 +402,8 @@
     <Content Include="Content\Kendo\kendo.silver.mobile.min.css" />
     <Content Include="Content\Kendo\kendo.uniform.min.css" />
     <Content Include="Content\Kendo\kendo.uniform.mobile.min.css" />
+    <Content Include="Content\toastr.css" />
+    <Content Include="Content\toastr.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -516,6 +522,8 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Areas\Worker\Views\_ViewStart.cshtml" />
+    <Content Include="Content\toastr.scss" />
+    <Content Include="Content\toastr.less" />
     <None Include="Properties\PublishProfiles\Home.pubxml" />
     <None Include="Properties\PublishProfiles\server.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
@@ -673,6 +681,8 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\toastr.js" />
+    <Content Include="Scripts\toastr.min.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -866,6 +876,8 @@
     <Content Include="Views\Shared\NotFound.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="App_Code\ToastrHelper.cshtml" />
+    <Content Include="Views\Shared\_Toastr.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

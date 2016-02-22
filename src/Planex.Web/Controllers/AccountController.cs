@@ -1,4 +1,7 @@
-﻿namespace Planex.Web.Controllers
+﻿using Planex.Web.Infrastructure.Extensions;
+using Planex.Web.Infrastructure.Notifications.Toastr;
+
+namespace Planex.Web.Controllers
 {
     using System.Linq;
     using System.Threading.Tasks;
@@ -103,6 +106,7 @@
             switch (result)
             {
                 case SignInStatus.Success:
+                    this.AddToastMessage("Login", "Login success!", ToastType.Success);
                     var user = this.UserService.GetAll().FirstOrDefault(x => x.Email == model.Email);
                     if (user != null && user.ResetPassword)
                     {
@@ -126,6 +130,7 @@
         public ActionResult LogOff()
         {
             this.AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+            this.AddToastMessage("Logout", "Logout success!", ToastType.Success);
             return this.RedirectToAction("Index", "Home");
         }
 
@@ -144,6 +149,7 @@
                 return this.View(model);
             }
 
+            this.AddToastMessage("Account", "Password updated!", ToastType.Success);
             this.UserProfile.ResetPassword = false;
             this.UserService.UpdatePassword(this.UserProfile, model.Password);
             return this.RedirectToAction("Index", "Home");
