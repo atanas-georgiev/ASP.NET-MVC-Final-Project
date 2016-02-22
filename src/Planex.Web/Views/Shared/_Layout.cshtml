@@ -25,115 +25,116 @@
 
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/kendo")
-    @Scripts.Render("~/Scripts/kendo/cultures/kendo.culture.bg.min.js")
-    @Scripts.Render("~/Scripts/kendo/cultures/kendo.culture.bg-BG.min.js")
-    @Scripts.Render("~/Scripts/kendo/messages/kendo.messages.bg-BG.min.js")
+    @Scripts.Render("~/Scripts/kendo/cultures/kendo.culture." + @System.Globalization.CultureInfo.CurrentCulture.Name + ".min.js")
+    @Scripts.Render("~/Scripts/kendo/cultures/kendo.culture." + @System.Globalization.CultureInfo.CurrentCulture.ToString() + ".min.js")
+    @Scripts.Render("~/Scripts/kendo/messages/kendo.messages." + @System.Globalization.CultureInfo.CurrentCulture.ToString() + ".min.js")
     @Scripts.Render("~/bundles/toastr")
+
+
+    @RenderSection("scripts", required: false)
 
     <script>
         kendo.culture("@System.Globalization.CultureInfo.CurrentCulture.ToString()");
     </script>
 
-    @RenderSection("scripts", required: false)
-
 </head>
 <body>
 <div id="planexMenu">
     @(Html.Kendo().Menu().Name("Menu").Animation(animation =>
+      {
+          animation.Open(open =>
           {
-              animation.Open(open =>
-                  {
-                      if (ViewBag.animation == "expand")
-                      {
-                          open.Expand(ExpandDirection.Vertical);
-                      }
-
-                      if (ViewBag.animation == "slide")
-                      {
-                          open.SlideIn(SlideDirection.Down);
-                      }
-
-                      if (true)
-                      {
-                          open.Fade(FadeDirection.In);
-                      }
-                  });
-          }).HoverDelay(100).Items(items =>
+              if (ViewBag.animation == "expand")
               {
-                  // Home page, public
-                  items.Add().Text("<span class=\"glyphicon glyphicon-home\"></span> " + @HtmlLabels.MenuHome).Encoded(false).Action("Index", "Home", new { area = string.Empty });
+                  open.Expand(ExpandDirection.Vertical);
+              }
 
-                  if (Context.User.Identity.IsAuthenticated)
+              if (ViewBag.animation == "slide")
+              {
+                  open.SlideIn(SlideDirection.Down);
+              }
+
+              if (true)
+              {
+                  open.Fade(FadeDirection.In);
+              }
+          });
+      }).HoverDelay(100).Items(items =>
+      {
+          // Home page, public
+          items.Add().Text("<span class=\"glyphicon glyphicon-home\"></span> " + @HtmlLabels.MenuHome).Encoded(false).Action("Index", "Home", new {area = string.Empty});
+
+          if (Context.User.Identity.IsAuthenticated)
+          {
+              // Manager section
+              if (User.IsInRole("Manager"))
+              {
+                  items.Add().Text("<span class=\"glyphicon glyphicon-edit\"></span> " + @HtmlLabels.MenuManagerProjects).Encoded(false).Items(children =>
                   {
-                      // Manager section
-                      if (User.IsInRole("Manager"))
-                      {
-                          items.Add().Text("<span class=\"glyphicon glyphicon-edit\"></span> " + @HtmlLabels.MenuManagerProjects).Encoded(false).Items(children =>
-                              {
-                                  children.Add().Text("<span class=\"glyphicon glyphicon-share\"></span> " + @HtmlLabels.MenuManagerProjectsAdd).Encoded(false).Action("Create", "Projects", new { area = "Manager" });
-                                  children.Add().Text("<span class=\"glyphicon glyphicon-check\"></span> " + @HtmlLabels.MenuManagerProjectsList).Encoded(false).Action("Index", "Projects", new { area = "Manager" });
-                              });
-                          items.Add().Text("<span class=\"glyphicon glyphicon-edit\"></span> " + @HtmlLabels.MenuHR).Encoded(false).Items(children =>
-                              {
-                                  children.Add().Text("<span class=\"glyphicon glyphicon-share\"></span> " + @HtmlLabels.MenuHRUsers).Encoded(false).Action("Index", "Users", new { area = "HR" });
-                                  children.Add().Text("<span class=\"glyphicon glyphicon-check\"></span> " + @HtmlLabels.MenuHRSkills).Encoded(false).Action("Index", "Skills", new { area = "HR" });
-                              });
-                      }
-
-                      // HR section
-                      else if (User.IsInRole("HR"))
-                      {
-                          items.Add().Text("<span class=\"glyphicon glyphicon-edit\"></span> " + @HtmlLabels.MenuHR).Encoded(false).Items(children =>
-                              {
-                                  children.Add().Text("<span class=\"glyphicon glyphicon-share\"></span> " + @HtmlLabels.MenuHRUsers).Encoded(false).Action("Index", "Users", new { area = "HR" });
-                                  children.Add().Text("<span class=\"glyphicon glyphicon-check\"></span> " + @HtmlLabels.MenuHRSkills).Encoded(false).Action("Index", "Skills", new { area = "HR" });
-                              });
-                      }
-
-                      // Lead section
-                      else if (User.IsInRole("Lead"))
-                      {
-                          items.Add().Text("<span class=\"glyphicon glyphicon-edit\"></span> " + @HtmlLabels.MenuLeadProjects).Encoded(false).Action("Index", "Projects", new { area = "Lead" });
-                          items.Add().Text("<span class=\"glyphicon glyphicon-check\"></span> " + @HtmlLabels.MenuLeadEstimations).Encoded(false).Action("Index", "Estimations", new { area = "Lead" });
-                      }
-
-                      // Worker section
-                      else if (User.IsInRole("Worker"))
-                      {
-                          items.Add().Text("<span class=\"glyphicon glyphicon-edit\"></span> " + @HtmlLabels.MenuWorkerTasks).Encoded(false).Action("Index", "Assignments", new { area = "Worker" });
-                      }
-
-                      // Other authorized part
-                      items.Add().Text("<span class=\"glyphicon glyphicon-print\"></span> " + @HtmlLabels.MenuMessages).Encoded(false).Items(children =>
-                          {
-                              children.Add().Text("<span class=\"glyphicon glyphicon-tag\"></span> " + @HtmlLabels.MenuMessagesNew).Encoded(false).Action("Send", "Messages", new { area = string.Empty });
-                              children.Add().Text("<span class=\"glyphicon glyphicon-inbox\"></span> " + @HtmlLabels.MenuMessagesInbox).Encoded(false).Action("Inbox", "Messages", new { area = string.Empty });
-                          });
-                      items.Add().Text("<span class=\"glyphicon glyphicon-user\"></span> " + Context.User.Identity.Name).Encoded(false).Items(children =>
-                          {
-                              children.Add().Text("<span class=\"glyphicon glyphicon-lock\"></span> " + @HtmlLabels.MenuUserProfile).Encoded(false).Action("Index", "Profile", new { area = string.Empty });
-                              children.Add().Text("<span class=\"glyphicon glyphicon-log-out\"></span> " + @HtmlLabels.MenuUserLogout).Encoded(false).Action("LogOff", "Account", new { area = string.Empty });
-                          });
-                  }
-                  else
+                      children.Add().Text("<span class=\"glyphicon glyphicon-share\"></span> " + @HtmlLabels.MenuManagerProjectsAdd).Encoded(false).Action("Create", "Projects", new {area = "Manager"});
+                      children.Add().Text("<span class=\"glyphicon glyphicon-check\"></span> " + @HtmlLabels.MenuManagerProjectsList).Encoded(false).Action("Index", "Projects", new {area = "Manager"});
+                  });
+                  items.Add().Text("<span class=\"glyphicon glyphicon-edit\"></span> " + @HtmlLabels.MenuHR).Encoded(false).Items(children =>
                   {
-                      items.Add().Text("<span class=\"glyphicon glyphicon-log-in\"></span> " + @HtmlLabels.MenuUserLogin).Encoded(false).Action("Login", "Account", new { area = string.Empty });
-                  }
-              }))
+                      children.Add().Text("<span class=\"glyphicon glyphicon-share\"></span> " + @HtmlLabels.MenuHRUsers).Encoded(false).Action("Index", "Users", new {area = "HR"});
+                      children.Add().Text("<span class=\"glyphicon glyphicon-check\"></span> " + @HtmlLabels.MenuHRSkills).Encoded(false).Action("Index", "Skills", new {area = "HR"});
+                  });
+              }
+
+              // HR section
+              else if (User.IsInRole("HR"))
+              {
+                  items.Add().Text("<span class=\"glyphicon glyphicon-edit\"></span> " + @HtmlLabels.MenuHR).Encoded(false).Items(children =>
+                  {
+                      children.Add().Text("<span class=\"glyphicon glyphicon-share\"></span> " + @HtmlLabels.MenuHRUsers).Encoded(false).Action("Index", "Users", new {area = "HR"});
+                      children.Add().Text("<span class=\"glyphicon glyphicon-check\"></span> " + @HtmlLabels.MenuHRSkills).Encoded(false).Action("Index", "Skills", new {area = "HR"});
+                  });
+              }
+
+              // Lead section
+              else if (User.IsInRole("Lead"))
+              {
+                  items.Add().Text("<span class=\"glyphicon glyphicon-edit\"></span> " + @HtmlLabels.MenuLeadProjects).Encoded(false).Action("Index", "Projects", new {area = "Lead"});
+                  items.Add().Text("<span class=\"glyphicon glyphicon-check\"></span> " + @HtmlLabels.MenuLeadEstimations).Encoded(false).Action("Index", "Estimations", new {area = "Lead"});
+              }
+
+              // Worker section
+              else if (User.IsInRole("Worker"))
+              {
+                  items.Add().Text("<span class=\"glyphicon glyphicon-edit\"></span> " + @HtmlLabels.MenuWorkerTasks).Encoded(false).Action("Index", "Assignments", new {area = "Worker"});
+              }
+
+              // Other authorized part
+              items.Add().Text("<span class=\"glyphicon glyphicon-print\"></span> " + @HtmlLabels.MenuMessages).Encoded(false).Items(children =>
+              {
+                  children.Add().Text("<span class=\"glyphicon glyphicon-tag\"></span> " + @HtmlLabels.MenuMessagesNew).Encoded(false).Action("Send", "Messages", new {area = string.Empty});
+                  children.Add().Text("<span class=\"glyphicon glyphicon-inbox\"></span> " + @HtmlLabels.MenuMessagesInbox).Encoded(false).Action("Inbox", "Messages", new {area = string.Empty});
+              });
+              items.Add().Text("<span class=\"glyphicon glyphicon-user\"></span> " + Context.User.Identity.Name).Encoded(false).Items(children =>
+              {
+                  children.Add().Text("<span class=\"glyphicon glyphicon-lock\"></span> " + @HtmlLabels.MenuUserProfile).Encoded(false).Action("Index", "Profile", new {area = string.Empty});
+                  children.Add().Text("<span class=\"glyphicon glyphicon-log-out\"></span> " + @HtmlLabels.MenuUserLogout).Encoded(false).Action("LogOff", "Account", new {area = string.Empty});
+              });
+          }
+          else
+          {
+              items.Add().Text("<span class=\"glyphicon glyphicon-log-in\"></span> " + @HtmlLabels.MenuUserLogin).Encoded(false).Action("Login", "Account", new {area = string.Empty});
+          }
+      }))
 
 </div>
 <div class="container body-content text-center">
-        @Html.Partial("_Toastr")
-    
-        <div class="container">        
-            @RenderBody()
-        </div>
+    @Html.Partial("_Toastr")
 
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My KendoUI Application</p>
-        </footer>
+    <div class="container">
+        @RenderBody()
     </div>
+
+    <hr/>
+    <footer>
+        <p>&copy; @DateTime.Now.Year - My KendoUI Application</p>
+    </footer>
+</div>
 
 
 <script>

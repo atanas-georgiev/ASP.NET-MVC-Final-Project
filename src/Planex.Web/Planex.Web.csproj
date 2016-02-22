@@ -542,6 +542,8 @@
     <None Include="Scripts\Kendo\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\Kendo\cultures\kendo.culture.bg-BG.min.js" />
     <Content Include="Scripts\Kendo\cultures\kendo.culture.bg.min.js" />
+    <Content Include="Scripts\Kendo\cultures\kendo.culture.en-US.min.js" />
+    <Content Include="Scripts\Kendo\cultures\kendo.culture.en.min.js" />
     <Content Include="Scripts\Kendo\jquery-1.10.2.js" />
     <Content Include="Scripts\Kendo\jquery-1.10.2.min.js" />
     <Content Include="Scripts\Kendo\jquery.min.js" />
@@ -673,6 +675,7 @@
     <Content Include="Scripts\Kendo\kendo.webcomponents.min.js" />
     <Content Include="Scripts\Kendo\kendo.window.min.js" />
     <Content Include="Scripts\Kendo\messages\kendo.messages.bg-BG.min.js" />
+    <Content Include="Scripts\Kendo\messages\kendo.messages.en-US.min.js" />
     <Content Include="Scripts\Kendo\modernizr-2.6.2.js" />
     <Content Include="Scripts\Kendo\pako_deflate.min.js" />
     <Content Include="Scripts\Kendo\respond.js" />
