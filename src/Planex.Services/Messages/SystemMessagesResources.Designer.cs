@@ -106,7 +106,7 @@ namespace Planex.Services.Messages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Hello {0}, new estimation task was completed by leader {1}. Project name is {2}. You can check the provided estimation details in the project page..
+        ///   Looks up a localized string similar to Hello {0}, new estimation task was completed by lead {1}. Project name is {2}. You can check the provided estimation details in the project page..
         /// </summary>
         public static string ProjectEstimatedText {
             get {
@@ -115,7 +115,7 @@ namespace Planex.Services.Messages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Estimation task requested for project {0}.
+        ///   Looks up a localized string similar to Estimation requested for project {0}..
         /// </summary>
         public static string ProjectRequestedEstimationSubject {
             get {
@@ -124,7 +124,7 @@ namespace Planex.Services.Messages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Hello {0}, new estimation task was requested by manager {1}. Project name is {2}. You can check you estimation list for more details..
+        ///   Looks up a localized string similar to Hello {0}, new estimation was requested by manager {1}. Project name is {2}. You can check you estimation list for more details..
         /// </summary>
         public static string ProjectRequestedEstimationText {
             get {
@@ -142,7 +142,7 @@ namespace Planex.Services.Messages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Hello {0}, task {1} from project {2} was completed by {3}.
+        ///   Looks up a localized string similar to Hello {0}, task {1} from project {2} was completed by {3}..
         /// </summary>
         public static string TaskCompletedText {
             get {
