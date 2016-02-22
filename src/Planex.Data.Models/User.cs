@@ -31,7 +31,6 @@
         public DateTime? DeletedOn { get; set; }
 
         [Required]
-        [MinLength(2)]
         [MaxLength(50)]
         public string FirstName { get; set; }
 
@@ -40,12 +39,12 @@
 
         public int? ImageId { get; set; }
 
+        [Required]
         public int IntId { get; set; }
 
         public bool IsDeleted { get; set; }
 
         [Required]
-        [MinLength(2)]
         [MaxLength(50)]
         public string LastName { get; set; }
 
@@ -57,6 +56,8 @@
 
         [Required]
         public decimal Salary { get; set; }
+
+        public string Theme { get; set; }
 
         public virtual ICollection<Skill> Skills
         {
@@ -83,8 +84,6 @@
                 this.subtasks = value;
             }
         }
-
-        public string Theme { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<User> manager)
         {

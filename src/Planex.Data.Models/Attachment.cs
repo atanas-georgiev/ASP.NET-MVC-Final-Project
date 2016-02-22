@@ -2,8 +2,8 @@
 {
     using System.ComponentModel.DataAnnotations;
 
-    using Planex.Data.Common;
-    using Planex.Data.Common.Models;
+    using Common;
+    using Common.Models;
 
     public class Attachment : BaseModel<int>, IHavePrimaryKey<int>
     {

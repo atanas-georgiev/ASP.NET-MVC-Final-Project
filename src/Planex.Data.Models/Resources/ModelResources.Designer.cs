@@ -61,6 +61,33 @@ namespace Planex.Data.Models.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to High.
+        /// </summary>
+        public static string PriorityHigh {
+            get {
+                return ResourceManager.GetString("PriorityHigh", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Low.
+        /// </summary>
+        public static string PriorityLow {
+            get {
+                return ResourceManager.GetString("PriorityLow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Normal.
+        /// </summary>
+        public static string PriorityNormal {
+            get {
+                return ResourceManager.GetString("PriorityNormal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Draft.
         /// </summary>
         public static string ProjectStateDraft {
@@ -97,7 +124,7 @@ namespace Planex.Data.Models.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Started.
+        ///   Looks up a localized string similar to Active.
         /// </summary>
         public static string ProjectStateStarted {
             get {

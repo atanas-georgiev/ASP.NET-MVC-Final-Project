@@ -29,7 +29,6 @@ namespace Planex.Data.Migrations
 
         private void SeedRoles(PlanexDbContext context)
         {
-            RoleManager<IdentityRole> roleManager;
             UserManager<User> userManager = new UserManager<User>(new UserStore<User>(context));
 
             context.Roles.AddOrUpdate(x => x.Name, new IdentityRole("Manager"));
@@ -38,8 +37,6 @@ namespace Planex.Data.Migrations
             context.Roles.AddOrUpdate(x => x.Name, new IdentityRole("HR"));
             context.SaveChanges();
 
-            // //var userStore = new UserStore<User>(context);
-            // var userManager = new UserManager<User>(userStore);
             var user = new User
                            {
                                UserName = "admin@planex.com", 
@@ -48,20 +45,13 @@ namespace Planex.Data.Migrations
                                LastName = "Message", 
                                Salary = 0, 
                                CreatedOn = DateTime.UtcNow, 
-                               ResetPassword = true
-                           };
+                               ResetPassword = false,
+                               IntId = 0
+            };
             userManager.Create(user, "changeme");
             context.SaveChanges();
             userManager.AddToRole(user.Id, "Manager");
             context.SaveChanges();
-
-            // user.UserName = user.Email;
-            // user.CreatedOn = DateTime.UtcNow;
-            // this.userManager.Create(user, "changeme");
-            // user.IntId = int.Parse(user.Id.GetHashCode().ToString());
-            // user.ResetPassword = true;
-            // this.users.Update(user);
-            // this.userManager.AddToRole(user.Id, role);
         }
     }
 }

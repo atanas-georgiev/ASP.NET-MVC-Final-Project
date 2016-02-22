@@ -10,37 +10,22 @@
     using Planex.Data.Common.Models;
 
     public class SubTask : BaseModel<int>, IHavePrimaryKey<int>
-    {
-        private ICollection<SubTask> dependencies;
-
-        private ICollection<SubTask> tasks;
+    {        
+        private ICollection<SubTask> subTasks;
 
         private ICollection<User> users;
 
         public SubTask()
         {
             this.users = new HashSet<User>();
-            this.tasks = new List<SubTask>();
-            this.dependencies = new List<SubTask>();
+            this.subTasks = new HashSet<SubTask>();
         }
 
-        public virtual ICollection<SubTask> Dependences
-        {
-            get
-            {
-                return this.dependencies;
-            }
-
-            set
-            {
-                this.dependencies = value;
-            }
-        }
-
+        [Required]
+        [MaxLength(1000)]
         public string Description { get; set; }
 
-        public int Duration { get; set; }
-
+        [Required]
         public DateTime End { get; set; }
 
         [Required]
@@ -52,8 +37,10 @@
 
         public int? ParentId { get; set; }
 
+        [Required]
         public decimal PercentComplete { get; set; }
 
+        [Required]
         public decimal Price { get; set; }
 
         [ForeignKey("ProjectId")]
@@ -61,23 +48,19 @@
 
         public int ProjectId { get; set; }
 
-        [ForeignKey("SkillId")]
-        public virtual Skill Skill { get; set; }
-
-        public int? SkillId { get; set; }
-
+        [Required]
         public DateTime Start { get; set; }
 
         public virtual ICollection<SubTask> Subtasks
         {
             get
             {
-                return this.tasks;
+                return this.subTasks;
             }
 
             set
             {
-                this.tasks = value;
+                this.subTasks = value;
             }
         }
 

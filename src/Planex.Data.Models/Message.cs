@@ -5,8 +5,8 @@
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
 
-    using Planex.Data.Common;
-    using Planex.Data.Common.Models;
+    using Common;
+    using Common.Models;
 
     public class Message : BaseModel<int>, IHavePrimaryKey<int>
     {
@@ -23,7 +23,7 @@
         public bool IsRead { get; set; }
 
         [Required]
-        [DefaultValue(true)]
+        [DefaultValue(false)]
         public bool IsSystemMessage { get; set; }
 
         public SystemMessageType? MessageType { get; set; }

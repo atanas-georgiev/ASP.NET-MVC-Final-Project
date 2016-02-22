@@ -20,23 +20,15 @@
             this.attachments = new HashSet<Attachment>();
         }
 
-        public virtual ICollection<Attachment> Attachments
-        {
-            get
-            {
-                return this.attachments;
-            }
-
-            set
-            {
-                this.attachments = value;
-            }
-        }
+        [Required]
+        [MaxLength(100)]
+        public string Title { get; set; }
 
         [Required]
         [MaxLength(10000)]
         public string Description { get; set; }
 
+        [Required]
         public DateTime End { get; set; }
 
         [ForeignKey("LeadId")]
@@ -77,8 +69,17 @@
             }
         }
 
-        [Required]
-        [MaxLength(100)]
-        public string Title { get; set; }
+        public virtual ICollection<Attachment> Attachments
+        {
+            get
+            {
+                return this.attachments;
+            }
+
+            set
+            {
+                this.attachments = value;
+            }
+        }
     }
 }
