@@ -95,5 +95,12 @@
         {
             return this.View();
         }
+
+        public ActionResult Remove(string id)
+        {
+            this.UserService.Delete(id);
+            
+            return RedirectToAction("Index");
+        }
     }
 }

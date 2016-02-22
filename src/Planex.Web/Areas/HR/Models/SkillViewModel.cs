@@ -12,6 +12,7 @@
         [System.Web.Mvc.HiddenInput(DisplayValue = false)]
         public int Id { get; set; }
 
+        [Required]
         [UIHint("String")]
         [LocalizedDisplay("SkillName")]
         [LocalizedRequired("RequiredFiled")]

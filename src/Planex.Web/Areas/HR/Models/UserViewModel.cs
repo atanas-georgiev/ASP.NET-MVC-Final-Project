@@ -12,11 +12,13 @@
 
     public class UserViewModel : IMapFrom<User>, IHaveCustomMappings
     {
+        [Required]
         [LocalizedDisplay("UserEmail")]
         [LocalizedRequired("RequiredFiled")]
         [UIHint("Email")]
         public string Email { get; set; }
 
+        [Required]
         [LocalizedDisplay("UserFirstName")]
         [LocalizedRequired("RequiredFiled")]
         [UIHint("String")]
@@ -26,6 +28,7 @@
         [HiddenInput(DisplayValue = false)]
         public string Id { get; set; }
 
+        [Required]
         [LocalizedDisplay("UserLastName")]
         [LocalizedRequired("RequiredFiled")]
         [UIHint("String")]
@@ -34,6 +37,7 @@
         [HiddenInput(DisplayValue = false)]
         public string Role { get; set; }
 
+        [Required]
         [UIHint("DropDown")]
         [LocalizedDisplay("UserRole")]
         [LocalizedRequired("RequiredFiled")]

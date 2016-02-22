@@ -10,16 +10,21 @@
     <hr/>
     <br/>
     @(Html.Kendo().Grid<Planex.Web.Areas.HR.Models.UserViewModel>().Name("grid").Columns(columns =>
-          {
-              columns.Template(@<text></text>).ClientTemplate("<a href='" + Url.Action("Details", "Users", new { id = "#=Id#" }) + "'>" + @HtmlLabels.UserSelect + "</a>");
-              columns.Bound(c => c.Email);
-              columns.Bound(c => c.FirstName);
-              columns.Bound(c => c.LastName);
-              columns.Bound(c => c.Role);
-          }).ToolBar(toolbar => { toolbar.Create(); }).ColumnMenu().Editable(editable => editable.Mode(GridEditMode.PopUp)).Pageable().Navigatable().Selectable(selectable =>
-              {
-                  selectable.Mode(GridSelectionMode.Single);
-                  selectable.Type(GridSelectionType.Row);
-              }).Sortable(sortable => { sortable.SortMode(GridSortMode.SingleColumn); }).Filterable().Scrollable().DataSource(dataSource => dataSource.Ajax().Model(model => model.Id(p => p.Id)).Read(read => read.Action("UsersRead", "Json")).Create(create => create.Action("UsersCreate", "Json")))
+      {
+          columns.Template(@<text></text>).ClientTemplate("<a href='" + Url.Action("Details", "Users", new {id = "#=Id#"}) + "'>" + @HtmlLabels.UserSelect + "</a>");
+          columns.Bound(c => c.Email);
+          columns.Bound(c => c.FirstName);
+          columns.Bound(c => c.LastName);
+          columns.Bound(c => c.Role);
+      }).ToolBar(toolbar => { toolbar.Create(); }).ColumnMenu().Editable(editable => editable.Mode(GridEditMode.PopUp)).Pageable(x => x.PageSizes(true)).Navigatable().Selectable(selectable =>
+      {
+          selectable.Mode(GridSelectionMode.Single);
+          selectable.Type(GridSelectionType.Row);
+      }).Sortable(sortable => { sortable.SortMode(GridSortMode.SingleColumn); }).Filterable().Scrollable().DataSource(dataSource => dataSource.Ajax().Model(model => model.Id(p => p.Id)).Read(read => read.Action("UsersRead", "Json")).Create(create => create.Action("UsersCreate", "Json")))
           )
 </div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+

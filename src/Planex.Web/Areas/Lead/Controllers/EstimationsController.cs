@@ -20,18 +20,13 @@
 
         private readonly IProjectService projectService;
 
-        private readonly ITaskService subTaskService;
-
         public EstimationsController(
             IUserService userService, 
             IProjectService projectService, 
-            ISkillService skillService, 
-            IMessageService messageService, 
-            ITaskService subTaskService)
+            IMessageService messageService)
             : base(userService)
         {
             this.projectService = projectService;
-            this.subTaskService = subTaskService;
             this.messageService = messageService;
         }
 
@@ -39,27 +34,18 @@
         {
             this.Session["ProjectId"] = id;
             var intId = int.Parse(id);
-            var requestedEstimationTask =
-                this.projectService.GetAll().Where(x => x.Id == intId).To<EstimationEditViewModel>().FirstOrDefault();
-            var requestedEstimationTaskSubTasks =
-                this.subTaskService.GetAll()
-                    .Where(x => x.ProjectId == requestedEstimationTask.Id)
-                    .OrderByDescending(x => x.End);
-
-            if (requestedEstimationTaskSubTasks.ToList().Count != 0)
+            var requestedEstimationTask = this.projectService.GetAll().Where(x => x.Id == intId).To<EstimationEditViewModel>().FirstOrDefault();
+                     
+            if (requestedEstimationTask != null)
             {
-                requestedEstimationTask.End = requestedEstimationTaskSubTasks.First().End;
-                requestedEstimationTask.Price =
-                    requestedEstimationTaskSubTasks.Where(x => x.ParentId == null).Sum(x => x.Price);
-            }
-            else
-            {
-                requestedEstimationTask.End = requestedEstimationTask.Start;
-                requestedEstimationTask.Price = 0;
-            }
+                if (requestedEstimationTask.LeadId != UserProfile.Id)
+                {
+                    return HttpNotFound();
+                }
 
-            var sanitizer = HtmlSanitizer.SimpleHtml5DocumentSanitizer();
-            requestedEstimationTask.Description = sanitizer.Sanitize(requestedEstimationTask.Description);
+                var sanitizer = HtmlSanitizer.SimpleHtml5DocumentSanitizer();
+                requestedEstimationTask.Description = sanitizer.Sanitize(requestedEstimationTask.Description);                
+            }
 
             return this.View(requestedEstimationTask);
         }
@@ -72,6 +58,12 @@
         public ActionResult SendForApproval()
         {
             var project = this.projectService.GetById(int.Parse(this.Session["ProjectId"].ToString()));
+
+            if (project.LeadId != UserProfile.Id)
+            {
+                return HttpNotFound();
+            }
+
             project.State = TaskStateType.Estimated;
             this.projectService.Update(project);
             this.messageService.SendSystemMessage(

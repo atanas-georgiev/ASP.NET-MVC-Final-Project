@@ -44,6 +44,9 @@
         [UIHint("String")]
         public string Title { get; set; }
 
+        [HiddenInput(DisplayValue = false)]
+        public string LeadId { get; set; }
+
         public List<string> UploadedAttachmentFiles { get; set; }
     }
 }

@@ -15,40 +15,34 @@
 
     public class ProjectsController : BaseController
     {
-        private readonly IMessageService messageService;
-
         private readonly IProjectService projectService;
-
-        private readonly ITaskService subTaskService;
 
         public ProjectsController(
             IUserService userService, 
-            IProjectService projectService, 
-            ISkillService skillService, 
-            IMessageService messageService, 
-            ITaskService subTaskService)
+            IProjectService projectService)
             : base(userService)
         {
             this.projectService = projectService;
-            this.subTaskService = subTaskService;
-            this.messageService = messageService;
         }
 
         public ActionResult Edit(string id)
         {
             this.Session["ProjectId"] = id;
             var intId = int.Parse(id);
-            var requestedEstimationTask =
-                this.projectService.GetAll().Where(x => x.Id == intId).To<EstimationEditViewModel>().FirstOrDefault();
-            
-            var sanitizer = HtmlSanitizer.SimpleHtml5DocumentSanitizer();
-            
-            if (requestedEstimationTask != null)
+            var requestedProjectTask = this.projectService.GetAll().Where(x => x.Id == intId).To<EstimationEditViewModel>().FirstOrDefault();
+                                 
+            if (requestedProjectTask != null)
             {
-                requestedEstimationTask.Description = sanitizer.Sanitize(requestedEstimationTask.Description);                
+                if (requestedProjectTask.LeadId != UserProfile.Id)
+                {
+                    return HttpNotFound();
+                }
+
+                var sanitizer = HtmlSanitizer.SimpleHtml5DocumentSanitizer();
+                requestedProjectTask.Description = sanitizer.Sanitize(requestedProjectTask.Description);                
             }
 
-            return this.View(requestedEstimationTask);
+            return this.View(requestedProjectTask);
         }
 
         public ActionResult Index()

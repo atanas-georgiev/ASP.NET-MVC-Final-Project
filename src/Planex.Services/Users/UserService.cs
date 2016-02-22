@@ -104,5 +104,10 @@
             this.userManager.ChangePassword(user.Id, "changeme", password);
             this.users.Update(user);
         }
+
+        public void Delete(string id)
+        {
+            this.users.Delete(id);
+        }
     }
 }

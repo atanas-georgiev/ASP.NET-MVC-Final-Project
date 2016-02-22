@@ -29,5 +29,7 @@
         void Update(User user);
 
         void UpdatePassword(User user, string password);
+
+        void Delete(string id);
     }
 }
