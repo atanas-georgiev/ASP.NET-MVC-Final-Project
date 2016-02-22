@@ -47,7 +47,7 @@
             {
                 var taskDb = this.subTaskService.GetById(task.Id);
                 taskDb.PercentComplete = task.PercentComplete / 100;
-                this.subTaskService.Update(taskDb);
+                this.subTaskService.UpdateProgress(taskDb);
 
                 if (task.PercentComplete == 100)
                 {
@@ -67,7 +67,7 @@
         {
             var tasks =
                 this.subTaskService.GetAll()
-                    .Where(x => x.Users.Any(u => u.Id == this.UserProfile.Id))
+                    .Where(x => x.Users.Any(u => u.Id == this.UserProfile.Id) && x.PercentComplete != 1)
                     .To<AssignmentViewModel>();
             return this.Json(tasks.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
         }

@@ -7,6 +7,7 @@
     ViewBag.Title = HtmlLabels.Tasks;
 }
 
+<br/>
 <div class="well k-content">
     <h3 class="well-title">@HtmlLabels.Tasks</h3>
     <hr/>
@@ -19,5 +20,8 @@
               columns.Bound(c => c.End).Format("{0:dd/MMMM/yyyy}");
               columns.Bound(c => c.PercentComplete);
               columns.Command(c => c.Edit());
-          }).Editable(editable => editable.Mode(GridEditMode.PopUp)).ColumnMenu().Pageable().Navigatable().Sortable(sortable => { sortable.SortMode(GridSortMode.SingleColumn); }).Filterable().Scrollable().DataSource(dataSource => dataSource.Ajax().Model(model => model.Id(p => p.Id)).Read(read => read.Action("GetAllAssignments", "Json")).Update("EditAssignment", "Json")))
+          }).Editable(editable => editable.Mode(GridEditMode.PopUp)).ColumnMenu()
+         .Pageable(p => p.PageSizes(true))
+         .Navigatable().Sortable(sortable => { sortable.SortMode(GridSortMode.SingleColumn); }).Filterable().Scrollable()
+         .DataSource(dataSource => dataSource.Ajax().Model(model => model.Id(p => p.Id)).Read(read => read.Action("GetAllAssignments", "Json")).Update("EditAssignment", "Json")))
 </div>

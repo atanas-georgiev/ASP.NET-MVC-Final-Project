@@ -122,6 +122,25 @@
             this.dependencies.Update(task);
         }
 
+        public void UpdateProgress(SubTask task)
+        {
+            this.Update(task);
+            
+            while (true)
+            {
+                if (task.ParentId != null)
+                {
+                    task = GetById(task.ParentId.Value);
+                    task.PercentComplete = task.Subtasks.Sum(x => x.PercentComplete) / task.Subtasks.Count;
+                    this.Update(task);
+                }
+                else
+                {
+                    break;
+                }                
+            }
+        }
+
         private void UpdateProjectDetails(Project project)
         {
             if (project != null)

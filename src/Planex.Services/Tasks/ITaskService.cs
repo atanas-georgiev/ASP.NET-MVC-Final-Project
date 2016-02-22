@@ -27,5 +27,7 @@
         void Update(SubTask task);
 
         void UpdateDependency(SubTaskDependency task);
+
+        void UpdateProgress(SubTask task);
     }
 }

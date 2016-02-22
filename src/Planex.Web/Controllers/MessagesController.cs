@@ -63,6 +63,11 @@
             var messageDb = this.messageService.GetAll().FirstOrDefault(x => x.Id == intId);
             if (messageDb != null)
             {
+                if (messageDb.ToId != UserProfile.Id)
+                {
+                    return HttpNotFound();
+                }
+
                 messageDb.IsRead = true;
                 this.messageService.Update(messageDb);
             }
@@ -77,6 +82,24 @@
             }
 
             return this.View(message);
+        }
+
+        public ActionResult Remove(string id)
+        {
+            var intId = int.Parse(id);
+            var messageDb = this.messageService.GetAll().FirstOrDefault(x => x.Id == intId);
+   
+            if (messageDb != null)
+            {
+                if (messageDb.ToId != UserProfile.Id)
+                {
+                    return HttpNotFound();
+                }
+
+                this.messageService.Delete(messageDb.Id);
+            }
+
+            return RedirectToAction("Inbox");
         }
     }
 }

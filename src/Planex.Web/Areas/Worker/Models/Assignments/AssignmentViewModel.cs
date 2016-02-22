@@ -1,4 +1,6 @@
-﻿namespace Planex.Web.Areas.Worker.Models.Assignments
+﻿using AutoMapper;
+
+namespace Planex.Web.Areas.Worker.Models.Assignments
 {
     using System;
     using System.ComponentModel.DataAnnotations;
@@ -8,7 +10,7 @@
     using Planex.Web.Infrastructure.Localization;
     using Planex.Web.Infrastructure.Mappings;
 
-    public class AssignmentViewModel : IMapFrom<SubTask>
+    public class AssignmentViewModel : IMapFrom<SubTask>, IHaveCustomMappings
     {
         [LocalizedDisplay("ProjectEndDate")]
         [LocalizedRequired("RequiredFiled")]
@@ -42,5 +44,11 @@
         [LocalizedRequired("RequiredFiled")]
         [UIHint("String")]
         public string Title { get; set; }
+
+        public void CreateMappings(IConfiguration configuration)
+        {
+            configuration.CreateMap<SubTask, AssignmentViewModel>(string.Empty)
+                .ForMember(m => m.PercentComplete, opt => opt.MapFrom(c => c.PercentComplete * 100));
+        }
     }
 }
