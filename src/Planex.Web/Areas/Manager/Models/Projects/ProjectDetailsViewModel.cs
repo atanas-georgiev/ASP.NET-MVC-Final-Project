@@ -26,7 +26,7 @@
         public DateTime End { get; set; }
 
         [LocalizedDisplay("ProjectPrice")]
-        public decimal FinalPrice { get; set; }
+        public decimal Price { get; set; }
 
         [Key]
         [HiddenInput(DisplayValue = false)]

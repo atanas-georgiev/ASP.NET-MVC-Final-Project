@@ -43,7 +43,6 @@
 
         [LocalizedDisplay("ProjectTitle")]
         [LocalizedRequired("RequiredFiled")]
-        [MaxLength(100)]
         [UIHint("String")]
         public string Title { get; set; }
 

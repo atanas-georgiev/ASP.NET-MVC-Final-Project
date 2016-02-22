@@ -22,10 +22,6 @@
         }
 
         [Required]
-        [MaxLength(1000)]
-        public string Description { get; set; }
-
-        [Required]
         public DateTime End { get; set; }
 
         [Required]

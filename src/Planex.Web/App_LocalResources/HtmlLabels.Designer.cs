@@ -385,6 +385,15 @@ namespace Planex.Web.App_LocalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Send for approval.
+        /// </summary>
+        public static string ProjectSendForApproval {
+            get {
+                return ResourceManager.GetString("ProjectSendForApproval", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Send for estimation.
         /// </summary>
         public static string ProjectSendForEstimation {

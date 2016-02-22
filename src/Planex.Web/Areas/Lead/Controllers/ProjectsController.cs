@@ -40,25 +40,13 @@
             var intId = int.Parse(id);
             var requestedEstimationTask =
                 this.projectService.GetAll().Where(x => x.Id == intId).To<EstimationEditViewModel>().FirstOrDefault();
-            var requestedEstimationTaskSubTasks =
-                this.subTaskService.GetAll()
-                    .Where(x => x.ProjectId == requestedEstimationTask.Id)
-                    .OrderByDescending(x => x.End);
-
-            if (requestedEstimationTaskSubTasks.ToList().Count != 0)
-            {
-                requestedEstimationTask.End = requestedEstimationTaskSubTasks.First().End;
-                requestedEstimationTask.Price =
-                    requestedEstimationTaskSubTasks.Where(x => x.ParentId == null).Sum(x => x.Price);
-            }
-            else
-            {
-                requestedEstimationTask.End = requestedEstimationTask.Start;
-                requestedEstimationTask.Price = 0;
-            }
-
+            
             var sanitizer = HtmlSanitizer.SimpleHtml5DocumentSanitizer();
-            requestedEstimationTask.Description = sanitizer.Sanitize(requestedEstimationTask.Description);
+            
+            if (requestedEstimationTask != null)
+            {
+                requestedEstimationTask.Description = sanitizer.Sanitize(requestedEstimationTask.Description);                
+            }
 
             return this.View(requestedEstimationTask);
         }

@@ -10,7 +10,7 @@
     {
         void Add(SubTask task);
 
-        void AddAttachments(SubTask dbTask, List<HttpPostedFileBase> uploadedAttachments, HttpServerUtility server);
+        void AddAttachments(SubTask dbtask, List<HttpPostedFileBase> uploadedAttachments, HttpServerUtility server);
 
         void AddDependency(SubTaskDependency dep);
 

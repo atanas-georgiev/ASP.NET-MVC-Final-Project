@@ -249,4 +249,7 @@
   <data name="Error" xml:space="preserve">
     <value>Error</value>
   </data>
+  <data name="ProjectSendForApproval" xml:space="preserve">
+    <value>Send for approval</value>
+  </data>
 </root>

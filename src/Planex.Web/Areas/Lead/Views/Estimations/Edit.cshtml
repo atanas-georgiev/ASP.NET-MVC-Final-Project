@@ -33,7 +33,7 @@
             <div class="form-group">
                 @if (Model.State == TaskStateType.UnderEstimation)
                 {
-                    @Html.ActionLink("Send For Approval", "SendForApproval", new { id = Model.Id }, new { @class = "k-button" })
+                    @Html.ActionLink(@HtmlLabels.ProjectSendForApproval, "SendForApproval", new { id = Model.Id }, new { @class = "k-button" })
                 }
             </div>
         </div>

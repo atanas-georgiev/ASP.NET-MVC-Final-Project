@@ -25,6 +25,7 @@
     ViewBag.Title = HtmlLabels.MessagesInbox;
 }
 
+<br/>
 <div class="well k-content">
     <h3 class="well-title">@HtmlLabels.MessagesInbox</h3>
     <hr/>
@@ -34,7 +35,7 @@
     <br/>
     @(Html.Kendo().Grid<MessageViewModel>().Name("grid").Columns(columns =>
           {
-              columns.Template(@<text></text>).ClientTemplate("<a href='" + Url.Action("View", "Messages", new { id = "#=Id#" }) + "'>" + @HtmlLabels.MessagesView + "</a>");
+              columns.Template(@<text></text>).ClientTemplate("<a href='" + Url.Action("Details", "Messages", new { id = "#=Id#" }) + "'>" + @HtmlLabels.MessagesView + "</a>");
               columns.Bound(c => c.From.Name);
               columns.Bound(c => c.Subject);
               columns.Bound(c => c.Date).Format("{0:MM/dd/yyyy hh:mm}");

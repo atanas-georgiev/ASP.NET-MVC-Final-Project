@@ -10,8 +10,8 @@
       }).Editable(true).Views(views =>
           {
               views.DayView();
-              views.WeekView(weekView => weekView.Selected(true));
-              views.MonthView();
+              views.WeekView();
+              views.MonthView(m => m.Selected(true));
           }).Height(700).ShowWorkHours(false).ShowWorkDays(false).Snap(false).DataSource(d => d.Model(m =>
               {
                   m.Id(f => f.TaskId);

@@ -25,20 +25,16 @@
 
         private readonly IProjectService projectService;
 
-        private readonly ISkillService skillService;
-
         private readonly ITaskService subTaskService;
 
         public JsonDataController(
             IUserService userService, 
-            ISkillService skillService, 
             ITaskService subTaskService, 
             IProjectService projectService, 
             IMessageService messageService, 
             ICacheService cacheService)
             : base(userService)
         {
-            this.skillService = skillService;
             this.subTaskService = subTaskService;
             this.projectService = projectService;
             this.messageService = messageService;
@@ -57,7 +53,7 @@
         public virtual JsonResult ReadAllProjects([DataSourceRequest] DataSourceRequest request)
         {
             var projectsPublic = this.cacheService.Get(
-                "categories", 
+                "homePageProjects", 
                 () =>
                     {
                         var projects = this.projectService.GetAll().Where(x => x.State == TaskStateType.Started);

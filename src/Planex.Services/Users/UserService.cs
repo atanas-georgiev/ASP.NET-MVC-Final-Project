@@ -16,7 +16,7 @@
 
         private IRepository<Image, int> images;
 
-        RoleManager<IdentityRole> roleManager;
+        private RoleManager<IdentityRole> roleManager;
 
         private UserManager<User> userManager;
 

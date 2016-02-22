@@ -1,20 +1,14 @@
 ﻿namespace Planex.Web.Infrastructure.Scheduler
 {
     using System;
-    using System.Data.Entity;
     using System.Linq;
-    using System.Threading;
 
     using Planex.Data.Common;
     using Planex.Data.Models;
     using Planex.Services.Messages;
 
     public class PlanexScheduler : IPlanexScheduler
-    {
-        private static Thread thread;
-
-        private DbContext context;
-
+    {        
         private IMessageService messageService;
 
         private IRepository<Project, int> projects;
@@ -24,39 +18,18 @@
         private IRepository<User> users;
 
         public PlanexScheduler(
-            DbContext context, 
             IMessageService messageService, 
             IRepository<User> users, 
             IRepository<Project, int> projects, 
             IRepository<SubTask, int> tasks)
         {
-            this.context = context;
             this.users = users;
             this.projects = projects;
             this.tasks = tasks;
-            this.messageService = messageService;
-
-            this.TimerWorker();
-
-            // if (thread == null)
-            // {
-            // thread = new Thread(new ThreadStart(this.ThreadFunc));
-            // thread.IsBackground = true;
-            // thread.Name = "ThreadFunc";
-            // thread.Start();
-            // }
+            this.messageService = messageService;         
         }
 
-        // protected void ThreadFunc()
-        // {
-        // Timer t = new System.Timers.Timer();
-        // t.Elapsed += new System.Timers.ElapsedEventHandler(this.TimerWorker);
-        // t.Interval = 10000;
-        // t.Enabled = true;
-        // t.AutoReset = true;
-        // t.Start();
-        // }
-        protected void TimerWorker()
+        public void Schedule()
         {
             var projectsDb =
                 this.projects.All().Where(x => x.PercentComplete == 1 && x.State != TaskStateType.Finished).ToList();

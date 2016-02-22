@@ -36,7 +36,7 @@
         [LocalizedDisplay("UserRole")]
         public string RoleId { get; set; }
 
-        [LocalizedDisplay("Salary")]
+        [LocalizedDisplay("UserSalary")]
         [LocalizedRequired("RequiredFiled")]
         [UIHint("Currency")]
         public decimal Salary { get; set; }

@@ -25,15 +25,12 @@
     @Scripts.Render("~/Scripts/kendo/cultures/kendo.culture.bg.min.js")
     @Scripts.Render("~/Scripts/kendo/cultures/kendo.culture.bg-BG.min.js")
     @Scripts.Render("~/Scripts/kendo/messages/kendo.messages.bg-BG.min.js")
-    @RenderSection("scripts", required: false)
-
-    @{
-        var culture = System.Globalization.CultureInfo.CurrentCulture.ToString();
-    }
 
     <script>
-        kendo.culture("@culture");
+        kendo.culture("@System.Globalization.CultureInfo.CurrentCulture.ToString()");
     </script>
+
+    @RenderSection("scripts", required: false)
 
 </head>
 <body>

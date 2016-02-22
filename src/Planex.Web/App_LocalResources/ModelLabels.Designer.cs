@@ -250,7 +250,7 @@ namespace Planex.Web.App_LocalResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Remuneration.
+        ///   Looks up a localized string similar to Salary.
         /// </summary>
         public static string UserSalary {
             get {

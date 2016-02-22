@@ -57,7 +57,7 @@
             return this.View(model);
         }
 
-        public ActionResult View(string id)
+        public ActionResult Details(string id)
         {
             var intId = int.Parse(id);
             var messageDb = this.messageService.GetAll().FirstOrDefault(x => x.Id == intId);
@@ -70,7 +70,11 @@
             var message = this.messageService.GetAll().Where(x => x.Id == intId).To<MessageViewModel>().FirstOrDefault();
 
             var sanitizer = HtmlSanitizer.SimpleHtml5DocumentSanitizer();
-            message.Text = sanitizer.Sanitize(message.Text);
+            
+            if (message != null)
+            {
+                message.Text = sanitizer.Sanitize(message.Text);                
+            }
 
             return this.View(message);
         }

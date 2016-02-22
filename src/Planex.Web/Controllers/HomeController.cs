@@ -6,6 +6,7 @@
     using System.Web.Mvc;
     using System.Web.Routing;
 
+    using Planex.Services.Cache;
     using Planex.Services.Messages;
     using Planex.Services.Users;
     using Planex.Web.Infrastructure.Scheduler;
@@ -15,18 +16,23 @@
     {
         private readonly IMessageService messageService;
 
-        private IPlanexScheduler scheduler;
+        private readonly IPlanexScheduler scheduler;
 
-        public HomeController(IUserService userService, IMessageService messageService, IPlanexScheduler scheduler)
+        private readonly ICacheService cacheService;
+
+        public HomeController(IUserService userService, IMessageService messageService, IPlanexScheduler scheduler, ICacheService cacheService)
             : base(userService)
         {
             this.messageService = messageService;
             this.scheduler = scheduler;
+            this.cacheService = cacheService;
         }
 
         public ActionResult Index()
         {
             var homeModel = new HomeViewModel();
+
+            this.cacheService.Get("systemMessagesCache", () => { this.scheduler.Schedule(); return 0; }, 10 * 60);            
 
             if (this.HttpContext.User.Identity.IsAuthenticated)
             {

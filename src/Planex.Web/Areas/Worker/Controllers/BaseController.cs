@@ -11,11 +11,11 @@
     [Authorize(Roles = "Worker, Manager")]
     public class BaseController : Controller
     {
-        protected IUserService userService;
+        protected IUserService UserService { get; set; }
 
         public BaseController(IUserService userService)
         {
-            this.userService = userService;
+            this.UserService = userService;
         }
 
         protected User UserProfile { get; private set; }
@@ -26,7 +26,7 @@
             object state)
         {
             this.UserProfile =
-                this.userService.GetAll()
+                this.UserService.GetAll()
                     .FirstOrDefault(u => u.UserName == requestContext.HttpContext.User.Identity.Name);
 
             if (requestContext.HttpContext.User.Identity.IsAuthenticated)

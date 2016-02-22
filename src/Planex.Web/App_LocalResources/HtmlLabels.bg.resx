@@ -249,4 +249,7 @@
   <data name="Error" xml:space="preserve">
     <value>Грешка</value>
   </data>
+  <data name="ProjectSendForApproval" xml:space="preserve">
+    <value>Изпрати за одобрение</value>
+  </data>
 </root>

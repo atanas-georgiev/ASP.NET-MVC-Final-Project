@@ -33,15 +33,12 @@
             [DataSourceRequest] DataSourceRequest request, 
             ProjectDetailsAssignmentsViewModel assignment)
         {
-            var projectId = int.Parse(this.Session["ProjectId"].ToString());
-
             if (assignment != null)
             {
                 var subtask = this.subTaskService.GetById(assignment.TaskId);
                 var user = this.UserService.GetAll().FirstOrDefault(x => x.IntId == assignment.ResourceId);
                 subtask.Users.Add(user);
                 this.subTaskService.Update(subtask);
-                this.UpdatePriceSubTask(assignment.TaskId);
             }
 
             return this.Json(assignment);
@@ -73,7 +70,7 @@
 
             if (this.ModelState.IsValid)
             {
-                var taskDb = new SubTask()
+                var taskdb = new SubTask()
                                  {
                                      ProjectId = projectId, 
                                      Title = task.Title, 
@@ -85,9 +82,10 @@
                                      IsUserNotified = false
                                  };
 
-                this.subTaskService.Add(taskDb);
-                task.TaskId = taskDb.Id;
-                task.ParentTaskId = taskDb.ParentId;
+                this.subTaskService.Add(taskdb);
+
+                task.TaskId = taskdb.Id;
+                task.ParentTaskId = taskdb.ParentId;                                
             }
 
             return this.Json(new[] { task }.ToDataSourceResult(request, this.ModelState));
@@ -97,15 +95,12 @@
             [DataSourceRequest] DataSourceRequest request, 
             ProjectDetailsAssignmentsViewModel assignment)
         {
-            var projectId = int.Parse(this.Session["ProjectId"].ToString());
-
             if (assignment != null)
             {
                 var subtask = this.subTaskService.GetById(assignment.TaskId);
                 var user = this.UserService.GetAll().FirstOrDefault(x => x.IntId == assignment.ResourceId);
                 subtask.Users.Remove(user);
                 this.subTaskService.Update(subtask);
-                this.UpdatePriceSubTask(assignment.TaskId);
             }
 
             return this.Json(assignment);
@@ -137,20 +132,16 @@
             var projectId = int.Parse(this.Session["ProjectId"].ToString());
             var result = new List<ProjectDetailsAssignmentsViewModel>();
             var subtasks = this.subTaskService.GetAll().Where(x => x.ProjectId == projectId);
-            var idCount = 1000;
-
+            
             foreach (var subtask in subtasks)
             {
-                result.AddRange(
-                    subtask.Users.Select(
-                        user =>
-                        new ProjectDetailsAssignmentsViewModel()
-                            {
-                                AssignmentId = idCount++, 
-                                ResourceId = (int)user.IntId, 
-                                TaskId = subtask.Id, 
-                                Units = 1
-                            }));
+                result.AddRange(subtask.Users.Select(user => new ProjectDetailsAssignmentsViewModel()
+                                                        {
+                                                            AssignmentId = user.IntId, 
+                                                            ResourceId = user.IntId, 
+                                                            TaskId = subtask.Id, 
+                                                            Units = 1
+                                                        }));
             }
 
             return this.Json(result.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
@@ -159,7 +150,6 @@
         // Gantt dependences
         public virtual JsonResult ReadDependencies([DataSourceRequest] DataSourceRequest request)
         {
-            var projectId = int.Parse(this.Session["ProjectId"].ToString());
             var result = this.subTaskService.AllDependencies().To<ProjectDetailsDependencyViewModel>();
             return this.Json(result.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
         }
@@ -201,15 +191,12 @@
             [DataSourceRequest] DataSourceRequest request, 
             ProjectDetailsAssignmentsViewModel assignment)
         {
-            var projectId = int.Parse(this.Session["ProjectId"].ToString());
-
             if (assignment != null)
             {
                 var subtask = this.subTaskService.GetById(assignment.TaskId);
                 var user = this.UserService.GetAll().FirstOrDefault(x => x.IntId == assignment.ResourceId);
                 subtask.Users.Add(user);
                 this.subTaskService.Update(subtask);
-                this.UpdatePriceSubTask(assignment.TaskId);
             }
 
             return this.Json(assignment);
@@ -222,10 +209,13 @@
             if (dep != null)
             {
                 var depDb = this.subTaskService.AllDependencies().FirstOrDefault(x => x.Id == dep.Id);
-                depDb.PredecessorId = dep.PredecessorId;
-                depDb.SuccessorId = dep.SuccessorId;
-                depDb.Type = dep.Type;
-                this.subTaskService.UpdateDependency(depDb);
+                if (depDb != null)
+                {
+                    depDb.PredecessorId = dep.PredecessorId;
+                    depDb.SuccessorId = dep.SuccessorId;
+                    depDb.Type = dep.Type;
+                    this.subTaskService.UpdateDependency(depDb);
+                }
             }
 
             return this.Json(dep);
@@ -244,15 +234,8 @@
                 taskDb.Start = task.Start;
                 taskDb.End = task.End;
                 taskDb.PercentComplete = task.PercentComplete;
-                taskDb.Price = 0;
 
-                var projectId = int.Parse(this.Session["ProjectId"].ToString());
-                var project = this.projectService.GetById(projectId);
-                var subTasks = this.subTaskService.GetAll().Where(x => x.ProjectId == projectId && x.ParentId == null);
-                project.PercentComplete = subTasks.Sum(x => x.PercentComplete) / subTasks.Count();
-                this.projectService.Update(project);
-
-                this.UpdatePriceSubTask(taskDb.Id);
+                this.subTaskService.Update(taskDb);
 
                 task.TaskId = taskDb.Id;
                 task.ParentTaskId = taskDb.ParentId;
@@ -271,30 +254,13 @@
 
                 taskDb.PercentComplete = task.PercentComplete;
 
-                var projectId = int.Parse(this.Session["ProjectId"].ToString());
-                var project = this.projectService.GetById(projectId);
-                var subTasks = this.subTaskService.GetAll().Where(x => x.ProjectId == projectId && x.ParentId == null);
-                project.PercentComplete = subTasks.Sum(x => x.PercentComplete) / subTasks.Count();
-                this.projectService.Update(project);
+                this.subTaskService.Update(taskDb);
 
-                this.UpdatePriceSubTask(taskDb.Id);
+                task.TaskId = taskDb.Id;
+                task.ParentTaskId = taskDb.ParentId;
             }
 
             return this.Json(new[] { task }.ToDataSourceResult(request, this.ModelState));
-        }
-
-        private void UpdatePriceSubTask(int taskId)
-        {
-            var taskDb = this.subTaskService.GetById(taskId);
-            taskDb.Price = 0;
-            var durationInDays = (taskDb.End - taskDb.Start).Days;
-
-            foreach (var user in taskDb.Users)
-            {
-                taskDb.Price += user.Salary / UserConstants.WorkingDays * durationInDays;
-            }
-
-            this.subTaskService.Update(taskDb);
         }
     }
 }

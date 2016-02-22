@@ -1,5 +1,6 @@
 ﻿namespace Planex.Web.Areas.Manager.Controllers
 {
+    using System;
     using System.Linq;
     using System.Web.Mvc;
 
@@ -9,7 +10,6 @@
     using Planex.Services.Tasks;
     using Planex.Services.Users;
     using Planex.Web.Areas.Manager.Models.Projects;
-    using Planex.Web.Extensions;
     using Planex.Web.Infrastructure.Mappings;
 
     public class ProjectsController : BaseController
@@ -18,17 +18,13 @@
 
         private readonly IProjectService projectsService;
 
-        private readonly ITaskService subTaskService;
-
         public ProjectsController(
             IUserService userService, 
             IProjectService projectsService, 
-            ITaskService subTaskService, 
             IMessageService messageService)
             : base(userService)
         {
             this.projectsService = projectsService;
-            this.subTaskService = subTaskService;
             this.messageService = messageService;
         }
 
@@ -49,7 +45,7 @@
 
         public ActionResult Create()
         {
-            return this.View();
+            return this.View(new ProjectCreateViewModel() { Start = DateTime.Today, Title = string.Empty });
         }
 
         [HttpPost]
@@ -88,35 +84,7 @@
         {
             this.Session["ProjectId"] = id;
             var intId = int.Parse(id);
-            var result =
-                this.projectsService.GetAll().Where(x => x.Id == intId).To<ProjectDetailsViewModel>().FirstOrDefault();
-
-            var subTasks = this.subTaskService.GetAll().Where(x => x.ProjectId == intId);
-
-            if (subTasks.Count() != 0)
-            {
-                if (result != null)
-                {
-                    result.Start = subTasks.OrderBy(x => x.Start).First().Start;
-                    result.End = subTasks.OrderByDescending(x => x.End).First().End;
-                    result.FinalPrice = subTasks.Sum(x => x.Price);
-                }
-            }
-
-            var project = this.projectsService.GetById(intId);
-
-            if (result != null && result.End != project.End)
-            {
-                project.End = result.End;
-            }
-
-            if (project.Subtasks.Count() != 0)
-            {
-                project.PercentComplete = project.Subtasks.Sum(x => x.PercentComplete) / project.Subtasks.Count;
-            }
-
-            this.projectsService.Update(project);
-
+            var result = this.projectsService.GetAll().Where(x => x.Id == intId).To<ProjectDetailsViewModel>().FirstOrDefault();
             return this.View(result);
         }
 
@@ -148,7 +116,6 @@
 
         public ActionResult Index()
         {
-            this.AddNotification("THIS IS SOME TESTSTSTSTST!", NotificationType.ERROR);
             return this.View();
         }
 

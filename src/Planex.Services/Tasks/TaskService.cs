@@ -35,10 +35,11 @@
         public void Add(SubTask task)
         {
             this.tasks.Add(task);
+            this.UpdateProjectDetails(task.Project);
         }
 
         public void AddAttachments(
-            SubTask dbTask, 
+            SubTask dbtask, 
             List<HttpPostedFileBase> uploadedAttachments, 
             HttpServerUtility server)
         {
@@ -52,17 +53,17 @@
                 Directory.CreateDirectory(server.MapPath(TasksConstants.MainContentFolder));
             }
 
-            if (!Directory.Exists(server.MapPath(TasksConstants.MainContentFolder + "\\" + dbTask.ProjectId)))
+            if (!Directory.Exists(server.MapPath(TasksConstants.MainContentFolder + "\\" + dbtask.ProjectId)))
             {
-                Directory.CreateDirectory(server.MapPath(TasksConstants.MainContentFolder + "\\" + dbTask.ProjectId));
+                Directory.CreateDirectory(server.MapPath(TasksConstants.MainContentFolder + "\\" + dbtask.ProjectId));
             }
 
             if (
                 !Directory.Exists(
-                    server.MapPath(TasksConstants.MainContentFolder + "\\" + dbTask.ProjectId + "\\" + dbTask.Id)))
+                    server.MapPath(TasksConstants.MainContentFolder + "\\" + dbtask.ProjectId + "\\" + dbtask.Id)))
             {
                 Directory.CreateDirectory(
-                    server.MapPath(TasksConstants.MainContentFolder + "\\" + dbTask.ProjectId + "\\" + dbTask.Id));
+                    server.MapPath(TasksConstants.MainContentFolder + "\\" + dbtask.ProjectId + "\\" + dbtask.Id));
             }
 
             foreach (var file in uploadedAttachments)
@@ -70,13 +71,8 @@
                 var filename = Path.GetFileName(file.FileName);
                 file.SaveAs(
                     server.MapPath(
-                        TasksConstants.MainContentFolder + "\\" + dbTask.ProjectId + "\\" + dbTask.Id + "\\" + filename));
-
-                // dbTask.Attachments.Add(new Attachment()
-                // {
-                // Name = file.FileName
-                // });
-                this.Update(dbTask);
+                        TasksConstants.MainContentFolder + "\\" + dbtask.ProjectId + "\\" + dbtask.Id + "\\" + filename));
+                this.Update(dbtask);
             }
         }
 
@@ -92,7 +88,9 @@
 
         public void Delete(int id)
         {
+            var taskProject = this.GetById(id).Project;            
             this.tasks.Delete(id);
+            this.UpdateProjectDetails(taskProject);
         }
 
         public void DeleteDependency(int id)
@@ -112,8 +110,11 @@
 
         public void Update(SubTask task)
         {
+            var durationInDays = (task.End - task.Start).Days;
+            task.Price = task.Users.Sum(user => (user.Salary / 20) * durationInDays);
             this.tasks.Update(task);
-            this.UpdateProjectCompleteness(task.Project);
+            
+            this.UpdateProjectDetails(task.Project);
         }
 
         public void UpdateDependency(SubTaskDependency task)
@@ -121,14 +122,21 @@
             this.dependencies.Update(task);
         }
 
-        private void UpdateProjectCompleteness(Project project)
+        private void UpdateProjectDetails(Project project)
         {
-            var subTasks = project.Subtasks; // .Where(x => x.ParentId == null);
-
-            if (subTasks.Count() != 0)
+            if (project != null)
             {
-                project.PercentComplete = subTasks.Sum(x => x.PercentComplete) / subTasks.Count();
-                this.projects.Update(project);
+                var subTasks = project.Subtasks;
+
+                if (subTasks.Count() != 0)
+                {
+                    project.PercentComplete = subTasks.Sum(x => x.PercentComplete) / subTasks.Count();
+                    project.Price = subTasks.Sum(x => x.Price);
+                    project.Start = subTasks.OrderBy(x => x.Start).First().Start;
+                    project.End = subTasks.OrderByDescending(x => x.End).First().End;
+
+                    this.projects.Update(project);
+                }
             }
         }
     }
