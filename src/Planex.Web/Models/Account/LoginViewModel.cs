@@ -1,8 +1,7 @@
-using Planex.Web.Infrastructure.Localization;
-
 namespace Planex.Web.Models.Account
 {
     using System.ComponentModel.DataAnnotations;
+    using Planex.Web.Infrastructure.Localization;
 
     public class LoginViewModel
     {

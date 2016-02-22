@@ -40,7 +40,7 @@
             {
                 if (requestedEstimationTask.LeadId != UserProfile.Id)
                 {
-                    return HttpNotFound();
+                    return this.HttpNotFound();
                 }
 
                 var sanitizer = HtmlSanitizer.SimpleHtml5DocumentSanitizer();
@@ -61,7 +61,7 @@
 
             if (project.LeadId != UserProfile.Id)
             {
-                return HttpNotFound();
+                return this.HttpNotFound();
             }
 
             project.State = TaskStateType.Estimated;

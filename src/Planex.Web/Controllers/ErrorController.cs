@@ -1,8 +1,7 @@
-﻿using Planex.Services.Users;
-
-namespace Planex.Web.Controllers
+﻿namespace Planex.Web.Controllers
 {
     using System.Web.Mvc;
+    using Planex.Services.Users;
 
     public class ErrorController : BaseController
     {

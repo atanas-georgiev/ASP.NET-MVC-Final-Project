@@ -137,7 +137,7 @@
             {
                 if (task.ParentId != null)
                 {
-                    task = GetById(task.ParentId.Value);
+                    task = this.GetById(task.ParentId.Value);
                     task.PercentComplete = task.Subtasks.Sum(x => x.PercentComplete) / task.Subtasks.Count;
                     this.Update(task);
                 }

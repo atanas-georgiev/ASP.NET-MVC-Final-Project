@@ -35,7 +35,7 @@
             {
                 if (requestedProjectTask.LeadId != UserProfile.Id)
                 {
-                    return HttpNotFound();
+                    return this.HttpNotFound();
                 }
 
                 var sanitizer = HtmlSanitizer.SimpleHtml5DocumentSanitizer();

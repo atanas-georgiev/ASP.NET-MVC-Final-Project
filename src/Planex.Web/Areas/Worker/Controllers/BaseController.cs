@@ -11,12 +11,12 @@
     [Authorize(Roles = "Worker, Manager")]
     public class BaseController : Controller
     {
-        protected IUserService UserService { get; set; }
-
         public BaseController(IUserService userService)
         {
             this.UserService = userService;
         }
+
+        protected IUserService UserService { get; set; }
 
         protected User UserProfile { get; private set; }
 

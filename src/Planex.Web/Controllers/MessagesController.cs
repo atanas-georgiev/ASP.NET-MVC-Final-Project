@@ -65,7 +65,7 @@
             {
                 if (messageDb.ToId != UserProfile.Id)
                 {
-                    return HttpNotFound();
+                    return this.HttpNotFound();
                 }
 
                 messageDb.IsRead = true;
@@ -93,13 +93,13 @@
             {
                 if (messageDb.ToId != UserProfile.Id)
                 {
-                    return HttpNotFound();
+                    return this.HttpNotFound();
                 }
 
                 this.messageService.Delete(messageDb.Id);
             }
 
-            return RedirectToAction("Inbox");
+            return this.RedirectToAction("Inbox");
         }
     }
 }

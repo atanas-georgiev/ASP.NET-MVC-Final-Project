@@ -876,7 +876,6 @@
     <Content Include="Views\Shared\NotFound.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="App_Code\ToastrHelper.cshtml" />
     <Content Include="Views\Shared\_Toastr.cshtml" />
   </ItemGroup>
   <ItemGroup>

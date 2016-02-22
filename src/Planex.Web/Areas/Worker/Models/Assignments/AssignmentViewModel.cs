@@ -1,10 +1,10 @@
-﻿using AutoMapper;
-
-namespace Planex.Web.Areas.Worker.Models.Assignments
+﻿namespace Planex.Web.Areas.Worker.Models.Assignments
 {
     using System;
     using System.ComponentModel.DataAnnotations;
     using System.Web.Mvc;
+
+    using AutoMapper;
 
     using Planex.Data.Models;
     using Planex.Web.Infrastructure.Localization;

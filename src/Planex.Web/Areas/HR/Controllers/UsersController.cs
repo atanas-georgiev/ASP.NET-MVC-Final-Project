@@ -50,8 +50,8 @@
                 {
                     foreach (string skill in user.Skills)
                     {
-                        var dbSkill = this.skillService.GetAll().FirstOrDefault(x => x.Name == skill);
-                        entity.Skills.Add(dbSkill);
+                        var dbskill = this.skillService.GetAll().FirstOrDefault(x => x.Name == skill);
+                        entity.Skills.Add(dbskill);
                     }
                 }
 
@@ -100,7 +100,7 @@
         {
             this.UserService.Delete(id);
             
-            return RedirectToAction("Index");
+            return this.RedirectToAction("Index");
         }
     }
 }

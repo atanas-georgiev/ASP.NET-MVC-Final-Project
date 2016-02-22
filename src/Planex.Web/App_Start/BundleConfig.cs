@@ -26,9 +26,7 @@
                     "~/Content/kendo/kendo.common.min.css", 
                     "~/Content/kendo/kendo.common-bootstrap.min.css"));
 
-            bundles.Add(new StyleBundle("~/content/toastr", 
-                            "http://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css")
-                            .Include("~/Content/toastr.min.css"));
+            bundles.Add(new StyleBundle("~/content/toastr", "http://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css").Include("~/Content/toastr.min.css"));
 
             bundles.Add(new StyleBundle("~/Content/custom").Include("~/Content/site.css"));
         }
