@@ -12,21 +12,18 @@
 
     public class UserService : IUserService
     {
-        private DbContext context;
-
-        private IRepository<Image, int> images;
-
         private RoleManager<IdentityRole> roleManager;
 
         private UserManager<User> userManager;
 
         private IRepository<User, string> users;
 
-        public UserService(DbContext context, IRepository<User> users, IRepository<Image, int> images)
+        private IRepository<Message, int> messages;
+
+        public UserService(DbContext context, IRepository<User> users, IRepository<Message, int> messages)
         {
             this.users = users;
-            this.context = context;
-            this.images = images;
+            this.messages = messages;
             this.userManager = new UserManager<User>(new UserStore<User>(context));
             this.roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
         }
@@ -34,7 +31,7 @@
         public void Add(User user, string role)
         {
             user.UserName = user.Email;
-            user.CreatedOn = DateTime.UtcNow;
+            user.CreatedOn = DateTime.Now;
             this.userManager.Create(user, "changeme");
             user.IntId = int.Parse(user.Id.GetHashCode().ToString());
             user.ResetPassword = true;
@@ -58,13 +55,6 @@
         public User GetById(string id)
         {
             return this.users.GetById(id);
-        }
-
-        public string GetRoleIdByName(string roleName)
-        {
-            return string.Empty;
-
-                // this.roleManager.Roles.Where(x => x.Id == roleId).Select(x => x.Name).FirstOrDefault();
         }
 
         public string GetRoleName(User user)
@@ -108,6 +98,12 @@
         public void Delete(string id)
         {
             this.users.Delete(id);
+
+            var messagesDb = this.messages.All().Where(x => x.FromId == id || x.ToId == id).ToList();
+            foreach (var message in messagesDb)
+            {
+                this.messages.Delete(message);
+            }
         }
     }
 }

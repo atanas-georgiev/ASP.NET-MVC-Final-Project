@@ -253,7 +253,7 @@
             message.SubTaskId = taskId;
             message.Subject = "System";
             message.Text = "System";
-            message.Date = DateTime.UtcNow;
+            message.Date = DateTime.Now;
             this.Add(message);
         }
 

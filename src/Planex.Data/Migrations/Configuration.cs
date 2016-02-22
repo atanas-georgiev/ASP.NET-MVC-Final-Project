@@ -44,7 +44,7 @@ namespace Planex.Data.Migrations
                                FirstName = "System", 
                                LastName = "Message", 
                                Salary = 0, 
-                               CreatedOn = DateTime.UtcNow, 
+                               CreatedOn = DateTime.Now, 
                                ResetPassword = false,
                                IntId = 0
             };

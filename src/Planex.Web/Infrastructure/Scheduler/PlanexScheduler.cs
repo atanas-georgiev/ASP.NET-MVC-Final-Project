@@ -57,7 +57,7 @@
                 this.tasks.All()
                     .Where(
                         x =>
-                        x.PercentComplete != 1 && x.End < DateTime.UtcNow && x.IsUserNotified != null
+                        x.PercentComplete != 1 && x.End < DateTime.Now && x.IsUserNotified != null
                         && x.IsUserNotified.Value == false)
                     .ToList();
 

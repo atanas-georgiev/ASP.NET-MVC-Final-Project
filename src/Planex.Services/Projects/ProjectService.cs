@@ -12,8 +12,6 @@
 
     public class ProjectService : IProjectService
     {
-        private DbContext context;
-
         private IRepository<Message, int> messages;
 
         private IRepository<Project, int> projects;
@@ -21,12 +19,10 @@
         private IRepository<SubTask, int> subtasks;
 
         public ProjectService(
-            DbContext context, 
             IRepository<Project, int> projects, 
             IRepository<SubTask, int> subtasks, 
             IRepository<Message, int> messages)
         {
-            this.context = context;
             this.projects = projects;
             this.subtasks = subtasks;
             this.messages = messages;

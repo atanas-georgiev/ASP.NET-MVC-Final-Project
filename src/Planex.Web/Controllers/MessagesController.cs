@@ -46,7 +46,7 @@
                                         To = userToSend, 
                                         Subject = model.Subject, 
                                         Text = model.Text, 
-                                        Date = DateTime.UtcNow
+                                        Date = DateTime.Now
                                     };
 
                 this.messageService.Add(messageDb);

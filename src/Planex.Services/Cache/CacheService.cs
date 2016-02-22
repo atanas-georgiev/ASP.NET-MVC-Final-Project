@@ -21,7 +21,7 @@
                             itemName, 
                             data, 
                             null, 
-                            DateTime.UtcNow.AddSeconds(durationInSeconds), 
+                            DateTime.Now.AddSeconds(durationInSeconds), 
                             Cache.NoSlidingExpiration);
                     }
                 }

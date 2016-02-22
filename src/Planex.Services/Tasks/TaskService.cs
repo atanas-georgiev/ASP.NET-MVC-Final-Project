@@ -12,24 +12,24 @@
 
     public class TaskService : ITaskService
     {
-        private DbContext context;
-
         private IRepository<SubTaskDependency, int> dependencies;
 
         private IRepository<Project, int> projects;
 
         private IRepository<SubTask, int> tasks;
 
+        private IRepository<Message, int> messages;
+
         public TaskService(
-            DbContext context, 
             IRepository<SubTask, int> tasks, 
             IRepository<SubTaskDependency, int> dependencies, 
-            IRepository<Project, int> projects)
+            IRepository<Project, int> projects,
+            IRepository<Message, int> messages)
         {
-            this.context = context;
             this.tasks = tasks;
             this.dependencies = dependencies;
             this.projects = projects;
+            this.messages = messages;
         }
 
         public void Add(SubTask task)
@@ -90,6 +90,13 @@
         {
             var taskProject = this.GetById(id).Project;            
             this.tasks.Delete(id);
+
+            var messagesDb = this.messages.All().Where(x => x.SubTaskId == id).ToList();
+            foreach (var message in messagesDb)
+            {
+                this.messages.Delete(message);
+            }
+
             this.UpdateProjectDetails(taskProject);
         }
 
