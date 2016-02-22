@@ -1,9 +1,15 @@
-﻿namespace Planex.Web.Controllers
+﻿using Planex.Services.Users;
+
+namespace Planex.Web.Controllers
 {
     using System.Web.Mvc;
 
-    public class ErrorController : Controller
+    public class ErrorController : BaseController
     {
+        public ErrorController(IUserService userService) : base(userService)
+        {
+        }
+
         public ActionResult Error()
         {
             return this.View();

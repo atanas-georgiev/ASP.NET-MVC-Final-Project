@@ -205,6 +205,15 @@ namespace Planex.Web.App_LocalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Confirm password.
+        /// </summary>
+        public static string UserConfirmPassword {
+            get {
+                return ResourceManager.GetString("UserConfirmPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Email.
         /// </summary>
         public static string UserEmail {
@@ -237,6 +246,24 @@ namespace Planex.Web.App_LocalResources {
         public static string UserLastName {
             get {
                 return ResourceManager.GetString("UserLastName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Password.
+        /// </summary>
+        public static string UserPassword {
+            get {
+                return ResourceManager.GetString("UserPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remember me.
+        /// </summary>
+        public static string UserRememberMe {
+            get {
+                return ResourceManager.GetString("UserRememberMe", resourceCulture);
             }
         }
         

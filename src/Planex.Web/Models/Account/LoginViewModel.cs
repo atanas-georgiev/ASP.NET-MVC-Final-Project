@@ -1,20 +1,22 @@
+using Planex.Web.Infrastructure.Localization;
+
 namespace Planex.Web.Models.Account
 {
     using System.ComponentModel.DataAnnotations;
 
     public class LoginViewModel
     {
-        [Required]
-        [Display(Name = "Email")]
+        [LocalizedDisplay("UserEmail")]
+        [LocalizedRequired("RequiredFiled")]
         [EmailAddress]
         public string Email { get; set; }
 
-        [Required]
+        [LocalizedDisplay("UserPassword")]
+        [LocalizedRequired("RequiredFiled")]
         [DataType(DataType.Password)]
-        [Display(Name = "Password")]
         public string Password { get; set; }
 
-        [Display(Name = "Remember me?")]
+        [LocalizedDisplay("UserRememberMe")]
         public bool RememberMe { get; set; }
     }
 }

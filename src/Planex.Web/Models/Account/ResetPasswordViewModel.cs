@@ -1,3 +1,6 @@
+using Planex.Web.App_LocalResources;
+using Planex.Web.Infrastructure.Localization;
+
 namespace Planex.Web.Models.Account
 {
     using System.ComponentModel.DataAnnotations;
@@ -5,16 +8,17 @@ namespace Planex.Web.Models.Account
     public class ResetPasswordViewModel
     {
         public string Code { get; set; }
-
+            
         [DataType(DataType.Password)]
-        [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [LocalizedDisplay("UserConfirmPassword")]
+        [LocalizedRequired("RequiredFiled")]
+        [Compare("Password", ErrorMessageResourceType = typeof(ErrorMessages), ErrorMessageResourceName = "PasswordError")]
         public string ConfirmPassword { get; set; }
 
-        [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [StringLength(100, ErrorMessageResourceType = typeof(ErrorMessages), ErrorMessageResourceName = "PasswordErrorLen")]
         [DataType(DataType.Password)]
-        [Display(Name = "Password")]
+        [LocalizedDisplay("UserPassword")]
+        [LocalizedRequired("RequiredFiled")]
         public string Password { get; set; }
     }
 }

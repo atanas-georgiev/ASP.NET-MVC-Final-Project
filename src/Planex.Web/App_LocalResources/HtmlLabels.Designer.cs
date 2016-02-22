@@ -430,6 +430,24 @@ namespace Planex.Web.App_LocalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Login.
+        /// </summary>
+        public static string UserLogin {
+            get {
+                return ResourceManager.GetString("UserLogin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Change password.
+        /// </summary>
+        public static string UserResetPassword {
+            get {
+                return ResourceManager.GetString("UserResetPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Employees.
         /// </summary>
         public static string Users {

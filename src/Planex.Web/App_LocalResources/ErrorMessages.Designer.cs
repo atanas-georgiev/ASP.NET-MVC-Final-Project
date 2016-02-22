@@ -61,11 +61,20 @@ namespace Planex.Web.App_LocalResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Please specify a receiver.
+        ///   Looks up a localized string similar to The password and confirmation password do not match.
         /// </summary>
-        public static string Receiver {
+        public static string PasswordError {
             get {
-                return ResourceManager.GetString("Receiver", resourceCulture);
+                return ResourceManager.GetString("PasswordError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The {0} must be at least {2} characters long.
+        /// </summary>
+        public static string PasswordErrorLen {
+            get {
+                return ResourceManager.GetString("PasswordErrorLen", resourceCulture);
             }
         }
         
@@ -75,15 +84,6 @@ namespace Planex.Web.App_LocalResources {
         public static string RequiredFiled {
             get {
                 return ResourceManager.GetString("RequiredFiled", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Please specify a subject.
-        /// </summary>
-        public static string Subject {
-            get {
-                return ResourceManager.GetString("Subject", resourceCulture);
             }
         }
     }

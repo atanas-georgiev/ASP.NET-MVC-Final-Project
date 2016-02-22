@@ -165,6 +165,9 @@
   <data name="Theme" xml:space="preserve">
     <value>Изглед</value>
   </data>
+  <data name="UserConfirmPassword" xml:space="preserve">
+    <value>Потвърди паролата</value>
+  </data>
   <data name="UserEmail" xml:space="preserve">
     <value>Email</value>
   </data>
@@ -176,6 +179,12 @@
   </data>
   <data name="UserLastName" xml:space="preserve">
     <value>Фамилия</value>
+  </data>
+  <data name="UserPassword" xml:space="preserve">
+    <value>Парола</value>
+  </data>
+  <data name="UserRememberMe" xml:space="preserve">
+    <value>Запомни ме</value>
   </data>
   <data name="UserRole" xml:space="preserve">
     <value>Длъжност</value>
