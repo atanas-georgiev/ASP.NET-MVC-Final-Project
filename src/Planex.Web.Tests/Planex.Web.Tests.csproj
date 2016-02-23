@@ -137,7 +137,12 @@
     <Folder Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="RouteTests.cs" />
+    <Compile Include="Routes\AreaRouteFactsBase.cs" />
+    <Compile Include="Routes\RouteTestsNoArea.cs" />
+    <Compile Include="Routes\RouteTestsLeadArea.cs" />
+    <Compile Include="Routes\RouteTestsHRArea.cs" />
+    <Compile Include="Routes\RouteTestsManagerArea.cs" />
+    <Compile Include="Routes\RouteTestsWorkerArea.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
