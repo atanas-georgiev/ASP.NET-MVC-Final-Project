@@ -1,4 +1,0 @@
-language: csharp
-solution: ./src/Planex.sln
-script:
-  xbuild /p:Configuration=Debug ./src/Planex.sln /p:TargetFrameworkVersion="v4.5"
