@@ -76,7 +76,7 @@
       <DependentUpon>ModelResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Skill.cs" />
-    <Compile Include="SubTask.cs" />
+    <Compile Include="Subtask.cs" />
     <Compile Include="Project.cs" />
     <Compile Include="SubTaskDependency.cs" />
     <Compile Include="SystemMessageType.cs" />
