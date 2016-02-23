@@ -45,4 +45,26 @@ Messages sending/receiving
 - 26 controllers
 - 60 actions
 - Razor view engine with Kendo UI wrappers 
-- ~20 Editor na Display templates
+- ~20 Editor and Display templates
+- Entity framework 6 with SQL Server DB
+- Repository pattern with data services
+- 4 area user (Manager, Lead, HR and worker)
+- All data visualization is based on JSON requests with server side paging/sorting
+- Bootstrap/Kendo vizualization
+- Possibility to change themes for each user
+- Toastr notifications used
+- ASP Identity system used, 4 different roles predifined
+- Data caching used for home page and internal server logic
+- Used Autofac dependency injector for MVC5
+- Automapper for model mappings
+- Site completely protected against XSS, XSRF, Parameter Tampering, HTML sanitizer used
+- Server and client validation implemented on all pages (error messages localized)
+- Used GitHub as a source repository
+- 30 Unit Tests (Routes and Services)
+- MD User and techical documentation
+- 0 StyleCop warnings
+
+# Additional Requirements Covered
+- Project hosted on Windows Server 2016 machine with IIS 10 
+[link](http://atanas.it)
+- Project completely localized in English and Bulgarian based on Browser's language
