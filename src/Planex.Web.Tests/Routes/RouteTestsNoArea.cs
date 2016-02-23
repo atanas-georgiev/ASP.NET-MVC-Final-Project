@@ -2,18 +2,19 @@
 using System.Web.Routing;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MvcRouteTester;
+using NUnit.Framework;
 using Planex.Web.Areas.Lead;
 using Planex.Web.Areas.Lead.Controllers;
 using Planex.Web.Controllers;
 
 namespace Planex.Web.Tests.Routes
 {
-    [TestClass]
+    [TestFixture]
     public class RouteTestsNoArea
     {
         private RouteCollection routeCollection;
 
-        [TestInitialize]
+        [OneTimeSetUp]
         public void InitTests()
         {
             this.routeCollection = new RouteCollection();
@@ -28,45 +29,45 @@ namespace Planex.Web.Tests.Routes
         }
 
         // Home and login
-        [TestMethod]
+        [Test]
         public void HomeRouteShouldCallCorrespondingController()
         {
             this.routeCollection.ShouldMap("/Home").To<HomeController>(x => x.Index());
         }
 
-        [TestMethod]
+        [Test]
         public void LogoffRouteShouldCallCorrespondingController()
         {
             this.routeCollection.ShouldMap("/Account/Logoff").To<AccountController>(x => x.LogOff());
         }
 
-        [TestMethod]
+        [Test]
         public void ResetRouteShouldCallCorrespondingController()
         {
             this.routeCollection.ShouldMap("/Account/ResetPassword").To<AccountController>(x => x.ResetPassword());
         }
 
         // Profile user page
-        [TestMethod]
+        [Test]
         public void ProfileRouteShouldCallCorrespondingController()
         {
             this.routeCollection.ShouldMap("/Profile").To<ProfileController>(x => x.Index());
         }
 
         // Messages
-        [TestMethod]
+        [Test]
         public void MessagesInboxRouteShouldCallCorrespondingController()
         {
             this.routeCollection.ShouldMap("/Messages/Inbox").To<MessagesController>(x => x.Inbox());
         }
 
-        [TestMethod]
+        [Test]
         public void MessagesSendRouteShouldCallCorrespondingController()
         {
             this.routeCollection.ShouldMap("/Messages/Send").To<MessagesController>(x => x.Send());
         }
 
-        [TestMethod]
+        [Test]
         public void MessagesDetailsRouteShouldCallCorrespondingController()
         {
             this.routeCollection.ShouldMap("/Messages/Details/1").To<MessagesController>(x => x.Details("1"));
