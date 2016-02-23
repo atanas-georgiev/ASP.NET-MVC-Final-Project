@@ -7,7 +7,6 @@
     using Kendo.Mvc.Extensions;
     using Kendo.Mvc.UI;
 
-    using Planex.Common;
     using Planex.Data.Models;
     using Planex.Services.Projects;
     using Planex.Services.Tasks;
@@ -85,7 +84,7 @@
                 this.subTaskService.Add(taskdb);
 
                 task.TaskId = taskdb.Id;
-                task.ParentTaskId = taskdb.ParentId;                                
+                task.ParentTaskId = taskdb.ParentId;
             }
 
             return this.Json(new[] { task }.ToDataSourceResult(request, this.ModelState));
@@ -132,16 +131,19 @@
             var projectId = int.Parse(this.Session["ProjectId"].ToString());
             var result = new List<ProjectDetailsAssignmentsViewModel>();
             var subtasks = this.subTaskService.GetAll().Where(x => x.ProjectId == projectId);
-            
+
             foreach (var subtask in subtasks)
             {
-                result.AddRange(subtask.Users.Select(user => new ProjectDetailsAssignmentsViewModel()
-                                                        {
-                                                            AssignmentId = user.IntId, 
-                                                            ResourceId = user.IntId, 
-                                                            TaskId = subtask.Id, 
-                                                            Units = 1
-                                                        }));
+                result.AddRange(
+                    subtask.Users.Select(
+                        user =>
+                        new ProjectDetailsAssignmentsViewModel()
+                            {
+                                AssignmentId = user.IntId, 
+                                ResourceId = user.IntId, 
+                                TaskId = subtask.Id, 
+                                Units = 1
+                            }));
             }
 
             return this.Json(result.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);

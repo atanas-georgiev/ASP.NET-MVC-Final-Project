@@ -8,12 +8,10 @@
     using Planex.Services.Images;
     using Planex.Services.Skills;
     using Planex.Services.Users;
-    using Planex.Web.Areas.HR.Models;
-
     using Planex.Web.App_LocalResources;
+    using Planex.Web.Areas.HR.Models;
     using Planex.Web.Infrastructure.Extensions;
     using Planex.Web.Infrastructure.Notifications.Toastr;
-
 
     public class UsersController : BaseController
     {
@@ -78,7 +76,7 @@
 
                 this.UserService.Update(entity);
                 this.UserService.SetRoleName(entity, user.RoleId);
-                this.AddToastMessage("", NotificationMessages.ProfileUpdated, ToastType.Success);
+                this.AddToastMessage(string.Empty, NotificationMessages.ProfileUpdated, ToastType.Success);
                 return this.RedirectToAction("Index");
             }
 
@@ -105,7 +103,7 @@
         public ActionResult Remove(string id)
         {
             this.UserService.Delete(id);
-            
+
             return this.RedirectToAction("Index");
         }
     }

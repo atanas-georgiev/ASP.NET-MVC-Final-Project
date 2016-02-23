@@ -25,9 +25,6 @@
         [LocalizedDisplay("ProjectEndDate")]
         public DateTime End { get; set; }
 
-        [LocalizedDisplay("ProjectPrice")]
-        public decimal Price { get; set; }
-
         [Key]
         [HiddenInput(DisplayValue = false)]
         public int Id { get; set; }
@@ -37,6 +34,9 @@
         public string LeadId { get; set; }
 
         public string LeadName { get; set; }
+
+        [LocalizedDisplay("ProjectPrice")]
+        public decimal Price { get; set; }
 
         [LocalizedRequired("RequiredFiled")]
         [LocalizedDisplay("ProjectPriority")]

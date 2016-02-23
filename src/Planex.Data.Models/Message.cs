@@ -5,8 +5,8 @@
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
 
-    using Common;
-    using Common.Models;
+    using Planex.Data.Common;
+    using Planex.Data.Common.Models;
 
     public class Message : BaseModel<int>, IHavePrimaryKey<int>
     {

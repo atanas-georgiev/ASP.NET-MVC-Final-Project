@@ -1,8 +1,4 @@
-﻿using Planex.Web.App_LocalResources;
-using Planex.Web.Infrastructure.Extensions;
-using Planex.Web.Infrastructure.Notifications.Toastr;
-
-namespace Planex.Web.Areas.Lead.Controllers
+﻿namespace Planex.Web.Areas.Lead.Controllers
 {
     using System.Linq;
     using System.Web.Mvc;
@@ -10,11 +6,12 @@ namespace Planex.Web.Areas.Lead.Controllers
     using Planex.Data.Models;
     using Planex.Services.Messages;
     using Planex.Services.Projects;
-    using Planex.Services.Skills;
-    using Planex.Services.Tasks;
     using Planex.Services.Users;
+    using Planex.Web.App_LocalResources;
     using Planex.Web.Areas.Lead.Models.Estimation;
+    using Planex.Web.Infrastructure.Extensions;
     using Planex.Web.Infrastructure.Mappings;
+    using Planex.Web.Infrastructure.Notifications.Toastr;
 
     using Vereyon.Web;
 
@@ -38,17 +35,18 @@ namespace Planex.Web.Areas.Lead.Controllers
         {
             this.Session["ProjectId"] = id;
             var intId = int.Parse(id);
-            var requestedEstimationTask = this.projectService.GetAll().Where(x => x.Id == intId).To<EstimationEditViewModel>().FirstOrDefault();
-                     
+            var requestedEstimationTask =
+                this.projectService.GetAll().Where(x => x.Id == intId).To<EstimationEditViewModel>().FirstOrDefault();
+
             if (requestedEstimationTask != null)
             {
-                if (requestedEstimationTask.LeadId != UserProfile.Id)
+                if (requestedEstimationTask.LeadId != this.UserProfile.Id)
                 {
                     return this.HttpNotFound();
                 }
 
                 var sanitizer = HtmlSanitizer.SimpleHtml5DocumentSanitizer();
-                requestedEstimationTask.Description = sanitizer.Sanitize(requestedEstimationTask.Description);                
+                requestedEstimationTask.Description = sanitizer.Sanitize(requestedEstimationTask.Description);
             }
 
             return this.View(requestedEstimationTask);
@@ -63,7 +61,7 @@ namespace Planex.Web.Areas.Lead.Controllers
         {
             var project = this.projectService.GetById(int.Parse(this.Session["ProjectId"].ToString()));
 
-            if (project.LeadId != UserProfile.Id)
+            if (project.LeadId != this.UserProfile.Id)
             {
                 return this.HttpNotFound();
             }
@@ -76,7 +74,7 @@ namespace Planex.Web.Areas.Lead.Controllers
                 SystemMessageType.ProjectEstimated, 
                 project.Id, 
                 null);
-            this.AddToastMessage("", NotificationMessages.EstimationApproval, ToastType.Success);
+            this.AddToastMessage(string.Empty, NotificationMessages.EstimationApproval, ToastType.Success);
             return this.RedirectToAction("Index");
         }
     }

@@ -7,7 +7,10 @@ namespace Planex.Web
     {
         public RuntimeEvent ExecuteOn
         {
-            get { return RuntimeEvent.EndRequest | RuntimeEvent.ExecuteResource; }
+            get
+            {
+                return RuntimeEvent.EndRequest | RuntimeEvent.ExecuteResource;
+            }
         }
 
         public RuntimePolicy Execute(IRuntimePolicyContext policyContext)

@@ -26,7 +26,11 @@
                     "~/Content/kendo/kendo.common.min.css", 
                     "~/Content/kendo/kendo.common-bootstrap.min.css"));
 
-            bundles.Add(new StyleBundle("~/content/toastr", "http://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css").Include("~/Content/toastr.min.css"));
+            bundles.Add(
+                new StyleBundle(
+                    "~/content/toastr", 
+                    "http://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css").Include(
+                        "~/Content/toastr.min.css"));
 
             bundles.Add(new StyleBundle("~/Content/custom").Include("~/Content/site.css"));
         }
@@ -46,7 +50,11 @@
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include("~/Scripts/jquery.validate*"));
 
-            bundles.Add(new ScriptBundle("~/bundles/toastr", "http://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js").Include("~/Scripts/toastr.min.js"));
+            bundles.Add(
+                new ScriptBundle(
+                    "~/bundles/toastr", 
+                    "http://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js").Include(
+                        "~/Scripts/toastr.min.js"));
 
             bundles.Add(
                 new ScriptBundle("~/bundles/bootstrap").Include("~/Scripts/bootstrap.js", "~/Scripts/respond.js"));

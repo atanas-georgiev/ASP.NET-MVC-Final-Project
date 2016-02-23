@@ -8,7 +8,7 @@
     using Planex.Services.Messages;
 
     public class PlanexScheduler : IPlanexScheduler
-    {        
+    {
         private IMessageService messageService;
 
         private IRepository<Project, int> projects;
@@ -26,7 +26,7 @@
             this.users = users;
             this.projects = projects;
             this.tasks = tasks;
-            this.messageService = messageService;         
+            this.messageService = messageService;
         }
 
         public void Schedule()

@@ -1,7 +1,6 @@
 ﻿namespace Planex.Services.Tasks
 {
     using System.Collections.Generic;
-    using System.Data.Entity;
     using System.IO;
     using System.Linq;
     using System.Web;
@@ -14,16 +13,16 @@
     {
         private IRepository<SubTaskDependency, int> dependencies;
 
+        private IRepository<Message, int> messages;
+
         private IRepository<Project, int> projects;
 
         private IRepository<SubTask, int> tasks;
 
-        private IRepository<Message, int> messages;
-
         public TaskService(
             IRepository<SubTask, int> tasks, 
             IRepository<SubTaskDependency, int> dependencies, 
-            IRepository<Project, int> projects,
+            IRepository<Project, int> projects, 
             IRepository<Message, int> messages)
         {
             this.tasks = tasks;
@@ -88,7 +87,7 @@
 
         public void Delete(int id)
         {
-            var taskProject = this.GetById(id).Project;            
+            var taskProject = this.GetById(id).Project;
             this.tasks.Delete(id);
 
             var messagesDb = this.messages.All().Where(x => x.SubTaskId == id).ToList();
@@ -120,7 +119,7 @@
             var durationInDays = (task.End - task.Start).Days;
             task.Price = task.Users.Sum(user => (user.Salary / 20) * durationInDays);
             this.tasks.Update(task);
-            
+
             this.UpdateProjectDetails(task.Project);
         }
 
@@ -132,7 +131,7 @@
         public void UpdateProgress(SubTask task)
         {
             this.Update(task);
-            
+
             while (true)
             {
                 if (task.ParentId != null)
@@ -144,7 +143,7 @@
                 else
                 {
                     break;
-                }                
+                }
             }
         }
 

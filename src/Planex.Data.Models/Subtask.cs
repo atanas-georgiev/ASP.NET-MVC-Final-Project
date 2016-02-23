@@ -10,7 +10,7 @@
     using Planex.Data.Common.Models;
 
     public class SubTask : BaseModel<int>, IHavePrimaryKey<int>
-    {        
+    {
         private ICollection<SubTask> subTasks;
 
         private ICollection<User> users;

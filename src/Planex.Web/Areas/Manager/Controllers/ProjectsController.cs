@@ -1,8 +1,4 @@
-﻿using Planex.Web.App_LocalResources;
-using Planex.Web.Infrastructure.Extensions;
-using Planex.Web.Infrastructure.Notifications.Toastr;
-
-namespace Planex.Web.Areas.Manager.Controllers
+﻿namespace Planex.Web.Areas.Manager.Controllers
 {
     using System;
     using System.Linq;
@@ -11,10 +7,12 @@ namespace Planex.Web.Areas.Manager.Controllers
     using Planex.Data.Models;
     using Planex.Services.Messages;
     using Planex.Services.Projects;
-    using Planex.Services.Tasks;
     using Planex.Services.Users;
+    using Planex.Web.App_LocalResources;
     using Planex.Web.Areas.Manager.Models.Projects;
+    using Planex.Web.Infrastructure.Extensions;
     using Planex.Web.Infrastructure.Mappings;
+    using Planex.Web.Infrastructure.Notifications.Toastr;
 
     public class ProjectsController : BaseController
     {
@@ -44,7 +42,7 @@ namespace Planex.Web.Areas.Manager.Controllers
                 SystemMessageType.ProjectApproved, 
                 project.Id, 
                 null);
-            this.AddToastMessage("", NotificationMessages.ProjectApproved, ToastType.Success);
+            this.AddToastMessage(string.Empty, NotificationMessages.ProjectApproved, ToastType.Success);
             return this.RedirectToAction("Index");
         }
 
@@ -78,7 +76,7 @@ namespace Planex.Web.Areas.Manager.Controllers
                     task, 
                     model.UploadedAttachments, 
                     System.Web.HttpContext.Current.Server);
-                this.AddToastMessage("", NotificationMessages.ProjectCreated, ToastType.Success);
+                this.AddToastMessage(string.Empty, NotificationMessages.ProjectCreated, ToastType.Success);
                 return this.RedirectToAction("Index");
             }
 
@@ -89,7 +87,8 @@ namespace Planex.Web.Areas.Manager.Controllers
         {
             this.Session["ProjectId"] = id;
             var intId = int.Parse(id);
-            var result = this.projectsService.GetAll().Where(x => x.Id == intId).To<ProjectDetailsViewModel>().FirstOrDefault();
+            var result =
+                this.projectsService.GetAll().Where(x => x.Id == intId).To<ProjectDetailsViewModel>().FirstOrDefault();
             return this.View(result);
         }
 
@@ -112,7 +111,7 @@ namespace Planex.Web.Areas.Manager.Controllers
                     project, 
                     model.UploadedAttachments, 
                     System.Web.HttpContext.Current.Server);
-                this.AddToastMessage("", NotificationMessages.ProjectUpdated, ToastType.Success);
+                this.AddToastMessage(string.Empty, NotificationMessages.ProjectUpdated, ToastType.Success);
                 return this.RedirectToAction("Index");
             }
 
@@ -145,7 +144,7 @@ namespace Planex.Web.Areas.Manager.Controllers
                 SystemMessageType.ProjectRequestedEstimation, 
                 project.Id, 
                 null);
-            this.AddToastMessage("", NotificationMessages.ProjectSentForEstimation, ToastType.Success);
+            this.AddToastMessage(string.Empty, NotificationMessages.ProjectSentForEstimation, ToastType.Success);
             return this.RedirectToAction("Index");
         }
     }

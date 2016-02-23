@@ -1,14 +1,14 @@
-﻿using System.Web.Mvc;
-using System.Web.Routing;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using MvcRouteTester;
-using NUnit.Framework;
-using Planex.Web.Areas.Lead;
-using Planex.Web.Areas.Lead.Controllers;
-using Planex.Web.Controllers;
-
-namespace Planex.Web.Tests.Routes
+﻿namespace Planex.Web.Tests.Routes
 {
+    using System.Web.Mvc;
+    using System.Web.Routing;
+
+    using MvcRouteTester;
+
+    using NUnit.Framework;
+
+    using Planex.Web.Controllers;
+
     [TestFixture]
     public class RouteTestsNoArea
     {
@@ -21,7 +21,8 @@ namespace Planex.Web.Tests.Routes
             RouteConfig.RegisterRoutes(this.routeCollection);
         }
 
-        public void RegisterAreaRoutes<TAreaRegistration>(RouteCollection routes) where TAreaRegistration : AreaRegistration, new()
+        public void RegisterAreaRoutes<TAreaRegistration>(RouteCollection routes)
+            where TAreaRegistration : AreaRegistration, new()
         {
             var area = new TAreaRegistration();
             var ctx = new AreaRegistrationContext(area.AreaName, routes);
@@ -42,16 +43,9 @@ namespace Planex.Web.Tests.Routes
         }
 
         [Test]
-        public void ResetRouteShouldCallCorrespondingController()
+        public void MessagesDetailsRouteShouldCallCorrespondingController()
         {
-            this.routeCollection.ShouldMap("/Account/ResetPassword").To<AccountController>(x => x.ResetPassword());
-        }
-
-        // Profile user page
-        [Test]
-        public void ProfileRouteShouldCallCorrespondingController()
-        {
-            this.routeCollection.ShouldMap("/Profile").To<ProfileController>(x => x.Index());
+            this.routeCollection.ShouldMap("/Messages/Details/1").To<MessagesController>(x => x.Details("1"));
         }
 
         // Messages
@@ -67,10 +61,17 @@ namespace Planex.Web.Tests.Routes
             this.routeCollection.ShouldMap("/Messages/Send").To<MessagesController>(x => x.Send());
         }
 
+        // Profile user page
         [Test]
-        public void MessagesDetailsRouteShouldCallCorrespondingController()
+        public void ProfileRouteShouldCallCorrespondingController()
         {
-            this.routeCollection.ShouldMap("/Messages/Details/1").To<MessagesController>(x => x.Details("1"));
+            this.routeCollection.ShouldMap("/Profile").To<ProfileController>(x => x.Index());
+        }
+
+        [Test]
+        public void ResetRouteShouldCallCorrespondingController()
+        {
+            this.routeCollection.ShouldMap("/Account/ResetPassword").To<AccountController>(x => x.ResetPassword());
         }
     }
 }

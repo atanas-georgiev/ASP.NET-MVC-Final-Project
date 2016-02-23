@@ -1,6 +1,4 @@
-﻿using Planex.Web.App_LocalResources;
-
-namespace Planex.Web.Controllers
+﻿namespace Planex.Web.Controllers
 {
     using System.Linq;
     using System.Threading.Tasks;
@@ -11,8 +9,8 @@ namespace Planex.Web.Controllers
     using Microsoft.AspNet.Identity.Owin;
     using Microsoft.Owin.Security;
 
-    using Planex.Data.Models;
     using Planex.Services.Users;
+    using Planex.Web.App_LocalResources;
     using Planex.Web.Infrastructure.Extensions;
     using Planex.Web.Infrastructure.Notifications.Toastr;
     using Planex.Web.Models.Account;
@@ -107,7 +105,7 @@ namespace Planex.Web.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
-                    this.AddToastMessage("", NotificationMessages.LoginSuccess, ToastType.Success);
+                    this.AddToastMessage(string.Empty, NotificationMessages.LoginSuccess, ToastType.Success);
                     var user = this.UserService.GetAll().FirstOrDefault(x => x.Email == model.Email);
                     if (user != null && user.ResetPassword)
                     {
@@ -131,7 +129,7 @@ namespace Planex.Web.Controllers
         public ActionResult LogOff()
         {
             this.AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
-            this.AddToastMessage("", NotificationMessages.LogoutSuccess, ToastType.Success);
+            this.AddToastMessage(string.Empty, NotificationMessages.LogoutSuccess, ToastType.Success);
             return this.RedirectToAction("Index", "Home");
         }
 
@@ -150,7 +148,7 @@ namespace Planex.Web.Controllers
                 return this.View(model);
             }
 
-            this.AddToastMessage("", NotificationMessages.PasswordChanged, ToastType.Success);
+            this.AddToastMessage(string.Empty, NotificationMessages.PasswordChanged, ToastType.Success);
             this.UserProfile.ResetPassword = false;
             this.UserService.UpdatePassword(this.UserProfile, model.Password);
             return this.RedirectToAction("Index", "Home");

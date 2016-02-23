@@ -12,13 +12,13 @@
 
     public class UserService : IUserService
     {
+        private IRepository<Message, int> messages;
+
         private RoleManager<IdentityRole> roleManager;
 
         private UserManager<User> userManager;
 
         private IRepository<User, string> users;
-
-        private IRepository<Message, int> messages;
 
         public UserService(DbContext context, IRepository<User> users, IRepository<Message, int> messages)
         {
@@ -37,6 +37,17 @@
             user.ResetPassword = true;
             this.users.Update(user);
             this.userManager.AddToRole(user.Id, role);
+        }
+
+        public void Delete(string id)
+        {
+            this.users.Delete(id);
+
+            var messagesDb = this.messages.All().Where(x => x.FromId == id || x.ToId == id).ToList();
+            foreach (var message in messagesDb)
+            {
+                this.messages.Delete(message);
+            }
         }
 
         public IQueryable<User> GetAll()
@@ -93,17 +104,6 @@
             user.UserName = user.Email;
             this.userManager.ChangePassword(user.Id, "changeme", password);
             this.users.Update(user);
-        }
-
-        public void Delete(string id)
-        {
-            this.users.Delete(id);
-
-            var messagesDb = this.messages.All().Where(x => x.FromId == id || x.ToId == id).ToList();
-            foreach (var message in messagesDb)
-            {
-                this.messages.Delete(message);
-            }
         }
     }
 }

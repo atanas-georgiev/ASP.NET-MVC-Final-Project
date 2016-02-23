@@ -3,8 +3,8 @@
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
-    using Common;
-    using Common.Models;
+    using Planex.Data.Common;
+    using Planex.Data.Common.Models;
 
     public class Skill : BaseModel<int>, IHavePrimaryKey<int>
     {

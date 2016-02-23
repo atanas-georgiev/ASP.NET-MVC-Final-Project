@@ -10,6 +10,8 @@
     {
         void Add(User user, string role);
 
+        void Delete(string id);
+
         IQueryable<User> GetAll();
 
         IQueryable<User> GetAllByRole(string role);
@@ -27,7 +29,5 @@
         void Update(User user);
 
         void UpdatePassword(User user, string password);
-
-        void Delete(string id);
     }
 }

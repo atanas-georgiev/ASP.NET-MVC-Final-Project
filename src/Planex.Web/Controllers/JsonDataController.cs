@@ -10,7 +10,6 @@
     using Planex.Services.Cache;
     using Planex.Services.Messages;
     using Planex.Services.Projects;
-    using Planex.Services.Skills;
     using Planex.Services.Tasks;
     using Planex.Services.Users;
     using Planex.Web.Infrastructure.Mappings;

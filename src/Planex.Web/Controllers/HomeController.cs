@@ -14,13 +14,17 @@
 
     public class HomeController : BaseController
     {
+        private readonly ICacheService cacheService;
+
         private readonly IMessageService messageService;
 
         private readonly IPlanexScheduler scheduler;
 
-        private readonly ICacheService cacheService;
-
-        public HomeController(IUserService userService, IMessageService messageService, IPlanexScheduler scheduler, ICacheService cacheService)
+        public HomeController(
+            IUserService userService, 
+            IMessageService messageService, 
+            IPlanexScheduler scheduler, 
+            ICacheService cacheService)
             : base(userService)
         {
             this.messageService = messageService;
@@ -32,7 +36,14 @@
         {
             var homeModel = new HomeViewModel();
 
-            this.cacheService.Get("systemMessagesCache", () => { this.scheduler.Schedule(); return 0; }, 10 * 60);            
+            this.cacheService.Get(
+                "systemMessagesCache", 
+                () =>
+                    {
+                        this.scheduler.Schedule();
+                        return 0;
+                    }, 
+                10 * 60);
 
             if (this.HttpContext.User.Identity.IsAuthenticated)
             {

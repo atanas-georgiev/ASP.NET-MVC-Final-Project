@@ -11,14 +11,14 @@
     <hr/>
     <br/>
     @(Html.Kendo().Grid<SkillViewModel>().Name("grid").Columns(columns =>
-      {
-          columns.Bound(c => c.Name);
-          columns.Command(command =>
           {
-              command.Edit();
-              command.Destroy();
-          });
-      }).ToolBar(toolbar => { toolbar.Create(); }).ColumnMenu().Editable(editable => editable.Mode(GridEditMode.PopUp)).Pageable(x => x.PageSizes(true)).Navigatable().Sortable(sortable => { sortable.SortMode(GridSortMode.SingleColumn); }).Filterable().Scrollable().DataSource(dataSource => dataSource.Ajax().Model(model => model.Id(p => p.Id)).Read(read => read.Action("SkillsRead", "Json")).Create(create => create.Action("SkillsCreate", "Json")).Update(update => update.Action("SkillsUpdate", "Json")).Destroy(destroy => destroy.Action("SkillsDestroy", "Json")))
+              columns.Bound(c => c.Name);
+              columns.Command(command =>
+                  {
+                      command.Edit();
+                      command.Destroy();
+                  });
+          }).ToolBar(toolbar => { toolbar.Create(); }).ColumnMenu().Editable(editable => editable.Mode(GridEditMode.PopUp)).Pageable(x => x.PageSizes(true)).Navigatable().Sortable(sortable => { sortable.SortMode(GridSortMode.SingleColumn); }).Filterable().Scrollable().DataSource(dataSource => dataSource.Ajax().Model(model => model.Id(p => p.Id)).Read(read => read.Action("SkillsRead", "Json")).Create(create => create.Action("SkillsCreate", "Json")).Update(update => update.Action("SkillsUpdate", "Json")).Destroy(destroy => destroy.Action("SkillsDestroy", "Json")))
           )
 </div>
 

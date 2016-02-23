@@ -20,9 +20,18 @@
             this.attachments = new HashSet<Attachment>();
         }
 
-        [Required]
-        [MaxLength(100)]
-        public string Title { get; set; }
+        public virtual ICollection<Attachment> Attachments
+        {
+            get
+            {
+                return this.attachments;
+            }
+
+            set
+            {
+                this.attachments = value;
+            }
+        }
 
         [Required]
         [MaxLength(10000)]
@@ -69,17 +78,8 @@
             }
         }
 
-        public virtual ICollection<Attachment> Attachments
-        {
-            get
-            {
-                return this.attachments;
-            }
-
-            set
-            {
-                this.attachments = value;
-            }
-        }
+        [Required]
+        [MaxLength(100)]
+        public string Title { get; set; }
     }
 }

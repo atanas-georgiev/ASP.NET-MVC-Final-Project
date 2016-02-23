@@ -57,8 +57,6 @@
         [Required]
         public decimal Salary { get; set; }
 
-        public string Theme { get; set; }
-
         public virtual ICollection<Skill> Skills
         {
             get
@@ -84,6 +82,8 @@
                 this.subtasks = value;
             }
         }
+
+        public string Theme { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<User> manager)
         {

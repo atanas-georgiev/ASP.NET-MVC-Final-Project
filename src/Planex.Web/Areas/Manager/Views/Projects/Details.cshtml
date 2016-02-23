@@ -25,15 +25,15 @@
         @Html.AntiForgeryToken()
 
         <div class="form-horizontal">
-            @Html.ValidationSummary(false, string.Empty, new {@class = "text-danger"})
+            @Html.ValidationSummary(false, string.Empty, new { @class = "text-danger" })
             <div class="form-group">
-                @Html.LabelFor(model => model.Title, htmlAttributes: new {@class = "control-label col-md-2"})
+                @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     @Html.EditorFor(model => model.Title)
                 </div>
             </div>
             <div class="form-group">
-                @Html.LabelFor(model => model.Description, htmlAttributes: new {@class = "control-label col-md-2"})
+                @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     @Html.EditorFor(model => model.Description)
                 </div>
@@ -41,7 +41,7 @@
             @if (Model.State < TaskStateType.Estimated)
             {
                 <div class="form-group">
-                    @Html.LabelFor(model => model.Start, htmlAttributes: new {@class = "control-label col-md-2"})
+                    @Html.LabelFor(model => model.Start, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
                         @Html.EditorFor(model => model.Start)
                     </div>
@@ -51,36 +51,36 @@
             @if (Model.State >= TaskStateType.Estimated)
             {
                 <div class="form-group">
-                    @Html.LabelFor(model => model.Start, htmlAttributes: new {@class = "control-label col-md-2"})
+                    @Html.LabelFor(model => model.Start, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
                         <div class="hidden">@Html.EditorFor(model => model.Start)</div>
                         @Html.DisplayFor(model => model.Start)
                     </div>
                 </div>
                 <div class="form-group">
-                    @Html.LabelFor(model => model.End, htmlAttributes: new {@class = "control-label col-md-2"})
+                    @Html.LabelFor(model => model.End, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
                         <div class="hidden">@Html.EditorFor(model => model.End)</div>
                         @Html.DisplayFor(model => model.End)
                     </div>
                 </div>
                 <div class="form-group">
-                    @Html.LabelFor(model => model.Price, htmlAttributes: new {@class = "control-label col-md-2"})
+                    @Html.LabelFor(model => model.Price, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
                         <span class="pull-left">@Html.DisplayFor(model => model.Price)</span>                        
                     </div>
                 </div>
             }
             <div class="form-group">
-                @Html.LabelFor(model => model.Priority, htmlAttributes: new {@class = "control-label col-md-2"})
+                @Html.LabelFor(model => model.Priority, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.Kendo().DropDownList().Name("Priority").BindTo(Enum.GetNames(typeof (PriorityType)).ToList()).HtmlAttributes(new {@class = "pull-left"})
+                    @Html.Kendo().DropDownList().Name("Priority").BindTo(Enum.GetNames(typeof(PriorityType)).ToList()).HtmlAttributes(new { @class = "pull-left" })
                 </div>
             </div>
             <div class="form-group">
-                @Html.LabelFor(model => model.LeadId, htmlAttributes: new {@class = "control-label col-md-2"})
+                @Html.LabelFor(model => model.LeadId, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @(Html.Kendo().DropDownListFor(model => model.LeadId).Name("LeadId").DataTextField("name").DataValueField("id").DataSource(source => { source.Read(read => { read.Action("GetAllLeadUsers", "Json"); }).ServerFiltering(false); }).Value(Model.LeadName).HtmlAttributes(new {@class = "pull-left"}))
+                    @(Html.Kendo().DropDownListFor(model => model.LeadId).Name("LeadId").DataTextField("name").DataValueField("id").DataSource(source => { source.Read(read => { read.Action("GetAllLeadUsers", "Json"); }).ServerFiltering(false); }).Value(Model.LeadName).HtmlAttributes(new { @class = "pull-left" }))
                 </div>
             </div>
             @Html.Partial("_DetailsFiles", Model.UploadedAttachmentFiles)
@@ -94,14 +94,14 @@
             </div>
             <div class="form-group">
                 <input type="submit" value="@HtmlLabels.ProjectEdit" class="k-button"/>
-                @Html.ActionLink(HtmlLabels.ProjectRemove, "Remove", new {id = Model.Id}, new {@class = "k-button"})
+                @Html.ActionLink(HtmlLabels.ProjectRemove, "Remove", new { id = Model.Id }, new { @class = "k-button" })
                 @if (Model.State == TaskStateType.Draft)
                 {
-                    @Html.ActionLink(HtmlLabels.ProjectSendForEstimation, "SendForEstimation", new {id = Model.Id}, new {@class = "k-button"})
+                    @Html.ActionLink(HtmlLabels.ProjectSendForEstimation, "SendForEstimation", new { id = Model.Id }, new { @class = "k-button" })
                 }
                 @if (Model.State == TaskStateType.Estimated)
                 {
-                    @Html.ActionLink(HtmlLabels.ProjectApprove, "Approve", new {id = Model.Id}, new {@class = "k-button"})
+                    @Html.ActionLink(HtmlLabels.ProjectApprove, "Approve", new { id = Model.Id }, new { @class = "k-button" })
                 }
             </div>
         </div>

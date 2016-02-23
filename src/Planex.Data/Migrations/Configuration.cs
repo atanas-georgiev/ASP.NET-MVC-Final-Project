@@ -45,9 +45,9 @@ namespace Planex.Data.Migrations
                                LastName = "Message", 
                                Salary = 0, 
                                CreatedOn = DateTime.Now, 
-                               ResetPassword = false,
+                               ResetPassword = false, 
                                IntId = 0
-            };
+                           };
             userManager.Create(user, "changeme");
             context.SaveChanges();
             userManager.AddToRole(user.Id, "Manager");

@@ -16,9 +16,9 @@
             this.UserService = userService;
         }
 
-        protected IUserService UserService { get; set; }
-
         protected User UserProfile { get; private set; }
+
+        protected IUserService UserService { get; set; }
 
         protected override IAsyncResult BeginExecute(
             RequestContext requestContext, 

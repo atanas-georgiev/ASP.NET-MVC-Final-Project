@@ -20,6 +20,9 @@
         [HiddenInput(DisplayValue = false)]
         public int Id { get; set; }
 
+        [HiddenInput(DisplayValue = false)]
+        public string LeadId { get; set; }
+
         [LocalizedDisplay("ProjectManager")]
         [LocalizedRequired("RequiredFiled")]
         [UIHint("String")]
@@ -43,9 +46,6 @@
         [LocalizedRequired("RequiredFiled")]
         [UIHint("String")]
         public string Title { get; set; }
-
-        [HiddenInput(DisplayValue = false)]
-        public string LeadId { get; set; }
 
         public List<string> UploadedAttachmentFiles { get; set; }
     }
