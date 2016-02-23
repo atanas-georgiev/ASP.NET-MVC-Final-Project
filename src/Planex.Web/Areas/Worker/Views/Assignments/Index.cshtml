@@ -25,3 +25,7 @@
          .Navigatable().Sortable(sortable => { sortable.SortMode(GridSortMode.SingleColumn); }).Filterable().Scrollable()
          .DataSource(dataSource => dataSource.Ajax().Model(model => model.Id(p => p.Id)).Read(read => read.Action("GetAllAssignments", "Json")).Update("EditAssignment", "Json")))
 </div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

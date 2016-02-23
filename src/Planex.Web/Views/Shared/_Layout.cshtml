@@ -24,8 +24,7 @@
 
 
     @Scripts.Render("~/bundles/bootstrap")
-    @Scripts.Render("~/bundles/kendo")
-    @Scripts.Render("~/Scripts/kendo/cultures/kendo.culture." + @System.Globalization.CultureInfo.CurrentCulture.Name + ".min.js")
+    @Scripts.Render("~/bundles/kendo")    
     @Scripts.Render("~/Scripts/kendo/cultures/kendo.culture." + @System.Globalization.CultureInfo.CurrentCulture.ToString() + ".min.js")
     @Scripts.Render("~/Scripts/kendo/messages/kendo.messages." + @System.Globalization.CultureInfo.CurrentCulture.ToString() + ".min.js")
     @Scripts.Render("~/bundles/toastr")

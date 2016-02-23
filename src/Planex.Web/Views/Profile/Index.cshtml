@@ -10,54 +10,60 @@
     <h3 class="well-title">@(Model.FirstName + " " + Model.LastName)</h3>
     <hr/>
     <div class="row">
-        @using (Html.BeginForm("Index", "Profile", FormMethod.Post, new { @class = "form-horizontal", enctype = "multipart/form-data" }))
+        @using (Html.BeginForm("Index", "Profile", FormMethod.Post, new {@class = "form-horizontal", enctype = "multipart/form-data"}))
         {
             @Html.AntiForgeryToken()
             <div class="col-md-4">
                 @if (Model.ImageId != null)
                 {
-                    <img src="@Url.Action("Image", "Users", new { id = Model.ImageId.Value })" alt="@Model.FirstName" class="img img-responsive img-rounded"/>
+                    <img src="@Url.Action("Image", "Users", new {id = Model.ImageId.Value})" alt="@Model.FirstName" class="img img-responsive img-rounded"/>
                 }
                 <div>
-                    @Html.LabelFor(model => model.Skills, htmlAttributes: new { @class = "control-label col-md-2" })
-                    @(Html.Kendo().Upload().Name("UploadedImage").HtmlAttributes(new { accept = "image/*" }))
+                    @Html.LabelFor(model => model.Skills, htmlAttributes: new {@class = "control-label col-md-2"})
+                    @(Html.Kendo().Upload().Name("UploadedImage").HtmlAttributes(new {accept = "image/*"}))
                 </div>
             </div>
             <div class="col-md-8">
                 <div>
-                    @Html.ValidationSummary(false, string.Empty, new { @class = "text-danger" })
+                    @Html.ValidationSummary(false, string.Empty, new {@class = "text-danger"})
                 </div>
                 <div class="form-group">
-                    @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+                    @Html.LabelFor(model => model.Email, htmlAttributes: new {@class = "control-label col-md-2"})
                     @Html.DisplayFor(model => model.Email)
                 </div>
                 <div class="form-group">
-                    @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label col-md-2" })
+                    @Html.LabelFor(model => model.FirstName, htmlAttributes: new {@class = "control-label col-md-2"})
                     @Html.EditorFor(model => model.FirstName)
                 </div>
                 <div class="form-group">
-                    @Html.LabelFor(model => model.LastName, htmlAttributes: new { @class = "control-label col-md-2" })
+                    @Html.LabelFor(model => model.LastName, htmlAttributes: new {@class = "control-label col-md-2"})
                     @Html.EditorFor(model => model.LastName)
                 </div>
                 <div class="form-group">
-                    @Html.LabelFor(model => model.Salary, htmlAttributes: new { @class = "control-label col-md-2" })
+                    @Html.LabelFor(model => model.Salary, htmlAttributes: new {@class = "control-label col-md-2"})
                     @Html.DisplayFor(model => model.Salary)
                 </div>
                 <div class="form-group">
-                    @Html.LabelFor(model => model.Skills, htmlAttributes: new { @class = "control-label col-md-2" })
-                    @(Html.Kendo().MultiSelect().Name("Skills").BindTo((List<string>)ViewData["skills"]).Value(Model.Skills).HtmlAttributes(new { @class = "pull-left" }))
+                    @Html.LabelFor(model => model.Skills, htmlAttributes: new {@class = "control-label col-md-2"})
+                    @(Html.Kendo().MultiSelect().Name("Skills").BindTo((List<string>) ViewData["skills"]).Value(Model.Skills).HtmlAttributes(new {@class = "pull-left"}))
                 </div>
                 <div class="form-group">
-                    @Html.LabelFor(model => model.Theme, htmlAttributes: new { @class = "control-label col-md-2" })
+                    @Html.LabelFor(model => model.Theme, htmlAttributes: new {@class = "control-label col-md-2"})
                     @Html.EditorFor(model => model.Theme)
                 </div>
                 <div>
                     <input type="submit" value="@HtmlLabels.UserUpdateProfile" class="k-button pull-left"/>
                     <br/>
                     <br/>
-                    @Html.ActionLink(HtmlLabels.UserUpdatePassword, "ResetPassword", "Account", null, new { @class = "k-button pull-left" })
+                    @Html.ActionLink(HtmlLabels.UserUpdatePassword, "ResetPassword", "Account", null, new {@class = "k-button pull-left"})
                 </div>
             </div>
         }
     </div>
 </div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+
