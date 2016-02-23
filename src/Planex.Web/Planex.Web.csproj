@@ -239,6 +239,16 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ModelLabels.resx</DependentUpon>
     </Compile>
+    <Compile Include="App_LocalResources\NotificationMessages.bg.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>NotificationMessages.bg.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_LocalResources\NotificationMessages.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>NotificationMessages.resx</DependentUpon>
+    </Compile>
     <Compile Include="App_Start\ApplicationSignInManager.cs" />
     <Compile Include="App_Start\ApplicationUserManager.cs" />
     <Compile Include="App_Start\AutofacConfig.cs" />
@@ -688,6 +698,7 @@
     <Content Include="Scripts\Kendo\kendo.webcomponents.min.js" />
     <Content Include="Scripts\Kendo\kendo.window.min.js" />
     <Content Include="Scripts\Kendo\messages\kendo.messages.bg-BG.min.js" />
+    <Content Include="Scripts\Kendo\messages\kendo.messages.bg.min.js" />
     <Content Include="Scripts\Kendo\messages\kendo.messages.en-US.min.js" />
     <Content Include="Scripts\Kendo\modernizr-2.6.2.js" />
     <Content Include="Scripts\Kendo\pako_deflate.min.js" />
@@ -976,6 +987,16 @@
     <EmbeddedResource Include="App_LocalResources\ModelLabels.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ModelLabels.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App_LocalResources\NotificationMessages.resx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>NotificationMessages.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App_LocalResources\NotificationMessages.bg.resx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>NotificationMessages.bg.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

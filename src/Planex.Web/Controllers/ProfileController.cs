@@ -1,4 +1,8 @@
-﻿namespace Planex.Web.Controllers
+﻿using Planex.Web.App_LocalResources;
+using Planex.Web.Infrastructure.Extensions;
+using Planex.Web.Infrastructure.Notifications.Toastr;
+
+namespace Planex.Web.Controllers
 {
     using System.IO;
     using System.Linq;
@@ -83,6 +87,7 @@
                 }
 
                 this.UserService.Update(entity);
+                this.AddToastMessage("", NotificationMessages.ProfileUpdated, ToastType.Success);
                 return this.RedirectToAction("Index");
             }
 

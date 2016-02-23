@@ -10,6 +10,11 @@
     using Planex.Services.Users;
     using Planex.Web.Areas.HR.Models;
 
+    using Planex.Web.App_LocalResources;
+    using Planex.Web.Infrastructure.Extensions;
+    using Planex.Web.Infrastructure.Notifications.Toastr;
+
+
     public class UsersController : BaseController
     {
         private readonly IImageService imageService;
@@ -73,6 +78,7 @@
 
                 this.UserService.Update(entity);
                 this.UserService.SetRoleName(entity, user.RoleId);
+                this.AddToastMessage("", NotificationMessages.ProfileUpdated, ToastType.Success);
                 return this.RedirectToAction("Index");
             }
 

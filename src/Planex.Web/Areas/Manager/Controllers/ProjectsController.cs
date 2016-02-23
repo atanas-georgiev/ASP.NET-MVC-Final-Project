@@ -1,4 +1,8 @@
-﻿namespace Planex.Web.Areas.Manager.Controllers
+﻿using Planex.Web.App_LocalResources;
+using Planex.Web.Infrastructure.Extensions;
+using Planex.Web.Infrastructure.Notifications.Toastr;
+
+namespace Planex.Web.Areas.Manager.Controllers
 {
     using System;
     using System.Linq;
@@ -40,6 +44,7 @@
                 SystemMessageType.ProjectApproved, 
                 project.Id, 
                 null);
+            this.AddToastMessage("", NotificationMessages.ProjectApproved, ToastType.Success);
             return this.RedirectToAction("Index");
         }
 
@@ -73,7 +78,7 @@
                     task, 
                     model.UploadedAttachments, 
                     System.Web.HttpContext.Current.Server);
-
+                this.AddToastMessage("", NotificationMessages.ProjectCreated, ToastType.Success);
                 return this.RedirectToAction("Index");
             }
 
@@ -107,7 +112,7 @@
                     project, 
                     model.UploadedAttachments, 
                     System.Web.HttpContext.Current.Server);
-
+                this.AddToastMessage("", NotificationMessages.ProjectUpdated, ToastType.Success);
                 return this.RedirectToAction("Index");
             }
 
@@ -140,6 +145,7 @@
                 SystemMessageType.ProjectRequestedEstimation, 
                 project.Id, 
                 null);
+            this.AddToastMessage("", NotificationMessages.ProjectSentForEstimation, ToastType.Success);
             return this.RedirectToAction("Index");
         }
     }

@@ -7,6 +7,9 @@
     using Planex.Data.Models;
     using Planex.Services.Messages;
     using Planex.Services.Users;
+    using Planex.Web.App_LocalResources;
+    using Planex.Web.Infrastructure.Extensions;
+    using Planex.Web.Infrastructure.Notifications.Toastr;
     using Planex.Web.Infrastructure.Mappings;
     using Planex.Web.Models.Messages;
 
@@ -50,6 +53,7 @@
                                     };
 
                 this.messageService.Add(messageDb);
+                this.AddToastMessage("", NotificationMessages.MessageSent, ToastType.Success);
 
                 return this.RedirectToAction("Inbox");
             }
@@ -97,6 +101,7 @@
                 }
 
                 this.messageService.Delete(messageDb.Id);
+                this.AddToastMessage("", NotificationMessages.MessageRemoved, ToastType.Success);
             }
 
             return this.RedirectToAction("Inbox");

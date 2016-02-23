@@ -1,4 +1,8 @@
-﻿namespace Planex.Web.Areas.Lead.Controllers
+﻿using Planex.Web.App_LocalResources;
+using Planex.Web.Infrastructure.Extensions;
+using Planex.Web.Infrastructure.Notifications.Toastr;
+
+namespace Planex.Web.Areas.Lead.Controllers
 {
     using System.Linq;
     using System.Web.Mvc;
@@ -72,6 +76,7 @@
                 SystemMessageType.ProjectEstimated, 
                 project.Id, 
                 null);
+            this.AddToastMessage("", NotificationMessages.EstimationApproval, ToastType.Success);
             return this.RedirectToAction("Index");
         }
     }

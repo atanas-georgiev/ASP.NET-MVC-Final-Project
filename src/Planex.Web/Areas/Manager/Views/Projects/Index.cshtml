@@ -24,7 +24,7 @@
           columns.Bound(c => c.Priority);
           columns.Bound(c => c.State);
           columns.Bound(c => c.Completed);
-      }).ColumnMenu().Pageable().Navigatable().Sortable(sortable => { sortable.SortMode(GridSortMode.SingleColumn); }).Filterable().Scrollable().DataSource(dataSource => dataSource.Ajax().Model(model => model.Id(p => p.Id)).Read(read => read.Action("ReadAllProjects", "Json")))
+      }).ColumnMenu().Pageable(p => p.PageSizes(true)).Navigatable().Sortable(sortable => { sortable.SortMode(GridSortMode.SingleColumn); }).Filterable().Scrollable().DataSource(dataSource => dataSource.Ajax().Model(model => model.Id(p => p.Id)).Read(read => read.Action("ReadAllProjects", "Json")))
           )
 </div>
 
